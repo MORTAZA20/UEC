@@ -53,7 +53,11 @@ include 'inc/navbar.php';
                     while ($row = $result->fetch_assoc()) {
                         echo '<tr>
                                 <td><span class="badge">' . $row["university_id"] . '</span></td>
-                                <td><img src="assets/pg/admins/' . $row["universities_img_path"] . '" style="width:100px; height:100px;
+                                <td><img src="assets/pg/admins/' . $row["universities_img_path"] . '" 
+                                style=" max-width: 80px;
+                                max-height: 80px;
+                                width: auto;
+                                height: auto;
                               
                                 padding-left:20px;"></td>
                                 <td>' . $row["university_name"] . '</td>

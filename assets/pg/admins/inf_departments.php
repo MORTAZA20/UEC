@@ -59,7 +59,8 @@
                                 <td>' . $row["parallel_GPA"] . '</td>
                                 <td data-title="التحكم" class="text-center">
                                 
-                                    <a href="edit_departments?Edit_departments_id=' . $row["department_id"] . '" style="padding: 3px 10px;
+                                    <a href="edit_departments?Edit_departments_id=' . $row["department_id"] . '" 
+                                    style="padding: 3px 10px;
                                     font-weight: 500;
                                     color: #fff;
                                     border-radius: 5px;

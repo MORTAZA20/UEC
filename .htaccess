@@ -35,6 +35,8 @@ RewriteRule ^delete_colleges ./assets/pg/admins/delete/delete_colleges.php [NC,L
 RewriteRule ^delete_inf_departments ./assets/pg/admins/delete/delete_inf_departments.php [NC,L]
 RewriteRule ^delete_courses ./assets/pg/admins/delete/delete_courses.php [NC,L]
 RewriteRule ^delete_top_students ./assets/pg/admins/delete/delete_top_students.php [NC,L]
+RewriteRule ^delete_student_projects ./assets/pg/admins/delete/delete_student_projects.php [NC,L]
+RewriteRule ^delete_career_opportunities ./assets/pg/admins/delete/delete_career_opportunities.php [NC,L]
 
 RewriteRule ^edit_universitys ./assets/pg/admins/edit_universitys.php [NC,L]
 RewriteRule ^test ./assets/pg/admins/test.php [NC,L]

@@ -94,7 +94,7 @@
                     </div>
 
 
-                    <textarea name="course_description" id="course_description" placeholder="النبذه عن المادة"></textarea>
+                    <textarea name="course_description" id="editor1" placeholder="النبذه عن المادة"></textarea>
                    
                     <div class="space"></div>
                     <div class="btn-row">   
@@ -111,6 +111,16 @@
             document.getElementById('success-message').style.display = 'none';
         }, 5000);
     </script>
-
+ <script src="../../../../../ecomweb1/assets/pg/admins/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('editor1');
+        CKEDITOR.editorConfig = function (config) {
+            config.language = 'ar';
+            config.uiColor = '#f7b42c';
+            config.height = 300;
+            config.toolbarCanCollapse = true;
+            config.contentsCss = 'margin-bottom: 15px;';
+        };
+    </script>
 </body>
 </html>

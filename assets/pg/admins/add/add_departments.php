@@ -118,11 +118,13 @@
                         <input type="number" style="margin: 0px 10px;" name="parallel_study_fees"
                             placeholder="القسط السنوي(الموازي)" required>
                     </div>
-                    <div class="custom-column" style="margin-bottom: 10px;">
-                        <textarea name="department_description" id="editor1" placeholder="النبذه عن القسم"></textarea>
-                        <textarea name="scientific_department_message" id="editor1"
+                  
+                    <p>الوصف</p>
+                    <textarea name="department_description" id="editor1" placeholder="النبذه عن القسم"></textarea>
+                    <p>رسالة القسم</p>
+                    <textarea name="scientific_department_message" id="editor2"
                             placeholder="رسالة القسم"></textarea>
-                    </div>
+                 
                     <div class="space"></div>
                     <div class="btn-row">
                         <input type="file" name="departments_images" class="file-btn" id="files"
@@ -143,7 +145,7 @@
             document.getElementById('success-message').style.display = 'none';
         }, 5000);
     </script>
-    <script src="ckeditor/ckeditor.js"></script>
+    <script src="../../../../../ecomweb1/assets/pg/admins/ckeditor/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('editor1');
         CKEDITOR.editorConfig = function (config) {

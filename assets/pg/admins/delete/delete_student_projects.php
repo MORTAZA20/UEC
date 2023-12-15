@@ -6,29 +6,29 @@ if (!$_SESSION["admin_user"]) {
     header("Location: admin");
 }
 
-$delete_courses = $_POST["del_id"];
+$delete_student_projects = $_POST["del_id"];
 
 if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] === "true") {
     try {
 
         $conn->autocommit(FALSE);
 
-        $sql = "DELETE FROM courses WHERE course_id=?";
+        $sql = "DELETE FROM student_projects WHERE project_id=?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $delete_courses);
+        $stmt->bind_param("s", $delete_student_projects);
         $stmt->execute();
 
         $conn->commit();
 
-        echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px; justify-content: center; text-align: center; font-family: 'Tajawal', sans-serif;'>تم حذف المادة بنجاح</div>";
+        echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px; justify-content: center; text-align: center; font-family: 'Tajawal', sans-serif;'>تم حذف المشروع بنجاح</div>";
         echo "<div style='justify-content: center; text-align: center;'>
-                <a href='courses' style='padding: 10px; color: #fff; font-size:18px; font-weight: 500; border-radius: 5px; background-color: #18bc9c; font-family: Tajawal, sans-serif; text-decoration: none;'>الرجوع الى صفحة المواد الدراسية</a>
+                <a href='student_projects' style='padding: 10px; color: #fff; font-size:18px; font-weight: 500; border-radius: 5px; background-color: #18bc9c; font-family: Tajawal, sans-serif; text-decoration: none;'>الرجوع الى صفحة مشاريع الطلبة</a>
               </div>";
     } catch (Exception $e) {
         $conn->rollback();
         echo "حدث خطأ: " . $e->getMessage();
         echo "<div style='justify-content: center; text-align: center;'>
-        <a href='courses'  style='
+        <a href='student_projects'  style='
             font-family: 'Tajawal', sans-serif;
             padding: 10px;
             color: #fff;
@@ -39,7 +39,7 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] === "true") {
             background-color: #5DC122;
             display: inline-block; 
             margin-top: 20px;  
-        '>الرجوع الى صفحة الجامعات</a>
+        '>الرجوع الى صفحة مشاريع الطلبة</a>
 
     </div>";
     } finally {
@@ -54,19 +54,19 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] === "true") {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>لوحة التحكم | حذف المواد</title>
+        <title>لوحة التحكم | حذف مشاريع الطلبة</title>
         <link rel="stylesheet" href="style">
     </head>
 
     <body>
         <div style="text-align: center; margin-top: 10%;">
-            <h1>هل أنت متأكد أنك ترغب في حذف هذه المادة؟ (معرف المادة الدراسية
-                <?php echo $delete_courses ?>)
+            <h1>هل أنت متأكد أنك ترغب في حذف هذه المشروع؟ (معرف المشروع؟ 
+                <?php echo $delete_student_projects ?>)
             </h1>
             <h2 style="padding: 10px;">
             <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
-                    <form method="post" action="delete_courses" style="margin:15px; ">
-                    <input type="hidden" name="del_id" value="<?php echo $delete_courses ?>">
+                    <form method="post" action="delete_student_projects" style="margin:15px; ">
+                    <input type="hidden" name="del_id" value="<?php echo $delete_student_projects ?>">
                         <input type="hidden" name="dal_stm" value="true">
                         <button type="submit" style="padding: 15px 70px;
                           font-size: 20px;
@@ -82,7 +82,7 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] === "true") {
                           display: inline-block;">نعم</button>
                     </form>
             
-                    <form method="post" action="courses" style="margin-left: 10px;">
+                    <form method="post" action="student_projects" style="margin-left: 10px;">
                         <button type="submit" style="padding: 15px 70px;
                           font-family: 'Tajawal', sans-serif;
                           font-size: 20px;

@@ -80,12 +80,11 @@
             </table>
         </div>
     </div>
-    
     <script>
-    function submitForm(delId) {
-        document.getElementById('del_id_input').value = delId;
-        document.getElementById('deleteForm').submit();
-    }
+        function submitForm(delId) {
+            document.getElementById('del_id_input').value = delId;
+            document.getElementById('deleteForm').submit();
+        }
     </script>
 </body>
 </html>

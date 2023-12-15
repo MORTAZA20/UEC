@@ -48,7 +48,11 @@
                                 <td><span class="badge">' . $row["college_id"] . '</span></td>
                                 <td>' . $row["university_name"] . '</td>
                                 <td>' . $row["college_name"] . '</td>
-                                <td><img src="' . $row["colleges_img_path"] . '" style="width:100px; height:100px;"></td>
+                                <td><img src="assets/pg/admins/' . $row["colleges_img_path"] . '" 
+                                style=" max-width:80px;
+                                max-height: 80px;
+                                width: auto;
+                                height: auto;"></td>
                                 <td>' . $row["required_GPA"] . '</td>
                                 <td>' . $row["college_description"] . '</td>
                                 <td data-title="التحكم" class="text-center">

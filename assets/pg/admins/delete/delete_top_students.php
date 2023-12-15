@@ -1,5 +1,5 @@
 <?php
-require_once("inc/conn.inc.php");
+require_once("../inc/conn.inc.php");
 session_start();
 
 if (!$_SESSION["admin_user"]) {
@@ -13,22 +13,23 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] === "true") {
 
         $conn->autocommit(FALSE);
 
-        $sql = "DELETE FROM top_students WHERE student_id =?";
+        $sql = "DELETE FROM top_students WHERE student_id=?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $delete_top_students );
+        $stmt->bind_param("s",$delete_top_students);
         $stmt->execute();
 
         $conn->commit();
 
         echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px; justify-content: center; text-align: center; font-family: 'Tajawal', sans-serif;'>تم حذف الطالب بنجاح</div>";
         echo "<div style='justify-content: center; text-align: center;'>
-                <a href='top_students ' style='padding: 10px; color: #fff; font-size:18px; font-weight: 500; border-radius: 5px; background-color: #18bc9c; font-family: Tajawal, sans-serif; text-decoration: none;'>الرجوع الى صفحة الطلبة الاوائل </a>
+                <a href='top_students' style='padding: 10px; color: #fff; font-size:18px; font-weight: 500; border-radius: 5px; background-color: #18bc9c; font-family: Tajawal, sans-serif; text-decoration: none;'>الرجوع الى صفحة الطلبة الاوائل</a>
               </div>";
     } catch (Exception $e) {
         $conn->rollback();
         echo "حدث خطأ: " . $e->getMessage();
         echo "<div style='justify-content: center; text-align: center;'>
-        <a href='top_students'  style='
+        <a href='top_students'  
+        style='
             font-family: 'Tajawal', sans-serif;
             padding: 10px;
             color: #fff;
@@ -60,12 +61,12 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] === "true") {
 
     <body>
         <div style="text-align: center; margin-top: 10%;">
-            <h1>هل أنت متأكد أنك ترغب في حذف هذه الطالب؟ (معرف الطالب
+            <h1>هل أنت متأكد أنك ترغب في حذف هذه المادة؟ (معرف المادة الدراسية
                 <?php echo $delete_top_students ?>)
             </h1>
             <h2 style="padding: 10px;">
             <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
-                    <form method="post" action="delete_top_students " style="margin:15px; ">
+                    <form method="post" action="delete_top_students" style="margin:15px; ">
                     <input type="hidden" name="del_id" value="<?php echo $delete_top_students ?>">
                         <input type="hidden" name="dal_stm" value="true">
                         <button type="submit" style="padding: 15px 70px;
@@ -97,8 +98,6 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] === "true") {
                           display: inline-block;">لا</button>
                     </form>
                 </div>
-
-
                 </h2>
             </div>
         </body>

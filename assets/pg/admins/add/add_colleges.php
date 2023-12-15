@@ -101,7 +101,8 @@
                     </div>
                    
                     
-                    
+                    <p>الوصف</p>
+                    <textarea name="editor1" id="editor1"></textarea>
                     <div class="space"></div>
                     <div class="btn-row">
                     <input type="file" name="colleges_images" class="file-btn" id="files" accept="image/png, image/jpeg" >
@@ -112,23 +113,17 @@
                             
                         
                     </div>
-                     <p>الوصف</p>
-                    <textarea name="editor1" id="editor1"></textarea>
-
-                </form>
+                 </form>    
             </div>
         </div>
     </div>
     
-  
     <script>
       setTimeout(function() {
             document.getElementById('success-message').style.display = 'none';
         }, 5000);
-    </script>
-</body>
-
-</html><script src="ckeditor/ckeditor.js"></script>
+    </script> 
+    <script src="../../../../../ecomweb1/assets/pg/admins/ckeditor/ckeditor.js"></script>
 <script>
     CKEDITOR.replace('editor1');
     CKEDITOR.editorConfig = function (config) {
@@ -139,3 +134,7 @@
         config.contentsCss = 'margin-bottom: 15px;';
     };
 </script>
+</body>
+
+</html>
+

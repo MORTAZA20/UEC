@@ -60,15 +60,18 @@
                                     color: #fff;
                                     border-radius: 5px;
                                     background-color: #95a5a6;
-                                    text-decoration: none;">تـعـديـل</a>
+                                    text-decoration: none;">تعديل</a>
                     
-                                    <a href="delete_courses?del_id='. $row["project_id"] .'"
+                                    <a href="#" onclick="submitForm(\'' . $row["project_id"] . '\');" 
                                     style="padding: 3px 10px;
                                     color: #fff;
                                     font-weight: 500;
                                     border-radius: 5px;
                                     background-color: rgb(223, 20, 10);
-                                    text-decoration: none;">حـذف</a> 
+                                    text-decoration: none;">حذف</a>
+                          <form id="deleteForm" action="delete_student_projects" method="post" style="display: none;">
+                              <input type="hidden" name="del_id" id="del_id_input">
+                          </form>
                                 </td>
                             </tr>';
                     }
@@ -78,5 +81,11 @@
             </table>
         </div>
     </div>
+    <script>
+        function submitForm(delId) {
+            document.getElementById('del_id_input').value = delId;
+            document.getElementById('deleteForm').submit();
+        }
+    </script>
 </body>
 </html>
