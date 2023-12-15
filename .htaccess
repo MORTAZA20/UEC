@@ -1,0 +1,40 @@
+RewriteEngine on
+
+RewriteRule ^style ./assets/pg/admins/css/style.css [NC,L]
+
+RewriteRule ^bg1 ./assets/pg/admins/img/bg1.png [L]
+RewriteRule ^close ./assets/pg/admins/img/close.png [L]
+
+RewriteRule ^login ./assets/pg/admins/login.php [NC,L]
+RewriteRule ^logout ./assets/pg/admins/logout.php [NC,L]
+
+RewriteRule ^home ./assets/pg/admins/home.php [NC,L]
+RewriteRule ^colleges ./assets/pg/admins/colleges.php [NC,L]
+RewriteRule ^courses ./assets/pg/admins/courses.php [NC,L]
+RewriteRule ^universities ./assets/pg/admins/universities.php [NC,L]
+RewriteRule ^inf_departments ./assets/pg/admins/inf_departments.php [NC,L]
+RewriteRule ^top_students ./assets/pg/admins/top_students.php [NC,L]
+RewriteRule ^My_Admins ./assets/pg/admins/My_Admins.php [NC,L]
+RewriteRule ^student_projects ./assets/pg/admins/student_projects.php [NC,L]
+RewriteRule ^career_opportunities ./assets/pg/admins/career_opportunities.php [NC,L]
+
+RewriteRule ^conn.inc ./assets/pg/admins/inc/conn.inc.php [NC,L]
+
+RewriteRule ^add_admin ./assets/pg/admins/add/add_admin.php [NC,L]
+RewriteRule ^add_departments ./assets/pg/admins/add/add_departments.php [NC,L]
+RewriteRule ^add_universities ./assets/pg/admins/add/add_universities.php [NC,L]
+RewriteRule ^add_colleges ./assets/pg/admins/add/add_colleges.php [NC,L]
+RewriteRule ^add_courses ./assets/pg/admins/add/add_courses.php [NC,L]
+RewriteRule ^add_top_studens ./assets/pg/admins/add/add_top_studens.php [NC,L]
+RewriteRule ^add_student_projects ./assets/pg/admins/add/add_student_projects.php [NC,L]
+RewriteRule ^add_career_opportunities ./assets/pg/admins/add/add_career_opportunities.php [NC,L]
+
+
+RewriteRule ^delete_universities ./assets/pg/admins/delete/delete_universities.php [NC,L]
+RewriteRule ^delete_colleges ./assets/pg/admins/delete/delete_colleges.php [NC,L]
+RewriteRule ^delete_inf_departments ./assets/pg/admins/delete/delete_inf_departments.php [NC,L]
+RewriteRule ^delete_courses ./assets/pg/admins/delete/delete_courses.php [NC,L]
+RewriteRule ^delete_top_students ./assets/pg/admins/delete/delete_top_students.php [NC,L]
+
+RewriteRule ^edit_universitys ./assets/pg/admins/edit_universitys.php [NC,L]
+RewriteRule ^test ./assets/pg/admins/test.php [NC,L]

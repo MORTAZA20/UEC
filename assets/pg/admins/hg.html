@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
+</head>
+
+<body>
+ <form>
+  <textarea id="editor1"></textarea>
+</body>
+</html>
+<img src="universities_img/caesar-cipher.png" style="width:100px; height:100px;">
+<script src="ckeditor/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('editor1');
+    CKEDITOR.editorConfig = function (config) {
+        config.language = 'ar';
+        config.uiColor = '#f7b42c';
+        config.height = 300;
+        config.toolbarCanCollapse = true;
+        config.contentsCss = 'margin-bottom: 15px;';
+    };
+</script>

@@ -1,0 +1,412 @@
+@import "https://necolas.github.io/normalize.css";
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Tajawal', sans-serif;
+    background-color: #fff;
+    direction: rtl;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.login-box {
+    top:20%;
+    right: 50%;
+    width: 300px;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 40px 20px;
+    box-shadow: 2px 2px 4px #000;
+    position: absolute;
+    transform: translate(50%, -20%);
+}
+
+.login-title {
+    font-size: 40px;
+    font-weight: 500;
+    padding-bottom: 10px;
+
+}
+
+.login-form input[type=text],
+.login-form input[type=password] {
+    margin: 10px 0;
+    width: 100%;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 15px;
+    border: 2px solid rebeccapurple;
+    border-radius: 6px;
+    background-color: #fff;
+    padding: 8px 10px;
+    outline: none;
+}
+
+.login-form input[type=submit] {
+    margin: 10px 0;
+    width: 100%;
+    color: white;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 15px;
+    border: 2px solid #6600ff;
+    border-radius: 6px;
+    background-color: #6600ff;
+    padding: 8px 10px;
+    outline: none;
+    cursor: pointer;
+}
+
+.header {
+    width: 100%;
+    height: auto;
+    color: #ECF0F1;
+    background-color: #192330;
+    padding: 12px 20px;
+    position: relative;
+}
+
+.header-title {
+    font-size: 30px;
+}
+
+.side-menu {
+    top: 14px;
+    left: 0;
+    position: absolute;
+    display: flex;
+}
+
+.menu-item {
+    margin-left: 20px;
+    color: white;
+    font-weight: 500;
+    background-color: #2C3E50;
+    padding: 8px 10px;
+}
+
+.menu-item:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.content {
+    width: 100%;
+    height: auto;
+    display: flex;
+}
+
+.content-bar {
+    left: 0;
+    width: calc(100% - 220px);
+    height: calc(100% - 60px);
+    background-color: white;
+    position: fixed;
+    overflow-y: scroll;
+}
+
+.content-bar > .btn-style {
+    color: #fff;
+    background-color: #18bc9c;
+    position: absolute;
+    left: 20px; top: 30px;
+    font-size: 16px;
+    font-family: 'Tajawal', sans-serif;
+    padding:8px 15px;
+    border: 0px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.side-bar {
+    right: 0;
+    width: 220px;
+    height: calc(100% - 60px);
+    background-color: #192330;
+    padding-top: 20px;
+    position: fixed;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.item-bar {
+    width: 100%;
+    height: auto;
+    color: #ECF0F1;
+    font-size: 18px;
+    border-bottom: 1px solid #2A3B52;
+    padding: 10px 15px;
+    transition: 0.3s all;
+}
+
+.item-bar:hover {
+    background-color: #18bc9c;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#req2{
+    display: none;
+}
+
+.sub-menu{
+    width: 220px;
+    height: 0px;
+    color: #fff;
+    background-color: #2A3B52;
+    overflow: hidden;
+    transition: 0.3s all;
+    display: block;
+    z-index: 1 !important;
+}
+
+.sub-menu > div{
+    width: 100%;
+    height: auto;
+    color: #ecf0f1;
+    background-color: #2A3B52;
+    font-size: 18px;
+    border-bottom: 1px solid #2A3B52;
+    padding: 10px 15px;
+    transition: 0.3s all;
+}
+
+.sub-menu > div:hover {
+    background-color: #344865;
+    cursor: pointer;
+
+}
+
+.path-bar{
+    margin: 20px;
+    padding: 14px;
+    color: darkgrey;
+    font-size: 18px;
+    background-color: #ECF0F1;
+    border-radius: 5px;
+    display: flex;
+    position: relative;
+
+}
+
+.url-path {
+    margin: 0px 5px;
+}
+
+.path-bar > button {
+    top: 8px;
+    left: 10px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 3px 10px;
+    box-shadow: 2px 2px 1px #ccc;
+    border: 1px solid #18bc9c;
+    border-radius: 3px;
+    position: absolute;
+    cursor: pointer;
+    transform: 0.3s all; /* حذف -moz-appearance: none; */
+}
+
+
+.path-bar > button :hover{
+    background-color: #18bc9c;
+}
+
+.active-path {
+    color: #38cbc5 !important;
+}
+
+.panel-bar {
+    margin: 40px 20px;
+    display: flex;
+}
+
+.panel-bar > div {
+    width: 25%;
+    font-size: 20px;
+    text-align: center;
+}
+
+.panel-bar > div > div {
+    margin: 20px;
+    color: #38cbc5;
+    font-size: 25px;
+}
+
+.Latest-orders {
+    margin: 20px;
+    color: #fff;
+    font-size: 18px;
+    padding: 14px;
+    border-radius: 5px;
+    background-color: #192330;
+}
+
+table {
+    font-size: 18px;
+    margin: 20px;
+    width: calc(100% - 40px);
+    border-collapse:collapse;
+
+}
+
+thead{
+    padding: 14px;
+    color: #fff;
+    border-radius: 5px 0px 5px 0px;
+    background-color: #192330;
+}
+
+thead tr th {
+    padding: 10px;
+    font-size: 18px;
+    text-align: center;
+}
+
+thead tr td {
+    padding: 15px 10px;
+    background-color: #efefef;
+    font-size: 18px;
+}
+
+tbody tr td {
+    padding: 15px 10px;
+    background-color: #efefef;
+    font-size: 18px;
+    text-align: center;
+}
+
+.edit-btn {
+
+    padding: 3px 10px;
+    color: #fff;
+    font-weight: 500;
+    border-radius: 5px;
+    background-color: #95a5a6;
+    text-decoration: none;
+}
+
+.del-btn{
+    padding: 3px 10px;
+    color: #fff;
+    font-weight: 500;
+    border-radius: 5px;
+    background-color: rgb(223, 20, 10);
+    text-decoration: none;
+}
+
+.container-form {
+    margin:  10px 20px;
+    
+}
+
+.custom-column {
+    display: flex;
+    width: 100%;
+}
+
+.custom-column #row-1{
+    margin: 10px;
+}
+
+.container-form input[type=date],
+.container-form input[type=text],
+.container-form input[type=number],
+.container-form input[type=password],
+.container-form textarea[class=text-style],
+.container-form textarea[name=shipping_info],#fruit
+{
+    font-size: 18px;
+    width: 100%;
+    border: 3px solid #efefef;
+    background-color: #efefef;
+    padding: 10px 15px;
+    display: block;
+    border-radius: 5px;
+}
+
+.container-form input[type=file]{
+    display: none;
+}
+
+.container-form .file-btn {
+    color: #fff;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid #192330;
+    background-color: #192330;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.container-form input[type=submit]{
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 5px;
+    margin-right: 5px;
+    border: 1px solid #18bc9c;
+    background-color: #18bc9c;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.container-img{
+    width: auto;
+    height: 150px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #efefef;
+    padding: 8px;
+    margin: 10px 0px;
+    border-radius: 5px;
+} 
+
+.item-img{
+    margin: 0px 5px; 
+    height:200px; 
+    width:100px;
+    
+} 
+
+.bg-close-btn{
+    width: 30px;
+    height: 30px;
+    padding: 15px;
+    background-color: #6600ff;
+    background-size: 30px;
+}
+
+.close-btn{
+    width: 20px;
+    height: 20px;
+}
+
+.btn-row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.badge{
+    padding: 10px;
+}
+
+.badge > .text-center{
+    text-align: center;
+    margin-top: 30%;
+
+}
+
+.del-massage{
+    width: 100%;
+    position: fixed;
+    border: 5px solid #18bc9c;
+}
+
+.del-massage > h1 , h2 , a{
+    text-align: center;
+}
