@@ -42,7 +42,7 @@
                     } else {
                         if ($_FILES['universities_images']['type'] === 'image/png' || $_FILES['universities_images']['type'] === 'image/jpeg') {
                             {   
-                                $universities_folder = 'universities_img' ;
+                                $universities_folder = '../universities_img' ;
 
                                 if (!file_exists($universities_folder)) {
                                     mkdir($universities_folder, 0777, true);
@@ -51,7 +51,7 @@
                                 $file_name = $_FILES["universities_images"]["name"];
                                 $universities_images = $_FILES["universities_images"]["tmp_name"];
                                 move_uploaded_file($universities_images, $universities_folder . '/' . $file_name);
-                                $image_path = $universities_folder . '/' . $file_name;
+                                $image_path = 'universities_img' . '/' . $file_name;
                             
                                 $sql = "INSERT INTO universities (university_id, university_name, university_location, university_website, universities_img_path) 
                                         VALUES ('$university_id', '$university_name', '$university_location', '$university_website', '$image_path')";
@@ -106,7 +106,5 @@
             document.getElementById('success-message').style.display = 'none';
         }, 5000);
     </script>
-
-
 </body>
 </html>

@@ -3,13 +3,25 @@ require_once("../inc/conn.inc.php");
 session_start();
 
 if (!$_SESSION["admin_user"]) {
-    header("Location: admin");
+    header("Location: login");
 }
 
 $delete_universities = $_POST["del_id"];
 
-if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] === "true") {
+if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] == "true") {
     try {
+        // حذف صور المشاريع المرتبطة بالاقسام
+        $sql = "SELECT * FROM student_projects WHERE department_id IN (SELECT department_id FROM departments WHERE college_id IN (SELECT college_id FROM colleges WHERE university_id=?))";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $delete_universities);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $dirPath ='../' . $row["student_projects_img_path"];
+                deleteDir($dirPath);
+            }
+        }
 
         //حذف صور الاقسام المرتبطة بالكليات
         $sql = "SELECT * FROM departments WHERE college_id IN (SELECT college_id FROM colleges WHERE university_id=?)";
@@ -19,7 +31,7 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] === "true") {
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $dirPath = $row["departments_img_path"];
+                $dirPath ='../' . $row["departments_img_path"];
                 deleteDir($dirPath);
             }
         }
@@ -31,7 +43,7 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] === "true") {
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $dirPath = $row["colleges_img_path"];
+                $dirPath = '../' . $row["colleges_img_path"];
                 deleteDir($dirPath);
             }
         }
@@ -43,15 +55,17 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] === "true") {
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
-        $dirPath = $row["universities_img_path"];
+        $dirPath = '../' . $row["universities_img_path"];
         deleteDir($dirPath);
         $conn->autocommit(FALSE);
+
 
         // حذف الجداول المرتبطة بالأقسام
         $sql = "DELETE FROM student_projects WHERE department_id IN (SELECT department_id FROM departments WHERE college_id IN (SELECT college_id FROM colleges WHERE university_id=?))";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $delete_universities);
         $stmt->execute();
+        
 
         $sql = "DELETE FROM career_opportunities WHERE department_id IN (SELECT department_id FROM departments WHERE college_id IN (SELECT college_id FROM colleges WHERE university_id=?))";
         $stmt = $conn->prepare($sql);

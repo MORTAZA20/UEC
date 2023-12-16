@@ -8,7 +8,7 @@ if (!$_SESSION["admin_user"]) {
 }
 $delete_colleges = $_POST["del_id"];
 
-if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] === "true") {
+if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] == "true") {
     try {
 
         $sql = "SELECT * FROM departments WHERE college_id =?";
@@ -18,7 +18,7 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] === "true") {
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $dirPath = $row["departments_img_path"];
+                $dirPath = '../'.$row["departments_img_path"];
                 deleteDir($dirPath);
             }
         }
@@ -28,7 +28,7 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] === "true") {
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
-        $dirPath = $row["colleges_img_path"];
+        $dirPath = '../'.$row["colleges_img_path"];
         deleteDir($dirPath);
 
         $conn->autocommit(FALSE);

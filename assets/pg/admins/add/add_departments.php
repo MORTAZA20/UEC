@@ -53,7 +53,7 @@
                     if ($_FILES['departments_images']['type'] == 'image/png' || $_FILES['departments_images']['type'] == 'image/jpeg') {
 
 
-                        $departments_folder = 'departments_img';
+                        $departments_folder = '../departments_img';
 
                         if (!file_exists($departments_folder)) {
                             mkdir($departments_folder, 0777, true);
@@ -62,7 +62,7 @@
                         $departments_images = $_FILES["departments_images"]["tmp_name"];
                         $file_name = $_FILES["departments_images"]["name"];
                         move_uploaded_file($departments_images, $departments_folder . '/' . $file_name);
-                        $image_path = $departments_folder . '/' . $file_name;
+                        $image_path ='departments_img'. '/' . $file_name;
                         $sql = "INSERT INTO departments (college_id , department_id , department_name, department_description, scientific_department_message, required_GPA , evening_GPA, evening_study_fees, parallel_GPA, parallel_study_fees,departments_img_path) 
                                     VALUES ('$college_id', '$department_id', '$department_name', '$department_description', '$scientific_department_message', '$required_GPA',  '$evening_GPA', '$evening_study_fees' , '$parallel_GPA', '$parallel_study_fees','$image_path')";
                         $result3 = $conn->query($sql);

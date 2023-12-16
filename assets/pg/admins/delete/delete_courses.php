@@ -8,7 +8,7 @@ if (!$_SESSION["admin_user"]) {
 
 $delete_courses = $_POST["del_id"];
 
-if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] === "true") {
+if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] == "true") {
     try {
 
         $conn->autocommit(FALSE);

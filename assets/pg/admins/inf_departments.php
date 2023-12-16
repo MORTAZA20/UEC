@@ -18,7 +18,7 @@
             <div style='position:relative; margin-top: 15px; '>
                 <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>الاقسام
             </div>
-            <button class="btn-style" onclick="window.open('add_departments.php' , '_self');">أضافة قسم جديد</button>
+            <button class="btn-style" onclick="window.open('add_departments' , '_self');">أضافة قسم جديد</button>
             <div class="path-bar">
                 <div class="url-path active-path">لوحة التحكم</div>
                 <div class="url-path slash">/</div>

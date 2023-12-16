@@ -46,9 +46,21 @@
                     if ($resultTest->num_rows > 0) {
                         echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>عذرًا، معرف  المشروع موجود مسبقًا</div>";
                     } else {
-                        $sql = "INSERT INTO student_projects (project_id  , department_id , student_name, project_name, project_supervisor,project_description) 
-                                    VALUES ('$project_id ', '$department_id', '$student_name', '$project_name', '$project_supervisor','$project_description')";
+                        if ($_FILES['student_projects_images']['type'] == 'image/png' || $_FILES['student_projects_images']['type'] == 'image/jpeg') {
 
+
+                            $student_projects_folder = '../student_projects_img';
+    
+                            if (!file_exists($student_projects_folder)) {
+                                mkdir($student_projects_folder, 0777, true);
+                                chmod($student_projects_folder, 0777);
+                            }
+                            $student_projects_images = $_FILES["student_projects_images"]["tmp_name"];
+                            $file_name = $_FILES["student_projects_images"]["name"];
+                            move_uploaded_file($student_projects_images, $student_projects_folder . '/' . $file_name);
+                            $image_path ='student_projects_img'. '/' . $file_name;
+                        $sql = "INSERT INTO student_projects (project_id  , department_id , student_name, project_name, project_supervisor,project_description,student_projects_img_path) 
+                                    VALUES ('$project_id ', '$department_id', '$student_name', '$project_name', '$project_supervisor','$project_description','$image_path')";
                         $result3 = $conn->query($sql);
                         if ($result3) {
                             echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>تم إضافة المشروع بنجاح</div>";
@@ -57,7 +69,7 @@
                         }
                     }
                 }
-                
+            }   
             ?>
 
             <div class="container-form">
@@ -95,7 +107,9 @@
                     <textarea name="project_description" id="editor1" placeholder="الوصف"></textarea>
                     
                     <div class="space"></div>
-                    <div class="btn-row">   
+                    <div class="btn-row"> 
+                    <input type="file" name="student_projects_images" class="file-btn" id="files" accept="image/png, image/jpeg , image/jpg" >
+                        <input type="button" class="file-btn" value="اختيار صورة المشروع" onclick="document.getElementById('files').click();">  
                         <p>
                             <input type="submit" name="sub_form" value="حـفـظ الـبـيـانـات" />
                         </p>
@@ -104,7 +118,6 @@
             </div>
         </div>
     </div>
-    <script src="index.js"></script>
     <script src="../../../../../ecomweb1/assets/pg/admins/ckeditor/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('editor1');

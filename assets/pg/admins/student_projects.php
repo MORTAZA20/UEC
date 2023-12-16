@@ -14,7 +14,7 @@
      <?php    include 'inc/sidebar.php'; ?>
         <div class="content-bar">
             <div style='position:relative; margin-top: 15px; '> <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>الاقسام</div>
-            <button class="btn-style" onclick="window.open('add_student_projects.php' , '_self');">أضافة مشروع جديد</button>
+            <button class="btn-style" onclick="window.open('add_student_projects' , '_self');">أضافة مشروع جديد</button>
             <div    class="path-bar">
                 <div class="url-path active-path">لوحة التحكم</div>
                 <div class="url-path slash">/</div>

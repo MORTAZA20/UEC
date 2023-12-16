@@ -3,44 +3,57 @@ require_once("../inc/conn.inc.php");
 session_start();
 
 if (!$_SESSION["admin_user"]) {
-    header("Location: admin");
+    header("Location: login");
 }
 
 $delete_departments = $_POST["del_id"];
 
 
 
-if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] === "true") {
+if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] == "true") {
     try {
+       
         $conn->autocommit(FALSE);
-
-
-
+        //حذف جميع صور المشاريع المرتبطة بالقسم
+        $sql = "SELECT * FROM student_projects WHERE department_id=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $delete_departments);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $dirPath = '../'.$row["student_projects_img_path"];
+                deleteDir($dirPath);
+            }
+        }
+        //حذف صورة القسم
         $sql = "SELECT * FROM departments WHERE department_id=?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $delete_departments);
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
-        $dirPath = $row["departments_img_path"];
+        $dirPath = '../'.$row["departments_img_path"];
         deleteDir($dirPath);
+
+
         // حذف الجداول المرتبطة بالأقسام
-        $sql = "DELETE FROM student_projects WHERE department_id IN (SELECT department_id FROM departments WHERE college_id IN (SELECT college_id FROM colleges WHERE department_id=?))";
+        $sql = "DELETE FROM student_projects WHERE department_id=?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $delete_departments);
         $stmt->execute();
 
-        $sql = "DELETE FROM career_opportunities WHERE department_id IN (SELECT department_id FROM departments WHERE college_id IN (SELECT college_id FROM colleges WHERE department_id=?))";
+        $sql = "DELETE FROM career_opportunities WHERE department_id=?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $delete_departments);
         $stmt->execute();
 
-        $sql = "DELETE FROM courses WHERE department_id IN (SELECT department_id FROM departments WHERE college_id IN (SELECT college_id FROM colleges WHERE department_id=?))";
+        $sql = "DELETE FROM courses WHERE department_id=?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $delete_departments);
         $stmt->execute();
 
-        $sql = "DELETE FROM top_students WHERE department_id IN (SELECT department_id FROM departments WHERE college_id IN (SELECT college_id FROM colleges WHERE department_id=?))";
+        $sql = "DELETE FROM top_students WHERE department_id=?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $delete_departments);
         $stmt->execute();
@@ -78,24 +91,28 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] === "true") {
         $conn->autocommit(TRUE);
     }
     $conn->close();
-}else {
+} else {
 
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة التحكم | حذف معلومات الاقسام</title>
-    <link rel="stylesheet" href="style">
-</head>
-<body>
-    <div style="text-align: center; margin-top: 10%;">
-          <h1>هل أنت متأكد أنك ترغب في حذف هذا القسم؟ (معرف القسم <?php echo $delete_departments ?>)</h1>
-          <h2 style="padding: 10px;">
-          <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+    ?>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>لوحة التحكم | حذف معلومات الاقسام</title>
+        <link rel="stylesheet" href="style">
+    </head>
+
+    <body>
+        <div style="text-align: center; margin-top: 10%;">
+            <h1>هل أنت متأكد أنك ترغب في حذف هذا القسم؟ (معرف القسم
+                <?php echo $delete_departments ?>)
+            </h1>
+            <h2 style="padding: 10px;">
+                <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
                     <form method="post" action="delete_inf_departments" style="margin:15px; ">
-                    <input type="hidden" name="del_id" value="<?php echo $delete_departments ?>">
+                        <input type="hidden" name="del_id" value="<?php echo $delete_departments ?>">
                         <input type="hidden" name="dal_stm" value="true">
                         <button type="submit" style="padding: 15px 70px;
                           font-size: 20px;
@@ -110,7 +127,7 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] === "true") {
                           width: 170px; ;
                           display: inline-block;">نعم</button>
                     </form>
-            
+
                     <form method="post" action="inf_departments" style="margin-left: 10px;">
                         <button type="submit" style="padding: 15px 70px;
                           font-family: 'Tajawal', sans-serif;
@@ -126,14 +143,15 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] === "true") {
                           display: inline-block;">لا</button>
                     </form>
                 </div>
-          </h2>
-    </div>
-</body>
-</html>
-<?php
-}
+            </h2>
+        </div>
+    </body>
 
-function deleteDir($dirPath) {
+    </html>
+    <?php
+}
+function deleteDir($dirPath)
+{
     if (file_exists($dirPath)) {
         unlink($dirPath);
     } else {

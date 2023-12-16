@@ -8,10 +8,19 @@ if (!$_SESSION["admin_user"]) {
 
 $delete_student_projects = $_POST["del_id"];
 
-if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] === "true") {
+if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] == "true") {
     try {
 
         $conn->autocommit(FALSE);
+
+        $sql = "SELECT * FROM student_projects WHERE project_id=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $delete_student_projects);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $dirPath = '../'.$row["student_projects_img_path"];
+        deleteDir($dirPath); 
 
         $sql = "DELETE FROM student_projects WHERE project_id=?";
         $stmt = $conn->prepare($sql);
@@ -106,4 +115,13 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] === "true") {
         </html>
 <?php
 }
+function deleteDir($dirPath)
+{
+    if (file_exists($dirPath)) {
+        unlink($dirPath);
+    } else {
+        echo "المسار غير موجود.";
+    }
+}
+
 ?>
