@@ -20,7 +20,7 @@ if (!$_SESSION["admin_user"]) {
 </head>
 <body>
 
-<?php    include 'inc/navbar.php'; $t=0; ?>
+<?php    include 'inc/navbar.php'; ?>
 
     <div class="content">
     <?php    include 'inc/sidebar.php'; ?>

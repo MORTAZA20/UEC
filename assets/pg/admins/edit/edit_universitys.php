@@ -9,10 +9,10 @@
 </head>
 
 <body>
-    <?php include 'inc/navbar.php'; ?>
+    <?php include '../inc/navbar.php'; ?>
 
     <div class="content">
-        <?php include 'inc/sidebar.php'; ?>
+        <?php include '../inc/sidebar.php'; ?>
 
         <div class="content-bar">
             <div style='position:relative; margin-top: 15px;'>
@@ -27,9 +27,10 @@
             </div>
 
             <?php
-            include 'inc/conn.inc.php';
+            include '../inc/conn.inc.php';
 
             if (isset($_POST["sub_form"])) {
+
                 $university_id = mysqli_real_escape_string($conn, $_POST["Edit_Universitie_id"]);
                 $university_name = mysqli_real_escape_string($conn, $_POST["university_name"]);
                 $university_location = mysqli_real_escape_string($conn, $_POST["university_location"]);
@@ -37,7 +38,6 @@
 
                 if ($_FILES['universities_images']['type'] == 'image/png' || $_FILES['universities_images']['type'] == 'image/jpeg') {
                     $universities_folder = '../universities_img';
-
                     if (!file_exists($universities_folder)) {
                         mkdir($universities_folder, 0777, true);
                         chmod($universities_folder, 0777);
@@ -48,56 +48,91 @@
                     move_uploaded_file($universities_images, $universities_folder . '/' . $file_name);
                     $image_path = 'universities_img' . '/' . $file_name;
 
-                    $sql = "UPDATE universities SET university_name = '$university_name', university_location = '$university_location', 
-                            university_website = '$university_website', universities_img_path = '$image_path' WHERE university_id =?";
+                    $sql = "UPDATE universities SET university_name = ?, university_location = ?, 
+                    university_website = ?, universities_img_path = ? WHERE university_id = ?";
                     $stmt = $conn->prepare($sql);
-                    $stmt->bind_param("s", $university_id);
+                    $stmt->bind_param("sssss", $university_name, $university_location, $university_website, $image_path, $university_id);
                     $stmt->execute();
-                    
-                    if ($result) {
+
+                    if ($stmt->affected_rows > 0) {
                         echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>تم تحديث بيانات الجامعة بنجاح</div>";
                     } else {
-                        echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>حدث خطأ أثناء تحديث بيانات الجامعة: " . $conn->error . "</div>";
+                        echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>حدث خطأ أثناء تحديث بيانات الجامعة: " . $stmt->error . "</div>";
                     }
                 } else {
                     echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>يرجى تحديد ملف صورة صحيح (PNG أو JPEG)</div>";
                 }
             }
+
+
+            if (isset($_POST['edit_id'])){
+                $universityId = $_POST['edit_id'];
+            }
+            // Get data from database for edit form
+            $sql = "SELECT * FROM universities WHERE university_id =?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("i", $universityId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+
+    
             ?>
 
+
+            
             <div class="container-form">
                 <form action="" method="post" enctype="multipart/form-data">
                     <div class="container" style="margin-bottom: 10px;">
                         <div class="row align-items-start">
                             <div class="col custom-column">
-                                <input type="hidden" name="Edit_Universitie_id"
-                                    value="<?php echo $_POST['Edit_Universitie_id']; ?>">
-                                <input type="text" name="university_name" id="" placeholder="اسم الجامعة"
-                                    value="<?php echo $_POST['university_name']; ?>" required>
+                                <input type="hidden" name="Edit_Universitie_id" value="<?php 
+                                 if (!isset($_POST['edit_id'])){echo "";}else{echo $universityId;}?>">
+                                <input type="text" name="university_name" placeholder="اسم الجامعة"
+                                    value="<?php if (!isset($_POST['edit_id'])){echo "";}else{ echo $row['university_name'];} ?>">
                                 <input type="text" style="margin: 0px 10px;" name="university_location" id="row-2"
-                                    placeholder="موقع الجامعة" value="<?php echo $_POST['university_location']; ?>"
-                                    required>
+                                    placeholder="موقع الجامعة" value="<?php if (!isset($_POST['edit_id'])){echo "";}else{echo $row['university_location'];} ?>">
                                 <input type="text" name="university_website" id="" placeholder="موقع الجامعة الالكتروني"
-                                    value="<?php echo $_POST['university_website']; ?>" required>
+                                    value="<?php if (!isset($_POST['edit_id'])){echo "";}else{echo $row['university_website'];} ?>">
+                                
+                                </div>
+                                <div class="container-img">
+                            
+                                <img src="assets/pg/admins/<?php echo $row["universities_img_path"]; ?>" 
+                                style="max-width: 80px;
+                                max-height: 80px;
+                                width: auto;
+                                height: auto;
+                                padding-left:20px;">
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="space"></div>
-                    <div class="btn-row">
-                        <input type="file" name="universities_images" class="file-btn" id="files"
-                            accept="image/png, image/jpeg">
-                        <input type="button" class="file-btn" value="تغيير شعار الجامعة"
-                            onclick="document.getElementById('files').click();">
-                        <p>
-                            <input type="submit" name="sub_form" value="حفظ التغييرات" />
-                        </p>
-                    </div>
+                        <div class="space"></div>
+                        <div class="btn-row">
+                            <input type="file" name="universities_images" class="file-btn" id="files"
+                                accept="image/png, image/jpeg">
+                            <input type="button" class="file-btn" value="تغيير شعار الجامعة"
+                                onclick="document.getElementById('files').click();">
+                                <p>
+                                    <input type="submit" name="sub_form" value="حفظ التغييرات" />
+                                </p>
+                            </div>
                 </form>
             </div>
         </div>
     </div>
-
+   <script>
+    function del_img_" . $rm_dot . "() {
+                var result = confirm('هل أنت متأكد من حذف الصورة؟');
+                    if (result) {
+                        document.getElementById('" . $rm_dot ."').style.display = 'none';
+                                      
+                            var getinputvar = document.getElementById('del_imgs');
+                            getinputvar.value += '" . $rm_dot ."';
+                            }
+    }
+    </script>
     <script>
         setTimeout(function () {
             document.getElementById('success-message').style.display = 'none';
@@ -105,5 +140,6 @@
     </script>
 
 </body>
+
 
 </html>

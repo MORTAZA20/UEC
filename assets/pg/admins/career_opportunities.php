@@ -1,21 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة التحكم | الوظائف بعد التخرج   </title>
+    <title>لوحة التحكم | الوظائف بعد التخرج </title>
     <link rel="stylesheet" href="style">
 </head>
+
 <body>
 
-<?php    include 'inc/navbar.php';?>
+    <?php include 'inc/navbar.php'; ?>
     <div class="content">
 
-     <?php    include 'inc/sidebar.php'; ?>
+        <?php include 'inc/sidebar.php'; ?>
         <div class="content-bar">
-            <div style='position:relative; margin-top: 15px; '> <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>الوظائف بعد التخرج</div>
+            <div style='position:relative; margin-top: 15px; '>
+                <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>الوظائف بعد التخرج
+            </div>
             <button class="btn-style" onclick="window.open('add_career_opportunities' , '_self');">أضافة وظيفة جديدة</button>
-            <div    class="path-bar">
+            <?php include 'Search.php' ?>
+            <form action="" method="post">
+                <div class="group">
+                    <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                        <g>
+                            <path
+                                d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z">
+                            </path>
+                        </g>
+                    </svg>
+
+                    <input name="search" placeholder="ادخل اسم الوظيفة او القسم" type="search" class="input-placeholder">
+                    <input name="Input_Serach" type="submit" class="button" value="بـحـث">
+                </div>
+            </form>
+            <div class="path-bar">
                 <div class="url-path active-path">لوحة التحكم</div>
                 <div class="url-path slash">/</div>
                 <div class="url-path">الاقسام</div>
@@ -35,13 +54,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php
+                    <?php
                     include 'inc/conn.inc.php';
+                    if (isset($_POST['Input_Serach'])) {
+                        $search = mysqli_real_escape_string($conn, $_POST['search']);
+                        $sql = "SELECT career_opportunities.*, departments.department_name 
+                        FROM career_opportunities
+                        LEFT JOIN departments ON career_opportunities.department_id = departments.department_id WHERE job_title LIKE '%$search%' OR departments.department_name LIKE '$search'";
 
-                    $sql = "SELECT career_opportunities.*, departments.department_name 
+                    } else {
+                        $sql = "SELECT career_opportunities.*, departments.department_name 
                             FROM career_opportunities
                             LEFT JOIN departments ON career_opportunities.department_id = departments.department_id";
 
+                    }
                     $result = $conn->query($sql);
 
                     while ($row = $result->fetch_assoc()) {
@@ -53,7 +79,7 @@
                                 <td>' . $row["job_description"] . '</td>
                                 <td data-title="التحكم" class="text-center">
                                 
-                                    <a href="edit_courses.php?Edit_courses_id='. $row["opportunity_id"] .'" style="padding: 3px 10px;
+                                    <a href="edit_courses.php?Edit_courses_id=' . $row["opportunity_id"] . '" style="padding: 3px 10px;
                                     font-weight: 500;
                                     color: #fff;
                                     border-radius: 5px;
@@ -86,4 +112,5 @@
         }
     </script>
 </body>
+
 </html>

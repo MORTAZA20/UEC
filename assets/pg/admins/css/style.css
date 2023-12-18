@@ -410,3 +410,11 @@ tbody tr td {
 .del-massage > h1 , h2 , a{
     text-align: center;
 }
+
+input:hover,input:focus{
+ 
+    outline: none;
+    border-color: #192330;
+    background-color: #2A3B52;
+    box-shadow: 0 0 0 2px rgba(39, 88, 78, 0.697);
+}
