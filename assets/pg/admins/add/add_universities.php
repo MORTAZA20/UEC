@@ -78,7 +78,7 @@
                         <div class="row align-items-start">
                             <div class="col custom-column">
                                 <input type="text" name="university_id" id="" placeholder="معرف الجامعة" required>
-                                <input type="text" style="margin: 0px 10px;" name="university_name" id="row-2" placeholder="اسم الجامعة" required>
+                                <input type="text" style="margin: 0px 10px;" name="university_name" placeholder="اسم الجامعة" required>
                                 <input type="text" name="university_location" id="" placeholder="موقع الجامعة" required>
                             </div>
                         </div>

@@ -82,9 +82,9 @@
                     </div>
                 
                     <div class="custom-column" style="margin-bottom: 10px;">
-                        <input type="text" name="opportunity_id" id="" placeholder="معرف الوظيفة" required>
-                        <input type="text" style="margin: 0px 10px;" name="job_title" id="" placeholder="العنوان الوظيفي" required>
-                        <input type="text" name="salary_range" id="" placeholder="مقدار الراتب" required>
+                        <input type="text" name="opportunity_id"  placeholder="معرف الوظيفة" required>
+                        <input type="text" style="margin: 0px 10px;" name="job_title" placeholder="العنوان الوظيفي" required>
+                        <input type="text" name="salary_range" placeholder="مقدار الراتب" required>
                     </div>
               
                 

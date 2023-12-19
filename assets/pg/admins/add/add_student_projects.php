@@ -95,13 +95,13 @@
                     </div>
                 
                     <div class="custom-column" style="margin-bottom: 10px;">
-                        <input type="text" name="project_id" id="" placeholder="معرف المشروع" required>
-                        <input type="text" style="margin: 0px 10px;" name="project_name" id="" placeholder="اسم المشروع" required>
+                        <input type="text" name="project_id" placeholder="معرف المشروع" required>
+                        <input type="text" style="margin: 0px 10px;" name="project_name" placeholder="اسم المشروع" required>
                     </div>
               
                     <div class="custom-column" style="margin-bottom: 10px;">
-                    <input type="text" name="student_name" id="" placeholder="صاحب المشروع" required>
-                        <input type="text" style="margin: 0px 10px;" name="project_supervisor" id="" placeholder="المشرف على المشروع" required>
+                    <input type="text" name="student_name" placeholder="صاحب المشروع" required>
+                        <input type="text" style="margin: 0px 10px;" name="project_supervisor" placeholder="المشرف على المشروع" required>
                     </div>
                     <p>نبذه عن المشروع</p>
                     <textarea name="project_description" id="editor1" placeholder="الوصف"></textarea>

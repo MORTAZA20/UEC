@@ -82,13 +82,13 @@
                     </div>
                 
                     <div class="custom-column" style="margin-bottom: 10px;">
-                        <input type="text" name="student_id" id="" placeholder="معرف الطالب" required>
-                        <input type="text" style="margin: 0px 10px;" name="student_name" id="" placeholder="اسم الطالب" required>
+                        <input type="text" name="student_id" placeholder="معرف الطالب" required>
+                        <input type="text" style="margin: 0px 10px;" name="student_name" placeholder="اسم الطالب" required>
                         
                     </div>
                     <div class="custom-column" style="margin-bottom: 10px;">
-                        <input type="text" name="Cumulative_Rating" id="" placeholder="المعدل التراكمي" required>
-                        <input type="date" style="margin: 0px 10px;" name="Graduation_Year" id="" placeholder="سنة التخرج" required>
+                        <input type="text" name="Cumulative_Rating" placeholder="المعدل التراكمي" required>
+                        <input type="date" style="margin: 0px 10px;" name="Graduation_Year" placeholder="سنة التخرج" required>
                     </div>
 
                     <div class="space"></div>

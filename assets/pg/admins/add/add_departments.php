@@ -84,10 +84,20 @@
             <div class="container-form">
                 <form action="" method="post" enctype="multipart/form-data">
 
-                    <div class="container" style="margin-bottom: 10px;">
-                        <div class="row align-items-start">
-                            <div class="col custom-column">
-                                <select id="fruit" name="college_id" required>
+                <div class="custom-column" style="margin-bottom: 10px;">
+                        
+                            <select id="fruit" name="university_id" required>
+                                    <?php
+                                    include '../inc/conn.inc.php';
+                                    $sql = "SELECT university_id, university_name FROM universities";
+                                    $result = $conn->query($sql);
+                                    while ($rec = $result->fetch_assoc()) {
+                                        echo "<option value='" . $rec['university_id'] . "'>" . $rec['university_name'] . "</option>";
+                                    }
+                                    $conn->close();
+                                    ?>
+                                </select>
+                            <select id="fruit" name="college_id" required>
                                     <?php
                                     include '../inc/conn.inc.php';
                                     $sql = "SELECT college_id, college_name FROM colleges";
@@ -98,25 +108,23 @@
                                     $conn->close();
                                     ?>
                                 </select>
-                                <input type="text" style="margin: 0px 10px;" name="department_id" id="row-2"
-                                    placeholder="معرف القسم" required>
-                                <input type="text" name="department_name" id="" placeholder="اسم القسم" required>
+                                
+                                <input type="text" style="margin: 0px 10px;" name="department_id" placeholder="معرف القسم" required>
+                                
                             </div>
-                        </div>
-                    </div>
+                 
 
                     <div class="custom-column" style="margin-bottom: 10px;">
+                       <input type="text" name="department_name" id="" placeholder="اسم القسم" required>
                         <input type="number" name="required_GPA" id="" placeholder="معدل القبول الصباحي" required>
-                        <input type="number" style="margin: 0px 10px;" name="evening_GPA" id=""
-                            placeholder="معدل القبول المسائي" required>
-                        <input type="number" id="" name="evening_study_fees" placeholder="القسط السنوي(المسائي)"
-                            required>
+                        <input type="number" style="margin: 0px 10px;" name="evening_GPA" placeholder="معدل القبول المسائي" required>
+                       
                     </div>
 
                     <div class="custom-column" style="margin-bottom: 10px;">
-                        <input type="number" name="parallel_GPA" id="" placeholder="معدل القبول الموازي" required>
-                        <input type="number" style="margin: 0px 10px;" name="parallel_study_fees"
-                            placeholder="القسط السنوي(الموازي)" required>
+                        <input type="number" id="" name="evening_study_fees" placeholder="القسط السنوي(المسائي)" required> 
+                            <input type="number" name="parallel_GPA" placeholder="معدل القبول الموازي" required>
+                        <input type="number" style="margin: 0px 10px;" name="parallel_study_fees" placeholder="القسط السنوي(الموازي)" required>
                     </div>
                   
                     <p>الوصف</p>

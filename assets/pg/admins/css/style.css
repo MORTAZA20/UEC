@@ -319,6 +319,7 @@ tbody tr td {
 .container-form textarea[class=text-style],
 .container-form textarea[name=shipping_info],#fruit
 {
+    margin-left: 10px;
     font-size: 18px;
     width: 100%;
     border: 3px solid #efefef;
@@ -417,3 +418,7 @@ input:focus{
     background-color: #2A3B52;
     box-shadow: 0 0 0 2px rgba(39, 88, 78, 0.697);
 }
+
+
+
+

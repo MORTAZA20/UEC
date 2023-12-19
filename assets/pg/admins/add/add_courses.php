@@ -81,10 +81,9 @@
                     </div>
                 
                     <div class="custom-column" style="margin-bottom: 10px;">
-                        <input type="text" name="course_id" id="" placeholder="معرف المادة" required>
-                        <input type="text" style="margin: 0px 10px;" name="course_name" id="" placeholder="اسم المادة" required>
+                        <input type="text" name="course_id" placeholder="معرف المادة" required>
+                        <input type="text" style="margin: 0px 10px;" name="course_name" placeholder="اسم المادة" required>
                         <select id="fruit" name="course_stage" required>
-                            <option value="">اختر المادة</option>
                             <option value="1">المرحلة الاولى</option>
                             <option value="2">المرحلة الثانية</option>
                             <option value="3">المرحلة الثالثة</option>

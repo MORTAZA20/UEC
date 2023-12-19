@@ -99,10 +99,9 @@
 
                     <div class="custom-column" style="margin-bottom: 10px;">
 
-                        <input type="text" name="college_id" id="" placeholder="معرف الكلية" required>
-                        <input type="text" style="margin: 0px 10px;" name="college_name" id="row-2"
-                            placeholder="اسم الكلية" required>
-                        <input type="number" name="required_GPA" id="" placeholder="المعدل">
+                        <input type="text" name="college_id"placeholder="معرف الكلية" required>
+                        <input type="text" style="margin: 0px 10px;" name="college_name" placeholder="اسم الكلية" required>
+                        <input type="number" name="required_GPA"placeholder="المعدل">
                     </div>
 
 
