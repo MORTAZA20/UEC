@@ -29,8 +29,8 @@
                             </path>
                         </g>
                     </svg>
-
-                    <input name="search" placeholder="ادخل اسم الكلية او الجامعة" type="search" class="input-placeholder">
+                    <input name="search" placeholder="ادخل اسم الكلية او الجامعة" type="search"
+                        class="input-placeholder">
                     <input name="Input_Serach" type="submit" class="button" value="بـحـث">
                 </div>
             </form>
@@ -81,13 +81,16 @@
                                 <td>' . $row["college_description"] . '</td>
                                 <td data-title="التحكم" class="text-center">
                                 
-                                    <a href="assets/pg/admins/edit_colleges.php?Edit_colleges_id=' . $row["college_id"] . '" style="padding: 3px 10px;
+                                    <a href="#" onclick="submitForm2(\'' . $row["college_id"] . '\');"
+                                    style="padding: 3px 10px;
                                     font-weight: 500;
                                     color: #fff;
                                     border-radius: 5px;
                                     background-color: #95a5a6;
                                     text-decoration: none;">تعديل</a>
-                    
+                                <form id="EditForm" action="edit_colleges" method="post" style="display: none;">
+                                    <input type="hidden" name="edit_id" id="edit_id_input">
+                                </form>  
                                     <a href="#" onclick="submitForm(\'' . $row["college_id"] . '\');" 
                                               style="padding: 3px 10px;
                                               color: #fff;
@@ -112,6 +115,10 @@
         function submitForm(delId) {
             document.getElementById('del_id_input').value = delId;
             document.getElementById('deleteForm').submit();
+        }
+        function submitForm2(editId) {
+            document.getElementById('edit_id_input').value = editId;
+            document.getElementById('EditForm').submit();
         }
     </script>
 </body>

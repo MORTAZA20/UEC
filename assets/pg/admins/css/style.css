@@ -356,7 +356,6 @@ tbody tr td {
 
 .container-img{
     width: auto;
-    height: 150px;
     display: flex;
     flex-wrap: wrap;
     background-color: #efefef;
@@ -411,8 +410,8 @@ tbody tr td {
     text-align: center;
 }
 
-input:hover,input:focus{
- 
+input:hover,
+input:focus{
     outline: none;
     border-color: #192330;
     background-color: #2A3B52;

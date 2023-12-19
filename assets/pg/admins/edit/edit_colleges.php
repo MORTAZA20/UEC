@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة التحكم | تعديل الجامعات</title>
+    <title>لوحة التحكم | تعديل الكليات</title>
     <link rel="stylesheet" href="style">
 </head>
 
@@ -21,9 +21,9 @@
             <div class="path-bar">
                 <div class="url-path active-path">لوحة التحكم</div>
                 <div class="url-path slash">/</div>
-                <div class="url-path">الجامعات</div>
+                <div class="url-path">الكليات</div>
                 <div class="url-path slash">/</div>
-                <div class="url-path">تعديل الجامعات</div>
+                <div class="url-path">تعديل الكلية</div>
             </div>
 
             <?php
@@ -65,79 +65,92 @@
             }
 
 
-            if (isset($_POST['edit_id'])){
-                $universityId = $_POST['edit_id'];
+            if (isset($_POST['edit_id'])) {
+                $collegeId = $_POST['edit_id'];
             }
             // Get data from database for edit form
-            $sql = "SELECT * FROM universities WHERE university_id =?";
+            $sql = "SELECT * FROM colleges WHERE college_id =?";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("i", $universityId);
+            $stmt->bind_param("i", $collegeId);
             $stmt->execute();
             $result = $stmt->get_result();
             $row = $result->fetch_assoc();
 
-    
-            ?>
 
+            ?>
             <div class="container-form">
                 <form action="" method="post" enctype="multipart/form-data">
+
                     <div class="container" style="margin-bottom: 10px;">
                         <div class="row align-items-start">
                             <div class="col custom-column">
-                                <input type="hidden" name="Edit_Universitie_id" value="<?php 
-                                 if (!isset($_POST['edit_id'])){echo "";}else{echo $universityId;}?>">
-                                <input type="text" name="university_name" placeholder="اسم الجامعة"
-                                    value="<?php if (!isset($_POST['edit_id'])){echo "";}else{ echo $row['university_name'];} ?>">
-                                <input type="text" style="margin: 0px 10px;" name="university_location" id="row-2"
-                                    placeholder="موقع الجامعة" value="<?php if (!isset($_POST['edit_id'])){echo "";}else{echo $row['university_location'];} ?>">
-                                <input type="text" name="university_website" id="" placeholder="موقع الجامعة الالكتروني"
-                                    value="<?php if (!isset($_POST['edit_id'])){echo "";}else{echo $row['university_website'];} ?>">
-                                
-                                </div>
-                                <div class="container-img">
-                            
-                                <img src="assets/pg/admins/<?php echo $row["universities_img_path"]; ?>" 
-                                style="max-width: 80px;
-                                max-height: 80px;
-                                width: auto;
-                                height: auto;
-                                padding-left:20px;">
-                                </div>
+                                <select id="fruit" name="university_id" required>
+                                    <?php
+                                    include '../inc/conn.inc.php';
+                                    $sql = "SELECT university_id, university_name FROM universities";
+                                    $result = $conn->query($sql);
+                                    while ($rec = $result->fetch_assoc()) {
+                                        echo "<option value='" . $rec['university_id'] . "'>" . $rec['university_name'] . "</option>";
+                                    }
+                                    $conn->close();
+                                    ?>
+                                </select>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="space"></div>
-                        <div class="btn-row">
-                            <input type="file" name="universities_images" class="file-btn" id="files"
-                                accept="image/png, image/jpeg">
-                            <input type="button" class="file-btn" value="تغيير شعار الجامعة"
-                                onclick="document.getElementById('files').click();">
-                                <p>
-                                    <input type="submit" name="sub_form" value="حفظ التغييرات" />
-                                </p>
-                            </div>
+                    <div class="custom-column" style="margin-bottom: 10px;">
+
+                        <input type="hidden" name="Edit_college_id">
+                        <input type="text" style="margin: 0px 10px;" name="college_name" id="row-2"
+                            placeholder="اسم الكلية"  value="<?php if (!isset($_POST['edit_id'])){echo "";}else{ echo $row['college_name'];} ?>" required>
+                        <input type="number" name="required_GPA" id="" placeholder="المعدل" value="<?php if (!isset($_POST['edit_id'])){echo "";}else{ echo $row['required_GPA'];} ?>" required>
+                    </div>
+                    <div class="container-img">
+                            
+                            <img src="assets/pg/admins/<?php echo $row["colleges_img_path"]; ?>" 
+                            style="max-width: 80px;
+                            max-height: 80px;
+                            width: auto;
+                            height: auto;
+                            padding-left:20px;">
+                    </div>
+
+                    <p>الوصف</p>
+                    <textarea name="editor1" id="editor1"><?php if (!isset($_POST['edit_id'])){echo "";}else{ echo $row['college_description'];} ?></textarea>
+                    <div class="space"></div>
+                    <div class="btn-row">
+                        <input type="file" name="colleges_images" class="file-btn" id="files"
+                            accept="image/png, image/jpeg">
+                        <input type="button" class="file-btn" value="اختيار شعار الكلية"
+                            onclick="document.getElementById('files').click();">
+                        <p>
+                            <input type="submit" name="sub_form" value="حـفـظ الـبـيـانـات" />
+                        </p>
+
+
+                    </div>
                 </form>
             </div>
         </div>
     </div>
-   <script>
-    function del_img_" . $rm_dot . "() {
-                var result = confirm('هل أنت متأكد من حذف الصورة؟');
-                    if (result) {
-                        document.getElementById('" . $rm_dot ."').style.display = 'none';
-                                      
-                            var getinputvar = document.getElementById('del_imgs');
-                            getinputvar.value += '" . $rm_dot ."';
-                            }
-    }
-    </script>
+
     <script>
         setTimeout(function () {
             document.getElementById('success-message').style.display = 'none';
         }, 5000);
     </script>
-
+    <script src="../../../../../ecomweb1/assets/pg/admins/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('editor1');
+        CKEDITOR.editorConfig = function (config) {
+            config.language = 'ar';
+            config.uiColor = '#f7b42c';
+            config.height = 300;
+            config.toolbarCanCollapse = true;
+            config.contentsCss = 'margin-bottom: 15px;';
+        };
+    </script>
 </body>
-
 
 </html>

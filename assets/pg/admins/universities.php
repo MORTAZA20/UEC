@@ -72,7 +72,6 @@ include 'inc/navbar.php';
 
         } else {
             $sql = "SELECT * FROM universities";
-    
         }
  $result = $conn->query($sql);
         while ($row = $result->fetch_assoc()) {

@@ -11,7 +11,6 @@
         }
 
         .input-placeholder { 
-          
             width:500px;
             height: 40px;
             line-height: 28px;
