@@ -1,72 +1,52 @@
+<?php
+require_once("inc/conn.inc.php");
 
-<style>
-        .group {
-            display: flex;
-            line-height: 28px;
-            align-items: center;
-            position: relative;
-            max-width: 190px;
-            margin: 20px;
-           
-        }
+if (isset($_POST['search'])) {
+    $search = mysqli_real_escape_string($conn, $_POST['search']);
+    $sql = "SELECT * FROM universities WHERE university_name LIKE '%$search%'";
+} else {
+    $sql = "SELECT * FROM universities";
+}
 
-        .input-placeholder { 
-            width:500px;
-            height: 40px;
-            line-height: 28px;
-            padding: 0 1rem;
-            padding-left: 2rem;
-            border: 2px solid transparent;
-            border-radius: 8px;
-            outline: none;
-            background-color: #f3f3f4;
-            color: #0d0c22;
-            transition: .3s ease;
-            font-size: 20px;
-            font-family: 'Tajawal', sans-serif;
+$result = $conn->query($sql);
 
-        }
+    while ($row = $result->fetch_assoc()) {
+        echo '<tr>
+                                <td><span class="badge">' . $row["university_id"] . '</span></td>
+                                <td><img src="assets/pg/admins/' . $row["universities_img_path"] . '" 
+                                style=" max-width: 80px;
+                                max-height: 80px;
+                                width: auto;
+                                height: auto;
+                              
+                                padding-left:20px;"></td>
+                                <td>' . $row["university_name"] . '</td>
+                                <td>' . $row["university_location"] . '</td>
+                                <td>' . $row["university_website"] . '</td>
+                                <td data-title="التحكم" class="text-center">
+                                    <a href="#" onclick="submitForm2(\'' . $row["university_id"] . '\');" 
+                                       style="padding: 3px 10px;
+                                              font-weight: 500;
+                                              color: #fff;
+                                              border-radius: 5px;
+                                              background-color: #95a5a6;
+                                              text-decoration: none;">تعديل</a>
+                                    <form id="EditForm" action="edit_universitys" method="post" style="display: none;">
+                                            <input type="hidden" name="edit_id" id="edit_id_input">
+                                    </form>  
+                                              <a href="#" onclick="submitForm(\'' . $row["university_id"] . '\');" 
+                                              style="padding: 3px 10px;
+                                              color: #fff;
+                                              font-weight: 500;
+                                              border-radius: 5px;
+                                              background-color: rgb(223, 20, 10);
+                                              text-decoration: none;">حذف</a>
+                                    <form id="deleteForm" action="delete_universities" method="post" style="display: none;">
+                                        <input type="hidden" name="del_id" id="del_id_input">
+                                    </form>
+                                </td>
+                            </tr>';
+    }
 
-        .input-placeholder::placeholder {
-            padding-left: 20px;
-            color: #9e9ea7;
-            font-size: 15px;
-            font-family: 'Tajawal', sans-serif;
-
-        }
-
-        .input-placeholder:focus,
-        .input-placeholder:hover {
-            outline: none;
-            border-color: rgba(234, 76, 137, 0.4);
-            background-color: #fff;
-            box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
-        }
-
-        .icon {
-            position: absolute;
-            right: 14.4rem;
-            fill: #9e9ea7;
-            width: 1rem;
-            height: 1rem;
-
-        }
-
-        .button {
-            margin-right: 15px;
-            padding:8px 25px;
-            font-family: 'Tajawal', sans-serif;
-            font-size: 15px;
-            background-color: #f3f7fe;
-            color: #192330;
-            border: none;
-            border-radius: 8px;
-            transition: .3s;
-        }
-
-        .button:hover {
-            background-color: #3b82f6;
-            box-shadow: 0 0 0 5px #3b83f65f;
-            color: #fff;
-        }
-</style>
+    $conn->close();
+    ?>

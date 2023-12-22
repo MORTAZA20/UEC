@@ -65,7 +65,7 @@
                     <div class="container" style="margin-bottom: 10px;">
                         <div class="row align-items-start">
                             <div class="col custom-column">
-                            <select id="fruit" name="department_id" required>
+                            <select class="fruit" name="department_id" required>
                             <?php
                             include '../inc/conn.inc.php';
                             $sql = "SELECT department_id, department_name FROM departments";
@@ -83,12 +83,12 @@
                 
                     <div class="custom-column" style="margin-bottom: 10px;">
                         <input type="text" name="student_id" placeholder="معرف الطالب" required>
-                        <input type="text" style="margin: 0px 10px;" name="student_name" placeholder="اسم الطالب" required>
+                        <input type="text" name="student_name" placeholder="اسم الطالب" required>
                         
                     </div>
                     <div class="custom-column" style="margin-bottom: 10px;">
                         <input type="text" name="Cumulative_Rating" placeholder="المعدل التراكمي" required>
-                        <input type="date" style="margin: 0px 10px;" name="Graduation_Year" placeholder="سنة التخرج" required>
+                        <input type="date" name="Graduation_Year" placeholder="سنة التخرج" required>
                     </div>
 
                     <div class="space"></div>

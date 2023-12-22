@@ -49,7 +49,7 @@
 
             <div class="container-form">
             <form action="" method="post">
-                <select id="fruit" name="department_id" style=" margin-bottom: 10px ;" required>
+                <select class="fruit" name="department_id" style=" margin-bottom: 10px ;" required>
                     <?php
                     include '../inc/conn.inc.php';
                     $sql = "SELECT department_id, department_name FROM departments";

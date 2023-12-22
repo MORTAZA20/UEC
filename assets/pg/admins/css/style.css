@@ -317,7 +317,7 @@ tbody tr td {
 .container-form input[type=number],
 .container-form input[type=password],
 .container-form textarea[class=text-style],
-.container-form textarea[name=shipping_info],#fruit
+.container-form textarea[name=shipping_info],.fruit
 {
     margin-left: 10px;
     font-size: 18px;

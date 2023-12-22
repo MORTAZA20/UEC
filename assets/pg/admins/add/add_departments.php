@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
     <?php include '../inc/navbar.php'; ?>
 
     <div class="content">
@@ -62,7 +61,7 @@
                         $departments_images = $_FILES["departments_images"]["tmp_name"];
                         $file_name = $_FILES["departments_images"]["name"];
                         move_uploaded_file($departments_images, $departments_folder . '/' . $file_name);
-                        $image_path ='departments_img'. '/' . $file_name;
+                        $image_path = 'departments_img' . '/' . $file_name;
                         $sql = "INSERT INTO departments (college_id , department_id , department_name, department_description, scientific_department_message, required_GPA , evening_GPA, evening_study_fees, parallel_GPA, parallel_study_fees,departments_img_path) 
                                     VALUES ('$college_id', '$department_id', '$department_name', '$department_description', '$scientific_department_message', '$required_GPA',  '$evening_GPA', '$evening_study_fees' , '$parallel_GPA', '$parallel_study_fees','$image_path')";
                         $result3 = $conn->query($sql);
@@ -84,55 +83,62 @@
             <div class="container-form">
                 <form action="" method="post" enctype="multipart/form-data">
 
-                <div class="custom-column" style="margin-bottom: 10px;">
-                        
-                            <select id="fruit" name="university_id" required>
-                                    <?php
-                                    include '../inc/conn.inc.php';
-                                    $sql = "SELECT university_id, university_name FROM universities";
-                                    $result = $conn->query($sql);
-                                    while ($rec = $result->fetch_assoc()) {
-                                        echo "<option value='" . $rec['university_id'] . "'>" . $rec['university_name'] . "</option>";
-                                    }
-                                    $conn->close();
-                                    ?>
-                                </select>
-                            <select id="fruit" name="college_id" required>
-                                    <?php
-                                    include '../inc/conn.inc.php';
-                                    $sql = "SELECT college_id, college_name FROM colleges";
-                                    $result = $conn->query($sql);
-                                    while ($rec = $result->fetch_assoc()) {
-                                        echo "<option value='" . $rec['college_id'] . "'>" . $rec['college_name'] . "</option>";
-                                    }
-                                    $conn->close();
-                                    ?>
-                                </select>
-                                
-                                <input type="text" style="margin: 0px 10px;" name="department_id" placeholder="معرف القسم" required>
-                                
-                            </div>
-                 
+                    <div class="custom-column" style="margin-bottom: 10px;">
+
+                        <select id="university_id" class="fruit" name="university_id" onchange="getColleges()" required>
+                            <?php
+                            include '../inc/conn.inc.php';
+                            $sql = "SELECT university_id, university_name FROM universities";
+                            $result = $conn->query($sql);
+                            while ($rec = $result->fetch_assoc()) {
+                                echo "<option value='" . $rec['university_id'] . "'>" . $rec['university_name'] . "</option>";
+                            }
+                            $conn->close();
+                            ?>
+                        </select>
+                        <select id="college_id" class="fruit" name="college_id" required>
+
+                        </select>
+                        <script src="jquery-3.6.0.min"></script>
+                        <script>
+                                function getColleges() {
+                                    var uniId = $("#university_id").val();
+                                    $.ajax({
+                                        url: "get_colleges",
+                                        method: "POST",
+                                        data: { university_id: uniId },
+                                        success: function (response) {
+
+                                            $("#college_id").html(response);
+                                        }
+                                    });
+                                }
+                        </script>
+                        <input type="text" name="department_id" placeholder="معرف القسم" required>
+                    </div>
+
+
+
+
 
                     <div class="custom-column" style="margin-bottom: 10px;">
-                       <input type="text" name="department_name" id="" placeholder="اسم القسم" required>
+                        <input type="text" name="department_name" id="" placeholder="اسم القسم" required>
                         <input type="number" name="required_GPA" id="" placeholder="معدل القبول الصباحي" required>
-                        <input type="number" style="margin: 0px 10px;" name="evening_GPA" placeholder="معدل القبول المسائي" required>
-                       
+                        <input type="number" name="evening_GPA" placeholder="معدل القبول المسائي" required>
+
                     </div>
 
                     <div class="custom-column" style="margin-bottom: 10px;">
-                        <input type="number" id="" name="evening_study_fees" placeholder="القسط السنوي(المسائي)" required> 
-                            <input type="number" name="parallel_GPA" placeholder="معدل القبول الموازي" required>
-                        <input type="number" style="margin: 0px 10px;" name="parallel_study_fees" placeholder="القسط السنوي(الموازي)" required>
+                        <input type="number" name="evening_study_fees" placeholder="القسط السنوي(المسائي)" required>
+                        <input type="number" name="parallel_GPA" placeholder="معدل القبول الموازي" required>
+                        <input type="number" name="parallel_study_fees" placeholder="القسط السنوي(الموازي)" required>
                     </div>
-                  
+
                     <p>الوصف</p>
                     <textarea name="department_description" id="editor1" placeholder="النبذه عن القسم"></textarea>
                     <p>رسالة القسم</p>
-                    <textarea name="scientific_department_message" id="editor2"
-                            placeholder="رسالة القسم"></textarea>
-                 
+                    <textarea name="scientific_department_message" id="editor2" placeholder="رسالة القسم"></textarea>
+
                     <div class="space"></div>
                     <div class="btn-row">
                         <input type="file" name="departments_images" class="file-btn" id="files"

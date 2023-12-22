@@ -82,7 +82,7 @@
                     <div class="container" style="margin-bottom: 10px;">
                         <div class="row align-items-start">
                             <div class="col custom-column">
-                                <select id="fruit" name="university_id" required>
+                                <select class="fruit" name="university_id" required>
                                     <?php
                                     include '../inc/conn.inc.php';
                                     $sql = "SELECT university_id, university_name FROM universities";
@@ -100,7 +100,7 @@
                     <div class="custom-column" style="margin-bottom: 10px;">
 
                         <input type="text" name="college_id"placeholder="معرف الكلية" required>
-                        <input type="text" style="margin: 0px 10px;" name="college_name" placeholder="اسم الكلية" required>
+                        <input type="text" name="college_name" placeholder="اسم الكلية" required>
                         <input type="number" name="required_GPA"placeholder="المعدل">
                     </div>
 

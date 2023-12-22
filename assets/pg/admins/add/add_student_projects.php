@@ -78,7 +78,7 @@
                     <div class="container" style="margin-bottom: 10px;">
                         <div class="row align-items-start">
                             <div class="col custom-column">
-                            <select id="fruit" name="department_id" required>
+                            <select class="fruit" name="department_id" required>
                             <?php
                             include '../inc/conn.inc.php';
                             $sql = "SELECT department_id, department_name FROM departments";
@@ -101,7 +101,7 @@
               
                     <div class="custom-column" style="margin-bottom: 10px;">
                     <input type="text" name="student_name" placeholder="صاحب المشروع" required>
-                        <input type="text" style="margin: 0px 10px;" name="project_supervisor" placeholder="المشرف على المشروع" required>
+                    <input type="text" name="project_supervisor" placeholder="المشرف على المشروع" required>
                     </div>
                     <p>نبذه عن المشروع</p>
                     <textarea name="project_description" id="editor1" placeholder="الوصف"></textarea>
