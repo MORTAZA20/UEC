@@ -29,7 +29,9 @@ RewriteRule ^add_top_studens ./assets/pg/admins/add/add_top_studens.php [NC,L]
 RewriteRule ^add_student_projects ./assets/pg/admins/add/add_student_projects.php [NC,L]
 RewriteRule ^add_career_opportunities ./assets/pg/admins/add/add_career_opportunities.php [NC,L]
 RewriteRule ^get_colleges ./assets/pg/admins/add/get_colleges.php [NC,L]
+RewriteRule ^get_inf_departments ./assets/pg/admins/add/get_inf_departments.php [NC,L]
 RewriteRule ^jquery-3.6.0.min ./assets/pg/admins/add/jquery-3.6.0.min.js [NC,L]
+RewriteRule ^Get_ScriptFunction ./assets/pg/admins/add/Get_ScriptFunction.js [NC,L]
 
 
 RewriteRule ^delete_universities ./assets/pg/admins/delete/delete_universities.php [NC,L]
@@ -43,6 +45,4 @@ RewriteRule ^delete_career_opportunities ./assets/pg/admins/delete/delete_career
 RewriteRule ^edit_universitys ./assets/pg/admins/edit/edit_universitys.php [NC,L]
 RewriteRule ^edit_colleges ./assets/pg/admins/edit/edit_colleges.php [NC,L]
 
-RewriteRule ^search_universities ./assets/pg/admins/search/search_universities.php [NC,L]
 
-RewriteRule ^test ./assets/pg/admins/test.php [NC,L]

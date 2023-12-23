@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة التحكم | أضافة المشاريع</title>
     <link rel="stylesheet" href="style">
 </head>
+
 <body>
 
-<?php  include '../inc/navbar.php';?>
+    <?php include '../inc/navbar.php'; ?>
 
     <div class="content">
-    <?php  include '../inc/sidebar.php';?>
+        <?php include '../inc/sidebar.php'; ?>
 
         <div class="content-bar">
-                <div style='position:relative; margin-top: 15px;'>
-                    <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>أضافة مشاريع الطلبة</h2>
-                </div>
+            <div style='position:relative; margin-top: 15px;'>
+                <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>أضافة مشاريع الطلبة</h2>
+            </div>
             <div class="path-bar">
                 <div class="url-path active-path">لوحة التحكم</div>
                 <div class="url-path slash">/</div>
@@ -26,39 +28,39 @@
             </div>
             <?php
 
-                include '../inc/conn.inc.php';
+            include '../inc/conn.inc.php';
 
-                if (isset($_POST["sub_form"])) {
-                   
-                    //mysqli_real_escape_string للحماية من الهجمات
-                    $project_id  = mysqli_real_escape_string($conn, $_POST["project_id"]);
-                    $department_id = mysqli_real_escape_string($conn, $_POST["department_id"]);
-                    $student_name = mysqli_real_escape_string($conn, $_POST["student_name"]);
-                    $project_name = mysqli_real_escape_string($conn, $_POST["project_name"]);
-                    $project_supervisor = mysqli_real_escape_string($conn, $_POST["project_supervisor"]);
-                    $project_description = mysqli_real_escape_string($conn, $_POST["project_description"]);
+            if (isset($_POST["sub_form"])) {
 
-                   
-                   
-                    $sqlTest = "SELECT project_id  FROM student_projects WHERE project_id  = '$project_id'";
-                    $resultTest = $conn->query($sqlTest);
-    
-                    if ($resultTest->num_rows > 0) {
-                        echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>عذرًا، معرف  المشروع موجود مسبقًا</div>";
-                    } else {
-                        if ($_FILES['student_projects_images']['type'] == 'image/png' || $_FILES['student_projects_images']['type'] == 'image/jpeg') {
+                //mysqli_real_escape_string للحماية من الهجمات
+                $project_id = mysqli_real_escape_string($conn, $_POST["project_id"]);
+                $department_id = mysqli_real_escape_string($conn, $_POST["department_id"]);
+                $student_name = mysqli_real_escape_string($conn, $_POST["student_name"]);
+                $project_name = mysqli_real_escape_string($conn, $_POST["project_name"]);
+                $project_supervisor = mysqli_real_escape_string($conn, $_POST["project_supervisor"]);
+                $project_description = mysqli_real_escape_string($conn, $_POST["project_description"]);
 
 
-                            $student_projects_folder = '../student_projects_img';
-    
-                            if (!file_exists($student_projects_folder)) {
-                                mkdir($student_projects_folder, 0777, true);
-                                chmod($student_projects_folder, 0777);
-                            }
-                            $student_projects_images = $_FILES["student_projects_images"]["tmp_name"];
-                            $file_name = $_FILES["student_projects_images"]["name"];
-                            move_uploaded_file($student_projects_images, $student_projects_folder . '/' . $file_name);
-                            $image_path ='student_projects_img'. '/' . $file_name;
+
+                $sqlTest = "SELECT project_id  FROM student_projects WHERE project_id  = '$project_id'";
+                $resultTest = $conn->query($sqlTest);
+
+                if ($resultTest->num_rows > 0) {
+                    echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>عذرًا، معرف  المشروع موجود مسبقًا</div>";
+                } else {
+                    if ($_FILES['student_projects_images']['type'] == 'image/png' || $_FILES['student_projects_images']['type'] == 'image/jpeg') {
+
+
+                        $student_projects_folder = '../student_projects_img';
+
+                        if (!file_exists($student_projects_folder)) {
+                            mkdir($student_projects_folder, 0777, true);
+                            chmod($student_projects_folder, 0777);
+                        }
+                        $student_projects_images = $_FILES["student_projects_images"]["tmp_name"];
+                        $file_name = $_FILES["student_projects_images"]["name"];
+                        move_uploaded_file($student_projects_images, $student_projects_folder . '/' . $file_name);
+                        $image_path = 'student_projects_img' . '/' . $file_name;
                         $sql = "INSERT INTO student_projects (project_id  , department_id , student_name, project_name, project_supervisor,project_description,student_projects_img_path) 
                                     VALUES ('$project_id ', '$department_id', '$student_name', '$project_name', '$project_supervisor','$project_description','$image_path')";
                         $result3 = $conn->query($sql);
@@ -69,47 +71,61 @@
                         }
                     }
                 }
-            }   
+            }
             ?>
-
+            <script src="jquery-3.6.0.min"></script>
+            <script src="Get_ScriptFunction.js"></script>
             <div class="container-form">
                 <form action="" method="post" enctype="multipart/form-data">
 
                     <div class="container" style="margin-bottom: 10px;">
                         <div class="row align-items-start">
                             <div class="col custom-column">
-                            <select class="fruit" name="department_id" required>
-                            <?php
-                            include '../inc/conn.inc.php';
-                            $sql = "SELECT department_id, department_name FROM departments";
-                            $result = $conn->query($sql);
-                            while ($rec = $result->fetch_assoc()) {
-                                echo "<option value='" . $rec['department_id'] . "'>" . $rec['department_name'] . "</option>";
-                            }
-                            $conn->close();
-                            ?>
-                            </select> 
-                           
+                                <select id="university_id" class="fruit" name="university_id" onchange="getColleges()"
+                                    required>
+                                    <?php
+                                    include '../inc/conn.inc.php';
+                                    $sql = "SELECT university_id, university_name FROM universities";
+                                    $result = $conn->query($sql);
+                                    while ($rec = $result->fetch_assoc()) {
+                                        echo "<option value='" . $rec['university_id'] . "'>" . $rec['university_name'] . "</option>";
+                                    }
+                                    $conn->close();
+                                    ?>
+                                </select>
+                                <select id="college_id" class="fruit" name="college_id" onchange="getInf_departments()"
+                                    required>
+
+                                </select>
+
+                                <select id="department_id" class="fruit" name="department_id" required>
+
+                                </select>
                             </div>
                         </div>
                     </div>
-                
+
+
+
                     <div class="custom-column" style="margin-bottom: 10px;">
                         <input type="text" name="project_id" placeholder="معرف المشروع" required>
-                        <input type="text" style="margin: 0px 10px;" name="project_name" placeholder="اسم المشروع" required>
+                        <input type="text" style="margin: 0px 10px;" name="project_name" placeholder="اسم المشروع"
+                            required>
                     </div>
-              
+
                     <div class="custom-column" style="margin-bottom: 10px;">
-                    <input type="text" name="student_name" placeholder="صاحب المشروع" required>
-                    <input type="text" name="project_supervisor" placeholder="المشرف على المشروع" required>
+                        <input type="text" name="student_name" placeholder="صاحب المشروع" required>
+                        <input type="text" name="project_supervisor" placeholder="المشرف على المشروع" required>
                     </div>
                     <p>نبذه عن المشروع</p>
                     <textarea name="project_description" id="editor1" placeholder="الوصف"></textarea>
-                    
+
                     <div class="space"></div>
-                    <div class="btn-row"> 
-                    <input type="file" name="student_projects_images" class="file-btn" id="files" accept="image/png, image/jpeg , image/jpg" >
-                        <input type="button" class="file-btn" value="اختيار صورة المشروع" onclick="document.getElementById('files').click();">  
+                    <div class="btn-row">
+                        <input type="file" name="student_projects_images" class="file-btn" id="files"
+                            accept="image/png, image/jpeg , image/jpg">
+                        <input type="button" class="file-btn" value="اختيار صورة المشروع"
+                            onclick="document.getElementById('files').click();">
                         <p>
                             <input type="submit" name="sub_form" value="حـفـظ الـبـيـانـات" />
                         </p>
@@ -121,20 +137,21 @@
     <script src="../../../../../ecomweb1/assets/pg/admins/ckeditor/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('editor1');
-        CKEDITOR.editorConfig = function( config ){
-           config.language = 'ar';
-           config.uiColor = '#f7b42c';
-           config.height = 300;
-           config.toolbarCanCollapse = true;
-           config.contentsCss = 'margin-bottom: 15px;';
+        CKEDITOR.editorConfig = function (config) {
+            config.language = 'ar';
+            config.uiColor = '#f7b42c';
+            config.height = 300;
+            config.toolbarCanCollapse = true;
+            config.contentsCss = 'margin-bottom: 15px;';
         };
 
     </script>
     <script>
-        setTimeout(function() {
+        setTimeout(function () {
             document.getElementById('success-message').style.display = 'none';
         }, 5000);
     </script>
 
 </body>
+
 </html>

@@ -3,7 +3,7 @@ require_once("inc/conn.inc.php");
 session_start();
 
 if (!$_SESSION["admin_user"]) {
-    header("Location: admin");
+    header("Location: login");
     exit();
 }
 
@@ -75,7 +75,7 @@ include 'inc/navbar.php';
                 var searchValue = $(this).val();
                 $.ajax({
                     type: "POST",
-                    url: "../../../../../ecomweb1/assets/pg/admins/search/search_universities.php",
+                    url: "../ecomweb1/assets/pg/admins/search/search_universities.php",
                     data: { search: searchValue },
                     success: function (data) {
                         $("#table-data tbody").html(data);

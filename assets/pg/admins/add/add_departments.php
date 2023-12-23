@@ -79,7 +79,8 @@
             }
             $conn->close();
             ?>
-
+            <script src="jquery-3.6.0.min"></script>
+            <script src="Get_ScriptFunction"></script>
             <div class="container-form">
                 <form action="" method="post" enctype="multipart/form-data">
 
@@ -99,25 +100,9 @@
                         <select id="college_id" class="fruit" name="college_id" required>
 
                         </select>
-                        <script src="jquery-3.6.0.min"></script>
-                        <script>
-                                function getColleges() {
-                                    var uniId = $("#university_id").val();
-                                    $.ajax({
-                                        url: "get_colleges",
-                                        method: "POST",
-                                        data: { university_id: uniId },
-                                        success: function (response) {
 
-                                            $("#college_id").html(response);
-                                        }
-                                    });
-                                }
-                        </script>
                         <input type="text" name="department_id" placeholder="معرف القسم" required>
                     </div>
-
-
 
 
 

@@ -1,3 +1,12 @@
+<?php
+require_once("inc/conn.inc.php");
+session_start();
+
+if (!$_SESSION["admin_user"]) {
+    header("Location: login");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,11 +25,11 @@
         <?php include 'inc/sidebar.php'; ?>
         <div class="content-bar">
             <div style='position:relative; margin-top: 15px; '>
-                <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>الاقسام
+                <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>المواد الدراسية</h2>
             </div>
             <button class="btn-style" onclick="window.open('add_courses' , '_self');">أضافة مادة جديد</button>
-            <?php include 'Search.php' ?>
-            <form action="" method="post">
+
+          
                 <div class="group">
                     <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
                         <g>
@@ -30,10 +39,9 @@
                         </g>
                     </svg>
 
-                    <input name="search" placeholder="ادخل اسم المادة او القسم" type="search" class="input-placeholder">
-                    <input name="Input_Serach" type="submit" class="button" value="بـحـث">
+                    <input id="search" name="search" placeholder="ادخل اسم المادة او القسم" type="search" class="input-placeholder">
                 </div>
-            </form>
+  
 
             <div class="path-bar">
                 <div class="url-path active-path">لوحة التحكم</div>
@@ -43,7 +51,7 @@
                 <div class="url-path">المواد الدراسية</div>
             </div>
 
-            <table class="table teble-bordered" role="table">
+            <table class="table teble-bordered" id="table-data" role="table">
                 <thead>
                     <tr>
                         <th width="10%">معرف المادة</th>
@@ -55,60 +63,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    include 'inc/conn.inc.php';
-
-                    if (isset($_POST['Input_Serach'])) {
-                        $search = mysqli_real_escape_string($conn, $_POST['search']);
-
-                        $sql = "SELECT courses.*, departments.department_name 
-                    FROM courses
-                    LEFT JOIN departments ON courses.department_id = departments.department_id WHERE course_name LIKE '%$search%' OR departments.department_name LIKE '$search'";
-                        $result = $conn->query($sql);
-                    } else {
-                        $sql = "SELECT courses.*, departments.department_name 
-                            FROM courses
-                            LEFT JOIN departments ON courses.department_id = departments.department_id";
-
-                        $result = $conn->query($sql);
-                    }
-
-
-                    while ($row = $result->fetch_assoc()) {
-                        echo '<tr>
-                                <td><span class="badge">' . $row["course_id"] . '</span></td>
-                                <td>' . $row["department_name"] . '</td>
-                                <td>' . $row["course_name"] . '</td>
-                                <td>' . $row["course_stage"] . '</td>
-                                <td>' . $row["course_description"] . '</td>
-                                <td data-title="التحكم" class="text-center">
-                                
-                                    <a href="edit_courses.php?Edit_courses_id=' . $row["course_id"] . '" style="padding: 3px 10px;
-                                    font-weight: 500;
-                                    color: #fff;
-                                    border-radius: 5px;
-                                    background-color: #95a5a6;
-                                    text-decoration: none;">تعديل</a>
-                    
-                                    <a href="#" onclick="submitForm(\'' . $row["course_id"] . '\');" 
-                                              style="padding: 3px 10px;
-                                              color: #fff;
-                                              font-weight: 500;
-                                              border-radius: 5px;
-                                              background-color: rgb(223, 20, 10);
-                                              text-decoration: none;">حذف</a>
-                                    <form id="deleteForm" action="delete_courses" method="post" style="display: none;">
-                                        <input type="hidden" name="del_id" id="del_id_input">
-                                    </form>
-                                </td>
-                            </tr>';
-                    }
-                    $conn->close();
-                    ?>
+                <?php include "search/search_courses.php"; ?>
                 </tbody>
             </table>
         </div>
     </div>
+    <script src="jquery-3.6.0.min"></script>
+    <script>
+        $(document).ready(function () {
+            $("#search").on("input", function () {
+                var searchValue = $(this).val();
+                $.ajax({
+                    type: "POST",
+                    url: "../ecomweb1/assets/pg/admins/search/search_courses.php",
+                    data: { search: searchValue },
+                    success: function (data) {
+                        $("#table-data tbody").html(data);
+                    }
+                });
+            });
+        });
+    </script>
+
     <script>
         function submitForm(delId) {
             document.getElementById('del_id_input').value = delId;

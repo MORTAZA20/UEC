@@ -1,3 +1,15 @@
+<?php
+require_once("inc/conn.inc.php");
+session_start();
+
+if (!$_SESSION["admin_user"]) {
+    header("Location: login");
+    exit();
+}
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +32,7 @@
             </div>
             <button class="btn-style" onclick="window.open('add_departments' , '_self');">أضافة قسم جديد</button>
        
-            <form action="" method="post">
+
                 <div class="group">
                     <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
                         <g>
@@ -30,10 +42,9 @@
                         </g>
                     </svg>
 
-                    <input name="search" placeholder="ادخل اسم القسم او الكلية" type="search" class="input-placeholder">
-                    <input name="Input_Serach" type="submit" class="button" value="بـحـث">
+                    <input id="search" name="search" placeholder="ادخل اسم القسم او الكلية" type="search" onkeyup="searchUniversities()" class="input-placeholder">
                 </div>
-            </form>
+
             <div class="path-bar">
                 <div class="url-path active-path">لوحة التحكم</div>
                 <div class="url-path slash">/</div>
@@ -42,7 +53,7 @@
                 <div class="url-path">معلومات الاقسام</div>
             </div>
 
-            <table class="table teble-bordered" role="table">
+            <table class="table teble-bordered" id="table-data" role="table">
                 <thead>
                     <tr>
                         <th width="5%">معرف القسم</th>
@@ -55,58 +66,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    include 'inc/conn.inc.php';
-                    if (isset($_POST['Input_Serach'])) {
-                       
-                        $search = mysqli_real_escape_string($conn, $_POST['search']);
-                        $sql = "SELECT departments.*, colleges.college_name 
-                    FROM departments
-                    LEFT JOIN colleges ON departments.college_id = colleges.college_id WHERE department_name LIKE '%$search%' OR colleges.college_name LIKE '$search'";
-                    } else {
-                        $sql = "SELECT departments.*, colleges.college_name 
-                            FROM departments
-                            LEFT JOIN colleges ON departments.college_id = colleges.college_id";
-                    }
-
-$result = $conn->query($sql);
-                    while ($row = $result->fetch_assoc()) {
-                        echo '<tr>
-                                <td><span class="badge">' . $row["department_id"] . '</span></td>
-                                <td>' . $row["college_name"] . '</td>
-                                <td>' . $row["department_name"] . '</td>
-                                <td>' . $row["required_GPA"] . '</td>
-                                <td>' . $row["evening_GPA"] . '</td>
-                                <td>' . $row["parallel_GPA"] . '</td>
-                                <td data-title="التحكم" class="text-center">
-                                
-                                    <a href="edit_departments?Edit_departments_id=' . $row["department_id"] . '" 
-                                    style="padding: 3px 10px;
-                                    font-weight: 500;
-                                    color: #fff;
-                                    border-radius: 5px;
-                                    background-color: #95a5a6;
-                                    text-decoration: none;">تعديل</a>
-                    
-                                    <a href="#" onclick="submitForm(\'' . $row["department_id"] . '\');" 
-                                           style="padding: 3px 10px;
-                                           color: #fff;
-                                           font-weight: 500;
-                                           border-radius: 5px;
-                                           background-color: rgb(223, 20, 10);
-                                           text-decoration: none;">حذف</a>
-                                 <form id="deleteForm" action="delete_inf_departments" method="post" style="display: none;">
-                                     <input type="hidden" name="del_id" id="del_id_input">
-                                 </form>
-                                </td>
-                            </tr>';
-                    }
-                    $conn->close();
-                    ?>
+                <?php include "search/search_inf_departments.php"; ?>
                 </tbody>
             </table>
         </div>
     </div>
+    <script src="jquery-3.6.0.min"></script>
+    <script>
+        $(document).ready(function () {
+            $("#search").on("input", function () {
+                var searchValue = $(this).val();
+                $.ajax({
+                    type: "POST",
+                    url: "../ecomweb1/assets/pg/admins/search/search_inf_departments.php",
+                    data: { search: searchValue },
+                    success: function (data) {
+                        $("#table-data tbody").html(data);
+                    }
+                });
+            });
+        });
+    </script>
+
 
     <script>
         function submitForm(delId) {
