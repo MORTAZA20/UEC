@@ -15,7 +15,7 @@
         <div class="content-bar">
             <div style='position:relative; margin-top: 15px; '> <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>الاقسام</div>
             <button class="btn-style" onclick="window.open('add_top_studens' , '_self');">أضافة طالب جديد</button>
-            <?php include 'Search.php' ?>
+          
             <form action="" method="post">
                 <div class="group">
                     <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">

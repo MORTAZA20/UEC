@@ -29,8 +29,6 @@ include 'inc/navbar.php';
                 <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>الجامعات</h2>
             </div>
             <button class="btn-style" onclick="window.open('add_universities' , '_self');">إضافة جامعة جديدة</button>
-            <?php include 'Search-Css.php' ?>
-
             <div class="group">
                 <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
                     <g>
@@ -65,7 +63,7 @@ include 'inc/navbar.php';
                 </thead>
 
                 <tbody>
-                <?php include "Search.php"; ?>
+                <?php include "search/search-universities.php";  ?>
                 </tbody>
             </table>
         </div>
@@ -77,7 +75,7 @@ include 'inc/navbar.php';
                 var searchValue = $(this).val();
                 $.ajax({
                     type: "POST",
-                    url: "Search",
+                    url: "search/search-universities.php",
                     data: { search: searchValue },
                     success: function (data) {
                         $("#table-data tbody").html(data);
