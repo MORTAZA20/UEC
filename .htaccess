@@ -18,7 +18,7 @@ RewriteRule ^My_Admins ./assets/pg/admins/My_Admins.php [NC,L]
 RewriteRule ^student_projects ./assets/pg/admins/student_projects.php [NC,L]
 RewriteRule ^career_opportunities ./assets/pg/admins/career_opportunities.php [NC,L]
 
-RewriteRule ^conn.inc ./assets/pg/admins/inc/conn.inc.php [NC,L]
+
 
 RewriteRule ^add_admin ./assets/pg/admins/add/add_admin.php [NC,L]
 RewriteRule ^add_departments ./assets/pg/admins/add/add_departments.php [NC,L]
@@ -28,6 +28,8 @@ RewriteRule ^add_courses ./assets/pg/admins/add/add_courses.php [NC,L]
 RewriteRule ^add_top_studens ./assets/pg/admins/add/add_top_studens.php [NC,L]
 RewriteRule ^add_student_projects ./assets/pg/admins/add/add_student_projects.php [NC,L]
 RewriteRule ^add_career_opportunities ./assets/pg/admins/add/add_career_opportunities.php [NC,L]
+RewriteRule ^get_colleges ./assets/pg/admins/add/get_colleges.php [NC,L]
+RewriteRule ^jquery-3.6.0.min ./assets/pg/admins/add/jquery-3.6.0.min.js [NC,L]
 
 
 RewriteRule ^delete_universities ./assets/pg/admins/delete/delete_universities.php [NC,L]
@@ -38,5 +40,9 @@ RewriteRule ^delete_top_students ./assets/pg/admins/delete/delete_top_students.p
 RewriteRule ^delete_student_projects ./assets/pg/admins/delete/delete_student_projects.php [NC,L]
 RewriteRule ^delete_career_opportunities ./assets/pg/admins/delete/delete_career_opportunities.php [NC,L]
 
-RewriteRule ^edit_universitys ./assets/pg/admins/edit_universitys.php [NC,L]
+RewriteRule ^edit_universitys ./assets/pg/admins/edit/edit_universitys.php [NC,L]
+RewriteRule ^edit_colleges ./assets/pg/admins/edit/edit_colleges.php [NC,L]
+
+RewriteRule ^search_universities ./assets/pg/admins/search/search_universities.php [NC,L]
+
 RewriteRule ^test ./assets/pg/admins/test.php [NC,L]

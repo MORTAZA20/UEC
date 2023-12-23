@@ -1,5 +1,5 @@
 <?php
-require_once("./inc/conn.inc.php");
+include "../inc/conn.inc.php";
 
 if (isset($_POST['search'])) {
     $search = mysqli_real_escape_string($conn, $_POST['search']);
