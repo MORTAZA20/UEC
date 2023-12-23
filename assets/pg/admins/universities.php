@@ -63,7 +63,7 @@ include 'inc/navbar.php';
                 </thead>
 
                 <tbody>
-                <?php include "search/search-universities.php";  ?>
+                <?php include "../admins/search/search_universities.php"; ?>
                 </tbody>
             </table>
         </div>
@@ -75,7 +75,7 @@ include 'inc/navbar.php';
                 var searchValue = $(this).val();
                 $.ajax({
                     type: "POST",
-                    url: "search/search-universities.php",
+                    url: "../admins/search/search_universities.php",
                     data: { search: searchValue },
                     success: function (data) {
                         $("#table-data tbody").html(data);
