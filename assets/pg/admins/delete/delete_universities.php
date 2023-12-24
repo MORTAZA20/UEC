@@ -5,11 +5,15 @@ session_start();
 if (!$_SESSION["admin_user"]) {
     header("Location: login");
 }
+if (isset($_POST["btn_delete"])) {
+    $_SESSION['delete_universities'] = $_POST["del_id"];
+    $delete_universities = $_SESSION['delete_universities'];
+}
 
-$delete_universities = $_POST["del_id"];
 
 if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] == "true") {
     try {
+        $delete_universities = $_SESSION['delete_universities'];
         // حذف صور المشاريع المرتبطة بالاقسام
         $sql = "SELECT * FROM student_projects WHERE department_id IN (SELECT department_id FROM departments WHERE college_id IN (SELECT college_id FROM colleges WHERE university_id=?))";
         $stmt = $conn->prepare($sql);

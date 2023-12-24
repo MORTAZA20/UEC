@@ -3,14 +3,17 @@ require_once("../inc/conn.inc.php");
 session_start();
 
 if (!$_SESSION["admin_user"]) {
-    header("Location: admin");
+    header("Location: login");
     exit();
 }
-$delete_colleges = $_POST["del_id"];
+if (isset($_POST["btn_delete"])) {
+    $_SESSION['delete_colleges'] = $_POST["del_id"];
+    $delete_colleges = $_SESSION['delete_colleges'];
+}
 
 if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] == "true") {
     try {
-
+        $delete_colleges = $_SESSION['delete_colleges'];
         $sql = "SELECT * FROM departments WHERE college_id =?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $delete_colleges);
@@ -154,6 +157,5 @@ function deleteDir($dirPath) {
         echo "المسار غير موجود.";
     }
 }
-
 
 ?>

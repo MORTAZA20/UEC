@@ -57,12 +57,13 @@ if (!$_SESSION["admin_user"]) {
                 <thead>
                     <tr>
                         <th width="5%">معرف القسم</th>
-                        <th class="text-right" width="10%">الكلية</th>
-                        <th class="text-right" width="10%">القسم</th>
+                        <th class="text-right" width="8%">الكلية</th>
+                        <th class="text-right" width="8%">القسم</th>
+                        <th class="text-right" width="8%">شعار القسم</th>
                         <th class="text-right" width="5%">معدل القبول(صباحي)</th>
                         <th class="text-right" width="5%">معدل القبول(مسائي)</th>
                         <th class="text-right" width="5%">معدل القبول(موازي)</th>
-                        <th class="text-right" width="20%">التحكم</th>
+                        <th class="text-right" width="30%">التحكم</th>
                     </tr>
                 </thead>
                 <tbody>

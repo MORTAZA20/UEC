@@ -65,7 +65,7 @@
             }
 
 
-            if (isset($_POST['edit_id'])){
+            if (isset($_POST['btn_edit'])){
                 $universityId = $_POST['edit_id'];
             }
             // Get data from database for edit form

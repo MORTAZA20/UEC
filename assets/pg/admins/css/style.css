@@ -100,7 +100,7 @@ body {
 
 .content-bar {
     left: 0;
-    width: calc(100% - 220px);
+    width: calc(100% - 180px);
     height: calc(100% - 60px);
     background-color: white;
     position: fixed;
@@ -122,13 +122,13 @@ body {
 
 .side-bar {
     right: 0;
-    width: 220px;
+    width: 180px;
     height: calc(100% - 60px);
     background-color: #192330;
     padding-top: 20px;
     position: fixed;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    overflow: hidden;
+
 }
 
 .item-bar {
@@ -207,7 +207,7 @@ body {
     border-radius: 3px;
     position: absolute;
     cursor: pointer;
-    transform: 0.3s all; /* حذف -moz-appearance: none; */
+    transform: 0.3s all; 
 }
 
 
