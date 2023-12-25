@@ -45,5 +45,6 @@ RewriteRule ^delete_career_opportunities ./assets/pg/admins/delete/delete_career
 RewriteRule ^edit_universitys ./assets/pg/admins/edit/edit_universitys.php [NC,L]
 RewriteRule ^edit_colleges ./assets/pg/admins/edit/edit_colleges.php [NC,L]
 RewriteRule ^edit_inf_departments ./assets/pg/admins/edit/edit_inf_departments.php [NC,L]
+RewriteRule ^edit_top_students ./assets/pg/admins/edit/edit_top_students.php [NC,L]
 
 
