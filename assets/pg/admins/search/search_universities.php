@@ -1,6 +1,4 @@
 <?php
-
-include "style_button.php";
 if (isset($_POST['search'])) {
     include "../inc/conn.inc.php";
     $search = mysqli_real_escape_string($conn, $_POST['search']);
@@ -43,3 +41,4 @@ while ($row = $result->fetch_assoc()) {
 $conn->close();
 
 ?>
+<?php include "style_button.php"; ?>
