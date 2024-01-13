@@ -42,7 +42,8 @@ if (!$_SESSION["admin_user"]) {
                         </g>
                     </svg>
 
-                    <input id="search" name="search" placeholder="ادخل اسم القسم او الكلية" type="search" onkeyup="searchUniversities()" class="input-placeholder">
+                    <input id="search" name="search" placeholder="ادخل اسم القسم او الكلية" type="search" 
+                    onkeyup="search()" class="input-placeholder">
                 </div>
 
             <div class="path-bar">
@@ -60,9 +61,7 @@ if (!$_SESSION["admin_user"]) {
                         <th class="text-right" width="8%">الكلية</th>
                         <th class="text-right" width="8%">القسم</th>
                         <th class="text-right" width="8%">شعار القسم</th>
-                        <th class="text-right" width="5%">معدل القبول(صباحي)</th>
-                        <th class="text-right" width="5%">معدل القبول(مسائي)</th>
-                        <th class="text-right" width="5%">معدل القبول(موازي)</th>
+                        
                         <th class="text-right" width="30%">التحكم</th>
                     </tr>
                 </thead>

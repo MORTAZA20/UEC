@@ -32,6 +32,7 @@ RewriteRule ^get_colleges ./assets/pg/admins/add/get_colleges.php [NC,L]
 RewriteRule ^get_inf_departments ./assets/pg/admins/add/get_inf_departments.php [NC,L]
 RewriteRule ^jquery-3.6.0.min ./assets/pg/admins/add/jquery-3.6.0.min.js [NC,L]
 RewriteRule ^Get_ScriptFunction ./assets/pg/admins/add/Get_ScriptFunction.js [NC,L]
+RewriteRule ^displayImage ./assets/pg/admins/add/displayImage.js [NC,L]
 
 
 RewriteRule ^delete_universities ./assets/pg/admins/delete/delete_universities.php [NC,L]
@@ -46,5 +47,8 @@ RewriteRule ^edit_universitys ./assets/pg/admins/edit/edit_universitys.php [NC,L
 RewriteRule ^edit_colleges ./assets/pg/admins/edit/edit_colleges.php [NC,L]
 RewriteRule ^edit_inf_departments ./assets/pg/admins/edit/edit_inf_departments.php [NC,L]
 RewriteRule ^edit_top_students ./assets/pg/admins/edit/edit_top_students.php [NC,L]
+RewriteRule ^edit_student_projects ./assets/pg/admins/edit/edit_student_projects.php [NC,L]
+RewriteRule ^edit_courses ./assets/pg/admins/edit/edit_courses.php [NC,L]
+RewriteRule ^edit_career_opportunities ./assets/pg/admins/edit/edit_career_opportunities.php [NC,L]
 
 

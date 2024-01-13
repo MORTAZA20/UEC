@@ -123,13 +123,19 @@
                     <textarea name="department_description" id="editor1" placeholder="النبذه عن القسم"></textarea>
                     <p>رسالة القسم</p>
                     <textarea name="scientific_department_message" id="editor2" placeholder="رسالة القسم"></textarea>
-
+                    <div class="container-img">
+                         <img id="uploaded-image" src="#" style="max-width: 100px;
+                                max-height: 100px;
+                                width: auto;
+                                height: auto;
+                                padding-left:20px;">
+                    </div>
                     <div class="space"></div>
                     <div class="btn-row">
-                        <input type="file" name="departments_images" class="file-btn" id="files"
-                            accept="image/png, image/jpeg">
+                    <input type="file" name="departments_images" class="file-btn" id="upload-input" accept="image/*"
+                            onchange="displayImage()">
                         <input type="button" class="file-btn" value="اختيار شعار القسم"
-                            onclick="document.getElementById('files').click();">
+                            onclick="document.getElementById('upload-input').click();">
                         <p>
                             <input type="submit" name="sub_form" value="حـفـظ الـبـيـانـات" />
                         </p>
@@ -138,6 +144,7 @@
             </div>
         </div>
     </div>
+    <script src="displayImage"></script>
 
     <script>
         setTimeout(function () {

@@ -35,7 +35,7 @@ if (!$_SESSION["admin_user"]) {
                     </svg>
 
                     <input id="search" name="search" placeholder="ادخل اسم المستخدم او المعرف" type="search" class="input-placeholder"
-                           onkeyup="searchUniversities()">
+                           onkeyup="search()">
                 </div>
             <div    class="path-bar">
                 <div class="url-path active-path">لوحة التحكم</div>

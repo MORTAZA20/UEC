@@ -87,20 +87,33 @@
                     <div class="custom-column" style="margin-bottom: 10px;">
                         <input type="text" name="university_website" id="" placeholder="موقع الجامعة الالكتروني" required>
                     </div>
-
+                    
+                                <div class="container-img">
+                            
+                                <img id="uploaded-image" src="#"
+                                style="max-width: 100px;
+                                max-height: 100px;
+                                width: auto;
+                                height: auto;
+                                padding-left:20px;" >
+                                </div>
+            
                     <div class="space"></div>
                     <div class="btn-row">
-                        <input type="file" name="universities_images" class="file-btn" id="files" accept="image/png, image/jpeg" >
-                        <input type="button" class="file-btn" value="اختيار شعار الجامعة" onclick="document.getElementById('files').click();">
-                        <p>
+                    <input type="file"  name="universities_images" class="file-btn" id="upload-input" accept="image/*" onchange="displayImage()" >
+                    <input type="button" class="file-btn" value="اختيار شعار الجامعة"
+                            onclick="document.getElementById('upload-input').click();"> 
+                    <p>
                             <input type="submit" name="sub_form" value="حفظ البيانات" />
                         </p>
                     </div> 
-                </form>
+                </form> 
             </div>
+            </div>
+       
         </div>
     </div>
-    
+    <script src="displayImage"></script>
     <script>
         setTimeout(function() {
             document.getElementById('success-message').style.display = 'none';

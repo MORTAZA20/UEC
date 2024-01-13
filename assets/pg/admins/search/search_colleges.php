@@ -15,8 +15,11 @@ while ($row = $result->fetch_assoc()) {
         ?>
         <tr>
                 <td><span class="badge"><?php echo $row["college_id"]; ?></span></td>
-                <td><?php echo $row["university_name"]; ?></td>
-                <td><?php echo $row["college_name"]; ?></td>
+                <td ><?php echo $row["university_name"]; ?></td>
+                <td style="
+            height: 50px;
+            max-width: 50px; 
+              "><?php echo $row["college_name"]; ?></td>
                 <td><img src="assets/pg/admins/<?php echo $row["colleges_img_path"]; ?>" 
                         style=" max-width:80px;
                         max-height: 80px;
@@ -51,4 +54,3 @@ while ($row = $result->fetch_assoc()) {
 }
 $conn->close();
 ?>
-<?php include "style_button.php"; ?>

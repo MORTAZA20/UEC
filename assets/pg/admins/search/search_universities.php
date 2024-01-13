@@ -35,10 +35,9 @@ while ($row = $result->fetch_assoc()) {
                                 </form>
                         </div>
                 </td>
-            </tr>';
+            </tr>
 <?php
 }
 $conn->close();
 
 ?>
-<?php include "style_button.php"; ?>

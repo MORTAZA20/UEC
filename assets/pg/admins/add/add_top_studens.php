@@ -97,7 +97,6 @@
                     <div class="custom-column" style="margin-bottom: 10px;">
                         <input type="text" name="student_id" placeholder="معرف الطالب" required>
                         <input type="text" name="student_name" placeholder="اسم الطالب" required>
-
                     </div>
                     <div class="custom-column" style="margin-bottom: 10px;">
                         <input type="text" name="Cumulative_Rating" placeholder="المعدل التراكمي" required>
@@ -114,6 +113,7 @@
             </div>
         </div>
     </div>
+    
     <script>
         setTimeout(function () {
             document.getElementById('success-message').style.display = 'none';

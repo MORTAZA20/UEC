@@ -44,7 +44,7 @@ if (!$_SESSION["admin_user"]) {
                 </svg>
 
                 <input id="search" name="search" placeholder="ادخل اسم المشروع او القسم" type="search"
-                    class="input-placeholder" onkeyup="searchUniversities()">
+                    class="input-placeholder" onkeyup="search()">
             </div>
 
 
@@ -59,7 +59,7 @@ if (!$_SESSION["admin_user"]) {
             <table class="table teble-bordered" id="table-data" role="table">
                 <thead>
                     <tr>
-                        <th width="10%">معرف الطالب</th>
+                        <th width="10%">معرف المشروع</th>
                         <th class="text-right" width="10%">القسم</th>
                         <th class="text-right" width="10%">اسم المشروع</th>
                         <th class="text-right" width="10%">صاحب المشروع</th>

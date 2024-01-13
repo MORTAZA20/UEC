@@ -44,7 +44,7 @@
                     echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>عذرًا، معرف الكلية موجود مسبقًا</div>";
                 } else {
                     if ($_FILES['colleges_images']['type'] === 'image/png' || $_FILES['colleges_images']['type'] === 'image/jpeg') {
-                        
+
                         $colleges_folder = '../colleges_img';
                         if (!file_exists($colleges_folder)) {
                             mkdir($colleges_folder, 0777, true);
@@ -99,20 +99,28 @@
 
                     <div class="custom-column" style="margin-bottom: 10px;">
 
-                        <input type="text" name="college_id"placeholder="معرف الكلية" required>
+                        <input type="text" name="college_id" placeholder="معرف الكلية" required>
                         <input type="text" name="college_name" placeholder="اسم الكلية" required>
-                        <input type="number" name="required_GPA"placeholder="المعدل">
+                        <input type="number" name="required_GPA" placeholder="المعدل">
                     </div>
 
 
                     <p>الوصف</p>
                     <textarea name="editor1" id="editor1"></textarea>
+                     <div class="container-img">
+                         <img id="uploaded-image" src="#" style="max-width: 100px;
+                                max-height: 100px;
+                                width: auto;
+                                height: auto;
+                                padding-left:20px;">
+                        </div>
                     <div class="space"></div>
                     <div class="btn-row">
-                        <input type="file" name="colleges_images" class="file-btn" id="files"
-                            accept="image/png, image/jpeg">
+                       
+                        <input type="file" name="colleges_images" class="file-btn" id="upload-input" accept="image/*"
+                            onchange="displayImage()">
                         <input type="button" class="file-btn" value="اختيار شعار الكلية"
-                            onclick="document.getElementById('files').click();">
+                            onclick="document.getElementById('upload-input').click();">
                         <p>
                             <input type="submit" name="sub_form" value="حـفـظ الـبـيـانـات" />
                         </p>
@@ -129,6 +137,7 @@
             document.getElementById('success-message').style.display = 'none';
         }, 5000);
     </script>
+    <script src="displayImage"></script>
     <script src="../../../../../ecomweb1/assets/pg/admins/ckeditor/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('editor1');

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 20, 2023 at 04:54 PM
+-- Generation Time: Jan 12, 2024 at 09:34 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -55,11 +55,17 @@ CREATE TABLE `colleges` (
 --
 
 INSERT INTO `colleges` (`college_id`, `college_name`, `college_description`, `required_GPA`, `university_id`, `colleges_img_path`) VALUES
-('35', '44', '', 44, '12', 'colleges_img/1.png'),
-('445', '454', '', 54, 'kwe2er4', 'colleges_img/caesar-cipher.png'),
-('44560', 'الببض', '', 0, '12', 'colleges_img/caesar-cipher.png'),
-('544', '44', '', 44, 'kwe2er4', 'colleges_img/٢٠٢٣٠٧٠٩_٠٩٢٥٢٦.png'),
-('98654', 'كلية التربية للعلوم الصرفة', '', 1, '12', 'colleges_img/٢٠٢٣٠٧٠٩_٠٩٣٢٢٩.jpg');
+('12312', 'العنب', '', 78, '878', 'colleges_img/لقطة شاشة 2023-10-10 225147.png'),
+('332', '32', '', 323, 'kwe2', 'colleges_img/caesar-cipher.png'),
+('4456', 'كلية التربية للعلوم الصرفة2', '', 9, '1', 'colleges_img/اسئلة شبكات1.jpg'),
+('44569098', 'كلية التربية للعلوم الصرفة', '', 89, 'kwe2', 'colleges_img/اسئلة شبكات1.jpg'),
+('45', 'الببض', '', 90, '878', 'colleges_img/12.png'),
+('5656', '65656', '', 56656, '1', 'colleges_img/data-mining.png'),
+('787', '78788', '<p>بلتايبايائيبلئيبسلئيسباليقابيبلايبليبايابيبايباليبا</p>\r\n', 7878, '1', 'colleges_img/اسئلة شبكات2.jpg'),
+('789', 'العنب', '', 89, 'kwe28', 'colleges_img/اسئلة شبكات1.jpg'),
+('986545', '5dd', '', 55, '234', 'colleges_img/الاحرف.png'),
+('9865499', 'كلية التربية للعلوم الصرفة', '', 3, '1', 'colleges_img/اسئلة شبكات2.jpg'),
+('FGFGF', 'كلية التربية للعلوم الصرفة1DFG', '<p>777777777777777777777777777777777777777777777777777</p>\\r\\n', 2147483647, '1', 'colleges_img/2022 شبكات.jpg');
 
 -- --------------------------------------------------------
 
@@ -94,6 +100,15 @@ CREATE TABLE `departments` (
   `evening_study_fees` int(11) NOT NULL,
   `departments_img_path` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `departments`
+--
+
+INSERT INTO `departments` (`department_id`, `department_name`, `college_id`, `department_description`, `scientific_department_message`, `required_GPA`, `evening_GPA`, `parallel_GPA`, `parallel_study_fees`, `evening_study_fees`, `departments_img_path`) VALUES
+('2278', 'الحاسبات1', '4456', '', '', 88, 88, 8, 88, 8, 'departments_img/الاحرف.png'),
+('22781', '1', '4456', '', '', 11, 1, 1, 1, 11, 'departments_img/operative-system2.png'),
+('33', '333', '4456', '', '', 33, 3, 3, 3, 3, 'departments_img/LOGO.png');
 
 -- --------------------------------------------------------
 
@@ -131,6 +146,14 @@ CREATE TABLE `student_projects` (
   `student_projects_img_path` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `student_projects`
+--
+
+INSERT INTO `student_projects` (`project_id`, `department_id`, `project_name`, `project_description`, `project_supervisor`, `student_name`, `student_projects_img_path`) VALUES
+('66 ', '22781', '111', '', '8', 'مرتضى', 'student_projects_img/اسئلة شبكات2.jpg'),
+('DDD ', '2278', 'D', '', 'D', 'مرتضى', 'student_projects_img/الاحرف.png');
+
 -- --------------------------------------------------------
 
 --
@@ -144,6 +167,14 @@ CREATE TABLE `top_students` (
   `Graduation_Year` date NOT NULL,
   `Cumulative_Rating` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `top_students`
+--
+
+INSERT INTO `top_students` (`student_id`, `department_id`, `student_name`, `Graduation_Year`, `Cumulative_Rating`) VALUES
+('456 ', '22781', 'مرتضى26', '2023-11-26', 67),
+('4567 ', '2278', '777', '2023-11-29', 77);
 
 -- --------------------------------------------------------
 
@@ -164,8 +195,11 @@ CREATE TABLE `universities` (
 --
 
 INSERT INTO `universities` (`university_id`, `university_name`, `university_location`, `university_website`, `universities_img_path`) VALUES
-('12', 'البصرة', 'البصرة', 'صقث', 'universities_img/٢٠٢٣٠٧٠٩_٠٩٢٥٢٦.png'),
-('kwe2er4', 'بغداد', '4444', '44', 'universities_img/٢٠٢٣٠٧٠٩_٠٩٣٢٢٩.jpg');
+('1', 'ك', 'البصرة', 'صقث', 'universities_img/اسئلة شبكات2.jpg'),
+('234', 'البصرة', '22', '43', 'universities_img/الاحرف.png'),
+('878', 'مرتضى', 'بلا', 'بلا', 'universities_img/اسئلة شبكات2.jpg'),
+('kwe2', 'البصرة', 'البصرة', 'sdfg', 'universities_img/1.png'),
+('kwe28', 'حيدر', 'بل', 'بلا', 'universities_img/photo_2023-11-11_13-16-29.jpg');
 
 --
 -- Indexes for dumped tables
@@ -234,7 +268,7 @@ ALTER TABLE `universities`
 -- AUTO_INCREMENT for table `login_credentials`
 --
 ALTER TABLE `login_credentials`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Constraints for dumped tables

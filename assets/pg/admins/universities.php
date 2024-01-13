@@ -39,7 +39,7 @@ include 'inc/navbar.php';
                 </svg>
 
                 <input name="search" id="search" placeholder="ادخل اسم الجامعة" type="search" class="input-placeholder"
-                    onkeyup="searchUniversities()">
+                    onkeyup="search()">
 
             </div>
 

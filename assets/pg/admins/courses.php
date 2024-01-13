@@ -39,7 +39,8 @@ if (!$_SESSION["admin_user"]) {
                         </g>
                     </svg>
 
-                    <input id="search" name="search" placeholder="ادخل اسم المادة او القسم" type="search" class="input-placeholder">
+                    <input id="search" name="search" placeholder="ادخل اسم المادة او القسم" type="search"
+                    onkeyup="search()" class="input-placeholder">
                 </div>
   
 

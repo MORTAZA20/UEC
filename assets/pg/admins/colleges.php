@@ -40,7 +40,7 @@ if (!$_SESSION["admin_user"]) {
                         </g>
                     </svg>
                     <input id="search" name="search" placeholder="ادخل اسم الكلية او الجامعة" type="search"
-                        class="input-placeholder" onkeyup="searchUniversities()">
+                        class="input-placeholder" onkeyup="search()">
                 </div>
  
             <div class="path-bar">

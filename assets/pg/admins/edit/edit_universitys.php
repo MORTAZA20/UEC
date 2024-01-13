@@ -120,17 +120,7 @@
             </div>
         </div>
     </div>
-   <script>
-    function del_img_" . $rm_dot . "() {
-                var result = confirm('هل أنت متأكد من حذف الصورة؟');
-                    if (result) {
-                        document.getElementById('" . $rm_dot ."').style.display = 'none';
-                                      
-                            var getinputvar = document.getElementById('del_imgs');
-                            getinputvar.value += '" . $rm_dot ."';
-                            }
-    }
-    </script>
+  
     <script>
         setTimeout(function () {
             document.getElementById('success-message').style.display = 'none';

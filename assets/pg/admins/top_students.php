@@ -41,7 +41,7 @@ if (!$_SESSION["admin_user"]) {
                 </svg>
 
                 <input id="search" name="search" placeholder="ادخل اسم الطالب او القسم" type="search"
-                    class="input-placeholder" onkeyup="searchUniversities()">
+                    class="input-placeholder" onkeyup="search()">
             </div>
 
             <div class="path-bar">
