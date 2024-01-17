@@ -139,13 +139,21 @@
                     <textarea name="department_description" id="editor1" placeholder="النبذه عن القسم"><?php if (!isset($_POST['edit_id'])){echo "";}else{echo $row['department_description'];} ?></textarea>
                     <p>رسالة القسم</p>
                     <textarea name="scientific_department_message" id="editor2" placeholder="رسالة القسم"><?php if (!isset($_POST['edit_id'])){echo "";}else{echo $row['scientific_department_message'];} ?></textarea>
-
+                    <div class="container-img">   
+                            <img id="uploaded-image" src="assets/pg/admins/<?php echo $row["departments_img_path"]; ?>" 
+                            style="max-width: 80px;
+                            max-height: 80px;
+                            width: auto;
+                            height: auto;
+                            padding-left:20px;">
+                    </div>
                     <div class="space"></div>
                     <div class="btn-row">
-                        <input type="file" name="departments_images" class="file-btn" id="files"
-                            accept="image/png, image/jpeg">
-                        <input type="button" class="file-btn" value="اختيار شعار القسم"
-                            onclick="document.getElementById('files').click();">
+
+                    <input type="file" name="departments_images" class="file-btn" id="upload-input" accept="image/*"
+                            onchange="displayImage()">
+                    <input type="button" class="file-btn" value="اختيار شعار القسم"
+                            onclick="document.getElementById('upload-input').click();">
                         <p>
                             <input type="submit" name="sub_form" value="حـفـظ الـبـيـانـات" />
                         </p>
@@ -154,7 +162,7 @@
             </div>
         </div>
     </div>
-
+    <script src="displayImage"></script>
     <script>
         setTimeout(function () {
             document.getElementById('success-message').style.display = 'none';

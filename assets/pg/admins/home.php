@@ -71,7 +71,7 @@ if (!$_SESSION["admin_user"]) {
                 <div >عدد الادمنية<div>      <?php
                     include 'inc/conn.inc.php';
 
-                    $sql ="SELECT * FROM login_credentials";
+                    $sql ="SELECT * FROM inf_login";
                     $result = $conn->query ($sql);
                     echo $result->num_rows;
                     $conn->close();

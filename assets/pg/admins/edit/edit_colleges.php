@@ -112,7 +112,7 @@
                     </div>
 
                     <div class="container-img">   
-                            <img src="assets/pg/admins/<?php echo $row["colleges_img_path"]; ?>" 
+                            <img id="uploaded-image" src="assets/pg/admins/<?php echo $row["colleges_img_path"]; ?>" 
                             style="max-width: 80px;
                             max-height: 80px;
                             width: auto;
@@ -127,13 +127,13 @@
                     </textarea>
                     <div class="space"></div>
                     <div class="btn-row">
-                        <input type="file" name="colleges_images" class="file-btn" id="files"
-                            accept="image/png, image/jpeg">
-                        <input type="button" class="file-btn" value="اختيار شعار الكلية"
-                            onclick="document.getElementById('files').click();">
-                        <p>
-                            <input type="submit" name="sub_form" value="حـفـظ الـبـيـانـات" />
-                        </p>
+                    <input type="file" name="colleges_images" class="file-btn" id="upload-input" accept="image/*"
+                            onchange="displayImage()">
+                    <input type="button" class="file-btn" value="تغير شعار الكلية"
+                            onclick="document.getElementById('upload-input').click();">
+                    <p>
+                        <input type="submit" name="sub_form" value="حـفـظ الـبـيـانـات" />
+                    </p>
 
 
                     </div>
@@ -141,6 +141,7 @@
             </div>
         </div>
     </div>
+    <script src="displayImage"></script>
 
     <script>
         setTimeout(function () {

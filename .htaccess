@@ -52,5 +52,6 @@ RewriteRule ^edit_top_students ./assets/pg/admins/edit/edit_top_students.php [NC
 RewriteRule ^edit_student_projects ./assets/pg/admins/edit/edit_student_projects.php [NC,L]
 RewriteRule ^edit_courses ./assets/pg/admins/edit/edit_courses.php [NC,L]
 RewriteRule ^edit_career_opportunities ./assets/pg/admins/edit/edit_career_opportunities.php [NC,L]
+RewriteRule ^edit_My_Admins ./assets/pg/admins/edit/edit_My_Admins.php [NC,L]
 
 

@@ -32,7 +32,7 @@
                     $AdminUserName = mysqli_real_escape_string($conn, $_POST["AdminUserName"]);
                     $AdminPassword = mysqli_real_escape_string($conn, $_POST["AdminPassword"]);
                 
-                            $sql = "INSERT INTO login_credentials  (department_id, AdminUserName, AdminPassword) 
+                            $sql = "INSERT INTO inf_login (department_id, AdminUserName, AdminPassword) 
                             VALUES ('$department_id', '$AdminUserName', '$AdminPassword')";
                             $result = $conn->query($sql);
                             if ($result) {
@@ -50,6 +50,7 @@
             <div class="container-form">
             <form action="" method="post">
                 <select class="fruit" name="department_id" style=" margin-bottom: 10px ;" required>
+                <option value=" ">ادمن عام</option>
                     <?php
                     include '../inc/conn.inc.php';
                     $sql = "SELECT department_id, department_name FROM departments";

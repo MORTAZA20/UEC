@@ -47,7 +47,7 @@ if (!$_SESSION["admin_user"]) {
                 <thead>
                     <tr>
                         <th width="2%">#</th>
-                        <th width="20%">معرف القسم</th>
+                        <th width="20%">اسم القسم</th>
                         <th class="text-right" width="20%">إسم المستخدم</th>
                         <th class="text-right" width="40%">كلمة المرور</th>
                         <th class="text-right" width="30%">التحكم</th>
