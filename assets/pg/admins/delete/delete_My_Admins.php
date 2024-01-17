@@ -13,7 +13,11 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] == "true") {
 
         $conn->autocommit(FALSE);
 
+<<<<<<< HEAD
         $sql = "DELETE FROM login_credentials WHERE Admin_id=?";
+=======
+        $sql = "DELETE FROM login_credentials WHERE id=?";
+>>>>>>> 5b63f653701167ebcee4db11cdec5f9a6f2437cb
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s",$delete_My_Admins);
         $stmt->execute();
