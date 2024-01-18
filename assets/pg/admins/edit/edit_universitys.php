@@ -28,55 +28,55 @@
 
             <?php
             include '../inc/conn.inc.php';
-            $row = [];
+            $row = array();
+
             if (isset($_POST['btn_edit'])){
-            $universityId = $_POST['edit_id'];
+                $universityId = $_POST['edit_id'];
+               
+            }
             $sql = "SELECT * FROM universities WHERE university_id =?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("i", $universityId);
             $stmt->execute();
             $result = $stmt->get_result();
             $row = $result->fetch_assoc();
-            }
 
+            if (isset($_POST["sub_form"])) {
+                $university_id = mysqli_real_escape_string($conn, $_POST["Edit_Universitie_id"]);
+                $university_name = mysqli_real_escape_string($conn, $_POST["university_name"]);
+                $university_location = mysqli_real_escape_string($conn, $_POST["university_location"]);
+                $university_website = mysqli_real_escape_string($conn, $_POST["university_website"]);
 
-        if (isset($_POST["sub_form"])) {
+                if (!empty($_FILES["universities_images"]["name"])) {
+                    if(isset($row['universities_img_path']) && file_exists("assets/pg/admins/" . $row['universities_img_path'])) {
+                        echo'kk';
+                        unlink("assets/pg/admins/" . $row['universities_img_path']);
+                    }
 
-            $university_id = mysqli_real_escape_string($conn, $_POST["Edit_Universitie_id"]);
-            $university_name = mysqli_real_escape_string($conn, $_POST["university_name"]);
-            $university_location = mysqli_real_escape_string($conn, $_POST["university_location"]);
-            $university_website = mysqli_real_escape_string($conn, $_POST["university_website"]);
+                    
+                    $universities_folder = '../universities_img';
+                    $file_name = $_FILES["universities_images"]["name"];
+                    $universities_images = $_FILES["universities_images"]["tmp_name"];
+                    move_uploaded_file($universities_images, $universities_folder . '/' . $file_name);
+                    $image_path = 'universities_img' . '/' . $file_name;
+                } else {
 
+                    $image_path = $row['universities_img_path'];
 
-            if (!empty($_FILES["universities_images"]["name"])) {
-             
-                $existingImagePath = $existingImagePath = isset($row['universities_img_path']) ? $row['universities_img_path'] : null;
-                if (file_exists($existingImagePath)) {
-                    unlink($existingImagePath);
                 }
-                $universities_folder = '../universities_img'; 
-                $file_name = $_FILES["universities_images"]["name"];
-                $universities_images = $_FILES["universities_images"]["tmp_name"];
-                move_uploaded_file($universities_images, $universities_folder . '/' . $file_name);
-                $image_path = 'universities_img' . '/' . $file_name;
-            }
-            
-                else{
-                 $image_path = isset($row['universities_img_path']) ? $row['universities_img_path'] : null;
-                }
+
                 $sql = "UPDATE universities SET university_name = ?, university_location = ?, 
-                university_website = ?, universities_img_path = ? WHERE university_id = ?";
+                        university_website = ?, universities_img_path = ? WHERE university_id = ?";
                 $stmt = $conn->prepare($sql);
                 $stmt->bind_param("sssss", $university_name, $university_location, $university_website, $image_path, $university_id);
                 $stmt->execute();
 
-            if ($stmt->affected_rows > 0) {
-                echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>تم تحديث بيانات الجامعة بنجاح</div>";
-            } else {
-                echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>حدث خطأ أثناء تحديث بيانات الجامعة: " . $stmt->error . "</div>";
+                if ($stmt->affected_rows > 0) {
+                    echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>تم تحديث بيانات الجامعة بنجاح</div>";
+                } else {
+                    echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>حدث خطأ أثناء تحديث بيانات الجامعة: " . $stmt->error . "</div>";
+                }
             }
-        }
-         
             ?>
 
             <div class="container-form">

@@ -13,6 +13,8 @@
                <div onclick="window.open('career_opportunities' , '_self')">فرص العمل المستقبلية</div>
             </div>
             <div class="item-bar" onclick="window.open('My_Admins' , '_self')">الادمنية</div>
+            <div class="item-bar" onclick="window.open('support' , '_self')">الدعم</div>
+
 
 </div>           
 <script>

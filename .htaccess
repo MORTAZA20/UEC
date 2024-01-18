@@ -17,6 +17,8 @@ RewriteRule ^top_students ./assets/pg/admins/top_students.php [NC,L]
 RewriteRule ^My_Admins ./assets/pg/admins/My_Admins.php [NC,L]
 RewriteRule ^student_projects ./assets/pg/admins/student_projects.php [NC,L]
 RewriteRule ^career_opportunities ./assets/pg/admins/career_opportunities.php [NC,L]
+RewriteRule ^support ./assets/pg/admins/support.php [NC,L]
+
 
 
 

@@ -207,7 +207,7 @@ body {
     font-weight: 500;
     padding: 3px 10px;
     box-shadow: 2px 2px 1px #ccc;
-    border: 1px solid #18bc9c;
+    border: 1px solid #23a0a9;
     border-radius: 3px;
     position: absolute;
     cursor: pointer;
@@ -238,15 +238,6 @@ body {
     margin: 20px;
     color: #23a0a9;
     font-size: 25px;
-}
-
-.Latest-orders {
-    margin: 20px;
-    color: #fff;
-    font-size: 18px;
-    padding: 14px;
-    border-radius: 5px;
-    background-color: #192330;
 }
 
 table {
@@ -283,24 +274,8 @@ tbody tr td {
     text-align: center;
 }
 
-.edit-btn {
 
-    padding: 3px 10px;
-    color: #fff;
-    font-weight: 500;
-    border-radius: 5px;
-    background-color: #95a5a6;
-    text-decoration: none;
-}
 
-.del-btn{
-    padding: 3px 10px;
-    color: #fff;
-    font-weight: 500;
-    border-radius: 5px;
-    background-color: rgb(223, 20, 10);
-    text-decoration: none;
-}
 
 .container-form {
     margin:  10px 20px;
@@ -326,7 +301,7 @@ tbody tr td {
     margin-left: 10px;
     font-size: 18px;
     width: 100%;
-    border: 3px solid #efefef;
+    border: 1px solid #efefef;
     background-color: #efefef;
     padding: 10px 15px;
     display: block;
@@ -346,6 +321,11 @@ tbody tr td {
     padding: 10px 15px;
     cursor: pointer;
 }
+.container-form .file-btn:hover  {
+    color: #192330;
+    background-color: #fff;
+
+}
 
 .container-form input[type=submit]{
     color: #fff;
@@ -353,12 +333,15 @@ tbody tr td {
     font-weight: 500;
     border-radius: 5px;
     margin-right: 5px;
-    border: 1px solid #18bc9c;
-    background-color: #18bc9c;
+    border: 1px solid #23a0a9;
+    background-color: #23a0a9;
     padding: 10px 15px;
     cursor: pointer;
 }
-
+.container-form input[type=submit]:hover{
+    color: #23a0a9; 
+    background-color: #fff;  
+}
 .container-img{
     width: auto;
     display: flex;
@@ -408,7 +391,7 @@ tbody tr td {
 .del-massage{
     width: 100%;
     position: fixed;
-    border: 5px solid #18bc9c;
+    border: 5px solid #23a0a9;
 }
 
 .del-massage > h1 , h2 , a{
@@ -420,7 +403,7 @@ input:focus{
     outline: none;
     border-color: #192330;
     background-color: #2A3B52;
-    box-shadow: 0 0 0 2px rgba(39, 88, 78, 0.697);
+    box-shadow: 0 0 0 1px rgba(39, 88, 78, 0.697);
 }
 
 
