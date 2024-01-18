@@ -50,7 +50,7 @@
                 if (!empty($_FILES["universities_images"]["name"])) {
                     if(isset($row['universities_img_path']) && file_exists("assets/pg/admins/" . $row['universities_img_path'])) {
                         echo'kk';
-                        unlink("assets/pg/admins/" . $row['universities_img_path']);
+                        unlink($row['universities_img_path']);
                     }
 
                     

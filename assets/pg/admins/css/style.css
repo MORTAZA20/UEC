@@ -245,7 +245,7 @@ table {
     margin: 20px;
     width: calc(100% - 40px);
     border-collapse:collapse;
-
+    border:#000 0.1rem solid;
 }
 
 thead{
