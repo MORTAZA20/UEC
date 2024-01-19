@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if ($_SESSION["admin_user"] != "Admin") {
+    header("Location:login");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 

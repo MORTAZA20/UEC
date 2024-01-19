@@ -2,8 +2,8 @@
 require_once("../inc/conn.inc.php");
 session_start();
 
-if (!$_SESSION["admin_user"]) {
-    header("Location: login");
+if ($_SESSION["admin_user"] != "Admin") {
+    header("Location:login");
     exit();
 }
 if (isset($_POST["btn_delete"])) {
@@ -56,6 +56,11 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] == "true") {
     
     // حذف الطلاب المرتبطين بالأقسام
     $sql = "DELETE FROM top_students WHERE department_id IN (SELECT department_id FROM departments WHERE college_id=?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $delete_colleges);
+    $stmt->execute();
+
+    $sql = "DELETE FROM inf_login WHERE department_id IN (SELECT department_id FROM departments WHERE college_id=?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $delete_colleges);
     $stmt->execute();

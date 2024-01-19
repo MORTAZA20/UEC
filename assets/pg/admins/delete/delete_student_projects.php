@@ -2,10 +2,10 @@
 require_once("../inc/conn.inc.php");
 session_start();
 
-if (!$_SESSION["admin_user"]) {
-    header("Location: admin");
+if ($_SESSION["admin_user"] != "Admin") {
+    header("Location:login");
+    exit();
 }
-
 $delete_student_projects = $_POST["del_id"];
 
 if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] == "true") {

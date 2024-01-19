@@ -2,8 +2,9 @@
 require_once("../inc/conn.inc.php");
 session_start();
 
-if (!$_SESSION["admin_user"]) {
-    header("Location: login");
+if ($_SESSION["admin_user"] != "Admin") {
+    header("Location:login");
+    exit();
 }
 
 $delete_departments = $_POST["del_id"];
@@ -58,6 +59,10 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] == "true") {
         $stmt->bind_param("s", $delete_departments);
         $stmt->execute();
 
+        $sql = "DELETE FROM inf_login WHERE department_id=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $delete_departments);
+        $stmt->execute();
         // حذف الأقسام
         $sql = "DELETE FROM departments WHERE department_id=?";
         $stmt = $conn->prepare($sql);

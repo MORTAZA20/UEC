@@ -1,4 +1,5 @@
 <?php
+
 if (isset($_POST['search'])) {
     include "../inc/conn.inc.php";
     $search = mysqli_real_escape_string($conn, $_POST['search']);
@@ -29,10 +30,18 @@ while ($row = $result->fetch_assoc()) {
                                         <input type="hidden" name="edit_id" value="<?php echo $row['university_id'];?>">
                                         <input type="submit" name="btn_edit" value="تعديل" class="edit-btn">
                                 </form>
+                                <?php
+                                
+
+                                if ($_SESSION["admin_user"] == "Admin") {
+
+                                ?>
                                 <form id="deleteForm" action="delete_universities" method="post" >
                                         <input type="hidden" name="del_id" value="<?php echo $row['university_id'];?>">
                                         <input type="submit" name="btn_delete" value="حذف" class="delete-btn">
-                                </form>
+                                </form>  
+                                <?php
+                                }?>
                         </div>
                 </td>
             </tr>

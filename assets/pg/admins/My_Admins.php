@@ -2,8 +2,8 @@
 require_once("inc/conn.inc.php");
 session_start();
 
-if (!$_SESSION["admin_user"]) {
-    header("Location: login");
+if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin") {
+    header("Location:login");
     exit();
 }
 ?>
@@ -49,7 +49,7 @@ if (!$_SESSION["admin_user"]) {
                         <th width="2%">#</th>
                         <th width="20%">اسم القسم</th>
                         <th class="text-right" width="20%">إسم المستخدم</th>
-                        <th class="text-right" width="40%">كلمة المرور</th>
+                        <th class="text-right" width="20%">النوع</th>
                         <th class="text-right" width="30%">التحكم</th>
                     </tr>
                 </thead>

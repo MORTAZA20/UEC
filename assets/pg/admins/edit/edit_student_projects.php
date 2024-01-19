@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if ($_SESSION["admin_user"] != "Admin") {
+    header("Location:login");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -118,7 +126,7 @@
                         if (!isset($_POST['edit_id'])) {
                             echo "";
                         } else {
-                            echo $row['project_description'];
+                            echo $project_id;
                         }
                         ?>" required>
                         <input type="text" style="margin: 0px 10px;" name="project_name" placeholder="اسم المشروع"

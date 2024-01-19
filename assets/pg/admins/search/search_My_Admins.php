@@ -19,7 +19,7 @@ while ($row = $result->fetch_assoc()) {
         <td><span class="badge"><?php echo $row["Admin_id"] ?></span></td>
         <td><?php echo $row["department_name"] ?></td>
         <td><?php echo $row["AdminUserName"] ?></td>
-        <td><?php echo $row["AdminPassword"] ?></td>
+        <td><?php echo $row["type"] ?></td>
         <td data-title="التحكم" class="text-center">
 
             <div class="control-buttons">
@@ -27,10 +27,12 @@ while ($row = $result->fetch_assoc()) {
                     <input type="hidden" name="edit_id" value="<?php echo $row['Admin_id']; ?>">
                     <input type="submit" name="btn_edit" value="تعديل" class="edit-btn">
                 </form>
+
+                <?php if ($_SESSION["admin_user"] == "Admin") {?>
                 <form id="deleteForm" action="delete_My_Admins" method="post">
                     <input type="hidden" name="del_id" value="<?php echo $row['Admin_id']; ?>">
                     <input type="submit" name="btn_delete" value="حذف" class="delete-btn">
-                </form>
+                </form><?php }?>
             </div>
 
         </td>

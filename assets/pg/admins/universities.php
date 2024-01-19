@@ -2,11 +2,10 @@
 require_once("inc/conn.inc.php");
 session_start();
 
-if (!$_SESSION["admin_user"]) {
-    header("Location: login");
+if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin") {
+    header("Location:login");
     exit();
 }
-
 include 'inc/navbar.php';
 
 ?>

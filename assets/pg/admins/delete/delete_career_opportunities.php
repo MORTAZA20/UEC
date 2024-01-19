@@ -2,8 +2,9 @@
 require_once("../inc/conn.inc.php");
 session_start();
 
-if (!$_SESSION["admin_user"]) {
-    header("Location: admin");
+if ($_SESSION["admin_user"] != "Admin") {
+    header("Location:login");
+    exit();
 }
 
 $delete_career_opportunities = $_POST["del_id"];

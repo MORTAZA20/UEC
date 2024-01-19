@@ -2,18 +2,13 @@
 require_once("../inc/conn.inc.php");
 session_start();
 
-if (!$_SESSION["admin_user"]) {
-    header("Location: login");
+if ($_SESSION["admin_user"] != "Admin") {
+    header("Location:login");
+    exit();
 }
-if (isset($_POST["btn_delete"])) {
-    $_SESSION['delete_universities'] = $_POST["del_id"];
-    $delete_universities = $_SESSION['delete_universities'];
-}
-
-
+$delete_universities =$_POST["del_id"];
 if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] == "true") {
     try {
-        $delete_universities = $_SESSION['delete_universities'];
         // حذف صور المشاريع المرتبطة بالاقسام
         $sql = "SELECT * FROM student_projects WHERE department_id IN (SELECT department_id FROM departments WHERE college_id IN (SELECT college_id FROM colleges WHERE university_id=?))";
         $stmt = $conn->prepare($sql);
@@ -82,6 +77,11 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] == "true") {
         $stmt->execute();
 
         $sql = "DELETE FROM top_students WHERE department_id IN (SELECT department_id FROM departments WHERE college_id IN (SELECT college_id FROM colleges WHERE university_id=?))";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $delete_universities);
+        $stmt->execute();
+
+        $sql = "DELETE FROM inf_login WHERE department_id IN (SELECT department_id FROM departments WHERE college_id IN (SELECT college_id FROM colleges WHERE university_id=?))";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $delete_universities);
         $stmt->execute();
@@ -188,7 +188,7 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] == "true") {
         </body>
 
         </html>
-    <?php
+<?php
 }
 function deleteDir($dirPath)
 {

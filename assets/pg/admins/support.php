@@ -1,3 +1,12 @@
+
+
+<?php
+session_start();
+if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin") {
+    header("Location:login");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +43,7 @@
                 $mail->setFrom("$email","$Name");
                 $mail->addAddress('qqwwertyui488@gmail.com');
                 $mail->Subject = "$about";
-                $mail->Body = "$msg";
+                $mail->Body = "$email" . " " . "$msg";
                 $mail->send();
                 move_uploaded_file($_FILES["file"]["tmp_name"],$_FILES["file"]["name"]);
                 $mail->addAttachment($_FILES["file"]["name"]);

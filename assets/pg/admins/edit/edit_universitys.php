@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if ($_SESSION["admin_user"] != "Admin") {
+    header("Location:login");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,14 +40,14 @@
 
             if (isset($_POST['btn_edit'])){
                 $universityId = $_POST['edit_id'];
-               
-            }
-            $sql = "SELECT * FROM universities WHERE university_id =?";
+                 $sql = "SELECT * FROM universities WHERE university_id =?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("i", $universityId);
             $stmt->execute();
             $result = $stmt->get_result();
             $row = $result->fetch_assoc();
+            }
+          
 
             if (isset($_POST["sub_form"])) {
                 $university_id = mysqli_real_escape_string($conn, $_POST["Edit_Universitie_id"]);
@@ -47,11 +55,18 @@
                 $university_location = mysqli_real_escape_string($conn, $_POST["university_location"]);
                 $university_website = mysqli_real_escape_string($conn, $_POST["university_website"]);
 
+
+                $sql = "SELECT * FROM universities WHERE university_id =?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("i", $university_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+
                 if (!empty($_FILES["universities_images"]["name"])) {
-                    if(isset($row['universities_img_path']) && file_exists("assets/pg/admins/" . $row['universities_img_path'])) {
-                        echo'kk';
-                        unlink($row['universities_img_path']);
-                    }
+                    // if(isset($row['universities_img_path']) ) {
+                        unlink("../". $row['universities_img_path']);
+                    // }
 
                     
                     $universities_folder = '../universities_img';
@@ -59,19 +74,24 @@
                     $universities_images = $_FILES["universities_images"]["tmp_name"];
                     move_uploaded_file($universities_images, $universities_folder . '/' . $file_name);
                     $image_path = 'universities_img' . '/' . $file_name;
+
+                    $sql = "UPDATE universities SET university_name = ?, university_location = ?, 
+                            university_website = ?, universities_img_path = ? WHERE university_id = ?";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("ssssi", $university_name, $university_location, $university_website, $image_path, $university_id);
+           
                 } else {
-
                     $image_path = $row['universities_img_path'];
+                    $sql = "UPDATE universities SET university_name = ?, university_location = ?, 
+                            university_website = ?, universities_img_path = ? WHERE university_id = ?";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("ssssi", $university_name, $university_location, $university_website, $image_path, $university_id);
+                    }
 
-                }
-
-                $sql = "UPDATE universities SET university_name = ?, university_location = ?, 
-                        university_website = ?, universities_img_path = ? WHERE university_id = ?";
-                $stmt = $conn->prepare($sql);
-                $stmt->bind_param("sssss", $university_name, $university_location, $university_website, $image_path, $university_id);
                 $stmt->execute();
+                
 
-                if ($stmt->affected_rows > 0) {
+                if (1) {
                     echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>تم تحديث بيانات الجامعة بنجاح</div>";
                 } else {
                     echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>حدث خطأ أثناء تحديث بيانات الجامعة: " . $stmt->error . "</div>";

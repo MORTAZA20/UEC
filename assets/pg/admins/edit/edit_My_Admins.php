@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if ($_SESSION["admin_user"] != "Admin") {
+    header("Location:login");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,15 +41,29 @@
                 $department_id = mysqli_real_escape_string($conn, $_POST["department_id"]);
                 $AdminUserName = mysqli_real_escape_string($conn, $_POST["UserName"]);
                 $AdminPassword = mysqli_real_escape_string($conn, $_POST["Password"]);
+            //    echo $Edit_Admin_id . '<br><br>';
+            //    echo $department_id . '<br><br>';
+            //    echo $AdminPassword . '<br><br>';
+            //    echo $AdminUserName . '<br><br>';
+                $timeTarget = 0.350; // 350 milliseconds
+                $cost = 10;
+                do {
+                    $cost++;
+                    $start = microtime(true);
+                    $AdminPassword_hash = password_hash($AdminPassword, PASSWORD_BCRYPT, ["cost" => $cost]);
+                    $end = microtime(true);
 
-                $sqlUP_login_credentials = "UPDATE inf_login SET department_id = '$department_id', AdminUserName = '$AdminUserName', AdminPassword = '$AdminPassword' WHERE Admin_id = '$Edit_Admin_id'";
-                $result_sqlUP_login_credentials = $conn->query($sqlUP_login_credentials);
+                } while (($end - $start) < $timeTarget);
 
-                if ($result_sqlUP_login_credentials) {
+                $sqlUP_inf_login = "UPDATE inf_login SET department_id = '$department_id', AdminUserName = '$AdminUserName', AdminPassword = '$AdminPassword_hash' WHERE Admin_id = '$Edit_Admin_id'";
+                $result_sqlUP_inf_login = $conn->query($sqlUP_inf_login);
+
+                if ($result_sqlUP_inf_login) {
                     echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>تم تعديل معلومات الادمن بنجاح</div>";
                 } else {
                     echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>هناك خطأ: " . $conn->error . "</div>";
                 }
+
             }
     
 
@@ -80,11 +102,11 @@
                         $conn->close();
                         ?>
                     </select>
-                    <input type="hidden" name="Edit_id" value="<?php if (!isset($_POST['edit_id'])) {
-                                                                    echo "";
-                                                                } else {
-                                                                    echo $Edit_id;
-                                                                } ?>" required>
+                    <input type="hidden" name="Edit_id" value="
+                    <?php if (!isset($_POST['edit_id'])) {
+                    echo "";
+                    } else {
+                    echo $edit_id;} ?>" required>
                     <input type="text" name="UserName" placeholder="أسم المستخدم" style=" margin-bottom: 10px ;" value="<?php if (!isset($_POST['edit_id'])) {
                                                                                                                             echo "";
                                                                                                                         } else {

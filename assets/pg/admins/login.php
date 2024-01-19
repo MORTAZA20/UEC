@@ -1,15 +1,3 @@
-<?php
-
-require_once("inc/conn.inc.php");
-
-session_start();
-
-if (isset($_SESSION["admin_user"])) {
-    header("Location: home");
-    exit();
-}
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,32 +11,53 @@ if (isset($_SESSION["admin_user"])) {
     <div class="login-box">
         <div class="login-title">تسجيل الدخول</div>
         <?php
-
-        if (isset($_POST["sub_log"])) {
+        require_once("inc/conn.inc.php");
+        if (isset($_POST["sub_log"])) { 
             $user_login = htmlspecialchars($_POST["user_log"]);
             $pass_login = htmlspecialchars($_POST["pass_log"]);
 
-            $sql = "SELECT * FROM login_credentials WHERE id='1'";
-            $result = $conn->query($sql);
 
-            $row = $result->fetch_assoc();
+                $timeTarget = 0.350; // 350 milliseconds
+                $cost = 10;
+                do {
+                $cost++;
+                $start = microtime(true);
+                $AdminPassword_hash = password_hash($pass_login, PASSWORD_BCRYPT, ["cost" => $cost]);
+                $end = microtime(true);
+                } while (($end - $start) < $timeTarget);
 
-            $admin_user = $row["AdminUserName"];
-            $admin_pass = $row["AdminPassword"];
+                $stmt = $conn->prepare("SELECT * FROM inf_login WHERE AdminUserName=?");
+                $stmt->bind_param("s", $user_login);
+                $stmt->execute();
+                $result = $stmt->get_result();
 
-            if (empty($user_login) || empty($pass_login)) {
-                echo "<div style='color: red; font-size: 18px; font-weight: 500; text-align: center;'>المرجوا ملئ الفراغات</div>";
-            }
-            else {
-                if ($user_login !== $admin_user || $pass_login !== $admin_pass) {
-                    echo "<div style='color: red; font-size: 18px; font-weight: 500; text-align: center;'>المعلومات التي ادخلت غير صحيحة</div>";
-                }
-                else {
-                    $_SESSION["admin_user"] = $user_login;
+            if ($result->num_rows > 0) {
+
+                $row = $result->fetch_assoc();
+                if(password_verify("$pass_login", $row["AdminPassword"])) {
+                
+                $type = $row["type"];
+                $department_id = $row['department_id'];
+                if ($type == "Admin" || $type == "SubAdmin" ) {
+                    
+                    session_start();
+                    $_SESSION["admin_user"] = $type ;
                     header("Location: home");
+                }else{
+                    session_start();
+                    $_SESSION["admin_user"] = $type;
+                    $_SESSION["department_id"] = $department_id ;
+                    header("Location: ShowDepartment");
                 }
+
+            }}    
+            else {
+                  echo "<div style='color: red; font-size: 18px; font-weight: 500; text-align: center;'>المعلومات التي ادخلت غير صحيحة</div>";
             }
         }
+           
+        
+        $conn->close();
         
         ?>
 
