@@ -1,16 +1,4 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوصلة التعليم الجامعي |  تسجيل الدخول</title>
-    <link rel="stylesheet" href="style">
-</head>
-<body style="background-color: #333; color: white; background-image: url('bg11'); background-size: cover; background-repeat: no-repeat;">
-    <div class="login-box">
-        <div class="login-title">تسجيل الدخول</div>
-        <?php
+<?php
         require_once("inc/conn.inc.php");
         if (isset($_POST["sub_log"])) { 
             $user_login = htmlspecialchars($_POST["user_log"]);
@@ -61,13 +49,47 @@
         
         ?>
 
-        <div class="login-form">
-            <form action="" method="post">
-                <input type="text" name="user_log" placeholder="إسم المستخدم" required>
-                <input type="password" name="pass_log"  placeholder="كلمة المرور" required>
-                <input type="submit" name="sub_log" value="دخول">
-            </form>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/0b13675ea3.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- custom css -->
+    <link rel="stylesheet" href="./assets/pg/admins/css/stylelogin.css">
+    <title>بوصلة التعليم الجامعي |  تسجيل الدخول</title>
+
+</head>
+<body>
+    <div class="login-form-cont">
+        
+        <form action="" method="post">
+            <div class="img-logo"><img src="LOGO" alt=""></div>
+            <span>أسم المستخدم</span>
+            <input type="text" class="box" name="user_log"  required>
+            <span>كلمة المرور</span>
+            <input type="password" class="box" name="pass_log" required>
+            <div class="checkbox">
+                <input type="checkbox">
+                <label for="remeber-me">تذكرني</label>
+            </div>
+            <button type="submit" name="sub_log" class="btn-active">تسجيل</button>
+            <div class="hrsp">
+                <hr><span>هل تواجهة بعض المشاكل؟</span>
+                <hr>
+            </div>
+            
+            <div class="login-resert">
+                <p><a href="#">نسيت كلمة المرور؟</a></p>
+            </div>
+        </form>
     </div>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    </body>
 </html>
