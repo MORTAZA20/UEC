@@ -3,7 +3,9 @@ RewriteEngine on
 RewriteRule ^style ./assets/pg/admins/css/style.css [NC,L]
 
 RewriteRule ^bg1 ./assets/pg/admins/img/bg1.png [L]
-RewriteRule ^close ./assets/pg/admins/img/close.png [L]
+
+
+RewriteRule ^login2 ./assets/pg/admins/login2.php [NC,L]
 
 RewriteRule ^login ./assets/pg/admins/login.php [NC,L]
 RewriteRule ^logout ./assets/pg/admins/logout.php [NC,L]
