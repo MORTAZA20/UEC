@@ -12,7 +12,16 @@
                <div onclick="window.open('student_projects' , '_self')">مشاريع الطلبة</div>
                <div onclick="window.open('career_opportunities' , '_self')">فرص العمل المستقبلية</div>
             </div>
+            <?php
+            
+            if (isset($_SESSION["admin_user"])) {
+                if ($_SESSION["admin_user"] == "Admin") {
+            ?>
             <div class="item-bar" onclick="window.open('My_Admins' , '_self')">الادمنية</div>
+            <?php
+            }
+        }
+            ?>
             <div class="item-bar" onclick="window.open('support' , '_self')">الدعم</div>
 
 
@@ -30,14 +39,7 @@
         }
 </script>    
 
-            <?php
-        
-            if  (isset($_SESSION["admin_user"])){
-                ?>
-
-                <?php 
-                }
-                ?>
+            
 
 
 

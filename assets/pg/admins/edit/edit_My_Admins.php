@@ -35,7 +35,16 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
             </div>
             <?php
             include '../inc/conn.inc.php';
+            if (isset($_POST['btn_edit'])) {
+                $edit_id = $_POST['edit_id'];
 
+                $sql = "SELECT * FROM inf_login WHERE Admin_id =?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("i", $edit_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+            }
             if (isset($_POST["sub_form"])) {
                 $Admin_id = mysqli_real_escape_string($conn, $_POST["Admin_id"]);
                 $department_id = mysqli_real_escape_string($conn, $_POST["department_id"]);
@@ -72,16 +81,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
 
                 $stmt->close();
             }
-            if (isset($_POST['btn_edit'])) {
-                $Edit_id = $_POST['edit_id'];
-
-                $sql = "SELECT * FROM inf_login WHERE Admin_id =?";
-                $stmt = $conn->prepare($sql);
-                $stmt->bind_param("i", $Edit_id);
-                $stmt->execute();
-                $result = $stmt->get_result();
-                $row = $result->fetch_assoc();
-            }
+            
             $conn->close();
             ?>
 
@@ -109,7 +109,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                         if (!isset($_POST['edit_id'])) {
                             echo "";
                         } else {
-                            echo $Edit_id;
+                            echo $edit_id;
                         }?>" required>
                     <input type="text" name="AdminUserName" placeholder="أسم المستخدم" style=" margin-bottom: 10px ;"
                     value="<?php

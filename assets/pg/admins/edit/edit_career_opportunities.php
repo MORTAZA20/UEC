@@ -39,7 +39,15 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
         <?php
 
         include '../inc/conn.inc.php';
-
+        if (isset($_POST['btn_edit'])) {
+            $edit_id = $_POST['edit_id']; 
+            $sql = "SELECT * FROM career_opportunities WHERE opportunity_id =?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("i", $edit_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+        }
         if (isset($_POST["sub_form"])) {
 
             //mysqli_real_escape_string للحماية من الهجمات
@@ -49,32 +57,31 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
             $salary_range = mysqli_real_escape_string($conn, $_POST["salary_range"]);
             $job_description = mysqli_real_escape_string($conn, $_POST["job_description"]);
 
+            
+                $sql = "SELECT * FROM career_opportunities WHERE opportunity_id =?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("i", $opportunity_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
 
-
-            $sqlTest = "SELECT opportunity_id  FROM career_opportunities WHERE opportunity_id  = '$opportunity_id'";
-            $resultTest = $conn->query($sqlTest);
-
-
-            $sqlUP_career_opportunities = "UPDATE career_opportunities SET department_id='$department_id', job_title='$job_title',salary_range='$salary_range',job_description='$job_description' WHERE opportunity_id='$opportunity_id'";
-            $result3 = $conn->query($sqlUP_career_opportunities);
-            if ($result3) {
-                echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>تم تعديل الوظيفة بنجاح</div>";
-            } else {
-                echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>هنالك خطأ: " . $conn->error . "</div>";
-            }
+                if ($row['department_id'] == $department_id   
+                &&  $row['job_title'] == $job_title
+                &&  $row['salary_range'] == $salary_range
+                &&  $row['job_description'] == $job_description) {
+                    echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>لم يتم تحديث بيانات الوظيفة </div>";
+                }else{
+                    $sqlUP = "UPDATE career_opportunities SET department_id= ?, job_title= ?,salary_range= ?,job_description= ? WHERE opportunity_id= ?";
+                    $stmt = $conn->prepare($sqlUP);
+                    $stmt->bind_param("ssssi", $department_id, $job_title, $salary_range, $job_description, $opportunity_id);
+                    $stmt->execute();
+                    if ($stmt->affected_rows > 0) {
+                        echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>تم تعديل الوظيفة بنجاح</div>";
+                    } else {
+                        echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>هنالك خطأ: " . $conn->error . "</div>";
+                    }
+                }
         }
-        if (isset($_POST['btn_edit'])) {
-            $Edit_opportunity_id = $_POST['edit_id'];
-        }
-
-        $sql_career_opportunities = "SELECT * FROM career_opportunities WHERE opportunity_id =?";
-        $stmt = $conn->prepare($sql_career_opportunities);
-        $stmt->bind_param("i", $Edit_opportunity_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-
-
         ?>
         <script src="jquery-3.6.0.min"></script>
         <script src="Get_ScriptFunction"></script>
@@ -107,12 +114,9 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                     </div>
                 </div>
 
-
-
-
                 <div class="custom-column" style="margin-bottom: 10px;">
                     <input type="hidden" name="opportunity_id" placeholder="معرف الوظيفة" value="<?php 
-                                 if (!isset($_POST['edit_id'])){echo "";}else{echo $Edit_opportunity_id;}?>"required>
+                                 if (!isset($_POST['edit_id'])){echo "";}else{echo $edit_id;}?>"required>
                     <input type="text" name="job_title" placeholder="العنوان الوظيفي" value="<?php 
                                  if (!isset($_POST['edit_id'])){echo "";}else{echo $row['job_title'];}?>"required>
                     <input type="text" name="salary_range" placeholder="مقدار الراتب" value="<?php 

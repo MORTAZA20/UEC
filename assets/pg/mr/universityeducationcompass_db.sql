@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 12, 2024 at 09:34 PM
+-- Generation Time: Jan 20, 2024 at 07:45 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -55,17 +55,11 @@ CREATE TABLE `colleges` (
 --
 
 INSERT INTO `colleges` (`college_id`, `college_name`, `college_description`, `required_GPA`, `university_id`, `colleges_img_path`) VALUES
-('12312', 'العنب', '', 78, '878', 'colleges_img/لقطة شاشة 2023-10-10 225147.png'),
-('332', '32', '', 323, 'kwe2', 'colleges_img/caesar-cipher.png'),
-('4456', 'كلية التربية للعلوم الصرفة2', '', 9, '1', 'colleges_img/اسئلة شبكات1.jpg'),
-('44569098', 'كلية التربية للعلوم الصرفة', '', 89, 'kwe2', 'colleges_img/اسئلة شبكات1.jpg'),
-('45', 'الببض', '', 90, '878', 'colleges_img/12.png'),
+('332', '323', '', 323, '1', 'colleges_img/computer.png'),
+('44568888', '888', '', 88, '1', 'colleges_img/computer.png'),
 ('5656', '65656', '', 56656, '1', 'colleges_img/data-mining.png'),
-('787', '78788', '<p>بلتايبايائيبلئيبسلئيسباليقابيبلايبليبايابيبايباليبا</p>\r\n', 7878, '1', 'colleges_img/اسئلة شبكات2.jpg'),
-('789', 'العنب', '', 89, 'kwe28', 'colleges_img/اسئلة شبكات1.jpg'),
-('986545', '5dd', '', 55, '234', 'colleges_img/الاحرف.png'),
-('9865499', 'كلية التربية للعلوم الصرفة', '', 3, '1', 'colleges_img/اسئلة شبكات2.jpg'),
-('FGFGF', 'كلية التربية للعلوم الصرفة1DFG', '<p>777777777777777777777777777777777777777777777777777</p>\\r\\n', 2147483647, '1', 'colleges_img/2022 شبكات.jpg');
+('787', '78788', '<p>بلتايبايائيبلئيبسلئيسباليقابيبلايبليبايابيبايباليبا</p>\\r\\n', 7878, '1', 'colleges_img/caesar-cipher.png'),
+('9865499', 'كلية التربية للعلوم الصرفة', '', 3, '1', 'colleges_img/اسئلة شبكات2.jpg');
 
 -- --------------------------------------------------------
 
@@ -106,29 +100,31 @@ CREATE TABLE `departments` (
 --
 
 INSERT INTO `departments` (`department_id`, `department_name`, `college_id`, `department_description`, `scientific_department_message`, `required_GPA`, `evening_GPA`, `parallel_GPA`, `parallel_study_fees`, `evening_study_fees`, `departments_img_path`) VALUES
-('2278', 'الحاسبات1', '4456', '', '', 88, 88, 8, 88, 8, 'departments_img/الاحرف.png'),
-('22781', '1', '4456', '', '', 11, 1, 1, 1, 11, 'departments_img/operative-system2.png'),
-('33', '333', '4456', '', '', 33, 3, 3, 3, 3, 'departments_img/LOGO.png');
+('2278', 'الحاسبات', '9865499', '', '', 4, 44, 4, 4, 4, 'departments_img/LOGO1.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `login_credentials`
+-- Table structure for table `inf_login`
 --
 
-CREATE TABLE `login_credentials` (
-  `id` int(11) NOT NULL,
+CREATE TABLE `inf_login` (
+  `Admin_id` int(200) NOT NULL,
   `department_id` varchar(100) DEFAULT NULL,
   `AdminUserName` varchar(100) DEFAULT NULL,
-  `AdminPassword` varchar(1000) DEFAULT NULL
+  `AdminPassword` varchar(1000) DEFAULT NULL,
+  `type` varchar(50) NOT NULL,
+  `RegistrationData` date DEFAULT NULL,
+  `RegistrationTime` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `login_credentials`
+-- Dumping data for table `inf_login`
 --
 
-INSERT INTO `login_credentials` (`id`, `department_id`, `AdminUserName`, `AdminPassword`) VALUES
-(1, NULL, 'mr', '1234');
+INSERT INTO `inf_login` (`Admin_id`, `department_id`, `AdminUserName`, `AdminPassword`, `type`, `RegistrationData`, `RegistrationTime`) VALUES
+(43, NULL, '1', '$2y$13$h2cewiz9DbXGKAcUpd1t5OaNyN.jTDnyr.x7p/bfT/ymYF1HdyTK.', 'Admin', '2024-01-20', '09:23:00'),
+(51, '2278', '2', '$2y$13$Q7MXgJXrN4IGmnx7VDAOXuR3mr1ZMqiK.6dZJpHztV8W4pYQQA2rm', 'department', '2024-01-20', '09:23:00');
 
 -- --------------------------------------------------------
 
@@ -146,14 +142,6 @@ CREATE TABLE `student_projects` (
   `student_projects_img_path` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `student_projects`
---
-
-INSERT INTO `student_projects` (`project_id`, `department_id`, `project_name`, `project_description`, `project_supervisor`, `student_name`, `student_projects_img_path`) VALUES
-('66 ', '22781', '111', '', '8', 'مرتضى', 'student_projects_img/اسئلة شبكات2.jpg'),
-('DDD ', '2278', 'D', '', 'D', 'مرتضى', 'student_projects_img/الاحرف.png');
-
 -- --------------------------------------------------------
 
 --
@@ -168,14 +156,6 @@ CREATE TABLE `top_students` (
   `Cumulative_Rating` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `top_students`
---
-
-INSERT INTO `top_students` (`student_id`, `department_id`, `student_name`, `Graduation_Year`, `Cumulative_Rating`) VALUES
-('456 ', '22781', 'مرتضى26', '2023-11-26', 67),
-('4567 ', '2278', '777', '2023-11-29', 77);
-
 -- --------------------------------------------------------
 
 --
@@ -187,7 +167,7 @@ CREATE TABLE `universities` (
   `university_name` varchar(100) NOT NULL,
   `university_location` varchar(100) DEFAULT NULL,
   `university_website` varchar(255) DEFAULT NULL,
-  `universities_img_path` varchar(255) NOT NULL
+  `universities_img_path` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -195,10 +175,7 @@ CREATE TABLE `universities` (
 --
 
 INSERT INTO `universities` (`university_id`, `university_name`, `university_location`, `university_website`, `universities_img_path`) VALUES
-('1', 'ك', 'البصرة', 'صقث', 'universities_img/اسئلة شبكات2.jpg'),
-('234', 'البصرة', '22', '43', 'universities_img/الاحرف.png'),
-('878', 'مرتضى', 'بلا', 'بلا', 'universities_img/اسئلة شبكات2.jpg'),
-('kwe2', 'البصرة', 'البصرة', 'sdfg', 'universities_img/1.png'),
+('1', 'ك1', 'البصرة', 'صقث1', 'universities_img/LOGO1.jpg'),
 ('kwe28', 'حيدر', 'بل', 'بلا', 'universities_img/photo_2023-11-11_13-16-29.jpg');
 
 --
@@ -234,10 +211,10 @@ ALTER TABLE `departments`
   ADD KEY `college_id` (`college_id`);
 
 --
--- Indexes for table `login_credentials`
+-- Indexes for table `inf_login`
 --
-ALTER TABLE `login_credentials`
-  ADD PRIMARY KEY (`id`),
+ALTER TABLE `inf_login`
+  ADD PRIMARY KEY (`Admin_id`),
   ADD KEY `department_id` (`department_id`);
 
 --
@@ -265,10 +242,10 @@ ALTER TABLE `universities`
 --
 
 --
--- AUTO_INCREMENT for table `login_credentials`
+-- AUTO_INCREMENT for table `inf_login`
 --
-ALTER TABLE `login_credentials`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+ALTER TABLE `inf_login`
+  MODIFY `Admin_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- Constraints for dumped tables
@@ -299,10 +276,10 @@ ALTER TABLE `departments`
   ADD CONSTRAINT `departments_ibfk_1` FOREIGN KEY (`college_id`) REFERENCES `colleges` (`college_id`);
 
 --
--- Constraints for table `login_credentials`
+-- Constraints for table `inf_login`
 --
-ALTER TABLE `login_credentials`
-  ADD CONSTRAINT `login_credentials_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `departments` (`department_id`);
+ALTER TABLE `inf_login`
+  ADD CONSTRAINT `inf_login_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `departments` (`department_id`);
 
 --
 -- Constraints for table `student_projects`

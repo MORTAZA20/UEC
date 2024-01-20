@@ -45,18 +45,25 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                 $mail->setFrom("$email","$Name");
                 $mail->addAddress('qqwwertyui488@gmail.com');
                 $mail->Subject = "$about";
-                $mail->Body = "$email" . " " . "$msg";
-                $mail->send();
-                move_uploaded_file($_FILES["file"]["tmp_name"],$_FILES["file"]["name"]);
-                $mail->addAttachment($_FILES["file"]["name"]);
+                $mail->Body = "$email" . "<br><br><br>" . "$msg";
+                
+                if(!empty($_FILES["file"]["name"])) {
+                    move_uploaded_file($_FILES["file"]["tmp_name"],$_FILES["file"]["name"]);
+                    $mail->addAttachment($_FILES["file"]["name"]);
+                    
+                }else{
+                    $mail->send();
+                }
+                
                 
 
                 if (!$mail->send()) {
                     echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>لم يتم ارسال الرساله هنالك خطأ</div>";
                 } else {
                     echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>تم ارسال الرساله بنجاح</div>"; 
-                    unlink($_FILES["file"]["name"]);
-                }
+                    if(!empty($_FILES["file"]["name"])){
+                        unlink($_FILES["file"]["name"]);}
+            }
             }
             
 

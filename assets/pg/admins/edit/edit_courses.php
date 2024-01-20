@@ -40,6 +40,15 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
 
             include '../inc/conn.inc.php';
 
+            if (isset($_POST['btn_edit'])){
+                $edit_id = $_POST['edit_id'];
+                $sql = "SELECT * FROM courses WHERE course_id =?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("i", $edit_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+            }
             if (isset($_POST["sub_form"])) {
 
                 //mysqli_real_escape_string للحماية من الهجمات
@@ -48,27 +57,33 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                 $course_name = mysqli_real_escape_string($conn, $_POST["course_name"]);
                 $course_stage = mysqli_real_escape_string($conn, $_POST["course_stage"]);
                 $course_description = mysqli_real_escape_string($conn, $_POST["course_description"]);
-
-              
-                $sqlUP_courses= "UPDATE courses SET department_id='$department_id' ,course_name = '$course_name',course_stage='$course_stage' ,course_description='$course_description' WHERE course_id = '$course_id'";
-                $result_UP_courses = $conn->query($sqlUP_courses);
-                if ($result_UP_courses) {
+                
+               
+                    
+                    $sql = "SELECT * FROM courses WHERE course_id =?";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("i", $course_id);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    $row = $result->fetch_assoc();
+                
+                if( $row['department_id'] == $department_id 
+                &&  $row['course_name'] == $course_name
+                &&  $row['course_stage'] == $course_stage
+                &&  $row['course_description'] == $course_description) {
+                    echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>لم يتم تحديث بيانات المادة </div>";
+                }else{
+                $sqlUP_courses = "UPDATE courses SET department_id= ? ,course_name = ?,course_stage= ?,course_description= ? WHERE course_id = ?";
+                $stmt = $conn->prepare($sqlUP_courses);
+                $stmt->bind_param("ssssi", $department_id, $course_name, $course_stage, $course_description, $course_id);
+                $stmt->execute();
+                if ($stmt->affected_rows > 0) {
                     echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>تم تعديل معلومات المادة الدراسية بنجاح</div>";
                 } else {
                     echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>هنالك خطأ: " . $conn->error . "</div>";
                 }
                 }
-            
-                if (isset($_POST['btn_edit'])){
-                    $Edit_course_id = $_POST['edit_id'];
-                }
-              
-                $sql = "SELECT * FROM courses WHERE course_id =?";
-                $stmt = $conn->prepare($sql);
-                $stmt->bind_param("i", $Edit_course_id);
-                $stmt->execute();
-                $result = $stmt->get_result();
-                $row = $result->fetch_assoc();
+            }  
             ?>
             <script src="jquery-3.6.0.min"></script>
             <script src="Get_ScriptFunction"></script>
@@ -107,7 +122,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                     <div class="custom-column" style="margin-bottom: 10px;">
                         <input type="hidden" name="course_id" placeholder="معرف المادة" 
                         value="<?php
-                                 if (!isset($_POST['edit_id'])){echo "";}else{echo $Edit_course_id;}?>" required>
+                                 if (!isset($_POST['edit_id'])){echo "";}else{echo $edit_id;}?>" required>
                         <input type="text" name="course_name" placeholder="اسم المادة"
                         value="<?php if (!isset($_POST['edit_id'])){echo "";}else{echo $row['course_name'];} ?>" required>
                         <select id="fruit" name="course_stage" class="fruit" required>

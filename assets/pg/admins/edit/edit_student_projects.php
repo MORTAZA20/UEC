@@ -38,7 +38,16 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
             <?php
 
             include '../inc/conn.inc.php';
+            if (isset($_POST['btn_edit'])) {
+                $edit_id = $_POST['edit_id'];
 
+                $sql = "SELECT * FROM student_projects WHERE project_id =?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("i", $edit_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+            }
             if (isset($_POST["sub_form"])) {
 
                 //mysqli_real_escape_string للحماية من الهجمات
@@ -50,43 +59,49 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                 $project_description = mysqli_real_escape_string($conn, $_POST["project_description"]);
 
 
-                if ($_FILES['student_projects_images']['type'] == 'image/png' || $_FILES['student_projects_images']['type'] == 'image/jpeg') {
+                $sql = "SELECT * FROM student_projects WHERE project_id =?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("i", $Edit_project_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+
+                if (empty($_FILES["student_projects_images"]["name"]) 
+                && $row['department_id'] == $department_id 
+                && $row['student_name'] == $student_name
+                && $row['project_name'] == $project_name
+                && $row['project_supervisor'] == $project_supervisor
+                && $row['project_description'] == $project_description) {
+                    echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>لم يتم تحديث بيانات المشروع </div>";
+                }else{
+                
+                if (!empty($_FILES["student_projects_images"]["name"])) {
+                        unlink("../". $row['student_projects_img_path']);
 
                     $student_projects_folder = '../student_projects_img';
-
-                    if (!file_exists($student_projects_folder)) {
-                        mkdir($student_projects_folder, 0777, true);
-                        chmod($student_projects_folder, 0777);
-                    }
                     $student_projects_images = $_FILES["student_projects_images"]["tmp_name"];
                     $file_name = $_FILES["student_projects_images"]["name"];
                     move_uploaded_file($student_projects_images, $student_projects_folder . '/' . $file_name);
                     $image_path = 'student_projects_img' . '/' . $file_name;
 
+                }else{
+                    $image_path = $row['student_projects_img_path'];
+                }
+                   $sqlUP = "UPDATE student_projects SET department_id = ?,student_name = ?,project_name=?,
+                   project_supervisor= ? , student_projects_img_path= ? ,project_description=''
+                   WHERE project_id = ?";
 
-                   $sqlUP_student_projects = "UPDATE student_projects SET department_id = '$department_id',student_name = '$student_name',project_name='$project_name',
-                   project_supervisor='$project_supervisor',student_projects_img_path='$image_path',project_description='$project_description'
-                   WHERE project_id = '$Edit_project_id'";
-                    $result_sqlUP_student_projects = $conn->query($sqlUP_student_projects);
+                   $stmt = $conn->prepare($sqlUP);
+                   $stmt->bind_param("ssssssi", $department_id, $student_name, $project_name, $project_supervisor, $image_path, $project_description, $Edit_project_id);
+                   $stmt->execute();
 
-                    if ($result_sqlUP_student_projects) {
+                    if ($stmt->affected_rows > 0){
                         echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>تم تعديل معلومات المشروع بنجاح</div>";
                     } else {
                         echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>هنالك خطأ: " . $conn->error . "</div>";
                     }
                 }
             }
-            if (isset($_POST['btn_edit'])) {
-                $project_id = $_POST['edit_id'];
-
-                $sql = "SELECT * FROM student_projects WHERE project_id =?";
-                $stmt = $conn->prepare($sql);
-                $stmt->bind_param("i", $project_id);
-                $stmt->execute();
-                $result = $stmt->get_result();
-                $row = $result->fetch_assoc();
-            }
-
             ?>
             <script src="jquery-3.6.0.min"></script>
             <script src="Get_ScriptFunction.js"></script>
@@ -127,7 +142,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                         if (!isset($_POST['edit_id'])) {
                             echo "";
                         } else {
-                            echo $project_id;
+                            echo $edit_id;
                         }
                         ?>" required>
                         <input type="text" style="margin: 0px 10px;" name="project_name" placeholder="اسم المشروع"
@@ -138,24 +153,23 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                                 echo $row['project_name'];
                             }
                             ?>" required>
-                    </div>
 
-                    <div class="custom-column" style="margin-bottom: 10px;">
                         <input type="text" name="student_name" placeholder="صاحب المشروع" value="<?php
-                        if (!isset($_POST['edit_id'])) {
-                            echo "";
-                        } else {
-                            echo $row['student_name'];
-                        }
+                                if (!isset($_POST['edit_id'])) {
+                                    echo "";
+                                } else {
+                                    echo $row['student_name'];
+                                }
                         ?>" required>
                         <input type="text" name="project_supervisor" placeholder="المشرف على المشروع" value="<?php
-                        if (!isset($_POST['edit_id'])) {
-                            echo "";
-                        } else {
-                            echo $row['project_supervisor'];
-                        }
+                                if (!isset($_POST['edit_id'])) {
+                                    echo "";
+                                } else {
+                                    echo $row['project_supervisor'];
+                                }
                         ?>" required>
                     </div>
+
                     <p>نبذه عن المشروع</p>
                     <textarea name="project_description" id="editor1" placeholder="الوصف">
                     <?php
