@@ -38,6 +38,18 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
             <?php
             include '../inc/conn.inc.php';
 
+            if (isset($_POST['btn_edit'])) {
+                $edit_id = $_POST['edit_id'];
+                $sql = "SELECT c.*, u.university_id, u.university_name
+                FROM colleges c 
+                JOIN universities u ON c.university_id = u.university_id
+                WHERE c.college_id = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("i", $edit_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+            }
             if (isset($_POST["sub_form"])) {
 
                 $university_id = mysqli_real_escape_string($conn, $_POST["university_id"]);
@@ -46,20 +58,32 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                 $required_GPA = mysqli_real_escape_string($conn, $_POST["required_GPA"]);
                 $college_description = mysqli_real_escape_string($conn, $_POST["college_description"]);
 
-                if ($_FILES['colleges_images']['type'] === 'image/png' || $_FILES['colleges_images']['type'] === 'image/jpeg') {
-                        
+                $sql = "SELECT * FROM colleges WHERE college_id =?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("i", $college_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+
+                if (empty($_FILES["universities_images"]["name"]) 
+                && $row['university_id'] == $university_id 
+                && $row['college_name'] == $college_name
+                && $row['required_GPA'] == $required_GPA
+                && $row['college_description'] == $college_description) {
+                    echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>لم يتم تحديث بيانات الكلية </div>";
+                }else{
+                    if (!empty($_FILES["colleges_images"]["name"])) {
+                        unlink("../". $row['colleges_img_path']);
+
                     $colleges_folder = '../colleges_img';
-                    if (!file_exists($colleges_folder)) {
-                        mkdir($colleges_folder, 0777, true);
-                        chmod($colleges_folder, 0777);
-                    }
-                    ini_set('upload_max_filesize', '50M');
-                    ini_set('post_max_size', '50M');
                     $file_name = $_FILES["colleges_images"]["name"];
                     $colleges_images = $_FILES["colleges_images"]["tmp_name"];
                     move_uploaded_file($colleges_images, $colleges_folder . '/' . $file_name);
                     $image_path = 'colleges_img' . '/' . $file_name;
+                    }else{
+                        $image_path = $row['colleges_img_path'];
 
+                    }
                     $sql = "UPDATE colleges SET university_id = ?, college_name = ?, required_GPA = ?, 
                     college_description = ?, colleges_img_path = ? WHERE college_id = ?";
                     $stmt = $conn->prepare($sql);
@@ -71,23 +95,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                     } else {
                         echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>حدث خطأ أثناء تعديل بيانات الجامعة: " . $stmt->error . "</div>";
                     }
-                } else {
-                    echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>يرجى تحديد ملف صورة صحيح (PNG أو JPEG)</div>";
-                }
-            }
-
-
-            if (isset($_POST['btn_edit'])) {
-                $collegeId = $_POST['edit_id'];
-            }
-       
-            $sql = "SELECT * FROM colleges WHERE college_id =?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("i", $collegeId);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $row = $result->fetch_assoc();
-
+                }}
 
             ?>
             <div class="container-form">
@@ -113,11 +121,11 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
 
                     <div class="custom-column" style="margin-bottom: 10px;">
                         <input type="hidden" name="Edit_college_id" placeholder="معرف الكلية" value="<?php 
-                                 if (!isset($_POST['edit_id'])){echo "";}else{echo $collegeId;}?>"required>
+                                 if (!isset($_POST['edit_id'])){echo "";}else{echo $edit_id;}?>"required>
                         <input type="text" name="college_name" placeholder="اسم الكلية" value="<?php 
-                                 if (!isset($_POST['edit_id'])){echo "";}else{echo  $row['college_name'];}?>"required>
+                                 if (!isset($_POST['edit_id'])){echo "";}else{echo $row['college_name'];}?>"required>
                         <input type="number" name="required_GPA"placeholder="المعدل" value="<?php 
-                                 if (!isset($_POST['edit_id'])){echo "";}else{echo  $row['required_GPA'];}?>" required>
+                                 if (!isset($_POST['edit_id'])){echo "";}else{echo $row['required_GPA'];}?>" required>
                     </div>
 
                     <div class="container-img">   

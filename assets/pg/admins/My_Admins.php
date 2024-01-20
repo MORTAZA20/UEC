@@ -47,10 +47,13 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
             <table class="table teble-bordered" id="table-data" role="table">
                 <thead>
                     <tr>
-                        <th width="2%">#</th>
-                        <th width="20%">اسم القسم</th>
-                        <th class="text-right" width="20%">إسم المستخدم</th>
-                        <th class="text-right" width="20%">النوع</th>
+                        <th width="5%">المعرف</th>
+                        <th width="15%">اسم القسم</th>
+                        <th class="text-right" width="15%">إسم المستخدم</th>
+                        <th class="text-right" width="15%">تاريخ تسجيل الدخول</th>
+                        <th class="text-right" width="15%">وقت تسجيل الدخول</th>
+                        <th class="text-right" width="10%">النوع</th>
+
                         <th class="text-right" width="30%">التحكم</th>
                     </tr>
                 </thead>

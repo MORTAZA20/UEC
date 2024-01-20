@@ -37,16 +37,16 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
 
             <?php
             include '../inc/conn.inc.php';
-            $row = array();
+           
 
             if (isset($_POST['btn_edit'])){
                 $universityId = $_POST['edit_id'];
-                 $sql = "SELECT * FROM universities WHERE university_id =?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("i", $universityId);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $row = $result->fetch_assoc();
+                $sql = "SELECT * FROM universities WHERE university_id =?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("i", $universityId);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
             }
           
 
@@ -64,40 +64,40 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                 $result = $stmt->get_result();
                 $row = $result->fetch_assoc();
 
+                if (empty($_FILES["universities_images"]["name"]) 
+                && $row['university_name'] == $university_name 
+                && $row['university_location'] == $university_location
+                && $row['university_website'] == $university_website) {
+                    echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>لم يتم تحديث بيانات الجامعة </div>";
+                }else{
+                
                 if (!empty($_FILES["universities_images"]["name"])) {
-                    // if(isset($row['universities_img_path']) ) {
                         unlink("../". $row['universities_img_path']);
-                    // }
 
-                    
                     $universities_folder = '../universities_img';
                     $file_name = $_FILES["universities_images"]["name"];
                     $universities_images = $_FILES["universities_images"]["tmp_name"];
                     move_uploaded_file($universities_images, $universities_folder . '/' . $file_name);
                     $image_path = 'universities_img' . '/' . $file_name;
 
-                    $sql = "UPDATE universities SET university_name = ?, university_location = ?, 
-                            university_website = ?, universities_img_path = ? WHERE university_id = ?";
-                    $stmt = $conn->prepare($sql);
-                    $stmt->bind_param("ssssi", $university_name, $university_location, $university_website, $image_path, $university_id);
-           
                 } else {
                     $image_path = $row['universities_img_path'];
-                    $sql = "UPDATE universities SET university_name = ?, university_location = ?, 
-                            university_website = ?, universities_img_path = ? WHERE university_id = ?";
-                    $stmt = $conn->prepare($sql);
-                    $stmt->bind_param("ssssi", $university_name, $university_location, $university_website, $image_path, $university_id);
-                    }
-
+                   
+                }
+                $sql = "UPDATE universities SET university_name = ?, university_location = ?, 
+                        university_website = ?, universities_img_path = ? WHERE university_id = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("ssssi", $university_name, $university_location, $university_website, $image_path, $university_id);
                 $stmt->execute();
+
                 
 
-                if (1) {
+                if ($stmt->affected_rows > 0) {
                     echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>تم تحديث بيانات الجامعة بنجاح</div>";
                 } else {
                     echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>حدث خطأ أثناء تحديث بيانات الجامعة: " . $stmt->error . "</div>";
                 }
-            }
+            }}
             ?>
 
             <div class="container-form">

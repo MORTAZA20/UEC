@@ -16,7 +16,6 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
     <title>لوحة التحكم | تعديل معلومات أدمن</title>
     <link rel="stylesheet" href="style">
 </head>
-
 <body>
     <?php include '../inc/navbar.php'; ?>
 
@@ -25,27 +24,24 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
 
         <div class="content-bar">
             <div style='position:relative; margin-top: 15px;'>
-                <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>تعديل معلومات الادمن</h2>
+                <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>تعديل بيانات الادمن</h2>
             </div>
             <div class="path-bar">
                 <div class="url-path active-path">لوحة التحكم</div>
                 <div class="url-path slash">/</div>
                 <div class="url-path">الادمنية</div>
                 <div class="url-path slash">/</div>
-                <div class="url-path">تعديل معلومات الادمن</div>
+                <div class="url-path">تعديل بيانات الادمن</div>
             </div>
             <?php
             include '../inc/conn.inc.php';
-            
+
             if (isset($_POST["sub_form"])) {
-                $Edit_Admin_id = mysqli_real_escape_string($conn, $_POST["Edit_id"]);
+                $Admin_id = mysqli_real_escape_string($conn, $_POST["Admin_id"]);
                 $department_id = mysqli_real_escape_string($conn, $_POST["department_id"]);
-                $AdminUserName = mysqli_real_escape_string($conn, $_POST["UserName"]);
-                $AdminPassword = mysqli_real_escape_string($conn, $_POST["Password"]);
-            //    echo $Edit_Admin_id . '<br><br>';
-            //    echo $department_id . '<br><br>';
-            //    echo $AdminPassword . '<br><br>';
-            //    echo $AdminUserName . '<br><br>';
+                $AdminUserName = mysqli_real_escape_string($conn, $_POST["AdminUserName"]);
+                $AdminPassword = mysqli_real_escape_string($conn, $_POST["AdminPassword"]);
+                $type = mysqli_real_escape_string($conn, $_POST["type"]);
                 $timeTarget = 0.350; // 350 milliseconds
                 $cost = 10;
                 do {
@@ -53,71 +49,83 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                     $start = microtime(true);
                     $AdminPassword_hash = password_hash($AdminPassword, PASSWORD_BCRYPT, ["cost" => $cost]);
                     $end = microtime(true);
-
                 } while (($end - $start) < $timeTarget);
 
-                $sqlUP_inf_login = "UPDATE inf_login SET department_id = '$department_id', AdminUserName = '$AdminUserName', AdminPassword = '$AdminPassword_hash' WHERE Admin_id = '$Edit_Admin_id'";
-                $result_sqlUP_inf_login = $conn->query($sqlUP_inf_login);
+                
 
-                if ($result_sqlUP_inf_login) {
-                    echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>تم تعديل معلومات الادمن بنجاح</div>";
+                
+                $sql = "UPDATE inf_login SET department_id = ?, AdminUserName = ?, AdminPassword = ?, type = ? WHERE Admin_id = ?";
+                $stmt = $conn->prepare($sql);
+
+                if ($type == "Admin" || $type == "SubAdmin") {
+                    $department_id=NULL;
+                }
+
+                $stmt->bind_param("ssssi", $department_id, $AdminUserName, $AdminPassword_hash, $type, $Admin_id);
+                $result = $stmt->execute();
+
+                if ($result) {
+                    echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>تم تعديل بيانات الادمن بنجاح</div>";
                 } else {
                     echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>هناك خطأ: " . $conn->error . "</div>";
                 }
 
+                $stmt->close();
             }
-    
-
             if (isset($_POST['btn_edit'])) {
-                $edit_id = $_POST['edit_id'];
+                $Edit_id = $_POST['edit_id'];
 
-                $sql_inf_login = "SELECT * FROM inf_login WHERE Admin_id =?";
-                $stmt = $conn->prepare($sql_inf_login);
-                $stmt->bind_param("i", $edit_id);
+                $sql = "SELECT * FROM inf_login WHERE Admin_id =?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("i", $Edit_id);
                 $stmt->execute();
-                $result_sql_inf_login = $stmt->get_result();
-                $row = $result_sql_inf_login->fetch_assoc();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
             }
             $conn->close();
             ?>
 
-
             <div class="container-form">
                 <form action="" method="post">
-                    <select class="fruit" name="department_id" style=" margin-bottom: 10px ;" required>
-
-                        <option value="">ادمن عام</option>
+                    <select class="fruit" name="type" style=" margin-bottom: 10px ;" required
+                    onchange="toggleDepartment()">
+                        <option value="Admin">ادمن عام</option>
+                        <option value="SubAdmin">ادمن فرعي</option>
+                        <option value="department">قسم</option>
+                    </select>
+                    <select class="fruit" name="department_id" style=" margin-bottom: 10px ;" 
+                    id="department_select">
                         <?php
                         include '../inc/conn.inc.php';
-                        $sql_department = "SELECT department_id, department_name FROM departments";
-                        $result_sql_department = $conn->query($sql_department);
-
-                        if ($result_sql_department->num_rows > 0) { // تحقق من وجود السجلات
-                            while ($rec = $result_sql_department->fetch_assoc()) {
-                                echo "<option value='" . $rec['department_id'] . "'>" . $rec['department_name'] . "</option>";
-                            }
-                        } else {
-                            echo "<option value='' disabled selected>لا توجد أقسام مضافة</option>";
+                        $sql_dep = "SELECT * FROM departments";
+                        $result_sql_dep = $conn->query($sql_dep);
+                        while ($row_dep = $result_sql_dep->fetch_assoc()) {
+                            echo "<option value='" . $row_dep['department_id'] . "'>" . $row_dep['department_name'] . "</option>";
                         }
-
-                        $conn->close();
                         ?>
                     </select>
-                    <input type="hidden" name="Edit_id" value="
-                    <?php if (!isset($_POST['edit_id'])) {
-                    echo "";
-                    } else {
-                    echo $edit_id;} ?>" required>
-                    <input type="text" name="UserName" placeholder="أسم المستخدم" style=" margin-bottom: 10px ;" value="<?php if (!isset($_POST['edit_id'])) {
-                                                                                                                            echo "";
-                                                                                                                        } else {
-                                                                                                                            echo $row['AdminUserName'];
-                                                                                                                        } ?>" required>
-                    <input type="text" name="Password" placeholder="كلمة المرور" style=" margin-bottom: 10px ;" value="<?php if (!isset($_POST['edit_id'])) {
-                                                                                                                            echo "";
-                                                                                                                        } else {
-                                                                                                                            echo $row['AdminPassword'];
-                                                                                                                        } ?>" required>
+                    <input type="hidden" name="Admin_id" placeholder="أسم المستخدم" style=" margin-bottom: 10px ;" 
+                    value="<?php
+                        if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        } else {
+                            echo $Edit_id;
+                        }?>" required>
+                    <input type="text" name="AdminUserName" placeholder="أسم المستخدم" style=" margin-bottom: 10px ;"
+                    value="<?php
+                        if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        } else {
+                            echo $row['AdminUserName'];
+                        }?>" required> 
+
+                    <input type="text" name="AdminPassword" placeholder="كلمة المرور" style=" margin-bottom: 10px ;" 
+                    value="<?php
+                        if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        } else {
+                            echo $row['AdminPassword'];
+                        }?>" required>
                     <p>
                         <input class="seve" type="submit" name="sub_form" value=" حـفـظ البـيـانـات" />
                     </p>
@@ -126,6 +134,15 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
         </div>
     </div>
     <script>
+        function toggleDepartment() {
+            var type = document.querySelector('select[name="type"]').value;
+
+            if (type == "department") {
+                document.getElementById('department_select').style.display = "block";
+            } else {
+                document.getElementById('department_select').style.display = "none";
+            }
+        }
         setTimeout(function() {
             document.getElementById('success-message').style.display = 'none';
         }, 5000);
@@ -133,3 +150,4 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
 </body>
 
 </html>
+    

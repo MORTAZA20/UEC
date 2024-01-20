@@ -22,8 +22,13 @@
             if ($result->num_rows > 0) {
 
                 $row = $result->fetch_assoc();
+                $Admin_id = $row["Admin_id"];
+                date_default_timezone_set('Asia/Baghdad');
+                $RegistrationData = date("Y-m-d");
+                $RegistrationTime = date("g:i a");
                 if(password_verify("$pass_login", $row["AdminPassword"])) {
-                
+                $sql_UPDATE = "UPDATE inf_login SET  RegistrationData = '$RegistrationData' , RegistrationTime = '$RegistrationTime' WHERE Admin_id = '$Admin_id'";
+                $stmt_UPDATE = $conn->query($sql_UPDATE);
                 $type = $row["type"];
                 $department_id = $row['department_id'];
                 if ($type == "Admin" || $type == "SubAdmin" ) {
@@ -86,7 +91,7 @@
             </div>
             
             <div class="login-resert">
-                <p><a href="#">نسيت كلمة المرور؟</a></p>
+                <p><a href="#">تواصل مع المشرف</a></p>
             </div>
         </form>
     </div>

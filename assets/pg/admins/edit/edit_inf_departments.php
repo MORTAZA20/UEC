@@ -1,11 +1,10 @@
-
 <?php
 session_start();
 if (isset($_SESSION["admin_user"])) {
-if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin") {
-    header("Location: login");
-    exit();
-}
+    if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin") {
+        header("Location: login");
+        exit();
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -39,6 +38,19 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
 
             include '../inc/conn.inc.php';
 
+            if (isset($_POST['btn_edit'])) {
+                $Edit_id = $_POST['edit_id'];
+                $sql = "SELECT d.*, c.college_id, c.university_id,c.college_name, u.university_name
+                FROM departments d
+                JOIN colleges c ON d.college_id = c.college_id
+                JOIN universities u ON c.university_id = u.university_id
+                WHERE d.department_id = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("i", $Edit_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+            }
             if (isset($_POST["sub_form"])) {
 
                 //mysqli_real_escape_string للحماية من الهجمات
@@ -53,54 +65,68 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                 $parallel_GPA = mysqli_real_escape_string($conn, $_POST["parallel_GPA"]);
                 $parallel_study_fees = mysqli_real_escape_string($conn, $_POST["parallel_study_fees"]);
 
-                    if ($_FILES['departments_images']['type'] == 'image/png' || $_FILES['departments_images']['type'] == 'image/jpeg') {
 
+
+                $sql = "SELECT * FROM departments WHERE department_id =?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("i", $department_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+
+                if (
+                    empty($_FILES["departments_images"]["name"])
+                    && $row['college_id'] == $college_id
+                    && $row['department_name'] == $department_name
+                    && $row['department_description'] == $department_description
+                    && $row['scientific_department_message'] == $scientific_department_message
+                    && $row['evening_GPA'] == $evening_GPA
+                    && $row['required_GPA'] == $required_GPA
+                    && $row['evening_study_fees'] == $evening_study_fees
+                    && $row['parallel_GPA'] == $parallel_GPA
+                    && $row['parallel_study_fees'] == $parallel_study_fees
+                ) {
+                    echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>لم يتم تحديث بيانات القسم </div>";
+                } else {
+                    if (!empty($_FILES["departments_images"]["name"])) {
+                        unlink("../" . $row['departments_img_path']);
 
                         $departments_folder = '../departments_img';
-
-                        if (!file_exists($departments_folder)) {
-                            mkdir($departments_folder, 0777, true);
-                            chmod($departments_folder, 0777);
-                        }
                         $departments_images = $_FILES["departments_images"]["tmp_name"];
                         $file_name = $_FILES["departments_images"]["name"];
                         move_uploaded_file($departments_images, $departments_folder . '/' . $file_name);
                         $image_path = 'departments_img' . '/' . $file_name;
-                        
-                    
-                        $sql = "UPDATE departments SET college_id = ?, department_name = ?, department_description = ?, 
-                        scientific_department_message = ?, required_GPA = ?, evening_GPA = ?, evening_study_fees = ?, 
-                        parallel_GPA = ?, parallel_study_fees = ?, departments_img_path = ? WHERE department_id = ?";
-                        $stmt = $conn->prepare($sql);
-                        $stmt->bind_param("sssssssssss",  $college_id, $department_name, $department_description, 
-                        $scientific_department_message, $required_GPA, $evening_GPA,$evening_study_fees ,
-                        $parallel_GPA, $parallel_study_fees, $image_path, $department_id);
-                        $stmt->execute();
-    
-
-                        if ($stmt->affected_rows > 0) {
-                            echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>تم تعديل معلومات القسم بنجاح</div>";
-                        } else {
-                            echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>هنالك خطأ: " . $conn->error . "</div>";
-                        }
                     } else {
-                        echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>يرجى تحديد ملف صورة صحيح (PNG أو JPEG)</div>";
+                        $image_path = $row['departments_img_path'];
+                    }
+                    $sql = "UPDATE departments SET college_id = ?, department_name = ?, department_description = ?, 
+                    scientific_department_message = ?, required_GPA = ?, evening_GPA = ?, evening_study_fees = ?, 
+                    parallel_GPA = ?, parallel_study_fees = ?, departments_img_path = ? WHERE department_id = ?";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param(
+                        "ssssssssssi",
+                        $college_id,
+                        $department_name,
+                        $department_description,
+                        $scientific_department_message,
+                        $required_GPA,
+                        $evening_GPA,
+                        $evening_study_fees,
+                        $parallel_GPA,
+                        $parallel_study_fees,
+                        $image_path,
+                        $department_id
+                    );
+
+                    $stmt->execute();
+
+                    if ($stmt->affected_rows > 0) {
+                        echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>تم تعديل معلومات القسم بنجاح</div>";
+                    } else {
+                        echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>هنالك خطأ: " . $conn->error . "</div>";
                     }
                 }
-
-            
-            
-            if (isset($_POST['btn_edit'])) {
-                $departmentId = $_POST['edit_id'];
             }
-       
-            $sql = "SELECT * FROM departments WHERE department_id =?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("i", $departmentId);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $row = $result->fetch_assoc();
-
             $conn->close();
             ?>
             <script src="jquery-3.6.0.min"></script>
@@ -108,14 +134,19 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
             <div class="container-form">
                 <form action="" method="post" enctype="multipart/form-data">
                     <div class="custom-column" style="margin-bottom: 10px;">
-                        <select id="university_id" class="fruit" name="university_id" onchange="getColleges()" required>
+                    <select id="university_id" class="fruit" name="university_id" onchange="getColleges()" required>
                             <?php
                             include '../inc/conn.inc.php';
                             $sql = "SELECT university_id, university_name FROM universities";
                             $result = $conn->query($sql);
                             while ($rec = $result->fetch_assoc()) {
-                                echo "<option value='" . $rec['university_id'] . "'>" . $rec['university_name'] . "</option>";
-                            }
+                            ?>
+                                <option value="<?php $rec['university_id'] ?>" 
+                                <?php
+                                if ($rec['university_id'] == $row['university_id']) {
+                                ?> selected <?php } ?>
+                                ><?php echo $rec['university_name'] ?></option>
+                            <?php }
                             $conn->close();
                             ?>
                         </select>
@@ -124,34 +155,71 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                         </select>
 
                         <input type="text" name="Edit_department_id" placeholder="معرف القسم" 
-                        value="<?php if (!isset($_POST['edit_id'])){echo "";}else{echo $departmentId;} ?>" required>
+                        value="<?php if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        } else {
+                            echo  $Edit_id;
+                        } ?>" required>
                     </div>
 
                     <div class="custom-column" style="margin-bottom: 10px;">
                         <input type="text" name="department_name" id="" placeholder="اسم القسم" 
-                        value="<?php if (!isset($_POST['edit_id'])){echo "";}else{echo $row['department_name'];} ?>" required>
+                        value="<?php if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        } else {
+                            echo $row['department_name'];
+                        } ?>" required>
                         <input type="number" name="required_GPA" id="" placeholder="معدل القبول الصباحي" 
-                        value="<?php if (!isset($_POST['edit_id'])){echo "";}else{echo $row['required_GPA'];} ?>" required>
+                        value="<?php if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        } else {
+                            echo $row['required_GPA'];
+                        } ?>" required>
                         <input type="number" name="evening_GPA" placeholder="معدل القبول المسائي" 
-                        value="<?php if (!isset($_POST['edit_id'])){echo "";}else{echo $row['evening_GPA'];} ?>" required>
+                        value="<?php if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        } else {
+                            echo $row['evening_GPA'];
+                        } ?>" required>
                     </div>
 
                     <div class="custom-column" style="margin-bottom: 10px;">
                         <input type="number" name="evening_study_fees" placeholder="القسط السنوي(المسائي)" 
-                        value="<?php if (!isset($_POST['edit_id'])){echo "";}else{echo $row['evening_study_fees'];} ?>" required>
-                        <input type="number" name="parallel_GPA" placeholder="معدل القبول الموازي"
-                        value="<?php if (!isset($_POST['edit_id'])){echo "";}else{echo $row['parallel_GPA'];} ?>" required>
+                        value="<?php if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        } else {
+                            echo $row['evening_study_fees'];
+                        } ?>" required>
+                        <input type="number" name="parallel_GPA" placeholder="معدل القبول الموازي" 
+                        value="<?php if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        } else {
+                            echo $row['parallel_GPA'];
+                        } ?>" required>
                         <input type="number" name="parallel_study_fees" placeholder="القسط السنوي(الموازي)" 
-                        value="<?php if (!isset($_POST['edit_id'])){echo "";}else{echo $row['parallel_study_fees'];} ?>" required>
+                        value="<?php if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        } else {
+                            echo $row['parallel_study_fees'];
+                        } ?>" required>
                     </div>
 
                     <p>الوصف</p>
-                    <textarea name="department_description" id="editor1" placeholder="النبذه عن القسم"><?php if (!isset($_POST['edit_id'])){echo "";}else{echo $row['department_description'];} ?></textarea>
+                    <textarea name="department_description" id="editor1" placeholder="النبذه عن القسم">
+                        <?php if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        } else {
+                            echo $row['department_description'];
+                        } ?></textarea>
                     <p>رسالة القسم</p>
-                    <textarea name="scientific_department_message" id="editor2" placeholder="رسالة القسم"><?php if (!isset($_POST['edit_id'])){echo "";}else{echo $row['scientific_department_message'];} ?></textarea>
-                    <div class="container-img">   
-                            <img id="uploaded-image" src="assets/pg/admins/<?php echo $row["departments_img_path"]; ?>" 
-                            style="max-width: 80px;
+                    <textarea name="scientific_department_message" id="editor2" placeholder="رسالة القسم">
+                        <?php if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        } else {
+                            echo $row['scientific_department_message'];
+                        } ?></textarea>
+                    <div class="container-img">
+                        <img id="uploaded-image" src="assets/pg/admins/<?php echo $row["departments_img_path"]; ?>" style="max-width: 80px;
                             max-height: 80px;
                             width: auto;
                             height: auto;
@@ -160,10 +228,8 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                     <div class="space"></div>
                     <div class="btn-row">
 
-                    <input type="file" name="departments_images" class="file-btn" id="upload-input" accept="image/*"
-                            onchange="displayImage()">
-                    <input type="button" class="file-btn" value="اختيار شعار القسم"
-                            onclick="document.getElementById('upload-input').click();">
+                        <input type="file" name="departments_images" class="file-btn" id="upload-input" accept="image/*" onchange="displayImage()">
+                        <input type="button" class="file-btn" value="اختيار شعار القسم" onclick="document.getElementById('upload-input').click();">
                         <p>
                             <input type="submit" name="sub_form" value="حـفـظ الـبـيـانـات" />
                         </p>
@@ -174,14 +240,14 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
     </div>
     <script src="displayImage"></script>
     <script>
-        setTimeout(function () {
+        setTimeout(function() {
             document.getElementById('success-message').style.display = 'none';
         }, 5000);
     </script>
     <script src="../../../../../ecomweb1/assets/pg/admins/ckeditor/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('editor1');
-        CKEDITOR.editorConfig = function (config) {
+        CKEDITOR.editorConfig = function(config) {
             config.language = 'ar';
             config.uiColor = '#f7b42c';
             config.height = 300;

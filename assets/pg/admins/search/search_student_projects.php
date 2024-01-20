@@ -1,5 +1,5 @@
 <?php
-  
+
     if (isset($_POST['search'])) {  
         include '../inc/conn.inc.php';
         $search = mysqli_real_escape_string($conn, $_POST['search']);
