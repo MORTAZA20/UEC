@@ -13,12 +13,13 @@
     while ($row = $result->fetch_assoc()) {
 ?>
        <tr>
-                    <td><span class="badge"><?php echo $row["student_id"] ?></span></td>
+       <div class="truncated-text">
+                    <td><?php echo $row["student_id"] ?></td>
                     <td><?php echo $row["department_name"] ?></td>
                     <td><?php echo $row["student_name"] ?></td>
                     <td><?php echo $row["Cumulative_Rating"] ?></td>
                     <td><?php echo $row["Graduation_Year"] ?></td>
-                                
+       </div>                        
                     <td data-title="التحكم" class="text-center">      
                     <div class="control-buttons">
                     <form id="EditForm" action="edit_top_students" method="post">
@@ -31,7 +32,7 @@
                     </form> 
                     </div>
                     </td>
-            </tr>
+        </tr>
 <?php 
 }
 $conn->close();

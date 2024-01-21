@@ -145,6 +145,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
         }
         setTimeout(function() {
             document.getElementById('success-message').style.display = 'none';
+            window.location.href = 'My_Admins';
         }, 5000);
     </script>
 </body>

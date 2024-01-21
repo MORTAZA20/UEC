@@ -141,17 +141,32 @@ if (isset($_SESSION["admin_user"])) {
                             $result = $conn->query($sql);
                             while ($rec = $result->fetch_assoc()) {
                             ?>
-                                <option value="<?php $rec['university_id'] ?>" 
-                                <?php
-                                if ($rec['university_id'] == $row['university_id']) {
-                                ?> selected <?php } ?>
-                                ><?php echo $rec['university_name'] ?></option>
-                            <?php }
+                                <option value="<?php if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        }else{ echo $rec['university_id'] ;}?>" 
+                                <?php 
+                                   if (isset($_POST['edit_id'])) {
+                                    if ($rec['university_id'] == $row['university_id']) { echo  "selected" ; } 
+                                } 
+                                ?>>
+                                <?php if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        }else{  echo $rec['university_name'] ;} ?></option>
+                                    
+                                    
+                                <?php 
+                                }
                             $conn->close();
                             ?>
                         </select>
                         <select id="college_id" class="fruit" name="college_id" required>
-
+                        <option value="<?php if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        }else{ echo $row['college_id'] ;}?>"> 
+                        <?php if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        }else{ echo $row['college_name'] ;} ?>
+                        </option>
                         </select>
 
                         <input type="text" name="Edit_department_id" placeholder="معرف القسم" 
@@ -242,6 +257,7 @@ if (isset($_SESSION["admin_user"])) {
     <script>
         setTimeout(function() {
             document.getElementById('success-message').style.display = 'none';
+            window.location.href = 'inf_departments';
         }, 5000);
     </script>
     <script src="../../../../../ecomweb1/assets/pg/admins/ckeditor/ckeditor.js"></script>

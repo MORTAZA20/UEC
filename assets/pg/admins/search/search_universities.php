@@ -14,17 +14,19 @@ $result = $conn->query($sql);
 while ($row = $result->fetch_assoc()) {
 ?>
     <tr>
-                <td><span class="badge"><?php echo $row["university_id"]?></span></td>
+                <td class="truncated-text"><?php echo $row["university_id"]?></td>
                 <td><img src="assets/pg/admins/<?php echo $row["universities_img_path"]?>" 
                 style=" max-width: 80px;
                 max-height: 80px;
                 width: auto;
-                height: auto;
-                              
+                height: auto;              
                 padding-left:20px;"></td>
+        
+        <div class="truncated-text">
                 <td><?php echo $row["university_name"]?></td>
                 <td><?php echo $row["university_location"]?></td>
                 <td><?php echo $row["university_website"]?></td>
+        </div>
                 <td data-title="التحكم" class="text-center">
                         <div class="control-buttons">
                                 <form id="EditForm" action="edit_universitys" method="post">

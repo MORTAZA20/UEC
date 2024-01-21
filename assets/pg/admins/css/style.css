@@ -237,6 +237,9 @@ tbody tr td {
     background-color: #efefef;
     font-size: 18px;
     text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 
@@ -355,9 +358,9 @@ tbody tr td {
 input:hover,
 input:focus{
     outline: none;
-    border-color: #192330;
-    background-color: #2A3B52;
-    box-shadow: 0 0 0 1px rgba(39, 88, 78, 0.697);
+    border-color: #23a0a9;
+    background-color: #23a0a9;
+    box-shadow: 0 0 0 1px #23a0a9;
 }
 
 
@@ -462,4 +465,10 @@ input:focus{
 
 #department_select{
     display : none;
+}
+
+.truncated-text td{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

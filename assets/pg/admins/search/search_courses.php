@@ -20,12 +20,13 @@ $result = $conn->query($sql);
 while ($row = $result->fetch_assoc()) {
     ?>
     <tr>
-                <td><span class="badge"><?php echo $row["course_id"] ?></span></td>
+    <div class="truncated-text">
+                <td><?php echo $row["course_id"] ?></td>
                 <td><?php echo $row["department_name"] ?></td>
                 <td><?php echo $row["course_name"] ?></td>
                 <td><?php echo $row["course_stage"] ?></td>
                 <td><?php echo $row["course_description"] ?></td>
-
+    </div>
                 <td data-title="التحكم" class="text-center"> 
                 <div class="control-buttons">
                     <form id="EditForm" action="edit_courses" method="post">

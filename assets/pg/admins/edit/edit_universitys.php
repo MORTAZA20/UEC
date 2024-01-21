@@ -144,6 +144,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
     <script>
         setTimeout(function () {
             document.getElementById('success-message').style.display = 'none';
+            window.location.href = 'universities';
         }, 5000);
     </script>
 

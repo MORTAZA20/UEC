@@ -15,30 +15,23 @@ if (isset($_POST['search'])) {
 $result = $conn->query($sql);
 while ($row = $result->fetch_assoc()) {
         ?>
+
         <tr>
-                <td><span class="badge"><?php echo $row["college_id"]; ?></span></td>
-                <td ><?php echo $row["university_name"]; ?></td>
-                <td style="
-            height: 50px;
-            max-width: 50px; 
-              "><?php echo $row["college_name"]; ?></td>
+        <div class="truncated-text">
+                <td><?php echo $row["college_id"]; ?></td>
+                <td><?php echo $row["university_name"]; ?></td>
+                <td><?php echo $row["college_name"]; ?></td>
+        </div>
                 <td><img src="assets/pg/admins/<?php echo $row["colleges_img_path"]; ?>" 
                         style=" max-width:80px;
                         max-height: 80px;
                         width: auto;
                         height: auto;">
                 </td>
-                <td><?php echo $row["required_GPA"]; ?></td>
-                <td style="
-            height: 50px;
-            max-width: 50px; 
-            overflow-y: auto;
-            overflow-x: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;">
-                        <?php echo $row["college_description"]; ?>
-                </td>
+                <td class="truncated-text"><?php echo $row["required_GPA"]; ?></td>
+                <td class="truncated-text"><?php echo $row["college_description"]; ?></td>
 
+        
                 <td data-title="التحكم" class="text-center">
                         <div class="control-buttons">
                                 <form id="EditForm" action="edit_colleges" method="post">
@@ -58,7 +51,9 @@ while ($row = $result->fetch_assoc()) {
                                 ?>
                         </div>
                 </td>
-        </tr>
+        
+</tr>
+
         <?php
 }
 $conn->close();

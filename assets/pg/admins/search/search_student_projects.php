@@ -17,14 +17,15 @@
     while ($row = $result->fetch_assoc()) {
         ?>
         <tr>
-                <td><span class="badge"><?php echo $row["project_id"] ?></span></td>
+        <div class="truncated-text">
+                <td><?php echo $row["project_id"] ?></td>
                 <td><?php echo $row["department_name"] ?></td>
                 <td><?php echo $row["project_name"] ?></td>
                 <td><?php echo $row["student_name"] ?></td>
                 <td><?php echo $row["project_supervisor"] ?></td>
                 <td><?php echo $row["project_description"] ?></td>
                 <td data-title="التحكم" class="text-center">
-                
+        </div>
                 <div class="control-buttons">
                     <form id="EditForm" action="edit_student_projects" method="post">
                             <input type="hidden" name="edit_id" value="<?php echo $row['project_id'];?>">

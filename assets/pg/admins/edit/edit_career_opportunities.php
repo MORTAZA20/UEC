@@ -41,7 +41,12 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
         include '../inc/conn.inc.php';
         if (isset($_POST['btn_edit'])) {
             $edit_id = $_POST['edit_id']; 
-            $sql = "SELECT * FROM career_opportunities WHERE opportunity_id =?";
+            $sql = "SELECT cop.*, d.*, c.*, u.*
+                FROM career_opportunities cop
+                JOIN departments d ON cop.department_id = d.department_id
+                JOIN colleges c ON d.college_id = c.college_id
+                JOIN universities u ON c.university_id = u.university_id
+                WHERE cop.opportunity_id = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("i", $edit_id);
             $stmt->execute();
@@ -83,33 +88,57 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                 }
         }
         ?>
-        <script src="jquery-3.6.0.min"></script>
-        <script src="Get_ScriptFunction"></script>
-        <div class="container-form">
-            <form action="" method="post" enctype="multipart/form-data">
-                <div class="container" style="margin-bottom: 10px;">
-                    <div class="row align-items-start">
-                        <div class="col custom-column">
-                            <select id="university_id" class="fruit" name="university_id" onchange="getColleges()"
-                                required>
-                                <?php
-                                include '../inc/conn.inc.php';
-                                $sql_university = "SELECT university_id, university_name FROM universities";
-                                $result_university = $conn->query($sql_university);
-                                while ($rec = $result_university->fetch_assoc()) {
-                                    echo "<option value='" . $rec['university_id'] . "'>" . $rec['university_name'] . "</option>";
+    <script src="jquery-3.6.0.min"></script>
+    <script src="Get_ScriptFunction"></script>
+    <div class="container-form">
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="container" style="margin-bottom: 10px;">
+                <div class="row align-items-start">
+                    <div class="col custom-column">
+                    <select id="university_id" class="fruit" name="university_id" onchange="getColleges()" required>
+                            <?php
+                            include '../inc/conn.inc.php';
+                            $sql = "SELECT university_id, university_name FROM universities";
+                            $result = $conn->query($sql);
+                            while ($rec = $result->fetch_assoc()) {
+                            ?>
+                                <option value="<?php if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        }else{ echo $rec['university_id'] ;}?>" 
+                                <?php 
+                                   if (isset($_POST['edit_id'])) {
+                                    if ($rec['university_id'] == $row['university_id']) { echo  "selected" ; } 
+                                } 
+                                ?>>
+                                <?php if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        }else{  echo $rec['university_name'] ;} ?></option>
+                                    
+                                    
+                                <?php 
                                 }
-                                $conn->close();
-                                ?>
-                            </select>
-                            <select id="college_id" class="fruit" name="college_id" onchange="getInf_departments()"
-                                required>
+                            $conn->close();
+                            ?>
+                        </select>
 
-                            </select>
-
-                            <select id="department_id" class="fruit" name="department_id" required>
-
-                            </select>
+                        <select id="college_id" class="fruit" name="college_id" onchange="getInf_departments()" required>
+                        <option value="<?php if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        }else{ echo $row['college_id'] ;}?>"> 
+                        <?php if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        }else{ echo $row['college_name'] ;} ?>
+                        </option>
+                        </select>
+                        <select id="department_id" class="fruit" name="department_id" required>
+                        <option value="<?php if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        }else{ echo $row['department_id'] ;}?>"> 
+                        <?php if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        }else{ echo $row['department_name'] ;} ?>
+                        </option>
+                        </select>
                         </div>
                     </div>
                 </div>
@@ -154,7 +183,9 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
 <script>
     setTimeout(function () {
         document.getElementById('success-message').style.display = 'none';
-    }, 5000);
+        window.location.href = 'career_opportunities';    
+     }, 5000);
+
 </script>
 
 </body>

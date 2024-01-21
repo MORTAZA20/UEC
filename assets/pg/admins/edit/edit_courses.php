@@ -42,7 +42,14 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
 
             if (isset($_POST['btn_edit'])){
                 $edit_id = $_POST['edit_id'];
-                $sql = "SELECT * FROM courses WHERE course_id =?";
+                
+                $sql = "SELECT co.*, d.*, c.*, u.*
+                FROM courses co
+                JOIN departments d ON co.department_id = d.department_id
+                JOIN colleges c ON d.college_id = c.college_id
+                JOIN universities u ON c.university_id = u.university_id
+                WHERE co.course_id = ?";
+
                 $stmt = $conn->prepare($sql);
                 $stmt->bind_param("i", $edit_id);
                 $stmt->execute();
@@ -101,19 +108,42 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                                     $sql = "SELECT university_id, university_name FROM universities";
                                     $result = $conn->query($sql);
                                     while ($rec = $result->fetch_assoc()) {
-                                        echo "<option value='" . $rec['university_id'] . "'>" . $rec['university_name'] . "</option>";
-                                    }
-                                    $conn->close();
-                                    ?>
+                                        ?>
+                                            <option value="<?php if (!isset($_POST['edit_id'])) {
+                                        echo "";
+                                        }else{ echo $rec['university_id'] ;}?>" 
+                                            <?php 
+                                               if (isset($_POST['edit_id'])) {
+                                                if ($rec['university_id'] == $row['university_id']) { echo  "selected" ; } 
+                                            } 
+                                            ?>>
+                                            <?php if (!isset($_POST['edit_id'])) {
+                                        echo "";
+                                        }else{  echo $rec['university_name'] ;} ?></option>
+   
+                                            <?php 
+                                            }
+                                        $conn->close();
+                                        ?>
                                 </select>
-                                <select id="college_id" class="fruit" name="college_id" onchange="getInf_departments()"
-                                    required>
-
-                                </select>
-
-                                <select id="department_id" class="fruit" name="department_id" required>
-
-                                </select>
+                                <select id="college_id" class="fruit" name="college_id" onchange="getInf_departments()" required>
+                        <option value="<?php if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        }else{ echo $row['college_id'] ;}?>"> 
+                        <?php if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        }else{ echo $row['college_name'] ;} ?>
+                        </option>
+                        </select>
+                        <select id="department_id" class="fruit" name="department_id" required>
+                        <option value="<?php if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        }else{ echo $row['department_id'] ;}?>"> 
+                        <?php if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        }else{ echo $row['department_name'] ;} ?>
+                        </option>
+                        </select>
                             </div>
                         </div>
                     </div>
@@ -152,6 +182,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
     <script>
         setTimeout(function () {
             document.getElementById('success-message').style.display = 'none';
+            window.location.href = 'courses';
         }, 5000);
     </script>
     <script src="../../../../../ecomweb1/assets/pg/admins/ckeditor/ckeditor.js"></script>

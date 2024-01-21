@@ -109,11 +109,23 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                                     include '../inc/conn.inc.php';
                                     $sql = "SELECT university_id, university_name FROM universities";
                                     $result = $conn->query($sql);
-                                    while ($rec = $result->fetch_assoc()) {
-                                        echo "<option value='" . $rec['university_id'] . "'>" . $rec['university_name'] . "</option>";
-                                    }
-                                    $conn->close();
+                                   while ($rec = $result->fetch_assoc()) {
                                     ?>
+                                        <option value="<?php if (!isset($_POST['edit_id'])) {
+                                    echo "";
+                                    }else{ echo $rec['university_id'] ;}?>" 
+                                    <?php 
+                                    if (isset($_POST['edit_id'])) {
+                                    if ($rec['university_id'] == $row['university_id']) { echo  "selected" ; } 
+                                    } 
+                                    ?>>
+                                    <?php if (!isset($_POST['edit_id'])) {
+                                    echo "";
+                                    }else{  echo $rec['university_name'] ;} ?></option>
+                                <?php 
+                                }
+                            $conn->close();
+                            ?>
                                 </select>
                             </div>
                         </div>
@@ -163,6 +175,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
     <script>
         setTimeout(function () {
             document.getElementById('success-message').style.display = 'none';
+            window.location.href = 'colleges';
         }, 5000);
     </script>
     <script src="../../../../../ecomweb1/assets/pg/admins/ckeditor/ckeditor.js"></script>

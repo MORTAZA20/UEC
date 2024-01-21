@@ -18,11 +18,13 @@
     while ($row = $result->fetch_assoc()) {
         ?>
         <tr>
-                <td><span class="badge"><?php echo $row["opportunity_id"] ?></span></td>
+        <div class="truncated-text">
+                <td><?php echo $row["opportunity_id"] ?></td>
                 <td><?php echo $row["department_name"] ?></td>
                 <td><?php echo $row["job_title"] ?></td>
                 <td><?php echo $row["salary_range"] ?></td>
                 <td><?php echo $row["job_description"] ?></td>
+        </div>
                 <td data-title="التحكم" class="text-center">
                 
                 <div class="control-buttons">

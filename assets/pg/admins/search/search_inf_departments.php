@@ -15,20 +15,18 @@ $result = $conn->query($sql);
 while ($row = $result->fetch_assoc()) {
     ?>
         <tr>
-            <td><span class="badge">
-                    <?php echo $row["department_id"] ?>
-                </span></td>
-            <td>
-                <?php echo $row["college_name"] ?>
-            </td>
-            <td>
-                <?php echo $row["department_name"] ?>
-            </td>
+        <div class="truncated-text">
+                <td><?php echo $row["department_id"] ?></td>               
+                <td><?php echo $row["college_name"] ?></td>
+                <td><?php echo $row["department_name"] ?></td>
+        </div>
             <td><img src="assets/pg/admins/<?php echo $row["departments_img_path"]; ?>" style=" max-width:80px;
                         max-height: 80px;
                         width: auto;
                         height: auto;">
             </td>
+            
+            
 
             <td data-title="التحكم" class="text-center">
                 <div class="control-buttons">
