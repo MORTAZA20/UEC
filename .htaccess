@@ -6,7 +6,6 @@ RewriteRule ^stylelogin ./assets/pg/admins/css/stylelogin.css [NC,L]
 RewriteRule ^bg1 ./assets/pg/admins/img/bg1.png [L]
 RewriteRule ^LOGO ./assets/pg/admins/img/LOGO.png [L]
 
-
 RewriteRule ^login ./assets/pg/admins/login.php [NC,L]
 RewriteRule ^logout ./assets/pg/admins/logout.php [NC,L]
 
@@ -20,8 +19,7 @@ RewriteRule ^My_Admins ./assets/pg/admins/My_Admins.php [NC,L]
 RewriteRule ^student_projects ./assets/pg/admins/student_projects.php [NC,L]
 RewriteRule ^career_opportunities ./assets/pg/admins/career_opportunities.php [NC,L]
 RewriteRule ^support ./assets/pg/admins/support.php [NC,L]
-
-
+RewriteRule ^test ./assets/pg/admins/test.html [NC,L]
 
 
 RewriteRule ^add_admin ./assets/pg/admins/add/add_admin.php [NC,L]
@@ -48,7 +46,6 @@ RewriteRule ^delete_student_projects ./assets/pg/admins/delete/delete_student_pr
 RewriteRule ^delete_career_opportunities ./assets/pg/admins/delete/delete_career_opportunities.php [NC,L]
 RewriteRule ^delete_My_Admins ./assets/pg/admins/delete/delete_My_Admins.php [NC,L]
 
-
 RewriteRule ^edit_universitys ./assets/pg/admins/edit/edit_universitys.php [NC,L]
 RewriteRule ^edit_colleges ./assets/pg/admins/edit/edit_colleges.php [NC,L]
 RewriteRule ^edit_inf_departments ./assets/pg/admins/edit/edit_inf_departments.php [NC,L]
@@ -57,5 +54,3 @@ RewriteRule ^edit_student_projects ./assets/pg/admins/edit/edit_student_projects
 RewriteRule ^edit_courses ./assets/pg/admins/edit/edit_courses.php [NC,L]
 RewriteRule ^edit_career_opportunities ./assets/pg/admins/edit/edit_career_opportunities.php [NC,L]
 RewriteRule ^edit_My_Admins ./assets/pg/admins/edit/edit_My_Admins.php [NC,L]
-
-

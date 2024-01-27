@@ -16,11 +16,7 @@ while ($row = $result->fetch_assoc()) {
     <tr>
                 <td class="truncated-text"><?php echo $row["university_id"]?></td>
                 <td><img src="assets/pg/admins/<?php echo $row["universities_img_path"]?>" 
-                style=" max-width: 80px;
-                max-height: 80px;
-                width: auto;
-                height: auto;              
-                padding-left:20px;"></td>
+                ></td>
         
         <div class="truncated-text">
                 <td><?php echo $row["university_name"]?></td>

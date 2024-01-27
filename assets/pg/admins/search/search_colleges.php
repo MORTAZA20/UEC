@@ -22,11 +22,7 @@ while ($row = $result->fetch_assoc()) {
                 <td><?php echo $row["university_name"]; ?></td>
                 <td><?php echo $row["college_name"]; ?></td>
         </div>
-                <td><img src="assets/pg/admins/<?php echo $row["colleges_img_path"]; ?>" 
-                        style=" max-width:80px;
-                        max-height: 80px;
-                        width: auto;
-                        height: auto;">
+                <td><img src="assets/pg/admins/<?php echo $row["colleges_img_path"]; ?>">
                 </td>
                 <td class="truncated-text"><?php echo $row["required_GPA"]; ?></td>
                 <td class="truncated-text"><?php echo $row["college_description"]; ?></td>

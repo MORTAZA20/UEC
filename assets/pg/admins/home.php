@@ -69,7 +69,8 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                     echo $result->num_rows;
                     $conn->close();
                     ?></div></div>
-                <div >عدد الادمنية<div>      <?php
+                <div >عدد الادمنية<div>    
+                    <?php
                     include 'inc/conn.inc.php';
 
                     $sql ="SELECT * FROM inf_login";
@@ -78,7 +79,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                     $conn->close();
                     ?></div></div>
             </div>
-
+            
             <div class="Latest-orders">احدث الاضافات</div>
 
             <table class="table teble-bordered" role="table">

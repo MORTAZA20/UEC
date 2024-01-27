@@ -34,10 +34,10 @@ while ($row = $result->fetch_assoc()) {
                 </form>
 
                
-                <form id="deleteForm" action="edit_My_Admins" method="post">
+                <form id="deleteForm" action="delete_My_Admins" method="post">
                     <input type="hidden" name="del_id" value="<?php echo $row['Admin_id']; ?>">
                     <input type="submit" name="btn_delete" value="حذف" class="delete-btn">
-                
+                </form>
             </div>
 
         </td>

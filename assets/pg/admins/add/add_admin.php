@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+if (isset($_SESSION["admin_user"])) {
+    if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin") {
+    header("Location:login");
+    exit();
+}
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,7 +39,7 @@
             include '../inc/conn.inc.php';
 
             if (isset($_POST["sub_form"])) {
-                $department_id = mysqli_real_escape_string($conn, $_POST["department_id"]);
+                
                 $AdminUserName = mysqli_real_escape_string($conn, $_POST["AdminUserName"]);
                 $AdminPassword = mysqli_real_escape_string($conn, $_POST["AdminPassword"]);
                 $type = mysqli_real_escape_string($conn, $_POST["type"]);
@@ -45,6 +55,7 @@
                 if ($type == "Admin" || $type == "SubAdmin") {
                     $sql = "INSERT INTO inf_login (AdminUserName, AdminPassword,type) VALUES (?, ?, ?)";
                 } else {
+                    $department_id = mysqli_real_escape_string($conn, $_POST["department_id"]);
                     $sql = "INSERT INTO inf_login (department_id, AdminUserName, AdminPassword,type) VALUES (?, ?, ?, ?)";
                 }
 
