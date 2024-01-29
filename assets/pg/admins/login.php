@@ -36,10 +36,11 @@
                     session_start();
                     $_SESSION["admin_user"] = $type ;
                     header("Location: home");
-                }else{
+                }else if($type == "department") {
                     session_start();
                     $_SESSION["admin_user"] = $type;
                     $_SESSION["department_id"] = $department_id ;
+                    echo $type;
                     header("Location: ShowDepartment");
                 }
 

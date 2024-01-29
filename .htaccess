@@ -20,6 +20,7 @@ RewriteRule ^student_projects ./assets/pg/admins/student_projects.php [NC,L]
 RewriteRule ^career_opportunities ./assets/pg/admins/career_opportunities.php [NC,L]
 RewriteRule ^support ./assets/pg/admins/support.php [NC,L]
 RewriteRule ^test ./assets/pg/admins/test.html [NC,L]
+RewriteRule ^ShowDepartment ./assets/pg/admins/ShowDepartment.php [NC,L]
 
 
 RewriteRule ^add_admin ./assets/pg/admins/add/add_admin.php [NC,L]

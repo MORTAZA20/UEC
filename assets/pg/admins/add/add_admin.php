@@ -14,7 +14,7 @@ if (isset($_SESSION["admin_user"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة التحكم | إضافة أدمن جديد</title>
+    <title>لوحة التحكم | إضافة مشرف جديد</title>
     <link rel="stylesheet" href="style">
 </head>
 
@@ -26,14 +26,14 @@ if (isset($_SESSION["admin_user"])) {
 
         <div class="content-bar">
             <div style='position:relative; margin-top: 15px;'>
-                <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>إضافة أدمن جديد</h2>
+                <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>إضافة مشرف جديد</h2>
             </div>
             <div class="path-bar">
                 <div class="url-path active-path">لوحة التحكم</div>
                 <div class="url-path slash">/</div>
-                <div class="url-path">الادمنية</div>
+                <div class="url-path">المشرفين</div>
                 <div class="url-path slash">/</div>
-                <div class="url-path">إضافة أدمن جديد</div>
+                <div class="url-path">إضافة مشرف جديد</div>
             </div>
             <?php
             include '../inc/conn.inc.php';
@@ -69,7 +69,7 @@ if (isset($_SESSION["admin_user"])) {
                 $result = $stmt->execute();
 
                 if ($result) {
-                    echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>تم إضافة الادمن بنجاح</div>";
+                    echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>تم إضافة المشرف بنجاح</div>";
                 } else {
                     echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>هناك خطأ: " . $conn->error . "</div>";
                 }
@@ -83,9 +83,9 @@ if (isset($_SESSION["admin_user"])) {
                 <form action="" method="post">
                     <select class="fruit" name="type" style=" margin-bottom: 10px ;" required
                     onchange="toggleDepartment()">
-                        <option value="Admin">ادمن عام</option>
-                        <option value="SubAdmin">ادمن فرعي</option>
-                        <option value="department">قسم</option>
+                        <option value="Admin">مشرف عام</option>
+                        <option value="SubAdmin">مشرف ثانوي</option>
+                        <option value="Department">قسم</option>
                     </select>
                     <select class="fruit" name="department_id" style=" margin-bottom: 10px ;" 
                     id="department_select">

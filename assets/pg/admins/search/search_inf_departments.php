@@ -27,7 +27,7 @@ while ($row = $result->fetch_assoc()) {
 
             <td data-title="التحكم" class="text-center">
                 <div class="control-buttons">
-                    <form id="ShowForm" action="Show_inf_departments" method="post">
+                    <form id="ShowForm" action="ShowDepartment" method="post">
                         <input type="hidden" name="Show_id" value="<?php echo $row['department_id']; ?>">
                         <input type="submit" name="btn_Show" value="عرض كل البيانات" class="Show-btn">
                     </form>

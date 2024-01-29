@@ -1,3 +1,14 @@
+<?php
+require_once("../inc/conn.inc.php");
+session_start();
+if (isset($_SESSION["admin_user"])) {
+    if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin"
+    && $_SESSION["admin_user"] != "department") {    
+        header("Location: login");
+        exit();
+}
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,7 +93,7 @@
                         <div class="row align-items-start">
                             <div class="col custom-column">
                                 <select id="university_id" class="fruit" name="university_id" onchange="getColleges()"
-                                    required>
+                                    >
                                     <?php
                                     include '../inc/conn.inc.php';
                                     $sql = "SELECT university_id, university_name FROM universities";
@@ -94,12 +105,15 @@
                                     ?>
                                 </select>
                                 <select id="college_id" class="fruit" name="college_id" onchange="getInf_departments()"
-                                    required>
+                                    >
 
                                 </select>
 
                                 <select id="department_id" class="fruit" name="department_id" required>
-
+                                <?php 
+                                   if($_SESSION["admin_user"] == "department"){
+                                        echo "<option value='" . $_SESSION["department_id"] . "'></option>"; 
+                                    }?>
                                 </select>
                             </div>
                         </div>
@@ -142,6 +156,13 @@
             </div>
         </div>
     </div>
+    <?php if($_SESSION["admin_user"] == "department"){?>
+        <style>
+            #university_id,#college_id,#department_id{
+               display : none;
+            }
+        </style>
+    <?php } ?>
     <script src="displayImage"></script>
     <script src="../../../../../ecomweb1/assets/pg/admins/ckeditor/ckeditor.js"></script>
     <script>

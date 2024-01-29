@@ -3,7 +3,9 @@
 <?php
 session_start();
 if (isset($_SESSION["admin_user"])) {
-if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin") {
+if ($_SESSION["admin_user"] != "Admin" 
+&& $_SESSION["admin_user"] != "SubAdmin"
+&& $_SESSION["admin_user"] != "department") {
     header("Location: login");
     exit();
 }

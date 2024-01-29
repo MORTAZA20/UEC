@@ -13,7 +13,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة التحكم | تعديل معلومات أدمن</title>
+    <title>لوحة التحكم | تعديل معلومات المشرف</title>
     <link rel="stylesheet" href="style">
 </head>
 <body>
@@ -29,9 +29,9 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
             <div class="path-bar">
                 <div class="url-path active-path">لوحة التحكم</div>
                 <div class="url-path slash">/</div>
-                <div class="url-path">الادمنية</div>
+                <div class="url-path">المشرفين</div>
                 <div class="url-path slash">/</div>
-                <div class="url-path">تعديل بيانات الادمن</div>
+                <div class="url-path">تعديل بيانات المشرف</div>
             </div>
             <?php
             include '../inc/conn.inc.php';
@@ -74,7 +74,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                 $result = $stmt->execute();
 
                 if ($result) {
-                    echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>تم تعديل بيانات الادمن بنجاح</div>";
+                    echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>تم تعديل بيانات المشرف بنجاح</div>";
                 } else {
                     echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>هناك خطأ: " . $conn->error . "</div>";
                 }
@@ -89,8 +89,8 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                 <form action="" method="post">
                     <select class="fruit" name="type" style=" margin-bottom: 10px ;" required
                     onchange="toggleDepartment()">
-                        <option value="Admin">ادمن عام</option>
-                        <option value="SubAdmin">ادمن فرعي</option>
+                        <option value="Admin">مشرف عام</option>
+                        <option value="SubAdmin">مشرف ثانوي</option>
                         <option value="department">قسم</option>
                     </select>
                     <select class="fruit" name="department_id" style=" margin-bottom: 10px ;" 

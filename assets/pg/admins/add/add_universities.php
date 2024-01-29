@@ -1,10 +1,21 @@
+<?php
+require_once("../inc/conn.inc.php");
+session_start();
+if (isset($_SESSION["admin_user"])) {
+    if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin"
+    ) {    
+        header("Location: login");
+        exit();
+}
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة التحكم | أضافة الجامعات</title>
-    <link rel="stylesheet" href="style"> <!-- قد تحتاج تغيير اسم الملف حسب اسم ملف الستايل الخاص بك -->
+    <link rel="stylesheet" href="style"> 
 </head>
 <body>
 

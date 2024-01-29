@@ -21,9 +21,9 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] == "true") {
 
         $conn->commit();
 
-        echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px; justify-content: center; text-align: center; font-family: 'Tajawal', sans-serif;'>تم حذف الادمن بنجاح</div>";
+        echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px; justify-content: center; text-align: center; font-family: 'Tajawal', sans-serif;'>تم حذف المشرف بنجاح</div>";
         echo "<div style='justify-content: center; text-align: center;'>
-                <a href='My_Admins' style='padding: 10px; color: #fff; font-size:18px; font-weight: 500; border-radius: 5px; background-color: #18bc9c; font-family: Tajawal, sans-serif; text-decoration: none;'>الرجوع الى صفحة الادمنية</a>
+                <a href='My_Admins' style='padding: 10px; color: #fff; font-size:18px; font-weight: 500; border-radius: 5px; background-color: #18bc9c; font-family: Tajawal, sans-serif; text-decoration: none;'>الرجوع الى صفحة المشرفين</a>
               </div>";
     } catch (Exception $e) {
         $conn->rollback();
@@ -41,7 +41,7 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] == "true") {
             background-color: #5DC122;
             display: inline-block; 
             margin-top: 20px;  
-        '>الرجوع الى صفحة  الادمنية</a>
+        '>الرجوع الى صفحة  المشرفين</a>
 
     </div>";
     } finally {
@@ -56,13 +56,13 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] == "true") {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>لوحة التحكم | حذف الادمنية</title>
+        <title>لوحة التحكم | حذف المشرفين</title>
         <link rel="stylesheet" href="style">
     </head>
 
     <body>
         <div style="text-align: center; margin-top: 10%;">
-            <h1>هل أنت متأكد أنك ترغب في حذف هذه الادمن؟ (معرف  الادمن
+            <h1>هل أنت متأكد أنك ترغب في حذف هذه المشرف؟ (معرف المشرف
                 <?php echo $delete_My_Admins ?>)
             </h1>
             <h2 style="padding: 10px;">

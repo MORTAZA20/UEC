@@ -1,7 +1,9 @@
 <?php
 session_start();
 if (isset($_SESSION["admin_user"])) {
-if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin") {
+if ($_SESSION["admin_user"] != "Admin" 
+&& $_SESSION["admin_user"] != "SubAdmin"
+&& $_SESSION["admin_user"] != "department") {
     header("Location: login");
     exit();
 }
@@ -116,8 +118,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                     <div class="container" style="margin-bottom: 10px;">
                         <div class="row align-items-start">
                             <div class="col custom-column">
-                                <select id="university_id" class="fruit" name="university_id" onchange="getColleges()"
-                                    required>
+                                <select id="university_id" class="fruit" name="university_id" onchange="getColleges()">
                                     <?php
                                     include '../inc/conn.inc.php';
                                     $sql = "SELECT university_id, university_name FROM universities";
@@ -142,7 +143,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                                         $conn->close();
                                         ?>
                                 </select>
-                                <select id="college_id" class="fruit" name="college_id" onchange="getInf_departments()" required>
+                                <select id="college_id" class="fruit" name="college_id" onchange="getInf_departments()" >
                         <option value="<?php if (!isset($_POST['edit_id'])) {
                             echo "";
                         }else{ echo $row['college_id'] ;}?>"> 
@@ -151,7 +152,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                         }else{ echo $row['college_name'] ;} ?>
                         </option>
                         </select>
-                        <select id="department_id" class="fruit" name="department_id" required>
+                        <select id="department_id" class="fruit" name="department_id">
                         <option value="<?php if (!isset($_POST['edit_id'])) {
                             echo "";
                         }else{ echo $row['department_id'] ;}?>"> 
@@ -159,6 +160,10 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                             echo "";
                         }else{ echo $row['department_name'] ;} ?>
                         </option>
+                        <?php 
+                            if($_SESSION["admin_user"] == "department"){
+                                echo "<option value='" . $_SESSION["department_id"] . "'></option>"; 
+                            }?>
                         </select>
                             </div>
                         </div>
@@ -232,6 +237,13 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
             </div>
         </div>
     </div>
+    <?php if($_SESSION["admin_user"] == "department"){?>
+        <style>
+            #university_id,#college_id,#department_id{
+               display : none;
+            }
+        </style>
+    <?php } ?>
     <script src="displayImage"></script>
     <script src="../../../../../ecomweb1/assets/pg/admins/ckeditor/ckeditor.js"></script>
     <script>
@@ -243,7 +255,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
             config.toolbarCanCollapse = true;
             config.contentsCss = 'margin-bottom: 15px;';
         };
-
+        
     </script>
     <script>
         setTimeout(function () {
