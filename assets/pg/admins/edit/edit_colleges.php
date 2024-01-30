@@ -176,7 +176,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
         setTimeout(function () {
             document.getElementById('success-message').style.display = 'none';
             window.location.href = 'colleges';
-        }, 5000);
+        }, 4000);
     </script>
     <script src="../../../../../ecomweb1/assets/pg/admins/ckeditor/ckeditor.js"></script>
     <script>

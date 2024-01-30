@@ -1,11 +1,13 @@
 <?php
 require_once("../inc/conn.inc.php");
 session_start();
-
+if (isset($_SESSION["admin_user"])) {
 if ($_SESSION["admin_user"] != "Admin") {
     header("Location:login");
     exit();
+} 
 }
+
 if (isset($_POST["btn_delete"])) {
     $_SESSION['delete_colleges'] = $_POST["del_id"];
     $delete_colleges = $_SESSION['delete_colleges'];

@@ -85,16 +85,21 @@ if (isset($_SESSION["admin_user"])) {
                     onchange="toggleDepartment()">
                         <option value="Admin">مشرف عام</option>
                         <option value="SubAdmin">مشرف ثانوي</option>
-                        <option value="Department">قسم</option>
+                        <option value="department">قسم</option>
                     </select>
                     <select class="fruit" name="department_id" style=" margin-bottom: 10px ;" 
                     id="department_select">
                         <?php
                         include '../inc/conn.inc.php';
-                        $sql_dep = "SELECT * FROM departments";
-                        $result_sql_dep = $conn->query($sql_dep);
-                        while ($row_dep = $result_sql_dep->fetch_assoc()) {
-                            echo "<option value='" . $row_dep['department_id'] . "'>" . $row_dep['department_name'] . "</option>";
+                        $sql = "SELECT d.*, c.college_name, u.university_name
+                                FROM departments d
+                                LEFT JOIN colleges c ON d.college_id = c.college_id
+                                LEFT JOIN universities u ON c.university_id = u.university_id
+                                WHERE d.department_id NOT IN (SELECT department_id FROM inf_login WHERE type = 'department')";
+
+                        $result = $conn->query($sql);
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<option value='" . $row['department_id'] . "'>" . $row['university_name'] ." - " . $row['college_name'] ." - ". $row['department_name'] . "</option>";
                         }
                         ?>
                     </select>
@@ -119,7 +124,7 @@ if (isset($_SESSION["admin_user"])) {
         }
         setTimeout(function() {
             document.getElementById('success-message').style.display = 'none';
-        }, 5000);
+        }, 4000);
     </script>
 </body>
 

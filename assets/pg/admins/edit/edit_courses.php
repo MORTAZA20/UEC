@@ -1,7 +1,9 @@
 <?php
 session_start();
 if (isset($_SESSION["admin_user"])) {
-if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin") {
+if ($_SESSION["admin_user"] != "Admin" 
+&& $_SESSION["admin_user"] != "SubAdmin"
+&& $_SESSION["admin_user"] != "department") {
     header("Location: login");
     exit();
 }
@@ -127,7 +129,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                                         ?>
                                 </select>
                                 <select id="college_id" class="fruit" name="college_id" onchange="getInf_departments()" required>
-                        <option value="<?php if (!isset($_POST['edit_id'])) {
+                        <option value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){
                             echo "";
                         }else{ echo $row['college_id'] ;}?>"> 
                         <?php if (!isset($_POST['edit_id'])) {
@@ -136,12 +138,16 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                         </option>
                         </select>
                         <select id="department_id" class="fruit" name="department_id" required>
-                        <option value="<?php if (!isset($_POST['edit_id'])) {
+                        <option value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){
                             echo "";
                         }else{ echo $row['department_id'] ;}?>"> 
-                        <?php if (!isset($_POST['edit_id'])) {
+                        <?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){
                             echo "";
                         }else{ echo $row['department_name'] ;} ?>
+                        <?php 
+                        if($_SESSION["admin_user"] == "department"){
+                            echo "<option value='" . $_SESSION["department_id"] . "' selected></option>"; 
+                        }?>
                         </option>
                         </select>
                             </div>
@@ -154,7 +160,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                         value="<?php
                                  if (!isset($_POST['edit_id'])){echo "";}else{echo $edit_id;}?>" required>
                         <input type="text" name="course_name" placeholder="اسم المادة"
-                        value="<?php if (!isset($_POST['edit_id'])){echo "";}else{echo $row['course_name'];} ?>" required>
+                        value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){echo "";}else{echo $row['course_name'];} ?>" required>
                         <select id="fruit" name="course_stage" class="fruit" required>
                             <option value="1">المرحلة الاولى</option>
                             <option value="2">المرحلة الثانية</option>
@@ -179,11 +185,18 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
             </div>
         </div>
     </div>
+    <?php if($_SESSION["admin_user"] == "department"){?>
+        <style>
+            #university_id,#college_id,#department_id{
+               display : none;
+            }
+        </style>
+    <?php } ?>
     <script>
         setTimeout(function () {
             document.getElementById('success-message').style.display = 'none';
             window.location.href = 'courses';
-        }, 5000);
+        }, 4000);
     </script>
     <script src="../../../../../ecomweb1/assets/pg/admins/ckeditor/ckeditor.js"></script>
     <script>

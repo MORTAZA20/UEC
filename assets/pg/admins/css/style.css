@@ -65,7 +65,7 @@ body {
     overflow-y: scroll;
 }
 
-.content-bar>.btn-style {
+.content-bar .btn-style {
     color: #fff;
     background-color: #23a0a9;
     position: absolute;
@@ -76,13 +76,14 @@ body {
     padding: 8px 15px;
     border: 0px;
     border-radius: 5px;
-    cursor: pointer;
+    cursor: pointer; 
+    border: 1px solid #23a0a9;
 }
 
-.content-bar>.btn-style:hover {
+.content-bar .btn-style:hover {
     color: #23a0a9;
     background-color: #ffffff;
-    border: 1px solid #23a0a9;
+   
 }
 
 .side-bar {

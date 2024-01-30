@@ -1,14 +1,26 @@
 <?php
             
     if (isset($_POST['search'])) {
+        session_start();
         include '../inc/conn.inc.php';
         $search = mysqli_real_escape_string($conn, $_POST['search']);
+        if ($_SESSION["admin_user"] == "department") {
+                $department_id = $_SESSION["department_id"];
         $sql = "SELECT top_students.*, departments.department_name FROM top_students
+                LEFT JOIN departments ON top_students.department_id = departments.department_id WHERE (student_name LIKE '%$search%' OR  departments.department_name LIKE '$search') AND top_students.department_id = '$department_id'";
+        } else  {
+                $sql = "SELECT top_students.*, departments.department_name FROM top_students
                 LEFT JOIN departments ON top_students.department_id = departments.department_id WHERE student_name LIKE '%$search%' OR  departments.department_name LIKE '$search'";
-    }else{
+}
+}else{
+        if ($_SESSION["admin_user"] == "department") {
+                $department_id = $_SESSION["department_id"];
         $sql = "SELECT top_students.*, departments.department_name FROM top_students
-                LEFT JOIN departments ON top_students.department_id = departments.department_id";  
-    }           
+                LEFT JOIN departments ON top_students.department_id = departments.department_id WHERE top_students.department_id = '$department_id'";  
+ }else{
+        $sql = "SELECT top_students.*, departments.department_name FROM top_students
+        LEFT JOIN departments ON top_students.department_id = departments.department_id";  
+ } }           
        $result = $conn->query($sql);
     while ($row = $result->fetch_assoc()) {
 ?>

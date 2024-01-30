@@ -1,7 +1,11 @@
 <?php
 session_start();
 if (isset($_SESSION["admin_user"])) {
-    if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin") {
+    if ($_SESSION["admin_user"] != "Admin" 
+    && $_SESSION["admin_user"] != "SubAdmin"
+    && $_SESSION["admin_user"] != "department") {
+        
+
         header("Location: login");
         exit();
     }
@@ -40,6 +44,12 @@ if (isset($_SESSION["admin_user"])) {
 
             if (isset($_POST['btn_edit'])) {
                 $Edit_id = $_POST['edit_id'];
+            }
+            if($_SESSION["admin_user"] == "department"){
+                $Edit_id = $_SESSION["department_id"];
+            }
+            
+
                 $sql = "SELECT d.*, c.college_id, c.university_id,c.college_name, u.university_name
                 FROM departments d
                 JOIN colleges c ON d.college_id = c.college_id
@@ -50,7 +60,7 @@ if (isset($_SESSION["admin_user"])) {
                 $stmt->execute();
                 $result = $stmt->get_result();
                 $row = $result->fetch_assoc();
-            }
+            
             if (isset($_POST["sub_form"])) {
 
                 //mysqli_real_escape_string للحماية من الهجمات
@@ -134,7 +144,7 @@ if (isset($_SESSION["admin_user"])) {
             <div class="container-form">
                 <form action="" method="post" enctype="multipart/form-data">
                     <div class="custom-column" style="margin-bottom: 10px;">
-                    <select id="university_id" class="fruit" name="university_id" onchange="getColleges()" required>
+                    <select id="university_id" class="fruit" name="university_id" onchange="getColleges()" >
                             <?php
                             include '../inc/conn.inc.php';
                             $sql = "SELECT university_id, university_name FROM universities";
@@ -159,39 +169,43 @@ if (isset($_SESSION["admin_user"])) {
                             $conn->close();
                             ?>
                         </select>
-                        <select id="college_id" class="fruit" name="college_id" required>
-                        <option value="<?php if (!isset($_POST['edit_id'])) {
+                        <select id="college_id" class="fruit" name="college_id">
+                        <option value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])) {
                             echo "";
                         }else{ echo $row['college_id'] ;}?>"> 
                         <?php if (!isset($_POST['edit_id'])) {
                             echo "";
                         }else{ echo $row['college_name'] ;} ?>
                         </option>
+                        <?php
+                        if($_SESSION["admin_user"] == "department"){
+                            echo "<option value='" . $row['college_id'] . "' selected></option>"; 
+                        }?>
                         </select>
-
-                        <input type="text" name="Edit_department_id" placeholder="معرف القسم" 
-                        value="<?php if (!isset($_POST['edit_id'])) {
+                        
+                        <input type="hidden" name="Edit_department_id" placeholder="معرف القسم" 
+                        value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])) {
                             echo "";
                         } else {
                             echo  $Edit_id;
-                        } ?>" required>
+                        } ?>" >
                     </div>
 
                     <div class="custom-column" style="margin-bottom: 10px;">
                         <input type="text" name="department_name" id="" placeholder="اسم القسم" 
-                        value="<?php if (!isset($_POST['edit_id'])) {
+                        value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){
                             echo "";
                         } else {
                             echo $row['department_name'];
                         } ?>" required>
                         <input type="number" name="required_GPA" id="" placeholder="معدل القبول الصباحي" 
-                        value="<?php if (!isset($_POST['edit_id'])) {
+                        value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){
                             echo "";
                         } else {
                             echo $row['required_GPA'];
                         } ?>" required>
                         <input type="number" name="evening_GPA" placeholder="معدل القبول المسائي" 
-                        value="<?php if (!isset($_POST['edit_id'])) {
+                        value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){
                             echo "";
                         } else {
                             echo $row['evening_GPA'];
@@ -200,19 +214,19 @@ if (isset($_SESSION["admin_user"])) {
 
                     <div class="custom-column" style="margin-bottom: 10px;">
                         <input type="number" name="evening_study_fees" placeholder="القسط السنوي(المسائي)" 
-                        value="<?php if (!isset($_POST['edit_id'])) {
+                        value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){
                             echo "";
                         } else {
                             echo $row['evening_study_fees'];
                         } ?>" required>
                         <input type="number" name="parallel_GPA" placeholder="معدل القبول الموازي" 
-                        value="<?php if (!isset($_POST['edit_id'])) {
+                        value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){
                             echo "";
                         } else {
                             echo $row['parallel_GPA'];
                         } ?>" required>
                         <input type="number" name="parallel_study_fees" placeholder="القسط السنوي(الموازي)" 
-                        value="<?php if (!isset($_POST['edit_id'])) {
+                        value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){
                             echo "";
                         } else {
                             echo $row['parallel_study_fees'];
@@ -221,14 +235,14 @@ if (isset($_SESSION["admin_user"])) {
 
                     <p>الوصف</p>
                     <textarea name="department_description" id="editor1" placeholder="النبذه عن القسم">
-                        <?php if (!isset($_POST['edit_id'])) {
+                        <?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){
                             echo "";
                         } else {
                             echo $row['department_description'];
                         } ?></textarea>
                     <p>رسالة القسم</p>
                     <textarea name="scientific_department_message" id="editor2" placeholder="رسالة القسم">
-                        <?php if (!isset($_POST['edit_id'])) {
+                        <?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){
                             echo "";
                         } else {
                             echo $row['scientific_department_message'];
@@ -253,12 +267,25 @@ if (isset($_SESSION["admin_user"])) {
             </div>
         </div>
     </div>
+    <?php if($_SESSION["admin_user"] == "department"){?>
+        <style>
+            #university_id,#college_id{
+               display : none;
+            }
+        </style>
+    <?php } ?>
     <script src="displayImage"></script>
     <script>
         setTimeout(function() {
             document.getElementById('success-message').style.display = 'none';
-            window.location.href = 'inf_departments';
-        }, 5000);
+            <?php
+            if ($_SESSION["admin_user"] == "department") {
+                echo "window.location.href = 'ShowDepartment';";
+            } else {
+                echo "window.location.href = 'inf_departments';";
+            }
+            ?>
+        }, 4000);
     </script>
     <script src="../../../../../ecomweb1/assets/pg/admins/ckeditor/ckeditor.js"></script>
     <script>

@@ -23,7 +23,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
     <div class="content">
     <?php  include 'inc/sidebar.php';?>
         <div class="content-bar">
-            <div style='position:relative; margin-top: 15px; '> <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>المشرفون</div>
+            <div style='position:relative; margin-top: 15px; '> <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>المشرفين</div>
             <button class="btn-style" onclick="window.open('add_admin' , '_self');">إضافة مشرف جديد</button>
 
             <div class="group">
@@ -41,7 +41,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
             <div    class="path-bar">
                 <div class="url-path active-path">لوحة التحكم</div>
                 <div class="url-path slash">/</div>
-                <div class="url-path">المشرفبن</div>
+                <div class="url-path">المشرفين</div>
             </div>
 
             <table class="table teble-bordered" id="table-data" role="table">

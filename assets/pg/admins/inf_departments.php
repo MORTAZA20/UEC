@@ -56,11 +56,10 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
             <table class="table teble-bordered" id="table-data" role="table">
                 <thead>
                     <tr>
-                        <th width="5%">معرف القسم</th>
-                        <th class="text-right" width="8%">الكلية</th>
-                        <th class="text-right" width="8%">القسم</th>
-                        <th class="text-right" width="8%">شعار القسم</th>
-                        
+                        <th width="10%">معرف القسم</th>
+                        <th class="text-right" width="10%">الكلية</th>
+                        <th class="text-right" width="10%">القسم</th>
+                        <th class="text-right" width="10%">شعار القسم</th>
                         <th class="text-right" width="30%">التحكم</th>
                     </tr>
                 </thead>

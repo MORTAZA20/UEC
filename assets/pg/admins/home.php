@@ -83,16 +83,12 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
             <div class="Latest-orders">احدث الاضافات</div>
 
             <table class="table teble-bordered" role="table">
-                <thead>
+            <thead>
                     <tr>
-                        <th width="2%">#</th>
-                        <th class="text-right" width="15%">القسم</th>
-                        <th class="text-right" width="15%">الكلية</th>
-                        <th class="text-right" width="10%">النبذة</th>
-                        <th class="text-right" width="10%">رسالة القسم</th>
-                        <th class="text-right" width="10%">المعدل صباحي</th>
-                        <th class="text-right" width="10%">المعدل مسائي</th>
-                        <th class="text-right" width="15%">المعدل موازي</th>
+                        <th width="10%">معرف القسم</th>
+                        <th class="text-right" width="10%">الكلية</th>
+                        <th class="text-right" width="10%">القسم</th>
+                        <th class="text-right" width="10%">شعار القسم</th>
                         <th class="text-right" width="30%">التحكم</th>
                     </tr>
                 </thead>

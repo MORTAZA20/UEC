@@ -145,7 +145,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
         setTimeout(function () {
             document.getElementById('success-message').style.display = 'none';
             window.location.href = 'universities';
-        }, 5000);
+        }, 4000);
     </script>
 
 </body>

@@ -186,7 +186,7 @@ if ($_SESSION["admin_user"] != "Admin"
         setTimeout(function () {
             document.getElementById('success-message').style.display = 'none';
             window.location.href = 'top_students';
-        }, 5000);
+        }, 4000);
     </script>
 
 </body>

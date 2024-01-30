@@ -43,7 +43,7 @@
     if (isset($_SESSION["admin_user"])) {
         if ($type == "Admin") {
     ?>
-            <div class="item-bar" onclick="window.open('My_Admins' , '_self')">المشرفون</div>
+            <div class="item-bar" onclick="window.open('My_Admins' , '_self')">المشرفين</div>
     <?php
         }
     }

@@ -60,11 +60,12 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin"
             <table class="table teble-bordered" id="table-data" role="table">
                 <thead>
                     <tr>
-                        <th width="10%">معرف المشروع</th>
+                        <th class="text-right" width="10%">معرف المشروع</th>
                         <th class="text-right" width="10%">القسم</th>
                         <th class="text-right" width="10%">اسم المشروع</th>
                         <th class="text-right" width="10%">صاحب المشروع</th>
-                        <th class="text-right" width="15%">المشرف على المشروع</th>
+                        <th class="text-right" width="10%">المشرف على المشروع</th>
+                        <th class="text-right" width="10%">صورة المشروع</th>
                         <th class="text-right" width="15%">نبذه عن المشروع</th>
                         <th class="text-right" width="20%">التحكم</th>
                     </tr>

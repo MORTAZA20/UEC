@@ -160,7 +160,7 @@ if (isset($_SESSION["admin_user"])) {
     <script>
         setTimeout(function () {
             document.getElementById('success-message').style.display = 'none';
-        }, 5000);
+        }, 4000);
     </script>
     <script src="../../../../../ecomweb1/assets/pg/admins/ckeditor/ckeditor.js"></script>
     <script>

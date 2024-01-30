@@ -1,11 +1,14 @@
 <?php
 require_once("../inc/conn.inc.php");
 session_start();
-
-if ($_SESSION["admin_user"] != "Admin") {
+if (isset($_SESSION["admin_user"])) {
+if ($_SESSION["admin_user"] != "Admin"
+ && $_SESSION["admin_user"] != "department") {
     header("Location:login");
     exit();
 }
+}
+
 
 $delete_career_opportunities = $_POST["del_id"];
 

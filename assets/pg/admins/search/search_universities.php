@@ -15,7 +15,7 @@ while ($row = $result->fetch_assoc()) {
 ?>
     <tr>
                 <td class="truncated-text"><?php echo $row["university_id"]?></td>
-                <td><img src="assets/pg/admins/<?php echo $row["universities_img_path"]?>" 
+                <td><img src="./assets/pg/admins/<?php echo $row["universities_img_path"]?>" 
                 ></td>
         
         <div class="truncated-text">

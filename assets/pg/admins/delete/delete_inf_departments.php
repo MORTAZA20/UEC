@@ -2,10 +2,13 @@
 require_once("../inc/conn.inc.php");
 session_start();
 
-if ($_SESSION["admin_user"] != "Admin") {
-    header("Location:login");
-    exit();
+if (isset($_SESSION["admin_user"])) {
+    if ($_SESSION["admin_user"] != "Admin") {
+        header("Location:login");
+        exit();
 }
+}
+    
 
 $delete_departments = $_POST["del_id"];
 

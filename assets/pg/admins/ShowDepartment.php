@@ -15,7 +15,6 @@ require_once("inc/conn.inc.php");
 
     <title>بوصلة التعليم الجامعي | لوحة التحكم</title>
 
-
     <link rel="stylesheet" href="style">
 </head>
 
@@ -27,11 +26,19 @@ require_once("inc/conn.inc.php");
         <?php include 'inc/sidebar.php'; ?>
 
         <div class="content-bar">
-            <div style='position:relative; margin-top: 15px; '>
-                <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>معلومات القسم</h2>
-                <button class="btn-style" onclick="window.open('edit_inf_departments' , '_self');">تعديل معلومات القسم</button>
+        <div style='position:relative; margin-top: 15px; '>
+            
+        <?php 
+        if ($_SESSION["admin_user"] == "department"){ 
 
-                <div class="path-bar">
+            ?>
+        
+        <button class="btn-style" onclick="window.open('edit_inf_departments' , '_self');">تعديل معلومات القسم</button>
+        <?php } ?>
+        <h2 style='text-align: center;font-size: 32px; font-weight: lighter;'>معلومات القسم</h2>
+            
+        
+                <div style='margin-top :50px;' class="path-bar">
                     <div class="url-path active-path">لوحة التحكم</div>
                     <div class="url-path slash">/</div>
                     <div class="url-path">الاقسام</div>
