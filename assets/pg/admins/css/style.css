@@ -23,6 +23,7 @@ body {
 }
 
 .header-title {
+<<<<<<< HEAD
     display: flex;
     font-size: 30px;
 }
@@ -35,6 +36,11 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
 }
+=======
+    font-size: 30px;
+}
+
+>>>>>>> 6a535679d7b76ac0f95c22a795a77624e343050d
 .side-menu {
     top: 14px;
     left: 0;
@@ -43,6 +49,7 @@ body {
 }
 
 .menu-item {
+<<<<<<< HEAD
     display: flex;
     margin-left: 20px;
     color: rgb(255, 255, 255);
@@ -51,13 +58,26 @@ body {
     padding: 8px 10px;
 
     border-radius: 5px ;
+=======
+    margin-left: 20px;
+    color: rgb(194, 19, 9);
+    font-weight: 500;
+    background-color: #303841;
+    padding: 8px 10px;
+
+    border-radius: 5px;
+>>>>>>> 6a535679d7b76ac0f95c22a795a77624e343050d
 }
 
 .menu-item:hover {
     color: #fff;
     background-color: #192330;
     cursor: pointer;
+<<<<<<< HEAD
     border: #752b2b 0.1rem solid;
+=======
+    border: #23a0a9 0.1rem solid;
+>>>>>>> 6a535679d7b76ac0f95c22a795a77624e343050d
 }
 
 .content {
@@ -76,7 +96,10 @@ body {
 }
 
 .content-bar .btn-style {
+<<<<<<< HEAD
     display: flex;
+=======
+>>>>>>> 6a535679d7b76ac0f95c22a795a77624e343050d
     color: #fff;
     background-color: #23a0a9;
     position: absolute;
@@ -108,9 +131,13 @@ body {
 
 }
 
+<<<<<<< HEAD
 
 .item-bar {
     display: flex;
+=======
+.item-bar {
+>>>>>>> 6a535679d7b76ac0f95c22a795a77624e343050d
     width: 100%;
     height: auto;
     color: #ECF0F1;
@@ -125,6 +152,7 @@ body {
     padding: 10px 20px;
     cursor: pointer;
 }
+<<<<<<< HEAD
 .Imgitem{
     pointer-events: none;
     margin-left: 5px;
@@ -134,6 +162,9 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
 }
+=======
+
+>>>>>>> 6a535679d7b76ac0f95c22a795a77624e343050d
 #req2 {
     display: none;
 }
@@ -158,10 +189,19 @@ body {
     border-bottom: 1px solid #2A3B52;
     padding: 10px 15px;
     transition: 0.3s all;
+<<<<<<< HEAD
     cursor: pointer;
 }
 
 
+=======
+}
+
+.sub-menu>div:hover {
+    background-color: #344865;
+    cursor: pointer;
+}
+>>>>>>> 6a535679d7b76ac0f95c22a795a77624e343050d
 
 .path-bar {
     margin: 20px;
@@ -371,7 +411,19 @@ tbody tr td img {
     justify-content: center;
 }
 
+<<<<<<< HEAD
 
+=======
+.badge {
+    padding: 10px;
+}
+
+.badge>.text-center {
+    text-align: center;
+    margin-top: 30%;
+
+}
+>>>>>>> 6a535679d7b76ac0f95c22a795a77624e343050d
 
 .del-massage {
     width: 100%;

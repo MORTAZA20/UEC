@@ -29,8 +29,12 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
             <div style='position:relative; margin-top: 15px; '>
                 <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>الاقسام
             </div>
+<<<<<<< HEAD
             <button class="btn-style" onclick="window.open('add_departments' , '_self');"><div class="Imgitem" style="background-image: url('A1');"></div>
             أضافة قسم جديد</button>
+=======
+            <button class="btn-style" onclick="window.open('add_departments' , '_self');">أضافة قسم جديد</button>
+>>>>>>> 6a535679d7b76ac0f95c22a795a77624e343050d
        
 
                 <div class="group">

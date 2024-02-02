@@ -29,8 +29,12 @@ if (isset($_SESSION["admin_user"])) {
             <div style='position:relative; margin-top: 15px;'>
                 <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>الطلبة الاوائل</h2>
             </div>
+<<<<<<< HEAD
             <button class="btn-style" onclick="window.open('add_top_studens' , '_self');"><div class="Imgitem" style="background-image: url('A1');"></div>
             أضافة طالب جديد</button>
+=======
+            <button class="btn-style" onclick="window.open('add_top_studens' , '_self');">أضافة طالب جديد</button>
+>>>>>>> 6a535679d7b76ac0f95c22a795a77624e343050d
 
             <div class="group">
                 <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">

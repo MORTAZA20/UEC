@@ -32,8 +32,12 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin"
                     مشاريع الطلاب
                 </h2>
             </div>
+<<<<<<< HEAD
             <button class="btn-style" onclick="window.open('add_student_projects' , '_self');"><div class="Imgitem" style="background-image: url('A1');"></div>
             أضافة مشروع جديد</button>
+=======
+            <button class="btn-style" onclick="window.open('add_student_projects' , '_self');">أضافة مشروع جديد</button>
+>>>>>>> 6a535679d7b76ac0f95c22a795a77624e343050d
 
 
             <div class="group">
