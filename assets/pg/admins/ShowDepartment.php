@@ -33,12 +33,9 @@ require_once("inc/conn.inc.php");
 
             ?>
         
-<<<<<<< HEAD
         <button class="btn-style" onclick="window.open('edit_inf_departments' , '_self');"><div class="Imgitem" style="background-image: url('E1');"></div>
         تعديل معلومات القسم</button>
-=======
-        <button class="btn-style" onclick="window.open('edit_inf_departments' , '_self');">تعديل معلومات القسم</button>
->>>>>>> 6a535679d7b76ac0f95c22a795a77624e343050d
+
         <?php } ?>
         <h2 style='text-align: center;font-size: 32px; font-weight: lighter;'>معلومات القسم</h2>
             

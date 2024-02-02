@@ -171,10 +171,7 @@ body {
     cursor: pointer;
 }
 
-.sub-menu>div:hover {
-    background-color: #344865;
-    cursor: pointer;
-}
+
 
 
 .path-bar {

@@ -99,7 +99,7 @@ $conn->close();
             </div>
             <button type="submit" name="sub_log" class="btn-active">تسجيل</button>
             <div class="hrsp">
-                <hr><span>هل تواجهة بعض المشاكل؟</span>
+                <hr><span>هل تواجهه بعض المشاكل؟</span>
                 <hr>
             </div>
 
