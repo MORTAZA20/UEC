@@ -2,10 +2,13 @@
 require_once("inc/conn.inc.php");
 session_start();
 if (isset($_SESSION["admin_user"])) {
-if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin") {
+if ($_SESSION["admin_user"] != "Admin") {
     header("Location: login");
     exit();
 }
+}else{
+    header("Location: login");
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -13,7 +16,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة التحكم | المشرفون</title>
+    <title>لوحة التحكم | المشرفين</title>
     <link rel="stylesheet" href="style">
 </head>
 <body>
@@ -72,7 +75,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                 var searchValue = $(this).val();
                 $.ajax({
                     type: "POST",
-                    url: "../ecomweb1/assets/pg/admins/search/search_My_Admins.php",
+                    url: "../university-education-compass/assets/pg/admins/search/search_My_Admins.php",
                     data: { search: searchValue },
                     success: function (data) {
                         $("#table-data tbody").html(data);

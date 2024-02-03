@@ -178,7 +178,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
             window.location.href = 'colleges';
         }, 4000);
     </script>
-    <script src="../../../../../ecomweb1/assets/pg/admins/ckeditor/ckeditor.js"></script>
+    <script src="../../../../../university-education-compass/assets/pg/admins/ckeditor/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('editor1');
         CKEDITOR.editorConfig = function (config) {

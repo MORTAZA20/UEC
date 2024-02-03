@@ -49,7 +49,7 @@ body {
     margin-left: 20px;
     color: rgb(255, 255, 255);
     font-weight: 500;
-    background-color: #751560;
+    background-color: #af3602;
     padding: 8px 10px;
     border-radius: 5px ;
     margin-left: 20px; 
@@ -60,7 +60,8 @@ body {
     color: #fff;
     background-color: #192330;
     cursor: pointer;
-    border: #751560 0.1rem solid;
+    color: #af3602;
+    border:  0.1rem solid #af3602;
 }
 
 .content {

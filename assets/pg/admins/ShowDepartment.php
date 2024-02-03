@@ -2,7 +2,17 @@
 session_start();
 require_once("inc/conn.inc.php");
 
-
+if (isset($_SESSION["admin_user"])) {
+if ($_SESSION["admin_user"] != "Admin" 
+    && $_SESSION["admin_user"] != "SubAdmin"
+    && $_SESSION["admin_user"] != "department") {
+    header("Location: login");
+    exit();
+}
+}else{
+    header("Location: login");
+    exit();
+}
 
 ?>
 

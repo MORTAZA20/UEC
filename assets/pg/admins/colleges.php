@@ -6,6 +6,9 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
     header("Location: login");
     exit();
 }
+}else{
+    header("Location: login");
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -74,7 +77,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                 var searchValue = $(this).val();
                 $.ajax({
                     type: "POST",
-                    url: "../ecomweb1/assets/pg/admins/search/search_colleges.php",
+                    url: "../university-education-compass/assets/pg/admins/search/search_colleges.php",
                     data: { search: searchValue },
                     success: function (data) {
                         $("#table-data tbody").html(data);

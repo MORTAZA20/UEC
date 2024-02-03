@@ -6,6 +6,9 @@ if (isset($_SESSION["admin_user"])) {
     header("Location:login");
     exit();
 }
+}else{
+    header("Location: login");
+    exit();
 }
 
 include 'inc/navbar.php';
@@ -79,7 +82,7 @@ include 'inc/navbar.php';
                 var searchValue = $(this).val();
                 $.ajax({
                     type: "POST",
-                    url: "../ecomweb1/assets/pg/admins/search/search_universities.php",
+                    url: "../university-education-compass/assets/pg/admins/search/search_universities.php",
                     data: { search: searchValue },
                     success: function (data) {
                         $("#table-data tbody").html(data);

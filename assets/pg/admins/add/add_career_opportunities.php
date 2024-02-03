@@ -137,7 +137,7 @@ if (isset($_SESSION["admin_user"])) {
         </style>
     <?php } ?>
     <script src="index.js"></script>
-    <script src="../../../../../ecomweb1/assets/pg/admins/ckeditor/ckeditor.js"></script>
+    <script src="../../../../../university-education-compass/assets/pg/admins/ckeditor/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('editor1');
         CKEDITOR.editorConfig = function (config) {

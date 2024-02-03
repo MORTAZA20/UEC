@@ -8,6 +8,9 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
     header("Location: login");
     exit();
 }
+}else{
+    header("Location: login");
+    exit();
 }
 ?>
 
@@ -18,6 +21,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>بوصلة التعليم الجامعي | لوحة التحكم</title>
     <link rel="stylesheet" href="style">
+    <link rel="icon" href="LOGO">
 </head>
 <body>
 

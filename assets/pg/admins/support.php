@@ -9,6 +9,9 @@ if ($_SESSION["admin_user"] != "Admin"
     header("Location: login");
     exit();
 }
+}else{
+    header("Location: login");
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -110,7 +113,7 @@ if ($_SESSION["admin_user"] != "Admin"
             document.getElementById('success-message').style.display = 'none';
         }, 5000);
     </script>
-     <script src="../../../../../ecomweb1/assets/pg/admins/ckeditor/ckeditor.js"></script>
+     <script src="../../../../../university-education-compass/assets/pg/admins/ckeditor/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('editor1');
         CKEDITOR.editorConfig = function (config) {
