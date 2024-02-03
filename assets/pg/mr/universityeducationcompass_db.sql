@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2024 at 11:31 AM
+-- Generation Time: Feb 03, 2024 at 02:27 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -35,13 +35,6 @@ CREATE TABLE `career_opportunities` (
   `salary_range` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `career_opportunities`
---
-
-INSERT INTO `career_opportunities` (`opportunity_id`, `department_id`, `job_title`, `job_description`, `salary_range`) VALUES
-('1', '2278', '1111222', '', '2-56');
-
 -- --------------------------------------------------------
 
 --
@@ -62,14 +55,9 @@ CREATE TABLE `colleges` (
 --
 
 INSERT INTO `colleges` (`college_id`, `college_name`, `college_description`, `required_GPA`, `university_id`, `colleges_img_path`) VALUES
-('332', '323', '', 2147483647, '1', 'colleges_img/computer.png'),
-('4', '4', '', 4, '1', 'colleges_img/LOGO5.jpg'),
-('44568888', '888', '', 88, '1', 'colleges_img/computer.png'),
-('45', 'كلية التربية للعلوم الصرفة1', '                                            ', 1, 'kwe28', 'colleges_img/close.png'),
-('5656', '65656', '', 56656, '1', 'colleges_img/data-mining.png'),
-('98654', 'كلية التربية للعلوم الصرفة2', '', 2147483647, '1', 'colleges_img/LOGO3.jpg'),
-('986545', '5555555555555555555555', '', 2147483647, '1', 'colleges_img/bg18.jpg'),
-('9865499', 'كلية التربية للعلوم الصرفة', '', 3, '1', 'colleges_img/اسئلة شبكات2.jpg');
+('45', 'كلية التربية للعلوم الصرفة1', '', 66, '1245', 'colleges_img/C1.png'),
+('6', 'كلية التربية للعلوم الصرفة2', '', 77, '1245', 'colleges_img/bg1.png'),
+('98654', '6', '', 6, '1', 'colleges_img/bg1.png');
 
 -- --------------------------------------------------------
 
@@ -84,14 +72,6 @@ CREATE TABLE `courses` (
   `course_description` text DEFAULT NULL,
   `course_stage` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `courses`
---
-
-INSERT INTO `courses` (`course_id`, `course_name`, `department_id`, `course_description`, `course_stage`) VALUES
-('2r', 'التشفير12', '2278', '', 1),
-('898', 'التشفير', '2278', '', 3);
 
 -- --------------------------------------------------------
 
@@ -118,8 +98,7 @@ CREATE TABLE `departments` (
 --
 
 INSERT INTO `departments` (`department_id`, `department_name`, `college_id`, `department_description`, `scientific_department_message`, `required_GPA`, `evening_GPA`, `parallel_GPA`, `parallel_study_fees`, `evening_study_fees`, `departments_img_path`) VALUES
-('1', 'الحاسبات', '45', '                        ', '                                                                                                                                                                        ', 1, 11, 1, 1, 1, 'departments_img/LOGO.png'),
-('2278', 'الحاسبات', '9865499', '', '', 4, 44, 4, 4, 4, 'departments_img/LOGO1.jpg');
+('67', 'الحاسبات', '45', '', '', 67, 67, 67, 67, 67, 'departments_img/homework.png');
 
 -- --------------------------------------------------------
 
@@ -142,9 +121,9 @@ CREATE TABLE `inf_login` (
 --
 
 INSERT INTO `inf_login` (`Admin_id`, `department_id`, `AdminUserName`, `AdminPassword`, `type`, `RegistrationData`, `RegistrationTime`) VALUES
-(43, NULL, '1', '$2y$13$O0QMy6UAc9d6hASYw8KGFu43uiIkHRyaj7m/gNNKAsOVX.AhezLBO', 'Admin', '2024-01-21', '03:08:00'),
-(51, '2278', '2', '$2y$13$Q7MXgJXrN4IGmnx7VDAOXuR3mr1ZMqiK.6dZJpHztV8W4pYQQA2rm', 'department', '2024-01-20', '09:23:00'),
-(52, NULL, '222', '$2y$13$dNrQaN5hvnmy4PGNlAa8h./MWPDg.L/dck2rAtBe765IrY13a4Kh.', 'SubAdmin', '2024-01-20', '11:32:00');
+(43, NULL, '1', '$2y$13$O0QMy6UAc9d6hASYw8KGFu43uiIkHRyaj7m/gNNKAsOVX.AhezLBO', 'Admin', '2024-02-03', '04:11:00'),
+(52, NULL, '222', '$2y$13$dNrQaN5hvnmy4PGNlAa8h./MWPDg.L/dck2rAtBe765IrY13a4Kh.', 'SubAdmin', '2024-01-20', '11:32:00'),
+(53, '67', '22', '$2y$13$6ElZRrure2cHOGU.31GSQeNC61VpCg5Qs58eevNj02aA3Zxjv1KcS', 'department', '2024-02-03', '04:01:00');
 
 -- --------------------------------------------------------
 
@@ -162,13 +141,6 @@ CREATE TABLE `student_projects` (
   `student_projects_img_path` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `student_projects`
---
-
-INSERT INTO `student_projects` (`project_id`, `department_id`, `project_name`, `project_description`, `project_supervisor`, `student_name`, `student_projects_img_path`) VALUES
-('1 ', '2278', 'DDDDDDD', '', '111', 'مرتضى', 'student_projects_img/LOGO5.jpg');
-
 -- --------------------------------------------------------
 
 --
@@ -182,13 +154,6 @@ CREATE TABLE `top_students` (
   `Graduation_Year` date NOT NULL,
   `Cumulative_Rating` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `top_students`
---
-
-INSERT INTO `top_students` (`student_id`, `department_id`, `student_name`, `Graduation_Year`, `Cumulative_Rating`) VALUES
-('000 ', '2278', 'مرتضى124', '2024-01-15', 89);
 
 -- --------------------------------------------------------
 
@@ -209,9 +174,8 @@ CREATE TABLE `universities` (
 --
 
 INSERT INTO `universities` (`university_id`, `university_name`, `university_location`, `university_website`, `universities_img_path`) VALUES
-('1', 'جامعة الكرمة', 'البصرة', 'صقث1', 'universities_img/LOGO1.jpg'),
-('666', 'بغداد', 'البصرة', 'بلا', 'universities_img/LOGO5.jpg'),
-('kwe28', 'حيدر', 'بل', 'بلا', 'universities_img/photo_2023-11-11_13-16-29.jpg');
+('1', 'جامعة الكرمة', 'البصرة', 'صقث', 'universities_img/universityeducationcompass_db.png'),
+('1245', 'بغداد', 'بغداد', 'sdfg', 'universities_img/E1.png');
 
 --
 -- Indexes for dumped tables
@@ -280,7 +244,7 @@ ALTER TABLE `universities`
 -- AUTO_INCREMENT for table `inf_login`
 --
 ALTER TABLE `inf_login`
-  MODIFY `Admin_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `Admin_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- Constraints for dumped tables

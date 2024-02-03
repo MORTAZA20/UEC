@@ -4,7 +4,7 @@ RewriteRule ^style ./assets/pg/admins/css/style.css [NC,L]
 RewriteRule ^stylelogin ./assets/pg/admins/css/stylelogin.css [NC,L]
 
 RewriteRule ^bg1 ./assets/pg/admins/img/bg1.png [L]
-RewriteRule ^LOGO ./assets/pg/admins/img/logo22.png [L]
+RewriteRule ^LOGO ./assets/pg/admins/img/logo23.png [L]
 
 RewriteRule ^home-page ./assets/pg/admins/img/home-page.png [L]
 RewriteRule ^university ./assets/pg/admins/img/university.png [L]

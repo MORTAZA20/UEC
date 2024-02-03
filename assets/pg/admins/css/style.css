@@ -49,14 +49,10 @@ body {
     margin-left: 20px;
     color: rgb(255, 255, 255);
     font-weight: 500;
-    background-color: #752b2b;
+    background-color: #751560;
     padding: 8px 10px;
     border-radius: 5px ;
-    margin-left: 20px;
-    color: rgb(194, 19, 9);
-    font-weight: 500;
-    background-color: #303841;
-    padding: 8px 10px;
+    margin-left: 20px; 
     border-radius: 5px;
 }
 
@@ -64,7 +60,7 @@ body {
     color: #fff;
     background-color: #192330;
     cursor: pointer;
-    border: #752b2b 0.1rem solid;
+    border: #751560 0.1rem solid;
 }
 
 .content {
@@ -328,7 +324,7 @@ tbody tr td img {
     color: #fff;
     font-size: 18px;
     border-radius: 5px;
-    border: 1px solid #192330;
+    border: 1px solid #23a0a9;
     background-color: #192330;
     padding: 10px 15px;
     cursor: pointer;

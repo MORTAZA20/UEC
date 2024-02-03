@@ -57,8 +57,8 @@ include 'inc/navbar.php';
             <table class="table teble-bordered" id="table-data" role="table">
                 <thead>
                     <tr>
-                        <th width="10%">معرف الجامعة</th>
-                        <th width="20%">شعار الجامعة</th>
+                        <th class="text-right" width="10%">معرف الجامعة</th>
+                        <th class="text-right" width="20%">شعار الجامعة</th>
                         <th class="text-right" width="15%">اسم الجامعة</th>
                         <th class="text-right" width="15%">موقع الجامعة</th>
                         <th class="text-right" width="20%">موقع الجامعة الإلكتروني</th>
