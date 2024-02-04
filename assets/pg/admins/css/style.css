@@ -27,15 +27,15 @@ body {
     display: flex;
     font-size: 30px;
 }
-.Img-header-title{
+/* .Img-header-title{
     pointer-events: none;
     margin-left: 5px;
-    width: 40px;
-    height: 40px; 
+    width: 70px;
+    height: 70px; 
     background-size: cover; 
     background-repeat: no-repeat;
     background-position: center center;
-}
+} */
 
 .side-menu {
     top: 14px;

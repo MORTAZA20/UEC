@@ -33,6 +33,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
 
         <div class="content-bar">
             <div style='position:relative; margin-top: 15px; '>
+                
               <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>الصفحة الرئيسية</h2>
             </div>
 
