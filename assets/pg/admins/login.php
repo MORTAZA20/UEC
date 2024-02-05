@@ -14,15 +14,15 @@ if (isset($_POST["sub_log"])) {
         $end = microtime(true);
     } while (($end - $start) < $timeTarget);
 
-    $stmt = $conn->prepare("SELECT inf_login.*
-                FROM inf_login
-                LEFT JOIN departments ON inf_login.department_id = departments.department_id
-                WHERE inf_login.AdminUserName=?");
+    $sql = "SELECT inf_login.* FROM inf_login
+    LEFT JOIN departments ON inf_login.department_id = departments.department_id
+    WHERE inf_login.AdminUserName=?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $user_login);
+$stmt->execute();
+$result = $stmt->get_result();
 
 
-    $stmt->bind_param("s", $user_login);
-    $stmt->execute();
-    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
 
@@ -32,24 +32,37 @@ if (isset($_POST["sub_log"])) {
         $RegistrationData = date("Y-m-d");
         $RegistrationTime = date("g:i a");
         if (password_verify("$pass_login", $row["AdminPassword"])) {
-            $sql_UPDATE = "UPDATE inf_login SET  RegistrationData = '$RegistrationData' , RegistrationTime = '$RegistrationTime' WHERE Admin_id = '$Admin_id'";
-            $stmt_UPDATE = $conn->query($sql_UPDATE);
+            $sql_UPDATE = "UPDATE inf_login SET RegistrationData = ?, RegistrationTime = ? WHERE Admin_id = ?";
+            $stmt_UPDATE = $conn->prepare($sql_UPDATE);
+            $stmt_UPDATE->bind_param("ssi", $RegistrationData, $RegistrationTime, $Admin_id);
+            $stmt_UPDATE->execute();
+            $stmt_UPDATE->close();
+            
             $type = $row["type"];
             $department_id = $row['department_id'];
 
 
 
             if ($type == "Admin" || $type == "SubAdmin") {
-
                 session_start();
                 $_SESSION["admin_user"] = $type;
                 header("Location: home");
+
             } else if ($type == "department") {
-                session_start();
-                echo $college_id;
-                $_SESSION["admin_user"] = $type;
-                $_SESSION["department_id"] = $department_id;
-                header("Location: ShowDepartment");
+                $sql="SELECT * FROM settings WHERE id = 1";
+                $result = $conn->query($sql);
+                
+                    $row = $result->fetch_assoc();
+                    if($row['Off_And_On'] == 0){
+                     header("Location: message");
+                    }else{
+                        session_start();
+                        $_SESSION["admin_user"] = $type;
+                        $_SESSION["department_id"] = $department_id;
+                        header("Location: ShowDepartment");
+                }
+                
+                
             }
            
         }else {
@@ -104,14 +117,13 @@ $conn->close();
             </div>
 
             <div class="login-resert">
-                <p><a href="#">تواصل مع المشرف</a></p>
+                <p><a href="https://t.me/M71_17">تواصل مع المشرف</a></p>
             </div>
         </form>
     </div>
     <script>
         setTimeout(function () {
-            document.getElementById('success-message').style.display = 'none';
-            
+            document.getElementById('success-message').style.display = 'none'; 
         }, 4000);
     </script>
     <script>

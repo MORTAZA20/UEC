@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 03, 2024 at 08:08 PM
+-- Generation Time: Feb 05, 2024 at 09:23 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -50,6 +50,14 @@ CREATE TABLE `colleges` (
   `colleges_img_path` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `colleges`
+--
+
+INSERT INTO `colleges` (`college_id`, `college_name`, `college_description`, `required_GPA`, `university_id`, `colleges_img_path`) VALUES
+('45', 'كلية التربية للعلوم الصرفة2', '', 78, '1', 'colleges_img/_83e01622-b7f9-4273-879b-37d245cd5e59.jpeg'),
+('99', '99', '', 99, '1245', 'colleges_img/_7aa6a15d-0ef0-4213-9e57-2222d50d6f44.jpeg');
+
 -- --------------------------------------------------------
 
 --
@@ -84,6 +92,13 @@ CREATE TABLE `departments` (
   `departments_img_path` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `departments`
+--
+
+INSERT INTO `departments` (`department_id`, `department_name`, `college_id`, `department_description`, `scientific_department_message`, `required_GPA`, `evening_GPA`, `parallel_GPA`, `parallel_study_fees`, `evening_study_fees`, `departments_img_path`) VALUES
+('7', 'الحاسبات', '45', '', '', 77, 77, 7, 7, 7, 'departments_img/_83e01622-b7f9-4273-879b-37d245cd5e59.jpeg');
+
 -- --------------------------------------------------------
 
 --
@@ -105,8 +120,27 @@ CREATE TABLE `inf_login` (
 --
 
 INSERT INTO `inf_login` (`Admin_id`, `department_id`, `AdminUserName`, `AdminPassword`, `type`, `RegistrationData`, `RegistrationTime`) VALUES
-(43, NULL, '1', '$2y$13$O0QMy6UAc9d6hASYw8KGFu43uiIkHRyaj7m/gNNKAsOVX.AhezLBO', 'Admin', '2024-02-03', '10:05:00'),
-(52, NULL, '222', '$2y$13$dNrQaN5hvnmy4PGNlAa8h./MWPDg.L/dck2rAtBe765IrY13a4Kh.', 'SubAdmin', '2024-01-20', '11:32:00');
+(43, NULL, '1', '$2y$13$O0QMy6UAc9d6hASYw8KGFu43uiIkHRyaj7m/gNNKAsOVX.AhezLBO', 'Admin', '2024-02-05', '10:52:00'),
+(52, NULL, '222', '$2y$13$tI7y1nDry93mMNLFoDGjGe8zZ1dlzCZJSReUXNxAyBnrs7.2SlhoG', 'SubAdmin', '2024-02-05', '10:49:00'),
+(56, '7', '22', '$2y$13$xATWFjOHZv9QvmCdqQL1QeWo6phv4ukQO3oDxpokeRr0/5LP1ulze', 'department', '2024-02-05', '10:47:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
+--
+
+CREATE TABLE `settings` (
+  `Off_And_On` int(11) NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`Off_And_On`, `id`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -153,6 +187,14 @@ CREATE TABLE `universities` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `universities`
+--
+
+INSERT INTO `universities` (`university_id`, `university_name`, `university_location`, `university_website`, `universities_img_path`) VALUES
+('1', 'جامعة ال', 'بغداد', 'sdfg', 'universities_img/_3e943703-ec9c-449e-b492-8d6628bae29b.jpeg'),
+('1245', 'جامعة الكرمة', 'البصرة', 'بلا', 'universities_img/_83e01622-b7f9-4273-879b-37d245cd5e59.jpeg');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -192,6 +234,12 @@ ALTER TABLE `inf_login`
   ADD KEY `department_id` (`department_id`);
 
 --
+-- Indexes for table `settings`
+--
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `student_projects`
 --
 ALTER TABLE `student_projects`
@@ -219,7 +267,13 @@ ALTER TABLE `universities`
 -- AUTO_INCREMENT for table `inf_login`
 --
 ALTER TABLE `inf_login`
-  MODIFY `Admin_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `Admin_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+
+--
+-- AUTO_INCREMENT for table `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

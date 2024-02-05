@@ -39,7 +39,7 @@
                 <td><?php echo $row["project_name"] ?></td>
                 <td><?php echo $row["student_name"] ?></td>
                 <td><?php echo $row["project_supervisor"] ?></td>
-                <td><img src="./assets/pg/admins/<?php echo $row["student_projects_img_path"]; ?>">
+                <td><img style="pointer-events: none;" src="./assets/pg/admins/<?php echo $row["student_projects_img_path"]; ?>">
                 <td><?php echo $row["project_description"] ?></td>
                 <td data-title="التحكم" class="text-center">
         </div>

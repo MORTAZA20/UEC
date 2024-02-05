@@ -20,6 +20,7 @@ RewriteRule ^business ./assets/pg/admins/img/business.png [L]
 RewriteRule ^A1 ./assets/pg/admins/img/A1.png [L]
 RewriteRule ^E1 ./assets/pg/admins/img/E1.png [L]
 RewriteRule ^exit ./assets/pg/admins/img/exit.png [L]
+RewriteRule ^ImgSettings ./assets/pg/admins/img/ImgSettings.png [L]
 
 
 RewriteRule ^login ./assets/pg/admins/login.php [NC,L]
@@ -37,6 +38,8 @@ RewriteRule ^career_opportunities ./assets/pg/admins/career_opportunities.php [N
 RewriteRule ^support ./assets/pg/admins/support.php [NC,L]
 RewriteRule ^test ./assets/pg/admins/test.html [NC,L]
 RewriteRule ^ShowDepartment ./assets/pg/admins/ShowDepartment.php [NC,L]
+RewriteRule ^Settings ./assets/pg/admins/Settings.php [NC,L]
+RewriteRule ^message ./assets/pg/admins/message.php [NC,L]
 
 
 RewriteRule ^add_admin ./assets/pg/admins/add/add_admin.php [NC,L]

@@ -80,7 +80,7 @@ if ($_SESSION["admin_user"] != "Admin"
                     $row = $result->fetch_assoc();
 
                     ?>
-                    <img style="width: 150px;"  src=./assets/pg/admins/<?php echo $row['departments_img_path']; ?>>
+                    <img style="width: 150px; pointer-events: none;"  src=./assets/pg/admins/<?php echo $row['departments_img_path']; ?>>
                 </div>
                 <div class="prodation">
                     <div class="sh-name">

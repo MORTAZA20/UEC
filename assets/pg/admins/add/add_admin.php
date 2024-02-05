@@ -6,6 +6,9 @@ if (isset($_SESSION["admin_user"])) {
     header("Location:login");
     exit();
 }
+}else{
+    header("Location: login");
+    exit();
 }
 ?>
 <!DOCTYPE html>

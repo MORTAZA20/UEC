@@ -65,7 +65,8 @@
     ?>
             <div class="item-bar" onclick="window.open('My_Admins' , '_self')"><div class="Imgitem" style="background-image: url('admin');"></div>
             المشرفين</div>
-
+            <div class="item-bar" onclick="window.open('Settings' , '_self')"><div class="Imgitem" style="background-image: url('ImgSettings');"></div>
+            اعدادات الموقع</div>
     <?php
         }
     }

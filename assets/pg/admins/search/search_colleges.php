@@ -20,9 +20,9 @@ while ($row = $result->fetch_assoc()) {
         <div class="truncated-text">
                 <td><?php echo $row["college_id"]; ?></td>
                 <td><?php echo $row["university_name"]; ?></td>
+                <td><img style="pointer-events: none;" src="./assets/pg/admins/<?php echo $row["colleges_img_path"]; ?>">
                 <td><?php echo $row["college_name"]; ?></td>
         </div>
-                <td><img src="./assets/pg/admins/<?php echo $row["colleges_img_path"]; ?>">
                 </td>
                 <td class="truncated-text"><?php echo $row["required_GPA"]; ?></td>
                 <td class="truncated-text"><?php echo $row["college_description"]; ?></td>
