@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 05, 2024 at 09:23 PM
+-- Generation Time: Feb 06, 2024 at 03:06 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -120,9 +120,9 @@ CREATE TABLE `inf_login` (
 --
 
 INSERT INTO `inf_login` (`Admin_id`, `department_id`, `AdminUserName`, `AdminPassword`, `type`, `RegistrationData`, `RegistrationTime`) VALUES
-(43, NULL, '1', '$2y$13$O0QMy6UAc9d6hASYw8KGFu43uiIkHRyaj7m/gNNKAsOVX.AhezLBO', 'Admin', '2024-02-05', '10:52:00'),
+(43, NULL, '1', '$2y$13$O0QMy6UAc9d6hASYw8KGFu43uiIkHRyaj7m/gNNKAsOVX.AhezLBO', 'Admin', '2024-02-06', '04:34:00'),
 (52, NULL, '222', '$2y$13$tI7y1nDry93mMNLFoDGjGe8zZ1dlzCZJSReUXNxAyBnrs7.2SlhoG', 'SubAdmin', '2024-02-05', '10:49:00'),
-(56, '7', '22', '$2y$13$xATWFjOHZv9QvmCdqQL1QeWo6phv4ukQO3oDxpokeRr0/5LP1ulze', 'department', '2024-02-05', '10:47:00');
+(56, '7', '22', '$2y$13$xATWFjOHZv9QvmCdqQL1QeWo6phv4ukQO3oDxpokeRr0/5LP1ulze', 'department', '2024-02-06', '04:34:00');
 
 -- --------------------------------------------------------
 

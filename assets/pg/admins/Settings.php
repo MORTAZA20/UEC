@@ -39,8 +39,18 @@ if (isset($_SESSION["admin_user"])) {
             </div>
             <?php
             include 'inc/conn.inc.php';
+            $sql = "SELECT Off_And_On FROM settings WHERE id = 1";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $Off_And_On_value = $row["Off_And_On"];
+                $isChecked = $Off_And_On_value == 1 ? "checked" : "";
+            }
+
+
             if (isset($_POST["sub_form"])) {
-                $Off_And_On = mysqli_real_escape_string($conn, $_POST["Off_And_On"]);
+                $Off_And_On = isset($_POST["Off_And_On"]) && $_POST["Off_And_On"] === "on" ? 1 : 0;
                 
                 $id = 1;
                 $sql = "UPDATE settings SET Off_And_On= ? WHERE id= ?";
@@ -62,21 +72,32 @@ if (isset($_SESSION["admin_user"])) {
             }
             ?>
 
-            <div class="container-form">
+            <div class="container-form" style="display: flex; justify-content: center;align-items: center;">
                 <form action="" method="post">
-                    
-                <select class="fruit" name="Off_And_On" style=" margin-bottom: 10px ;" required>
-                    <option value="1" selected>تفعيل</option>
-                    <option value="0">تعطيل</option>   
-                </select>
-                    
+                    <div class="toggleButton">
+                        <input name="Off_And_On" class="toggleButton__checkbox" type="checkbox" id="toggle_1" <?php echo $isChecked ?>>
+                        <label class="toggleButton__body" for="toggle_1"></label>
+                    </div>
                     <p>
-                        <input class="seve" type="submit" name="sub_form" value="حـفـظ اعدادات الموقع" />
+                        <input style="margin: 15px;" class="seve" type="submit" name="sub_form" value="حـفـظ اعدادات الموقع" />
                     </p>
                 </form>
             </div>
+
         </div>
     </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('.container-form form');
+        const toggleCheckbox = document.querySelector('.toggleButton__checkbox');
+
+        form.addEventListener('submit', function (event) {
+            const valueToSend = toggleCheckbox.checked ? 1 : 0;
+            document.querySelector('input[name="Off_And_On"]').checked = toggleCheckbox.checked;
+        });
+    });
+</script>
+
     <script>
         setTimeout(function() {
             document.getElementById('success-message').style.display = 'none';
