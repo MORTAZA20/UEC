@@ -40,6 +40,9 @@ RewriteRule ^test ./assets/pg/admins/test.html [NC,L]
 RewriteRule ^ShowDepartment ./assets/pg/admins/ShowDepartment.php [NC,L]
 RewriteRule ^Settings ./assets/pg/admins/Settings.php [NC,L]
 RewriteRule ^message ./assets/pg/admins/message.php [NC,L]
+RewriteRule ^Msg2FA ./assets/pg/admins/Msg2FA.php [NC,L]
+RewriteRule ^Mail-2FA ./assets/pg/admins/Mail-2FA.php [NC,L]
+
 
 
 RewriteRule ^add_admin ./assets/pg/admins/add/add_admin.php [NC,L]

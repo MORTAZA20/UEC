@@ -17,10 +17,10 @@ if (isset($_POST["sub_log"])) {
     $sql = "SELECT inf_login.* FROM inf_login
     LEFT JOIN departments ON inf_login.department_id = departments.department_id
     WHERE inf_login.AdminUserName=?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $user_login);
-$stmt->execute();
-$result = $stmt->get_result();
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $user_login);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
 
 
@@ -44,9 +44,48 @@ $result = $stmt->get_result();
 
 
             if ($type == "Admin" || $type == "SubAdmin") {
-                session_start();
-                $_SESSION["admin_user"] = $type;
-                header("Location: home");
+                
+                function generateRandomCode($length = 6) {
+                
+                    $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+                    $charactersLength = strlen($characters);
+                  
+                    $randomString = '';
+                    for ($i = 0; $i < $length; $i++) {
+                      $randomString .= $characters[rand(0, $charactersLength - 1)];
+                    }
+                  
+                    return $randomString;
+                  
+                  }
+                  $random_code = generateRandomCode();
+                  echo $random_code ;
+                
+                  require_once 'C:/xampp/htdocs/university-education-compass/assets/pg/admins/Mail-2FA.php';
+                
+                
+                  if(isset($_POST["Submit-verification_code"])) {
+                    $verification_code = $_POST["verification_code"];
+                    if ($verification_code == $random_code) {
+                        session_start();
+                        $_SESSION["admin_user"] = $type;
+                        header("Location: home");
+                    }else{
+                        echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>رمز التاكيد الذي ادخلتة خاطئ</div>";
+                    }
+                  }
+                
+                  echo "
+                  <head>
+                  <link rel='stylesheet' href='./assets/pg/admins/css/stylelogin.css'>
+                  </head>
+                    <div class='container'>
+                        <h2>أدخل رمز المصادقة الثنائية</h2>
+                        <form action='login' method='post'>
+                            <input type='text' name='verification_code' placeholder='رمز المصادقة' required>
+                            <input class='button' type='submit' name='Submit-verification_code' value='تأكيد'>
+                        </form>
+                    </div>";
 
             } else if ($type == "department") {
                 $sql="SELECT * FROM settings WHERE id = 1";
@@ -72,10 +111,9 @@ $result = $stmt->get_result();
     } else {
         echo "<div id='success-message' style='color: red; font-size: 18px; font-weight: 500; text-align: center;'>أسم المستخدم الذي ادخل غير صحيح</div>";
     }
-}
+    $conn->close();
+}else{
 
-
-$conn->close();
 
 ?>
 
@@ -141,3 +179,4 @@ $conn->close();
 </body>
 
 </html>
+<?php } ?>
