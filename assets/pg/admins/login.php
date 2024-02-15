@@ -1,10 +1,11 @@
 <?php
 require_once("inc/conn.inc.php");
 if (isset($_POST["sub_log"])) {
-    $user_login = htmlspecialchars($_POST["user_log"]);
-    $pass_login = htmlspecialchars($_POST["pass_log"]);
-
-
+    session_start();
+  
+        $user_login = htmlspecialchars($_POST["user_log"]);
+        $pass_login = htmlspecialchars($_POST["pass_log"]);
+  
     $timeTarget = 0.350; // 350 milliseconds
     $cost = 10;
     do {
@@ -40,12 +41,12 @@ if (isset($_POST["sub_log"])) {
             
             $type = $row["type"];
             $department_id = $row['department_id'];
-
+            $_SESSION["admin_user"] = $type;
 
 
             if ($type == "Admin" || $type == "SubAdmin") {
                 
-                function generateRandomCode($length = 6) {
+                function generateRandomCode($length = 8) {
                 
                     $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
                     $charactersLength = strlen($characters);
@@ -59,34 +60,29 @@ if (isset($_POST["sub_log"])) {
                   
                   }
                   $random_code = generateRandomCode();
-                  echo $random_code ;
-                
-                  require_once 'C:/xampp/htdocs/university-education-compass/assets/pg/admins/Mail-2FA.php';
-                
-                
-                  if(isset($_POST["Submit-verification_code"])) {
-                    $verification_code = $_POST["verification_code"];
-                    if ($verification_code == $random_code) {
-                        session_start();
-                        $_SESSION["admin_user"] = $type;
-                        header("Location: home");
-                    }else{
-                        echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>رمز التاكيد الذي ادخلتة خاطئ</div>";
-                    }
-                  }
-                
-                  echo "
-                  <head>
-                  <link rel='stylesheet' href='./assets/pg/admins/css/stylelogin.css'>
-                  </head>
-                    <div class='container'>
-                        <h2>أدخل رمز المصادقة الثنائية</h2>
-                        <form action='login' method='post'>
-                            <input type='text' name='verification_code' placeholder='رمز المصادقة' required>
-                            <input class='button' type='submit' name='Submit-verification_code' value='تأكيد'>
-                        </form>
-                    </div>";
+                  $Gmail = $row['Gmail'];
 
+                  require_once 'C:/xampp/htdocs/university-education-compass/assets/pg/admins/Mail-2FA.php';
+                  
+                  $mail->setFrom("qqwwertyui488@gmail.com" ,"University Education Compass");
+                  $mail->addAddress($Gmail);
+                  $mail->Subject = "رسالة تاكيد تسجيل الدخول";
+                  $mail->Body = '
+                    <div style="background-color: #f4f4f4; padding: 20px;">
+                        <div style="background-color: #fff; padding: 20px; border-radius: 5px;">
+                            <h1 style="color: #333;text-align: center;">رسالة تأكيد تسجيل الدخول</h1>
+                            <h2 style="color: #333; text-align: center;"><span style="color: #23a0a9; display: inline-block;">' . $random_code . '</span> : رمز التحقق</h2>
+                            <h3 style="text-align: right;">.من فضلك، قم بإدخال هذا الرمز لتأكيد تسجيل الدخول</h3>
+                            <h4 style="text-align: right;"> ،شكرًا لك
+                            <br> 
+                            University Education Compass فريق</h4>
+                        </div>
+                    </div>';
+                  $mail->send();
+                  $_SESSION["random_code"] = $random_code;
+                  header("Location: Msg2FA");
+                  
+                  
             } else if ($type == "department") {
                 $sql="SELECT * FROM settings WHERE id = 1";
                 $result = $conn->query($sql);
@@ -95,13 +91,9 @@ if (isset($_POST["sub_log"])) {
                     if($row['Off_And_On'] == 0){
                      header("Location: message");
                     }else{
-                        session_start();
-                        $_SESSION["admin_user"] = $type;
                         $_SESSION["department_id"] = $department_id;
                         header("Location: ShowDepartment");
-                }
-                
-                
+                } 
             }
            
         }else {
@@ -112,8 +104,8 @@ if (isset($_POST["sub_log"])) {
         echo "<div id='success-message' style='color: red; font-size: 18px; font-weight: 500; text-align: center;'>أسم المستخدم الذي ادخل غير صحيح</div>";
     }
     $conn->close();
-}else{
 
+}
 
 ?>
 
@@ -179,4 +171,3 @@ if (isset($_POST["sub_log"])) {
 </body>
 
 </html>
-<?php } ?>

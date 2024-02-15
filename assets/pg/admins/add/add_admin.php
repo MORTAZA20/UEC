@@ -46,6 +46,7 @@ if (isset($_SESSION["admin_user"])) {
                 $AdminUserName = mysqli_real_escape_string($conn, $_POST["AdminUserName"]);
                 $AdminPassword = mysqli_real_escape_string($conn, $_POST["AdminPassword"]);
                 $type = mysqli_real_escape_string($conn, $_POST["type"]);
+                $Gmail = mysqli_real_escape_string($conn, $_POST["Gmail"]);
                 $timeTarget = 0.350; // 350 milliseconds
                 $cost = 10;
                 do {
@@ -56,7 +57,7 @@ if (isset($_SESSION["admin_user"])) {
                 } while (($end - $start) < $timeTarget);
 
                 if ($type == "Admin" || $type == "SubAdmin") {
-                    $sql = "INSERT INTO inf_login (AdminUserName, AdminPassword,type) VALUES (?, ?, ?)";
+                    $sql = "INSERT INTO inf_login (AdminUserName, AdminPassword,type,Gmail) VALUES (?, ?, ?, ?)";
                 } else {
                     $department_id = mysqli_real_escape_string($conn, $_POST["department_id"]);
                     $sql = "INSERT INTO inf_login (department_id, AdminUserName, AdminPassword,type) VALUES (?, ?, ?, ?)";
@@ -66,7 +67,7 @@ if (isset($_SESSION["admin_user"])) {
                 if ($type != "Admin" && $type != "SubAdmin") {
                     $stmt->bind_param("ssss", $department_id, $AdminUserName, $AdminPassword_hash, $type);
                 } else {
-                    $stmt->bind_param("sss", $AdminUserName, $AdminPassword_hash, $type);
+                    $stmt->bind_param("ssss", $AdminUserName, $AdminPassword_hash, $type,$Gmail);
                 }
 
                 $result = $stmt->execute();
@@ -101,13 +102,21 @@ if (isset($_SESSION["admin_user"])) {
                                 WHERE d.department_id NOT IN (SELECT department_id FROM inf_login WHERE type = 'department')";
 
                         $result = $conn->query($sql);
-                        while ($row = $result->fetch_assoc()) {
+                        if($result->num_rows >0){
+                            while ($row = $result->fetch_assoc()) {
                             echo "<option value='" . $row['department_id'] . "'>" . $row['university_name'] ." - " . $row['college_name'] ." - ". $row['department_name'] . "</option>";
                         }
+                        }else{
+                            echo "<option>لا توجد أقسام مضافه</option>";
+                        }
+                        
                         ?>
                     </select>
+                    
                     <input type="text" name="AdminUserName" placeholder="أسم المستخدم" style=" margin-bottom: 10px ;" required>
                     <input type="text" name="AdminPassword" placeholder="كلمة المرور" style=" margin-bottom: 10px ;" required>
+                    <input type="email" name="Gmail" id="gmailField" placeholder="حساب الـ Gmail" style=" margin-bottom: 10px ;" required>
+
                     <p>
                         <input class="seve" type="submit" name="sub_form" value=" حـفـظ البـيـانـات" />
                     </p>
@@ -118,11 +127,13 @@ if (isset($_SESSION["admin_user"])) {
     <script>
         function toggleDepartment() {
             var type = document.querySelector('select[name="type"]').value;
-
+            var gmailField = document.getElementById('gmailField');
             if (type == "department") {
                 document.getElementById('department_select').style.display = "block";
+                gmailField.style.display = "none";
             } else {
                 document.getElementById('department_select').style.display = "none";
+                gmailField.style.display = "block";
             }
         }
         setTimeout(function() {

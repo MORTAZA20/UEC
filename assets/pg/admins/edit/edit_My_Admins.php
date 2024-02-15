@@ -51,6 +51,8 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                 $AdminUserName = mysqli_real_escape_string($conn, $_POST["AdminUserName"]);
                 $AdminPassword = mysqli_real_escape_string($conn, $_POST["AdminPassword"]);
                 $type = mysqli_real_escape_string($conn, $_POST["type"]);
+                $Gmail = mysqli_real_escape_string($conn, $_POST["Gmail"]);
+
                 $timeTarget = 0.350; // 350 milliseconds
                 $cost = 10;
                 do {
@@ -63,14 +65,14 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                 
 
                 
-                $sql = "UPDATE inf_login SET department_id = ?, AdminUserName = ?, AdminPassword = ?, type = ? WHERE Admin_id = ?";
+                $sql = "UPDATE inf_login SET department_id = ?, AdminUserName = ?, AdminPassword = ?, type = ?, Gmail = ? WHERE Admin_id = ?";
                 $stmt = $conn->prepare($sql);
 
                 if ($type == "Admin" || $type == "SubAdmin") {
                     $department_id=NULL;
                 }
 
-                $stmt->bind_param("ssssi", $department_id, $AdminUserName, $AdminPassword_hash, $type, $Admin_id);
+                $stmt->bind_param("sssssi", $department_id, $AdminUserName, $AdminPassword_hash, $type, $Gmail, $Admin_id);
                 $result = $stmt->execute();
 
                 if ($result) {
@@ -126,6 +128,14 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                         } else {
                             echo $row['AdminPassword'];
                         }?>" required>
+                        <input type="email" name="Gmail" id="gmailField" placeholder="حساب الـ Gmail" style=" margin-bottom: 10px ;"
+                        value="<?php
+                        if (!isset($_POST['edit_id'])) {
+                            echo "";
+                        } else {
+                            echo $row['Gmail'];
+                        }?>" >
+
                     <p>
                         <input class="seve" type="submit" name="sub_form" value=" حـفـظ البـيـانـات" />
                     </p>
@@ -136,11 +146,13 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
     <script>
         function toggleDepartment() {
             var type = document.querySelector('select[name="type"]').value;
-
+            var gmailField = document.getElementById('gmailField');
             if (type == "department") {
                 document.getElementById('department_select').style.display = "block";
+                gmailField.style.display = "none";
             } else {
                 document.getElementById('department_select').style.display = "none";
+                gmailField.style.display = "block";
             }
         }
         setTimeout(function() {

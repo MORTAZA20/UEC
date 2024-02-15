@@ -51,14 +51,13 @@ if ($_SESSION["admin_user"] != "Admin") {
             <table class="table teble-bordered" id="table-data" role="table">
                 <thead>
                     <tr>
-                        <th width="5%">المعرف</th>
-                        <th width="15%">اسم القسم</th>
-                        <th class="text-right" width="15%">إسم المستخدم</th>
-                        <th class="text-right" width="15%">تاريخ تسجيل الدخول</th>
-                        <th class="text-right" width="15%">وقت تسجيل الدخول</th>
+                        <th class="text-right" width="10%">اسم القسم</th>
+                        <th class="text-right" width="10%">إسم المستخدم</th>
+                        <th class="text-right" width="10%">تاريخ تسجيل الدخول</th>
+                        <th class="text-right" width="10%">وقت تسجيل الدخول</th>
                         <th class="text-right" width="10%">النوع</th>
-
-                        <th class="text-right" width="30%">التحكم</th>
+                        <th class="text-right" width="10%">الايميل</th>
+                        <th class="text-right" width="25%">التحكم</th>
                     </tr>
                 </thead>
                 <tbody>

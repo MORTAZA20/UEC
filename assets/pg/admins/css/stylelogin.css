@@ -132,7 +132,7 @@ body {
   padding: 0;
   color: #000;
   font-family: 'Tajawal', sans-serif;
-  background-color: #f1efef;
+  background-color: #f1efefb7;
   direction: rtl;
 }
 * {
@@ -165,7 +165,7 @@ body {
     margin: 40px;
     border-radius: 5px;
     box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-    background-color: #fff;
+    background-color: #f5f1f1;
     text-align: center;
     justify-content: center;
 }
@@ -307,7 +307,9 @@ body {
 h2 {
     margin-bottom: 20px;
 }
-
+.container h3 {
+    margin: 20px;
+}
 input[type="text"] {
     width: 100%;
     padding: 10px;

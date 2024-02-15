@@ -18,12 +18,12 @@ while ($row = $result->fetch_assoc()) {
 ?>
     <tr>
     <div class="truncated-text">
-        <td><?php echo $row["Admin_id"] ?></td>
         <td><?php echo $row["department_name"] ?></td>
         <td><?php echo $row["AdminUserName"] ?></td>
         <td><?php echo $row["RegistrationData"] ?></td>
         <td><?php echo $row["RegistrationTime"] ?></td>
         <td><?php echo $row["type"] ?></td>
+        <td><?php echo $row["Gmail"] ?></td>
     </div>
         <td data-title="التحكم" class="text-center">
 

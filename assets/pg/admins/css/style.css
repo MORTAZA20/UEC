@@ -240,7 +240,7 @@ thead {
     padding: 14px;
     color: #fff;
     border-radius: 5px 0px 5px 0px;
-    background-color: #192330;
+    background-color: #19302f;
 }
 
 thead tr th {
@@ -295,6 +295,7 @@ tbody tr td img {
 .container-form input[type=text],
 .container-form input[type=number],
 .container-form input[type=password],
+.container-form input[type=email],
 .container-form textarea[class=text-style],
 .fruit {
     margin-left: 10px;
