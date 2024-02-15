@@ -115,7 +115,7 @@ if (isset($_SESSION["admin_user"])) {
                     
                     <input type="text" name="AdminUserName" placeholder="أسم المستخدم" style=" margin-bottom: 10px ;" required>
                     <input type="text" name="AdminPassword" placeholder="كلمة المرور" style=" margin-bottom: 10px ;" required>
-                    <input type="email" name="Gmail" id="gmailField" placeholder="حساب الـ Gmail" style=" margin-bottom: 10px ;" required>
+                    <input type="email" name="Gmail" id="gmailField" placeholder="حساب الـ Gmail" style=" margin-bottom: 10px ;" >
 
                     <p>
                         <input class="seve" type="submit" name="sub_form" value=" حـفـظ البـيـانـات" />

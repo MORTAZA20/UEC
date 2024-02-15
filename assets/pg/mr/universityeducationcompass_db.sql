@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2024 at 03:06 PM
+-- Generation Time: Feb 15, 2024 at 10:18 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -55,7 +55,7 @@ CREATE TABLE `colleges` (
 --
 
 INSERT INTO `colleges` (`college_id`, `college_name`, `college_description`, `required_GPA`, `university_id`, `colleges_img_path`) VALUES
-('45', 'كلية التربية للعلوم الصرفة2', '', 78, '1', 'colleges_img/_83e01622-b7f9-4273-879b-37d245cd5e59.jpeg'),
+('45', 'كلية التربية للعلوم الصرفة2', '                                            ', 78, '1', 'colleges_img/_83e01622-b7f9-4273-879b-37d245cd5e59.jpeg'),
 ('99', '99', '', 99, '1245', 'colleges_img/_7aa6a15d-0ef0-4213-9e57-2222d50d6f44.jpeg');
 
 -- --------------------------------------------------------
@@ -112,17 +112,18 @@ CREATE TABLE `inf_login` (
   `AdminPassword` varchar(1000) DEFAULT NULL,
   `type` varchar(50) NOT NULL,
   `RegistrationData` date DEFAULT NULL,
-  `RegistrationTime` time DEFAULT NULL
+  `RegistrationTime` time DEFAULT NULL,
+  `Gmail` varchar(70) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `inf_login`
 --
 
-INSERT INTO `inf_login` (`Admin_id`, `department_id`, `AdminUserName`, `AdminPassword`, `type`, `RegistrationData`, `RegistrationTime`) VALUES
-(43, NULL, '1', '$2y$13$O0QMy6UAc9d6hASYw8KGFu43uiIkHRyaj7m/gNNKAsOVX.AhezLBO', 'Admin', '2024-02-06', '04:34:00'),
-(52, NULL, '222', '$2y$13$tI7y1nDry93mMNLFoDGjGe8zZ1dlzCZJSReUXNxAyBnrs7.2SlhoG', 'SubAdmin', '2024-02-05', '10:49:00'),
-(56, '7', '22', '$2y$13$xATWFjOHZv9QvmCdqQL1QeWo6phv4ukQO3oDxpokeRr0/5LP1ulze', 'department', '2024-02-06', '04:34:00');
+INSERT INTO `inf_login` (`Admin_id`, `department_id`, `AdminUserName`, `AdminPassword`, `type`, `RegistrationData`, `RegistrationTime`, `Gmail`) VALUES
+(43, NULL, '1', '$2y$13$O0QMy6UAc9d6hASYw8KGFu43uiIkHRyaj7m/gNNKAsOVX.AhezLBO', 'Admin', '2024-02-16', '12:14:00', 'qqwwertyui84@gmail.com'),
+(52, NULL, '222', '$2y$13$2GbAuC4PyLkTmQg04XtnGe00H4iu7ZQxGB3B5Zi00AoGpuigVOhV2', 'SubAdmin', '2024-02-16', '12:13:00', 'qqwwertyui488@gmail.com'),
+(56, '7', '22', '$2y$13$xATWFjOHZv9QvmCdqQL1QeWo6phv4ukQO3oDxpokeRr0/5LP1ulze', 'department', '2024-02-06', '08:18:00', '');
 
 -- --------------------------------------------------------
 
@@ -267,7 +268,7 @@ ALTER TABLE `universities`
 -- AUTO_INCREMENT for table `inf_login`
 --
 ALTER TABLE `inf_login`
-  MODIFY `Admin_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `Admin_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `settings`
