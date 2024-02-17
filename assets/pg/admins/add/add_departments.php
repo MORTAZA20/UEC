@@ -122,14 +122,14 @@ if (isset($_SESSION["admin_user"])) {
 
                     <div class="custom-column" style="margin-bottom: 10px;">
                         <input type="text" name="department_name" id="" placeholder="اسم القسم" required>
-                        <input type="number" name="required_GPA" id="" placeholder="معدل القبول الصباحي" required>
-                        <input type="number" name="evening_GPA" placeholder="معدل القبول المسائي" required>
-
+                        <input type="text" name="evening_GPA" placeholder="معدل القبول المسائي" required  pattern="^(?:[5-9]\d|\d{2})(?:\.\d+)?$" title="الرجاء إدخال قيمة صحيحة بين 50 و 100">
+                        <input type="text" name="parallel_GPA" placeholder="معدل القبول الموازي" required pattern="^(?:[5-9]\d|\d{2})(?:\.\d+)?$" title="الرجاء إدخال قيمة صحيحة بين 50 و 100">
                     </div>
 
+
                     <div class="custom-column" style="margin-bottom: 10px;">
+                        <input type="text" name="required_GPA" placeholder="معدل القبول الصباحي" required pattern="^(?:[5-9]\d|\d{2})(?:\.\d+)?$" title="الرجاء إدخال قيمة صحيحة بين 50 و 100">
                         <input type="number" name="evening_study_fees" placeholder="القسط السنوي(المسائي)" required>
-                        <input type="number" name="parallel_GPA" placeholder="معدل القبول الموازي" required>
                         <input type="number" name="parallel_study_fees" placeholder="القسط السنوي(الموازي)" required>
                     </div>
 

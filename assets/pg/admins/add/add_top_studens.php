@@ -115,7 +115,7 @@ if (isset($_SESSION["admin_user"])) {
                         <input type="text" name="student_name" placeholder="اسم الطالب" required>
                     </div>
                     <div class="custom-column" style="margin-bottom: 10px;">
-                        <input type="text" name="Cumulative_Rating" placeholder="المعدل التراكمي" required>
+                        <input type="text" name="Cumulative_Rating" placeholder="المعدل التراكمي" required pattern="^(?:[5-9]\d|\d{2})(?:\.\d+)?$" title="الرجاء إدخال قيمة صحيحة بين 50 و 100">
                         <input type="date" name="Graduation_Year" placeholder="سنة التخرج" required>
                     </div>
 

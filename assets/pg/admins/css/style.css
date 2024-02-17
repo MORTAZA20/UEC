@@ -493,7 +493,7 @@ input:focus {
 }
 
 
-#department_select {
+#department_select,#college_select {
     display: none;
 }
 

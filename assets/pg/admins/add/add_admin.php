@@ -58,16 +58,21 @@ if (isset($_SESSION["admin_user"])) {
 
                 if ($type == "Admin" || $type == "SubAdmin") {
                     $sql = "INSERT INTO inf_login (AdminUserName, AdminPassword,type,Gmail) VALUES (?, ?, ?, ?)";
-                } else {
+                } else if($type == "department") {
                     $department_id = mysqli_real_escape_string($conn, $_POST["department_id"]);
                     $sql = "INSERT INTO inf_login (department_id, AdminUserName, AdminPassword,type) VALUES (?, ?, ?, ?)";
+                }else{
+                    $college_id = mysqli_real_escape_string($conn, $_POST["college_id"]);
+                    $sql = "INSERT INTO inf_login (college_id, AdminUserName, AdminPassword,type) VALUES (?, ?, ?, ?)";
                 }
 
                 $stmt = $conn->prepare($sql);
-                if ($type != "Admin" && $type != "SubAdmin") {
-                    $stmt->bind_param("ssss", $department_id, $AdminUserName, $AdminPassword_hash, $type);
-                } else {
+                if ($type == "Admin" && $type == "SubAdmin") { 
                     $stmt->bind_param("ssss", $AdminUserName, $AdminPassword_hash, $type,$Gmail);
+                } else if($type == "department")  {
+                    $stmt->bind_param("ssss", $department_id, $AdminUserName, $AdminPassword_hash, $type);
+                }else{
+                    $stmt->bind_param("ssss", $college_id, $AdminUserName, $AdminPassword_hash, $type);
                 }
 
                 $result = $stmt->execute();
@@ -86,28 +91,49 @@ if (isset($_SESSION["admin_user"])) {
             <div class="container-form">
                 <form action="" method="post">
                     <select class="fruit" name="type" style=" margin-bottom: 10px ;" required
-                    onchange="toggleDepartment()">
+                    onchange="toggle()">
                         <option value="Admin">مشرف عام</option>
                         <option value="SubAdmin">مشرف ثانوي</option>
                         <option value="department">قسم</option>
+                        <option value="college">كلية</option>
                     </select>
                     <select class="fruit" name="department_id" style=" margin-bottom: 10px ;" 
                     id="department_select">
                         <?php
                         include '../inc/conn.inc.php';
-                        $sql = "SELECT d.*, c.college_name, u.university_name
+                        $sql1 = "SELECT d.*, c.college_name, u.university_name
                                 FROM departments d
                                 LEFT JOIN colleges c ON d.college_id = c.college_id
                                 LEFT JOIN universities u ON c.university_id = u.university_id
                                 WHERE d.department_id NOT IN (SELECT department_id FROM inf_login WHERE type = 'department')";
 
-                        $result = $conn->query($sql);
+                        $result = $conn->query($sql1);
                         if($result->num_rows >0){
-                            while ($row = $result->fetch_assoc()) {
-                            echo "<option value='" . $row['department_id'] . "'>" . $row['university_name'] ." - " . $row['college_name'] ." - ". $row['department_name'] . "</option>";
+                            while ($row1 = $result->fetch_assoc()) {
+                            echo "<option value='" . $row1['department_id'] . "'>" . $row1['university_name'] ." - " . $row1['college_name'] ." - ". $row1['department_name'] . "</option>";
                         }
                         }else{
                             echo "<option>لا توجد أقسام مضافه</option>";
+                        }
+                        
+                        ?>
+                    </select>
+                    <select class="fruit" name="college_id" style=" margin-bottom: 10px ;" 
+                    id="college_select">
+                        <?php
+                        include '../inc/conn.inc.php';
+                        $sql2 = "SELECT  c.*, u.university_name
+                                FROM colleges c
+                                LEFT JOIN universities u ON c.university_id = u.university_id
+                                WHERE c.college_id NOT IN (SELECT college_id FROM inf_login WHERE type = 'college')";
+
+                        $result = $conn->query($sql2);
+                        if($result->num_rows >0){
+                            while ($row2 = $result->fetch_assoc()) {
+                            echo "<option value='" . $row2['college_id'] . "'>" . $row2['university_name'] ." - " . $row2['college_name'] . "</option>";
+                        }
+                        }else{
+                            echo "<option>لا توجد كليات مضافه</option>";
                         }
                         
                         ?>
@@ -125,21 +151,38 @@ if (isset($_SESSION["admin_user"])) {
         </div>
     </div>
     <script>
-        function toggleDepartment() {
-            var type = document.querySelector('select[name="type"]').value;
-            var gmailField = document.getElementById('gmailField');
-            if (type == "department") {
-                document.getElementById('department_select').style.display = "block";
-                gmailField.style.display = "none";
-            } else {
-                document.getElementById('department_select').style.display = "none";
-                gmailField.style.display = "block";
-            }
+    function toggle() {
+        var type = document.querySelector('select[name="type"]').value;
+        var departmentSelect = document.getElementById('department_select');
+        var collegeSelect = document.getElementById('college_select');
+        var gmailField = document.getElementById('gmailField');
+
+        if (type == "department") {
+            departmentSelect.style.display = "block";
+            collegeSelect.style.display = "none";
+            gmailField.style.display = "none";
+            departmentSelect.setAttribute("required", "required");
+            collegeSelect.removeAttribute("required"); 
+        } else if (type == "college") {
+            departmentSelect.style.display = "none";
+            collegeSelect.style.display = "block";
+            gmailField.style.display = "none";
+            departmentSelect.removeAttribute("required"); 
+            collegeSelect.setAttribute("required", "required"); 
+        } else {
+            departmentSelect.style.display = "none";
+            collegeSelect.style.display = "none";
+            gmailField.style.display = "block";
+            departmentSelect.removeAttribute("required");  
+            collegeSelect.removeAttribute("required"); 
         }
-        setTimeout(function() {
-            document.getElementById('success-message').style.display = 'none';
-        }, 4000);
-    </script>
+    }
+    setTimeout(function () {
+        document.getElementById('success-message').style.display = 'none';
+    }, 4000);
+</script>
+
+
 </body>
 
 </html>

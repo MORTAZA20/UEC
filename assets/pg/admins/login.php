@@ -41,6 +41,7 @@ if (isset($_POST["sub_log"])) {
             
             $type = $row["type"];
             $department_id = $row['department_id'];
+            $college_id = $row['college_id'];
             $_SESSION["admin_user"] = $type;
 
 
@@ -93,6 +94,17 @@ if (isset($_POST["sub_log"])) {
                     }else{
                         $_SESSION["department_id"] = $department_id;
                         header("Location: ShowDepartment");
+                } 
+            }else if ($type == "college") {
+                $sql="SELECT * FROM settings WHERE id = 1";
+                $result = $conn->query($sql);
+                
+                    $row = $result->fetch_assoc();
+                    if($row['Off_And_On'] == 0){
+                     header("Location: message");
+                    }else{
+                        $_SESSION["college_id"] = $college_id;
+                        header("Location: ShowCollege");
                 } 
             }
            

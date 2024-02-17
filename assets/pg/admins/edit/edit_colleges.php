@@ -136,8 +136,8 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                                  if (!isset($_POST['edit_id'])){echo "";}else{echo $edit_id;}?>"required>
                         <input type="text" name="college_name" placeholder="اسم الكلية" value="<?php 
                                  if (!isset($_POST['edit_id'])){echo "";}else{echo $row['college_name'];}?>"required>
-                        <input type="number" name="required_GPA"placeholder="المعدل" value="<?php 
-                                 if (!isset($_POST['edit_id'])){echo "";}else{echo $row['required_GPA'];}?>" required>
+                        <input type="text" name="required_GPA"placeholder="المعدل" value="<?php 
+                                 if (!isset($_POST['edit_id'])){echo "";}else{echo $row['required_GPA'];}?>" required pattern="^(?:[5-9]\d|\d{2})(?:\.\d+)?$" title="الرجاء إدخال قيمة صحيحة بين 50 و 100">
                     </div>
 
                     <div class="container-img">   

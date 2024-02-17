@@ -54,7 +54,27 @@
             فرص العمل</div>
     <?php }
     
-     }?>
+     }
+     if ($type == "department"){ 
+                   
+        ?>
+
+            <div class="item-bar" onclick="window.open('ShowCollege' , '_self')"><div class="Imgitem" style="background-image: url('information-department');"></div>
+            معلومات الكلية</div>
+            <div class="item-bar" onclick="window.open('inf_departments' , '_self')"><div class="Imgitem" style="background-image: url('information-department');"></div>
+            معلومات الاقسام</div>
+            <div class="item-bar" onclick="window.open('courses' , '_self')"><div class="Imgitem" style="background-image: url('Subjects');"></div>
+            المواد الدراسية</div>
+            <div class="item-bar" onclick="window.open('top_students' , '_self')"><div class="Imgitem" style="background-image: url('graduated');"></div>
+            الطلبة الااوائل</div>
+            <div class="item-bar" onclick="window.open('student_projects' , '_self')"><div class="Imgitem" style="background-image: url('projects');"></div>
+            مشاريع الطلبة</div>
+            <div class="item-bar" onclick="window.open('career_opportunities' , '_self')"><div class="Imgitem" style="background-image: url('business');"></div>
+            فرص العمل</div>
+    <?php } ?>
+    
+    
+
 
 
 

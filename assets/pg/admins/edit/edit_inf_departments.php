@@ -144,17 +144,16 @@ if (isset($_SESSION["admin_user"])) {
             <div class="container-form">
                 <form action="" method="post" enctype="multipart/form-data">
                     <div class="custom-column" style="margin-bottom: 10px;">
-                    <select id="university_id" class="fruit" name="university_id" onchange="getColleges()" >
+                        <select id="university_id" class="fruit" name="university_id" onchange="getColleges()">
                             <?php
                             include '../inc/conn.inc.php';
                             $sql = "SELECT university_id, university_name FROM universities";
                             $result = $conn->query($sql);
                             while ($rec = $result->fetch_assoc()) {
                             ?>
-                                <option value="<?php if (!isset($_POST['edit_id'])) {
+                            <option value="<?php if (!isset($_POST['edit_id'])) {
                             echo "";
-                        }else{ echo $rec['university_id'] ;}?>" 
-                                <?php 
+                        }else{ echo $rec['university_id'] ;}?>" <?php 
                                    if (isset($_POST['edit_id'])) {
                                     if ($rec['university_id'] == $row['university_id']) { echo  "selected" ; } 
                                 } 
@@ -162,71 +161,68 @@ if (isset($_SESSION["admin_user"])) {
                                 <?php if (!isset($_POST['edit_id'])) {
                             echo "";
                         }else{  echo $rec['university_name'] ;} ?></option>
-                                    
-                                    
-                                <?php 
+
+                            <?php 
                                 }
                             $conn->close();
                             ?>
                         </select>
                         <select id="college_id" class="fruit" name="college_id">
-                        <option value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])) {
+                            <option value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])) {
                             echo "";
-                        }else{ echo $row['college_id'] ;}?>"> 
-                        <?php if (!isset($_POST['edit_id'])) {
+                        }else{ echo $row['college_id'] ;}?>">
+                                <?php if (!isset($_POST['edit_id'])) {
                             echo "";
                         }else{ echo $row['college_name'] ;} ?>
-                        </option>
-                        <?php
+                            </option>
+                            <?php
                         if($_SESSION["admin_user"] == "department"){
                             echo "<option value='" . $row['college_id'] . "' selected></option>"; 
                         }?>
                         </select>
-                        
-                        <input type="hidden" name="Edit_department_id" placeholder="معرف القسم" 
-                        value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])) {
+
+                        <input type="hidden" name="Edit_department_id" placeholder="معرف القسم" value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])) {
                             echo "";
                         } else {
                             echo  $Edit_id;
-                        } ?>" >
+                        } ?>">
                     </div>
 
                     <div class="custom-column" style="margin-bottom: 10px;">
-                        <input type="text" name="department_name" id="" placeholder="اسم القسم" 
-                        value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){
+                        <input type="text" name="department_name" id="" placeholder="اسم القسم" value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){
                             echo "";
                         } else {
                             echo $row['department_name'];
                         } ?>" required>
-                        <input type="number" name="required_GPA" id="" placeholder="معدل القبول الصباحي" 
-                        value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){
-                            echo "";
-                        } else {
-                            echo $row['required_GPA'];
-                        } ?>" required>
-                        <input type="number" name="evening_GPA" placeholder="معدل القبول المسائي" 
-                        value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){
+
+                        <input type="text" name="evening_GPA" placeholder="معدل القبول المسائي" value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){
                             echo "";
                         } else {
                             echo $row['evening_GPA'];
-                        } ?>" required>
+                        } ?>" required pattern="^(?:[5-9]\d|\d{2})(?:\.\d+)?$"
+                            title="الرجاء إدخال قيمة صحيحة بين 50 و 100">
+                        <input type="text" name="parallel_GPA" placeholder="معدل القبول الموازي" value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){
+                            echo "";
+                        } else {
+                            echo $row['parallel_GPA'];
+                        } ?>" required pattern="^(?:[5-9]\d|\d{2})(?:\.\d+)?$"
+                            title="الرجاء إدخال قيمة صحيحة بين 50 و 100">
                     </div>
 
                     <div class="custom-column" style="margin-bottom: 10px;">
-                        <input type="number" name="evening_study_fees" placeholder="القسط السنوي(المسائي)" 
-                        value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){
+                        <input type="text" name="required_GPA" id="" placeholder="معدل القبول الصباحي" value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){
+                            echo "";
+                        } else {
+                            echo $row['required_GPA'];
+                        } ?>" required pattern="^(?:[5-9]\d|\d{2})(?:\.\d+)?$"
+                            title="الرجاء إدخال قيمة صحيحة بين 50 و 100">
+                        <input type="number" name="evening_study_fees" placeholder="القسط السنوي(المسائي)" value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){
                             echo "";
                         } else {
                             echo $row['evening_study_fees'];
                         } ?>" required>
-                        <input type="number" name="parallel_GPA" placeholder="معدل القبول الموازي" 
-                        value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){
-                            echo "";
-                        } else {
-                            echo $row['parallel_GPA'];
-                        } ?>" required>
-                        <input type="number" name="parallel_study_fees" placeholder="القسط السنوي(الموازي)" 
-                        value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){
+
+                        <input type="number" name="parallel_study_fees" placeholder="القسط السنوي(الموازي)" value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){
                             echo "";
                         } else {
                             echo $row['parallel_study_fees'];
@@ -248,7 +244,8 @@ if (isset($_SESSION["admin_user"])) {
                             echo $row['scientific_department_message'];
                         } ?></textarea>
                     <div class="container-img">
-                        <img id="uploaded-image" src="assets/pg/admins/<?php echo $row["departments_img_path"]; ?>" style="max-width: 80px;
+                        <img id="uploaded-image" src="assets/pg/admins/<?php echo $row["departments_img_path"]; ?>"
+                            style="max-width: 80px;
                             max-height: 80px;
                             width: auto;
                             height: auto;
@@ -257,8 +254,10 @@ if (isset($_SESSION["admin_user"])) {
                     <div class="space"></div>
                     <div class="btn-row">
 
-                        <input type="file" name="departments_images" class="file-btn" id="upload-input" accept="image/*" onchange="displayImage()">
-                        <input type="button" class="file-btn" value="اختيار شعار القسم" onclick="document.getElementById('upload-input').click();">
+                        <input type="file" name="departments_images" class="file-btn" id="upload-input" accept="image/*"
+                            onchange="displayImage()">
+                        <input type="button" class="file-btn" value="اختيار شعار القسم"
+                            onclick="document.getElementById('upload-input').click();">
                         <p>
                             <input type="submit" name="sub_form" value="حـفـظ الـبـيـانـات" />
                         </p>
@@ -268,35 +267,36 @@ if (isset($_SESSION["admin_user"])) {
         </div>
     </div>
     <?php if($_SESSION["admin_user"] == "department"){?>
-        <style>
-            #university_id,#college_id{
-               display : none;
-            }
-        </style>
+    <style>
+    #university_id,
+    #college_id {
+        display: none;
+    }
+    </style>
     <?php } ?>
     <script src="displayImage"></script>
     <script>
-        setTimeout(function() {
-            document.getElementById('success-message').style.display = 'none';
-            <?php
+    setTimeout(function() {
+        document.getElementById('success-message').style.display = 'none';
+        <?php
             if ($_SESSION["admin_user"] == "department") {
                 echo "window.location.href = 'ShowDepartment';";
             } else {
                 echo "window.location.href = 'inf_departments';";
             }
             ?>
-        }, 4000);
+    }, 4000);
     </script>
     <script src="../../../../../university-education-compass/assets/pg/admins/ckeditor/ckeditor.js"></script>
     <script>
-        CKEDITOR.replace('editor1');
-        CKEDITOR.editorConfig = function(config) {
-            config.language = 'ar';
-            config.uiColor = '#f7b42c';
-            config.height = 300;
-            config.toolbarCanCollapse = true;
-            config.contentsCss = 'margin-bottom: 15px;';
-        };
+    CKEDITOR.replace('editor1');
+    CKEDITOR.editorConfig = function(config) {
+        config.language = 'ar';
+        config.uiColor = '#f7b42c';
+        config.height = 300;
+        config.toolbarCanCollapse = true;
+        config.contentsCss = 'margin-bottom: 15px;';
+    };
     </script>
 </body>
 

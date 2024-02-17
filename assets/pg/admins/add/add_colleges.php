@@ -114,7 +114,7 @@ if (isset($_SESSION["admin_user"])) {
 
                         <input type="text" name="college_id" placeholder="معرف الكلية" required>
                         <input type="text" name="college_name" placeholder="اسم الكلية" required>
-                        <input type="number" name="required_GPA" placeholder="المعدل">
+                        <input type="text" name="required_GPA" placeholder="المعدل" pattern="^(?:[5-9]\d|\d{2})(?:\.\d+)?$" title="الرجاء إدخال قيمة صحيحة بين 50 و 100" required>
                     </div>
 
 

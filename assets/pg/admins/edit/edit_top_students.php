@@ -159,7 +159,7 @@ if ($_SESSION["admin_user"] != "Admin"
                                  if (!isset($_POST['edit_id'])){echo "";}else{echo $row['student_name'];}?>" required>
                         <input type="text" name="Cumulative_Rating" placeholder="المعدل التراكمي"
                         value="<?php
-                                 if (!isset($_POST['edit_id'])){echo "";}else{echo $row['Cumulative_Rating'];}?>" required>
+                                 if (!isset($_POST['edit_id'])){echo "";}else{echo $row['Cumulative_Rating'];}?>" required pattern="^(?:[5-9]\d|\d{2})(?:\.\d+)?$" title="الرجاء إدخال قيمة صحيحة بين 50 و 100">
                         <input type="date" name="Graduation_Year" placeholder="سنة التخرج" 
                         value="<?php
                                  if (!isset($_POST['edit_id'])){echo "";}else{echo $row['Graduation_Year'];}?>" required>

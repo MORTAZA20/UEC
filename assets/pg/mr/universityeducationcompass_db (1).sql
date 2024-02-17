@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 16, 2024 at 01:01 PM
+-- Generation Time: Feb 17, 2024 at 01:24 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -45,7 +45,7 @@ CREATE TABLE `colleges` (
   `college_id` varchar(12) NOT NULL,
   `college_name` varchar(100) NOT NULL,
   `college_description` text DEFAULT NULL,
-  `required_GPA` int(11) DEFAULT NULL,
+  `required_GPA` double DEFAULT NULL,
   `university_id` varchar(12) DEFAULT NULL,
   `colleges_img_path` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -55,8 +55,8 @@ CREATE TABLE `colleges` (
 --
 
 INSERT INTO `colleges` (`college_id`, `college_name`, `college_description`, `required_GPA`, `university_id`, `colleges_img_path`) VALUES
-('45', 'كلية التربية للعلوم الصرفة2', '                                            ', 78, '1', 'colleges_img/_83e01622-b7f9-4273-879b-37d245cd5e59.jpeg'),
-('99', '99', '', 99, '1245', 'colleges_img/_7aa6a15d-0ef0-4213-9e57-2222d50d6f44.jpeg');
+('2', 'كلية التربية للعلوم الصرفة1', '', 78.9, '12', 'colleges_img/_7aa6a15d-0ef0-4213-9e57-2222d50d6f44.jpeg'),
+('45', 'كلية التربية للعلوم الصرفة1', '', 78.9, '1245', 'colleges_img/_4235b54f-ba8f-4f16-b27c-9194166273df.jpeg');
 
 -- --------------------------------------------------------
 
@@ -84,20 +84,13 @@ CREATE TABLE `departments` (
   `college_id` varchar(12) DEFAULT NULL,
   `department_description` text DEFAULT NULL,
   `scientific_department_message` text DEFAULT NULL,
-  `required_GPA` int(11) DEFAULT NULL,
-  `evening_GPA` int(11) DEFAULT NULL,
-  `parallel_GPA` int(11) DEFAULT NULL,
+  `required_GPA` double DEFAULT NULL,
+  `evening_GPA` double DEFAULT NULL,
+  `parallel_GPA` double DEFAULT NULL,
   `parallel_study_fees` int(11) NOT NULL,
   `evening_study_fees` int(11) NOT NULL,
   `departments_img_path` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `departments`
---
-
-INSERT INTO `departments` (`department_id`, `department_name`, `college_id`, `department_description`, `scientific_department_message`, `required_GPA`, `evening_GPA`, `parallel_GPA`, `parallel_study_fees`, `evening_study_fees`, `departments_img_path`) VALUES
-('7', 'الحاسبات', '45', '', '', 77, 77, 7, 7, 7, 'departments_img/_83e01622-b7f9-4273-879b-37d245cd5e59.jpeg');
 
 -- --------------------------------------------------------
 
@@ -113,17 +106,16 @@ CREATE TABLE `inf_login` (
   `type` varchar(50) NOT NULL,
   `RegistrationData` date DEFAULT NULL,
   `RegistrationTime` time DEFAULT NULL,
-  `Gmail` varchar(70) NOT NULL
+  `Gmail` varchar(70) NOT NULL,
+  `college_id` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `inf_login`
 --
 
-INSERT INTO `inf_login` (`Admin_id`, `department_id`, `AdminUserName`, `AdminPassword`, `type`, `RegistrationData`, `RegistrationTime`, `Gmail`) VALUES
-(43, NULL, '1', '$2y$13$O0QMy6UAc9d6hASYw8KGFu43uiIkHRyaj7m/gNNKAsOVX.AhezLBO', 'Admin', '2024-02-16', '12:35:00', 'qqwwertyui84@gmail.com'),
-(52, NULL, '222', '$2y$13$2GbAuC4PyLkTmQg04XtnGe00H4iu7ZQxGB3B5Zi00AoGpuigVOhV2', 'SubAdmin', '2024-02-16', '12:13:00', 'qqwwertyui488@gmail.com'),
-(58, '7', '333', '$2y$13$4QjZujZ4b.5/qBSBZV19NO1X5jeAFciuLI0LRvtA9P4KCzr0tyiPi', 'department', '2024-02-16', '12:35:00', '');
+INSERT INTO `inf_login` (`Admin_id`, `department_id`, `AdminUserName`, `AdminPassword`, `type`, `RegistrationData`, `RegistrationTime`, `Gmail`, `college_id`) VALUES
+(59, NULL, '1', '$2y$13$O0QMy6UAc9d6hASYw8KGFu43uiIkHRyaj7m/gNNKAsOVX.AhezLBO', 'Admin', NULL, NULL, 'qqwwertyui84@gmail.com', NULL);
 
 -- --------------------------------------------------------
 
@@ -170,7 +162,7 @@ CREATE TABLE `top_students` (
   `department_id` varchar(12) DEFAULT NULL,
   `student_name` varchar(100) NOT NULL,
   `Graduation_Year` date NOT NULL,
-  `Cumulative_Rating` int(11) NOT NULL
+  `Cumulative_Rating` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -192,8 +184,8 @@ CREATE TABLE `universities` (
 --
 
 INSERT INTO `universities` (`university_id`, `university_name`, `university_location`, `university_website`, `universities_img_path`) VALUES
-('1', 'جامعة ال', 'بغداد', 'sdfg', 'universities_img/_3e943703-ec9c-449e-b492-8d6628bae29b.jpeg'),
-('1245', 'جامعة الكرمة', 'البصرة', 'بلا', 'universities_img/_83e01622-b7f9-4273-879b-37d245cd5e59.jpeg');
+('12', 'بغداد', '2', 'sdf', 'universities_img/_35d35935-0ed2-4340-b56b-69f21ccb9683.jpeg'),
+('1245', 'جامعة الكرمة', 'بغداد', 'بلا', 'universities_img/_34ec1c70-0ad6-40c9-9dba-0d2f65bc4c48.jpeg');
 
 --
 -- Indexes for dumped tables
@@ -232,7 +224,8 @@ ALTER TABLE `departments`
 --
 ALTER TABLE `inf_login`
   ADD PRIMARY KEY (`Admin_id`),
-  ADD KEY `department_id` (`department_id`);
+  ADD KEY `department_id` (`department_id`),
+  ADD KEY `inf_login_ibfk_2` (`college_id`);
 
 --
 -- Indexes for table `settings`
@@ -268,7 +261,7 @@ ALTER TABLE `universities`
 -- AUTO_INCREMENT for table `inf_login`
 --
 ALTER TABLE `inf_login`
-  MODIFY `Admin_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `Admin_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -308,7 +301,8 @@ ALTER TABLE `departments`
 -- Constraints for table `inf_login`
 --
 ALTER TABLE `inf_login`
-  ADD CONSTRAINT `inf_login_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `departments` (`department_id`);
+  ADD CONSTRAINT `inf_login_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `departments` (`department_id`),
+  ADD CONSTRAINT `inf_login_ibfk_2` FOREIGN KEY (`college_id`) REFERENCES `colleges` (`college_id`);
 
 --
 -- Constraints for table `student_projects`

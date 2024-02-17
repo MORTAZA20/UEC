@@ -35,19 +35,11 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
             </div>
             <?php
             include '../inc/conn.inc.php';
-            if (isset($_POST['btn_edit'])) {
-                $edit_id = $_POST['edit_id'];
-
-                $sql = "SELECT * FROM inf_login WHERE Admin_id =?";
-                $stmt = $conn->prepare($sql);
-                $stmt->bind_param("i", $edit_id);
-                $stmt->execute();
-                $result = $stmt->get_result();
-                $row = $result->fetch_assoc();
-            }
+            
             if (isset($_POST["sub_form"])) {
                 $Admin_id = mysqli_real_escape_string($conn, $_POST["Admin_id"]);
                 $department_id = mysqli_real_escape_string($conn, $_POST["department_id"]);
+                $college_id = mysqli_real_escape_string($conn, $_POST["college_id"]);
                 $AdminUserName = mysqli_real_escape_string($conn, $_POST["AdminUserName"]);
                 $AdminPassword = mysqli_real_escape_string($conn, $_POST["AdminPassword"]);
                 $type = mysqli_real_escape_string($conn, $_POST["type"]);
@@ -65,14 +57,15 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                 
 
                 
-                $sql = "UPDATE inf_login SET department_id = ?, AdminUserName = ?, AdminPassword = ?, type = ?, Gmail = ? WHERE Admin_id = ?";
+                $sql = "UPDATE inf_login SET department_id = ?, college_id = ?, AdminUserName = ?, AdminPassword = ?, type = ?, Gmail = ? WHERE Admin_id = ?";
                 $stmt = $conn->prepare($sql);
 
                 if ($type == "Admin" || $type == "SubAdmin") {
                     $department_id=NULL;
+                    $college_id=NULL;
                 }
 
-                $stmt->bind_param("sssssi", $department_id, $AdminUserName, $AdminPassword_hash, $type, $Gmail, $Admin_id);
+                $stmt->bind_param("ssssssi", $department_id, $college_id, $AdminUserName, $AdminPassword_hash, $type, $Gmail, $Admin_id);
                 $result = $stmt->execute();
 
                 if ($result) {
@@ -83,27 +76,65 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
 
                 $stmt->close();
             }
+            if (isset($_POST['btn_edit'])) {
+                $edit_id = $_POST['edit_id'];
+            }
+            $sql = "SELECT * FROM inf_login WHERE Admin_id =?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("i", $edit_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            
             
             $conn->close();
             ?>
 
             <div class="container-form">
                 <form action="" method="post">
-                    <select class="fruit" name="type" style=" margin-bottom: 10px ;" required
-                    onchange="toggleDepartment()">
+                <select class="fruit" name="type" style=" margin-bottom: 10px ;" required
+                    onchange="toggle()">
                         <option value="Admin">مشرف عام</option>
                         <option value="SubAdmin">مشرف ثانوي</option>
                         <option value="department">قسم</option>
+                        <option value="college">كلية</option>
                     </select>
                     <select class="fruit" name="department_id" style=" margin-bottom: 10px ;" 
                     id="department_select">
                         <?php
                         include '../inc/conn.inc.php';
-                        $sql_dep = "SELECT * FROM departments";
-                        $result_sql_dep = $conn->query($sql_dep);
-                        while ($row_dep = $result_sql_dep->fetch_assoc()) {
-                            echo "<option value='" . $row_dep['department_id'] . "'>" . $row_dep['department_name'] . "</option>";
+                        $sql1 = "SELECT d.*, c.college_name, u.university_name
+                                FROM departments d
+                                LEFT JOIN colleges c ON d.college_id = c.college_id
+                                LEFT JOIN universities u ON c.university_id = u.university_id";
+                        $result = $conn->query($sql1);
+                        if($result->num_rows >0){
+                            while ($row1 = $result->fetch_assoc()) {
+                            echo "<option value='" . $row1['department_id'] . "'>" . $row1['university_name'] ." - " . $row1['college_name'] ." - ". $row1['department_name'] . "</option>";
                         }
+                        }else{
+                            echo "<option>لا توجد أقسام مضافه</option>";
+                        }
+                        
+                        ?>
+                    </select>
+                    <select class="fruit" name="college_id" style=" margin-bottom: 10px ;" 
+                    id="college_select">
+                        <?php
+                        include '../inc/conn.inc.php';
+                        $sql2 = "SELECT  c.*, u.university_name
+                                FROM colleges c
+                                LEFT JOIN universities u ON c.university_id = u.university_id";
+
+                        $result = $conn->query($sql2);
+                        if($result->num_rows >0){
+                            while ($row2 = $result->fetch_assoc()) {
+                            echo "<option value='" . $row2['college_id'] . "'>" . $row2['university_name'] ." - " . $row2['college_name'] . "</option>";
+                        }
+                        }else{
+                            echo "<option>لا توجد كليات مضافه</option>";
+                        }
+                        
                         ?>
                     </select>
                     <input type="hidden" name="Admin_id" placeholder="أسم المستخدم" style=" margin-bottom: 10px ;" 
@@ -144,17 +175,32 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
         </div>
     </div>
     <script>
-        function toggleDepartment() {
-            var type = document.querySelector('select[name="type"]').value;
-            var gmailField = document.getElementById('gmailField');
-            if (type == "department") {
-                document.getElementById('department_select').style.display = "block";
-                gmailField.style.display = "none";
-            } else {
-                document.getElementById('department_select').style.display = "none";
-                gmailField.style.display = "block";
-            }
+    function toggle() {
+        var type = document.querySelector('select[name="type"]').value;
+        var departmentSelect = document.getElementById('department_select');
+        var collegeSelect = document.getElementById('college_select');
+        var gmailField = document.getElementById('gmailField');
+
+        if (type == "department") {
+            departmentSelect.style.display = "block";
+            collegeSelect.style.display = "none";
+            gmailField.style.display = "none";
+            departmentSelect.setAttribute("required", "required");
+            collegeSelect.removeAttribute("required"); 
+        } else if (type == "college") {
+            departmentSelect.style.display = "none";
+            collegeSelect.style.display = "block";
+            gmailField.style.display = "none";
+            departmentSelect.removeAttribute("required"); 
+            collegeSelect.setAttribute("required", "required"); 
+        } else {
+            departmentSelect.style.display = "none";
+            collegeSelect.style.display = "none";
+            gmailField.style.display = "block";
+            departmentSelect.removeAttribute("required");  
+            collegeSelect.removeAttribute("required"); 
         }
+    }
         setTimeout(function() {
             document.getElementById('success-message').style.display = 'none';
             window.location.href = 'My_Admins';

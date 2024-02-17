@@ -1,4 +1,3 @@
-
 <?php
 
 if (isset($_POST['search'])) {
@@ -16,41 +15,43 @@ $result = $conn->query($sql);
 while ($row = $result->fetch_assoc()) {
         ?>
 
-        <tr>
-        <div class="truncated-text">
-                <td><?php echo $row["college_id"]; ?></td>
-                <td><?php echo $row["university_name"]; ?></td>
-                <td><img style="pointer-events: none;" src="./assets/pg/admins/<?php echo $row["colleges_img_path"]; ?>">
-                <td><?php echo $row["college_name"]; ?></td>
-        </div>
-                </td>
-                <td class="truncated-text"><?php echo $row["required_GPA"]; ?></td>
-                <td class="truncated-text"><?php echo $row["college_description"]; ?></td>
+<tr>
+    <div class="truncated-text">
+        <td><?php echo $row["college_id"]; ?></td>
+        <td><?php echo $row["university_name"]; ?></td>
+        <td><img style="pointer-events: none;" src="./assets/pg/admins/<?php echo $row["colleges_img_path"]; ?>">
+        <td><?php echo $row["college_name"]; ?></td>
+    </div>
+    </td>
+    <td class="truncated-text"><?php echo $row["required_GPA"]; ?></td>
 
-        
-                <td data-title="التحكم" class="text-center">
-                        <div class="control-buttons">
-                                <form id="EditForm" action="edit_colleges" method="post">
-                                        <input type="hidden" name="edit_id" value="<?php echo $row['college_id'];?>">
-                                        <input type="submit" name="btn_edit" value="تعديل" class="edit-btn">
-                                </form>
-                                <?php if (isset($_SESSION["admin_user"])) {
+    <td data-title="التحكم" class="text-center">
+        <div class="control-buttons">
+            <form id="ShowForm" action="ShowCollege" method="post">
+                <input type="hidden" name="Show_id" value="<?php echo $row['college_id']; ?>">
+                <input type="submit" name="btn_Show" value="عرض كل البيانات" class="Show-btn">
+            </form>
+            <form id="EditForm" action="edit_colleges" method="post">
+                <input type="hidden" name="edit_id" value="<?php echo $row['college_id'];?>">
+                <input type="submit" name="btn_edit" value="تعديل" class="edit-btn">
+            </form>
+            <?php if (isset($_SESSION["admin_user"])) {
                                 if ($_SESSION["admin_user"] == "Admin") {
                                 ?>
-                                <form id="deleteForm" action="delete_colleges" method="post" >
-                                        <input type="hidden" name="del_id" value="<?php echo $row['college_id'];?>">
-                                        <input type="submit" name="btn_delete" value="حذف" class="delete-btn">
-                                </form>
-                                <?php 
+            <form id="deleteForm" action="delete_colleges" method="post">
+                <input type="hidden" name="del_id" value="<?php echo $row['college_id'];?>">
+                <input type="submit" name="btn_delete" value="حذف" class="delete-btn">
+            </form>
+            <?php 
                                 }
                                 }
                                 ?>
-                        </div>
-                </td>
-        
+        </div>
+    </td>
+
 </tr>
 
-        <?php
+<?php
 }
 $conn->close();
 ?>

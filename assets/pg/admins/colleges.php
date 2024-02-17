@@ -60,7 +60,6 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                         <th class="text-right" width="15%">شعار الكلية</th>
                         <th class="text-right" width="15%">اسم الكلية</th>
                         <th class="text-right" width="10%">معدل القبول</th>
-                        <th class="text-right" width="10%">النبذة</th>
                         <th class="text-right" width="30%">التحكم</th>
                     </tr>
                 </thead>
