@@ -63,6 +63,10 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                 if ($type == "Admin" || $type == "SubAdmin") {
                     $department_id=NULL;
                     $college_id=NULL;
+                }else if($type == "college"){
+                    $department_id=NULL;
+                }else if($type == "department"){
+                    $college_id=NULL;
                 }
 
                 $stmt->bind_param("ssssssi", $department_id, $college_id, $AdminUserName, $AdminPassword_hash, $type, $Gmail, $Admin_id);

@@ -3,27 +3,31 @@
 if (isset($_POST['search'])) {
     include '../inc/conn.inc.php';
     $search = mysqli_real_escape_string($conn, $_POST['search']);
-    $sql = "SELECT inf_login.*, departments.department_name 
+    $sql = "SELECT inf_login.*, departments.department_name ,colleges.college_name 
     FROM inf_login 
     LEFT JOIN departments ON inf_login.department_id = departments.department_id 
+    LEFT JOIN colleges ON inf_login.college_id = colleges.college_id
     WHERE AdminUserName LIKE '%$search%' OR Admin_id = '$search'";
-    $result = $conn->query($sql);
+    
 } else {
-    $sql = "SELECT inf_login.*, departments.department_name 
+    $sql = "SELECT inf_login.*, departments.department_name ,colleges.college_name 
     FROM inf_login 
-    LEFT JOIN departments ON inf_login.department_id = departments.department_id";
-    $result = $conn->query($sql);
-}
+    LEFT JOIN departments ON inf_login.department_id = departments.department_id
+    LEFT JOIN colleges ON inf_login.college_id = colleges.college_id";
+
+   
+} 
+$result = $conn->query($sql);
 while ($row = $result->fetch_assoc()) {
 ?>
     <tr>
     <div class="truncated-text">
-        <td><?php echo $row["department_name"] ?></td>
+        <td><?php echo $row["college_name"] ?></td>
+        <td><?php echo $row["department_name"] ?></td> 
         <td><?php echo $row["AdminUserName"] ?></td>
         <td><?php echo $row["RegistrationData"] ?></td>
         <td><?php echo $row["RegistrationTime"] ?></td>
         <td><?php echo $row["type"] ?></td>
-        <td><?php echo $row["Gmail"] ?></td>
     </div>
         <td data-title="التحكم" class="text-center">
 

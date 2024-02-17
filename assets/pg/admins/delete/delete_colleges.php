@@ -73,6 +73,12 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] == "true") {
     $stmt->bind_param("s", $delete_colleges);
     $stmt->execute();
     
+     // حذف الأقسام
+     $sql = "DELETE FROM inf_login WHERE college_id=?";
+     $stmt = $conn->prepare($sql);
+     $stmt->bind_param("s", $delete_colleges);
+     $stmt->execute();
+
     // حذف الكليات
     $sql = "DELETE FROM colleges WHERE college_id=?";
     $stmt = $conn->prepare($sql);
