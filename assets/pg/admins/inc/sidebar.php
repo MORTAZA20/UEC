@@ -41,7 +41,6 @@
         if ($type == "department"){ 
                    
         ?>
-
             <div class="item-bar" onclick="window.open('ShowDepartment' , '_self')"><div class="Imgitem" style="background-image: url('information-department');"></div>
             معلومات القسم</div>
             <div class="item-bar" onclick="window.open('courses' , '_self')"><div class="Imgitem" style="background-image: url('Subjects');"></div>
@@ -55,11 +54,11 @@
     <?php }
     
      }
-     if ($type == "department"){ 
+     if ($type == "college"){ 
                    
         ?>
 
-            <div class="item-bar" onclick="window.open('ShowCollege' , '_self')"><div class="Imgitem" style="background-image: url('information-department');"></div>
+            <div class="item-bar" onclick="window.open('ShowCollege' , '_self')"><div class="Imgitem" style="background-image: url('C1');"></div>
             معلومات الكلية</div>
             <div class="item-bar" onclick="window.open('inf_departments' , '_self')"><div class="Imgitem" style="background-image: url('information-department');"></div>
             معلومات الاقسام</div>
@@ -97,7 +96,6 @@
 
     <div class="item-bar" onclick="window.open('support' , '_self')"><div class="Imgitem" style="background-image: url('Support');"></div>
     الدعم والمساعدة</div>
-
 
 
 </div>

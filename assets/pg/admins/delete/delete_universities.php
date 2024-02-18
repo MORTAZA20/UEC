@@ -93,6 +93,11 @@ if (isset($_POST["dal_stm"]) && $_POST["dal_stm"] == "true") {
         $stmt->bind_param("s", $delete_universities);
         $stmt->execute();
 
+        $sql = "DELETE FROM inf_login WHERE college_id IN (SELECT college_id FROM colleges WHERE university_id=?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $delete_universities);
+        $stmt->execute();
+
         $sql = "DELETE FROM colleges WHERE university_id=?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $delete_universities);

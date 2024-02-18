@@ -29,12 +29,11 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
 if(isset($_POST["Submit-verification_code"])) {
     $verification_code = $_POST["verification_code"];
     $random_code = $_SESSION["random_code"];
-    echo $random_code;
-    
+
     if ($random_code == $verification_code) {
         header("Location: home");
     }else{
-        echo $random_code;
+        
         echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>رمز التاكيد الذي ادخلتة خاطئ</div>";   
     }
   }

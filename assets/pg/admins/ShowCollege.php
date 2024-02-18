@@ -67,7 +67,7 @@ if ($_SESSION["admin_user"] != "Admin"
                     if (isset($_SESSION["admin_user"])){
 
                     if ($_SESSION["admin_user"] == "college" ){
-                        $Show_id = $_SESSION["college"];
+                        $Show_id = $_SESSION["college_id"];
                     }
                     else {
                         $Show_id = $_POST["Show_id"];

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 17, 2024 at 03:40 PM
+-- Generation Time: Feb 18, 2024 at 07:23 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -107,7 +107,7 @@ CREATE TABLE `inf_login` (
 --
 
 INSERT INTO `inf_login` (`Admin_id`, `department_id`, `AdminUserName`, `AdminPassword`, `type`, `RegistrationData`, `RegistrationTime`, `Gmail`, `college_id`) VALUES
-(59, NULL, '1', '$2y$13$O0QMy6UAc9d6hASYw8KGFu43uiIkHRyaj7m/gNNKAsOVX.AhezLBO', 'Admin', NULL, NULL, 'qqwwertyui84@gmail.com', NULL);
+(59, NULL, '1', '$2y$13$O0QMy6UAc9d6hASYw8KGFu43uiIkHRyaj7m/gNNKAsOVX.AhezLBO', 'Admin', '2024-02-18', '09:21:00', 'qqwwertyui84@gmail.com', NULL);
 
 -- --------------------------------------------------------
 
@@ -245,7 +245,7 @@ ALTER TABLE `universities`
 -- AUTO_INCREMENT for table `inf_login`
 --
 ALTER TABLE `inf_login`
-  MODIFY `Admin_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `Admin_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `settings`

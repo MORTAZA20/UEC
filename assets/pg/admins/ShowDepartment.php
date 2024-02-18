@@ -3,13 +3,16 @@ session_start();
 require_once("inc/conn.inc.php");
 
 if (isset($_SESSION["admin_user"])) {
-if ($_SESSION["admin_user"] != "Admin" 
-    && $_SESSION["admin_user"] != "SubAdmin"
-    && $_SESSION["admin_user"] != "department") {
-    header("Location: login");
-    exit();
-}
-}else{
+    if (
+        $_SESSION["admin_user"] != "Admin"
+        && $_SESSION["admin_user"] != "SubAdmin"
+        && $_SESSION["admin_user"] != "department"
+        && $_SESSION["admin_user"] != "college"
+    ) {
+        header("Location: login");
+        exit();
+    }
+} else {
     header("Location: login");
     exit();
 }
@@ -36,20 +39,22 @@ if ($_SESSION["admin_user"] != "Admin"
         <?php include 'inc/sidebar.php'; ?>
 
         <div class="content-bar">
-        <div style='position:relative; margin-top: 15px; '>
-            
-        <?php 
-        if ($_SESSION["admin_user"] == "department"){ 
+            <div style='position:relative; margin-top: 15px; '>
 
-            ?>
-        
-        <button class="btn-style" onclick="window.open('edit_inf_departments' , '_self');"><div class="Imgitem" style="background-image: url('E1');"></div>
-        تعديل معلومات القسم</button>
+                <?php
+                if ($_SESSION["admin_user"] == "department") {
 
-        <?php } ?>
-        <h2 style='text-align: center;font-size: 32px; font-weight: lighter;'>معلومات القسم</h2>
-            
-        
+                ?>
+
+                    <button class="btn-style" onclick="window.open('edit_inf_departments' , '_self');">
+                        <div class="Imgitem" style="background-image: url('E1');"></div>
+                        تعديل معلومات القسم
+                    </button>
+
+                <?php } ?>
+                <h2 style='text-align: center;font-size: 32px; font-weight: lighter;'>معلومات القسم</h2>
+
+
                 <div style='margin-top :50px;' class="path-bar">
                     <div class="url-path active-path">لوحة التحكم</div>
                     <div class="url-path slash">/</div>
@@ -62,17 +67,16 @@ if ($_SESSION["admin_user"] != "Admin"
 
                 <div class="image-prod">
                     <?php
-                   
-                    if (isset($_SESSION["admin_user"])){
 
-                    if ($_SESSION["admin_user"] == "department" ){
-                        $Show_id = $_SESSION["department_id"];
+                    if (isset($_SESSION["admin_user"])) {
+
+                        if ($_SESSION["admin_user"] == "department") {
+                            $Show_id = $_SESSION["department_id"];
+                        } else {
+                            $Show_id = $_POST["Show_id"];
+                        }
                     }
-                    else {
-                        $Show_id = $_POST["Show_id"];
-                    }
-                }
-                    
+
                     $sql = "SELECT departments.*, colleges.college_name FROM departments
                             LEFT JOIN colleges ON departments.college_id = colleges.college_id WHERE department_id = $Show_id";
 
@@ -80,7 +84,7 @@ if ($_SESSION["admin_user"] != "Admin"
                     $row = $result->fetch_assoc();
 
                     ?>
-                    <img style="width: 150px; pointer-events: none;"  src=./assets/pg/admins/<?php echo $row['departments_img_path']; ?>>
+                    <img style="width: 150px; pointer-events: none;" src=./assets/pg/admins/<?php echo $row['departments_img_path']; ?>>
                 </div>
                 <div class="prodation">
                     <div class="sh-name">
@@ -113,7 +117,7 @@ if ($_SESSION["admin_user"] != "Admin"
             </div>
         </div>
     </div>
-    
+
 </body>
 
 </html>
