@@ -18,7 +18,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
 <div class='container'>
     <h2>أدخل رمز المصادقة الثنائية</h2>
     <h3>تم ارسال رمز مكون من 8 من الارقام والاحرف الى الايميل</h3>
-
+   <?php echo $_SESSION["random_code"]; ?>
     <form action="" method="post">
         <input type='text' name='verification_code' placeholder='رمز المصادقة' required>
         <input class='button' type='submit' name='Submit-verification_code' value='تأكيد'>

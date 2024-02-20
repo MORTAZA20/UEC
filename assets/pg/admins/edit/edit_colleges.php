@@ -1,7 +1,9 @@
 <?php
 session_start();
 if (isset($_SESSION["admin_user"])) {
-if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin") {
+if ($_SESSION["admin_user"] != "Admin" 
+&& $_SESSION["admin_user"] != "SubAdmin"
+&& $_SESSION["admin_user"] != "college") {
     header("Location: login");
     exit();
 }
@@ -40,7 +42,12 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
 
             if (isset($_POST['btn_edit'])) {
                 $edit_id = $_POST['edit_id'];
-                $sql = "SELECT c.*, u.university_id, u.university_name
+                
+            }
+            if($_SESSION["admin_user"] == "college"){
+                $edit_id= $_SESSION["college_id"];
+            }
+            $sql = "SELECT c.*, u.university_id, u.university_name
                 FROM colleges c 
                 JOIN universities u ON c.university_id = u.university_id
                 WHERE c.college_id = ?";
@@ -49,7 +56,6 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                 $stmt->execute();
                 $result = $stmt->get_result();
                 $row = $result->fetch_assoc();
-            }
             if (isset($_POST["sub_form"])) {
 
                 $university_id = mysqli_real_escape_string($conn, $_POST["university_id"]);
@@ -111,15 +117,15 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                                     $result = $conn->query($sql);
                                    while ($rec = $result->fetch_assoc()) {
                                     ?>
-                                        <option value="<?php if (!isset($_POST['edit_id'])) {
+                                        <option value="<?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])) {
                                     echo "";
                                     }else{ echo $rec['university_id'] ;}?>" 
                                     <?php 
-                                    if (isset($_POST['edit_id'])) {
+                                    if (isset($_POST['edit_id']) || isset($_SESSION["admin_user"])) {
                                     if ($rec['university_id'] == $row['university_id']) { echo  "selected" ; } 
                                     } 
                                     ?>>
-                                    <?php if (!isset($_POST['edit_id'])) {
+                                    <?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])) {
                                     echo "";
                                     }else{  echo $rec['university_name'] ;} ?></option>
                                 <?php 
@@ -133,11 +139,11 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
 
                     <div class="custom-column" style="margin-bottom: 10px;">
                         <input type="hidden" name="Edit_college_id" placeholder="معرف الكلية" value="<?php 
-                                 if (!isset($_POST['edit_id'])){echo "";}else{echo $edit_id;}?>"required>
+                                 if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){echo "";}else{echo $edit_id;}?>"required>
                         <input type="text" name="college_name" placeholder="اسم الكلية" value="<?php 
-                                 if (!isset($_POST['edit_id'])){echo "";}else{echo $row['college_name'];}?>"required>
+                                 if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){echo "";}else{echo $row['college_name'];}?>"required>
                         <input type="text" name="required_GPA"placeholder="المعدل" value="<?php 
-                                 if (!isset($_POST['edit_id'])){echo "";}else{echo $row['required_GPA'];}?>" required pattern="^(?:[5-9]\d|\d{2})(?:\.\d+)?$" title="الرجاء إدخال قيمة صحيحة بين 50 و 100">
+                                 if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){echo "";}else{echo $row['required_GPA'];}?>" required pattern="^(?:[5-9]\d|\d{2})(?:\.\d+)?$" title="الرجاء إدخال قيمة صحيحة بين 50 و 100">
                     </div>
 
                     <div class="container-img">   
@@ -151,7 +157,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                     <p>الوصف</p>
                     <textarea name="college_description" id="editor1">
                         <?php 
-                            if (!isset($_POST['edit_id'])){echo "";}else{echo  $row['college_description'];}
+                            if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){echo "";}else{echo  $row['college_description'];}
                         ?>
                     </textarea>
                     <div class="space"></div>
@@ -175,7 +181,11 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
     <script>
         setTimeout(function () {
             document.getElementById('success-message').style.display = 'none';
-            window.location.href = 'colleges';
+            <?php if($_SESSION["admin_user"] == "college") { ?>
+            window.location.href = 'ShowCollege';
+            <?php } else { ?>
+                window.location.href = 'colleges';
+            <?php }  ?>
         }, 4000);
     </script>
     <script src="../../../../../university-education-compass/assets/pg/admins/ckeditor/ckeditor.js"></script>
