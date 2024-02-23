@@ -1,0 +1,417 @@
+@import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap");
+
+*/ html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border: none;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+button {
+  border: none;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+label,
+img {
+  display: block;
+}
+input {
+  font: inherit;
+  width: 100%;
+  border: none;
+}
+ion-icon,
+span {
+  display: inline-block;
+}
+a {
+  text-decoration: none;
+}
+:root {
+  --primary: #111822;
+  --sec: #18bc9c;
+  --neutral: #f1efef;
+  --light-color: #e1e5ea;
+  --light-color2: #cdd0cb;
+  --bord: rgb(226 232 240);
+  --border: solid rgb(226 232 240);
+  --heart: #d80032;
+
+  --onyx: hsl(0, 0%, 25%);
+  --azure: hsl(219, 77%, 60%);
+  --white: hsl(0, 0%, 100%);
+  --platinum: hsl(0, 0%, 91%);
+  --gainsboro: hsl(0, 0%, 90%);
+  --red-salsa: hsl(0, 77%, 60%);
+  --dim-gray: hsl(0, 0%, 39%);
+  --davys-gray: hsl(0, 0%, 30%);
+  --spanish-gray: hsl(0, 0%, 62%);
+  --quick-silver: hsl(0, 0, 64%);
+
+  --fs-28: 28px;
+  --fs-24: 24px;
+  --fs-18: 18px;
+  --fs-15: 15px;
+  --fs-14: 14px;
+  --fs-12: 12px;
+  --fw-5: 500;
+  --fw-6: 600;
+  --fw-7: 700;
+
+  --px: 50px;
+  --px-30-15: 30px;
+  --radius: 5px;
+
+  --box-shadow: 0 8px 10px -6px rgb(0 0 0 / 0.2);
+  --main-font: "Tajawal", sans-serif;
+}
+
+* {
+  font-family: var(--main-font);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: all 0.2s linear;
+  transition: width 0.2s none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: #000;
+  align-items: center;
+  justify-content: center;
+  font-family: "Tajawal", sans-serif;
+  background-color: #f8fafc;
+  direction: rtl;
+  position: relative;
+}
+.header {
+  display: flex;
+  width: 100%;
+  height: 45px;
+  color: #f1efef;
+  background-color: var(--primary);
+  align-items: center;
+  justify-content: center;
+}
+.header .fa-solid {
+  position: absolute;
+  right: 10px;
+}
+.header p {
+  margin-bottom: 0;
+}
+.navbar {
+  display: flex;
+  background-color: #fff;
+  width: 100%;
+  justify-content: space-between;
+  padding: 10px 20px;
+  box-shadow: 0 10px 15px -6px rgb(0 0 0 / 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+.navbar .search-box {
+  width: auto;
+  height: 50px;
+  border: 1px solid #cdd0cb;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.navbar .search-box input {
+  font-size: 15px;
+  height: 100%;
+  width: 100%;
+  padding-right: 10px;
+  text-transform: none;
+  color: var(--primary);
+}
+.navbar .nav-menu {
+  display: flex;
+  gap: 20px;
+}
+.navbar .nav-item {
+  padding: 8px 15px;
+  border-bottom: 2px solid var(--primary);
+  font-weight: 700;
+  cursor: pointer;
+}
+.navbar .nav-menu .menu-dep {
+  border-radius: 5px;
+  background-color: var(--primary);
+  color: #fff;
+  padding: 5px 0;
+  width: 180px;
+  display: none;
+  position: absolute;
+  top: 30px;
+  transition: 0.3s all;
+}
+.navbar .nav-menu .menu-dep li {
+  padding: 10px 15px;
+  font-size: 0.8em;
+  font-weight: 500;
+}
+.navbar .nav-menu .menu-dep li:hover {
+  background-color: var(--sec);
+  padding: 10px 25px 10px 10px;
+  cursor: pointer;
+}
+.active {
+  position: relative;
+}
+.navbar .nav-menu .active:hover .menu-dep {
+  display: block;
+}
+.navbar img {
+  width: 3em;
+}
+.control {
+  padding: var(--px);
+}
+.control section .pagimation_ {
+  max-height: 70px;
+  padding: 8px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+}
+
+.control section .pagimation_ .btn-grup {
+  position: absolute;
+  left: 0px;
+  display: flex;
+  gap: 10px;
+}
+
+.control section .pagimation_ .btn-grup div[class^="swiper-btn"]::after {
+  display: none;
+}
+
+.control section .pagimation_ .btn-grup div[class^="swiper-btn"] {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  border-radius: 5px;
+  border: 1px solid #94a3b8;
+}
+
+.control section .pagimation_ .btn-grup div i {
+  font-size: 18px;
+  color: #000;
+}
+
+.control section .pagimation_ h3 {
+  padding: 5px;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.control section .swiper,
+.control section .BestSellers {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  border-top: 2px solid #f1f5f9;
+  display: flex;
+  align-items: space-between;
+}
+
+.control section .swiper-wrapper {
+  padding: 15px 0;
+}
+
+.control section .swiper-slide {
+  height: auto;
+}
+.control section .swiper .swiper-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+}
+.control .card {
+  border: 1px solid var(--gainsboro);
+  border-radius: 5px;
+  width: 300px;
+}
+.control .card img {
+  padding: 10px;
+}
+.control .card .text-card {
+  margin: 10px 0;
+  padding: 5px 8px 0 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.control .card .text-card .title {
+  font-family: var(--main-font);
+  font-size: 1.2em;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+.control .card .text-card p {
+  font-family: var(--main-font);
+  font-size: 0.9em;
+  color: var(--onyx);
+}
+.control .card .text-card button {
+  width: 100%;
+  text-align: center;
+  background-color: var(--sec);
+  color: var(--white);
+  padding: 0.8em;
+  border: 1px solid var(--sec);
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+.control .card .text-card button:hover {
+  background-color: var(--white);
+  color: var(--sec);
+}
