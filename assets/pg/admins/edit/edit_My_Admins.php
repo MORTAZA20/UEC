@@ -98,10 +98,10 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                 <form action="" method="post">
                 <select class="fruit" name="type" style=" margin-bottom: 10px ;" required
                     onchange="toggle()">
-                        <option value="Admin">مشرف عام</option>
-                        <option value="SubAdmin">مشرف ثانوي</option>
-                        <option value="department">قسم</option>
-                        <option value="college">كلية</option>
+                    <option value="Admin" <?php if($row['type'] == "Admin") echo "selected"; ?>>مشرف عام</option>
+                    <option value="SubAdmin" <?php if($row['type'] == "SubAdmin") echo "selected"; ?>>مشرف ثانوي</option>
+                    <option value="department" <?php if($row['type'] == "department") echo "selected"; ?>>قسم</option>
+                    <option value="college" <?php if($row['type'] == "college") echo "selected"; ?>>كلية</option>
                     </select>
                     <select class="fruit" name="department_id" style=" margin-bottom: 10px ;" 
                     id="department_select">

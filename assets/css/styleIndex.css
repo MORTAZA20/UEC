@@ -240,61 +240,71 @@ body {
 }
 .navbar {
   display: flex;
+  gap: 1.5em;
   background-color: #fff;
   width: 100%;
+  align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
   box-shadow: 0 10px 15px -6px rgb(0 0 0 / 0.1);
   position: sticky;
   top: 0;
-  z-index: 999;
+  z-index: 990;
 }
-.navbar .search-box {
+.navbar .search-from {
   width: auto;
-  height: 50px;
+  height: 40px;
   border: 1px solid #cdd0cb;
   overflow: hidden;
   background: #fff;
   display: flex;
   align-items: center;
   border-radius: 5px;
+  padding: 0 10px;
 }
 
-.navbar .search-box input {
-  font-size: 15px;
+.navbar .search-from input {
+  font-size: 1.1em;
   height: 100%;
   width: 100%;
   padding-right: 10px;
   text-transform: none;
   color: var(--primary);
 }
+.navbar .search-from label {
+  margin-right: 10px;
+}
+
 .navbar .nav-menu {
   display: flex;
   gap: 20px;
+  align-items: center;
+  margin: 0;
 }
 .navbar .nav-item {
+  font-size: 1em;
   padding: 8px 15px;
   border-bottom: 2px solid var(--primary);
   font-weight: 700;
   cursor: pointer;
 }
-.navbar .nav-menu .menu-dep {
+.navbar .nav-menu ul[class^="menu-dep"] {
   border-radius: 5px;
   background-color: var(--primary);
   color: #fff;
   padding: 5px 0;
-  width: 180px;
+  width: max-content;
   display: none;
   position: absolute;
   top: 30px;
   transition: 0.3s all;
 }
-.navbar .nav-menu .menu-dep li {
+.navbar .nav-menu ul[class^="menu-dep"] li {
   padding: 10px 15px;
   font-size: 0.8em;
   font-weight: 500;
 }
-.navbar .nav-menu .menu-dep li:hover {
+.navbar .nav-menu ul[class^="menu-dep"] li:hover {
   background-color: var(--sec);
   padding: 10px 25px 10px 10px;
   cursor: pointer;
@@ -302,7 +312,7 @@ body {
 .active {
   position: relative;
 }
-.navbar .nav-menu .active:hover .menu-dep {
+.navbar .nav-menu .active:hover ul[class^="menu-dep"] {
   display: block;
 }
 .navbar img {
@@ -353,7 +363,7 @@ body {
   font-weight: 500;
 }
 
-.control section .swiper,
+.control section div[class^="swiper"],
 .control section .BestSellers {
   width: 100%;
   height: auto;
@@ -370,7 +380,7 @@ body {
 .control section .swiper-slide {
   height: auto;
 }
-.control section .swiper .swiper-wrapper {
+.control section div[class^="swiper"] .swiper-wrapper {
   display: flex;
   flex-wrap: nowrap;
   gap: 10px;
@@ -379,28 +389,35 @@ body {
   border: 1px solid var(--gainsboro);
   border-radius: 5px;
   width: 300px;
+  position: relative;
 }
+
 .control .card img {
   padding: 10px;
 }
+
 .control .card .text-card {
   margin: 10px 0;
   padding: 5px 8px 0 8px;
   display: flex;
   flex-direction: column;
   gap: 5px;
+  min-height: 150px; /* ارتفاع مرن يتكيف مع محتوى البطاقة */
 }
+
 .control .card .text-card .title {
   font-family: var(--main-font);
   font-size: 1.2em;
   color: var(--primary);
   margin-bottom: 8px;
 }
+
 .control .card .text-card p {
   font-family: var(--main-font);
   font-size: 0.9em;
   color: var(--onyx);
 }
+
 .control .card .text-card button {
   width: 100%;
   text-align: center;
@@ -409,8 +426,9 @@ body {
   padding: 0.8em;
   border: 1px solid var(--sec);
   border-radius: 5px;
-  margin-top: 1rem;
+  margin-top: auto; /* تأمين توسيط الزر داخل البطاقة */
 }
+
 .control .card .text-card button:hover {
   background-color: var(--white);
   color: var(--sec);
