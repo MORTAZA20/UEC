@@ -29,18 +29,20 @@ require_once("assets/pg/admins/inc/conn.inc.php");
             <li class="nav-item">الرئيسية</li>
 
             <li class="nav-item active">الجامعات
+                <i class="fa-solid fa-caret-down"></i>
                 <ul class="menu-dep-universities">
                     <?php
                     $sql = "SELECT * FROM universities";
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) {
                     ?>
-                        <li><?php echo $row["university_name"]; ?></li>
+                        <li><a href="Show_Inf_university.php?id='<?php echo $row["university_id"]; ?>'"><?php echo $row["university_name"]; ?></a></li>
                     <?php } ?>
                 </ul>
             </li>
 
             <li class="nav-item active">الكليات
+                <i class="fa-solid fa-caret-down"></i>
                 <ul class="menu-dep-colleges">
                     <?php
                     $sql2 = "SELECT  c.*, u.university_name
@@ -50,12 +52,13 @@ require_once("assets/pg/admins/inc/conn.inc.php");
                     $result2 = $conn->query($sql2);
                     while ($row2 = $result2->fetch_assoc()) {
                     ?>
-                        <li><?php echo $row2["university_name"] . " - " .  $row2["college_name"] ?></li>
+                        <li><a href="Show_Inf_college.php?id='<?php echo $row2["college_id"]; ?>'"><?php echo $row2["university_name"] . " - " .  $row2["college_name"]; ?></a></li>
                     <?php } ?>
                 </ul>
             </li>
 
             <li class="nav-item active">الاقسام العلمية
+                <i class="fa-solid fa-caret-down"></i>
                 <ul class="menu-dep-departments">
                     <?php
                     $sql3 = "SELECT d.*, c.college_name, u.university_name
@@ -66,7 +69,7 @@ require_once("assets/pg/admins/inc/conn.inc.php");
                     $result3 = $conn->query($sql3);
                     while ($row3 = $result3->fetch_assoc()) {
                     ?>
-                        <li><?php echo $row3["university_name"] . " - " .  $row3["college_name"] . " - " .  $row3["department_name"] ?></li>
+                        <li><a href="Show_Inf_department.php?id='<?php echo $row3["department_id"]; ?>'"><?php echo $row3["university_name"] . " - " .  $row3["college_name"] . " - " .  $row3["department_name"]; ?></a></li>
                     <?php } ?>
                 </ul>
             </li>
@@ -80,7 +83,7 @@ require_once("assets/pg/admins/inc/conn.inc.php");
 
 
         <div class="nav-item">
-            <i class="fa-solid fa-circle-info"></i>
+            <i class="fa-solid fa-circle-info" title="ماذا عنا"></i>
         </div>
     </nav>
     <div class="control">
@@ -185,6 +188,16 @@ require_once("assets/pg/admins/inc/conn.inc.php");
         </section>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const xMark = document.querySelector(".fa-xmark");
+            const header = document.querySelector(".header");
+
+            xMark.addEventListener("click", function() {
+                header.classList.toggle("hide");
+            });
+        });
+    </script>
     <script>
         new Swiper('.swiper-universities', {
             speed: 400,

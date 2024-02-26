@@ -208,7 +208,8 @@ a {
   text-decoration: none;
   text-transform: capitalize;
   transition: all 0.2s linear;
-  transition: width 0.2s none;
+  transition: width 0.2s none; 
+  
 }
 
 body {
@@ -221,6 +222,7 @@ body {
   background-color: #f8fafc;
   direction: rtl;
   position: relative;
+ 
 }
 .header {
   display: flex;
@@ -230,6 +232,10 @@ body {
   background-color: var(--primary);
   align-items: center;
   justify-content: center;
+}
+
+.header.hide {
+  display: none; 
 }
 .header .fa-solid {
   position: absolute;
