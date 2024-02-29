@@ -11,7 +11,6 @@ require_once("assets/pg/admins/inc/conn.inc.php");
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/0b13675ea3.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/styleIndex.css">
 </head>
 
@@ -87,10 +86,6 @@ require_once("assets/pg/admins/inc/conn.inc.php");
         </div>
     </nav>
     <div class="control">
-
-        <section class="">
-
-        </section>
         <section>
             <div class="pagimation_">
                 <h3>الجامعات المتقرحة</h3>
@@ -112,7 +107,7 @@ require_once("assets/pg/admins/inc/conn.inc.php");
                             <div class="text-card">
                                 <h4 class="title"><?php echo $row["university_name"]; ?></h4>
                                 <p><?php echo $row["university_location"]; ?></p>
-                                <button>عرض الجامعة</button>
+                                <button onclick="window.open('Show_Inf_university?id=<?php echo $row['university_id']; ?>', '_self');">عرض الجامعة</button>
                             </div>
                         </div>
                     <?php
@@ -143,7 +138,7 @@ require_once("assets/pg/admins/inc/conn.inc.php");
                             <div class="text-card">
                                 <p><?php echo $row4["university_name"]; ?></p>
                                 <h4 class="title"><?php echo $row4["college_name"]; ?></h4>
-                                <button>عرض الكلية</button>
+                                <button onclick="window.open('Show_Inf_college?id=<?php echo $row4['college_id']; ?>', '_self');">عرض الكلية</button>
                             </div>
 
                         </div>
@@ -176,8 +171,7 @@ require_once("assets/pg/admins/inc/conn.inc.php");
                             <div class="text-card">
                                 <p><?php echo $row5["university_name"] . " - " .  $row5["college_name"] ?></p>
                                 <h4 class="title"><?php echo $row5["department_name"]; ?></h4>
-
-                                <button>عرض القسم</button>
+                                <button onclick="window.open('Show_Inf_department?id=<?php echo $row5['department_id']; ?>', '_self');">عرض القسم</button>
                             </div>
 
                         </div>
@@ -187,7 +181,56 @@ require_once("assets/pg/admins/inc/conn.inc.php");
             </div>
         </section>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <footer>
+        <div class="control">
+            <div class="about">
+                <h3>ماذا عنا</h3>
+                يهدف المشروع إلى توفير معلومات شاملة ومفصلة حول الجامعات والكليات والأقسام العلمية المختلفة. يتم توفير المعلومات حول البرامج الأكاديمية، والمتطلبات الدراسية، والخطط الدراسية، والفرص البحثية، والأنشطة الطلابية، والخدمات المقدمة، وما إلى ذلك، بهدف مساعدة الطلاب في اتخاذ قرارات مهمة بشأن تعليمهم العالي.
+            </div>
+            <div class="feedback">
+                <h3>اترك لنا رأيك</h3>
+                <form action="">
+                    <label for="">الايميل</label>
+                    <input type="Email" placeholder="الايميل">
+                    <label for="">الرساله</label>
+                    <textarea></textarea>
+                    <input type="submit">
+                </form>
+            </div>
+            <div class="contact_information">
+                <h3>معلومات الاتصال</h3>
+                <div class="grop">
+                    <div onclick="window.open('#', '_self');">
+                        <div class="fa-brands fa-instagram"></div>
+                        <div>انستغرام</div>
+                    </div>
+                    <div onclick="window.open('#', '_self');">
+                        <div class="fa-brands fa-facebook"></div>
+                        <div>فيسبوك</div>
+                    </div>
+                    <div onclick="window.open('https://t.me/M71_17', '_self');">
+                        <div class="fa-brands fa-telegram"></div>
+                        <div>تلجرام</div>
+                    </div>
+                    <div onclick="window.open('#', '_self');">
+                        <div class="fa-brands fa-twitter"></div>
+                        <div>تويتر</div>
+                    </div>
+
+                    <div onclick="window.open('tel:+9647839985872', '_self');">
+                        <div class="fa-solid fa-phone"></div>
+                        <div> رقم الهاتف</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="copy">
+            <p>جميع الحقوق محفوظة &copy; 2024 Murtadha Haider Al-Mansouri</p>
+
+        </div>
+    </footer>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const xMark = document.querySelector(".fa-xmark");

@@ -78,3 +78,8 @@ RewriteRule ^edit_student_projects ./assets/pg/admins/edit/edit_student_projects
 RewriteRule ^edit_courses ./assets/pg/admins/edit/edit_courses.php [NC,L]
 RewriteRule ^edit_career_opportunities ./assets/pg/admins/edit/edit_career_opportunities.php [NC,L]
 RewriteRule ^edit_My_Admins ./assets/pg/admins/edit/edit_My_Admins.php [NC,L]
+
+
+RewriteRule ^Show_Inf_university ./assets/pg/Show_Inf_university.php [NC,L]
+RewriteRule ^Show_Inf_college ./assets/pg/Show_Inf_college.php [NC,L]
+RewriteRule ^Show_Inf_department ./assets/pg/Show_Inf_department.php [NC,L]
