@@ -135,6 +135,9 @@ body {
   background-color: #f1efefb7;
   direction: rtl;
 }
+input {
+    text-transform: none; 
+}
 * {
   font-family: 'Tajawal', sans-serif;
   margin: 0;

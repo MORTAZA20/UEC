@@ -16,75 +16,10 @@ require_once("assets/pg/admins/inc/conn.inc.php");
 
 <body>
     <div class="header">
-
         <i class="fa-solid fa-xmark"></i>
         <p>07839985872</p>
     </div>
-    <nav class="navbar">
-
-        <img src="LOGO" alt="شعار بوصلة التعليم الجامعي">
-        <ul class="nav-menu">
-
-            <li class="nav-item">الرئيسية</li>
-
-            <li class="nav-item active">الجامعات
-                <i class="fa-solid fa-caret-down"></i>
-                <ul class="menu-dep-universities">
-                    <?php
-                    $sql = "SELECT * FROM universities";
-                    $result = $conn->query($sql);
-                    while ($row = $result->fetch_assoc()) {
-                    ?>
-                        <li><a href="Show_Inf_university.php?id='<?php echo $row["university_id"]; ?>'"><?php echo $row["university_name"]; ?></a></li>
-                    <?php } ?>
-                </ul>
-            </li>
-
-            <li class="nav-item active">الكليات
-                <i class="fa-solid fa-caret-down"></i>
-                <ul class="menu-dep-colleges">
-                    <?php
-                    $sql2 = "SELECT  c.*, u.university_name
-                    FROM colleges c
-                    LEFT JOIN universities u ON c.university_id = u.university_id ";
-
-                    $result2 = $conn->query($sql2);
-                    while ($row2 = $result2->fetch_assoc()) {
-                    ?>
-                        <li><a href="Show_Inf_college.php?id='<?php echo $row2["college_id"]; ?>'"><?php echo $row2["university_name"] . " - " .  $row2["college_name"]; ?></a></li>
-                    <?php } ?>
-                </ul>
-            </li>
-
-            <li class="nav-item active">الاقسام العلمية
-                <i class="fa-solid fa-caret-down"></i>
-                <ul class="menu-dep-departments">
-                    <?php
-                    $sql3 = "SELECT d.*, c.college_name, u.university_name
-                    FROM departments d
-                    LEFT JOIN colleges c ON d.college_id = c.college_id
-                    LEFT JOIN universities u ON c.university_id = u.university_id";
-
-                    $result3 = $conn->query($sql3);
-                    while ($row3 = $result3->fetch_assoc()) {
-                    ?>
-                        <li><a href="Show_Inf_department.php?id='<?php echo $row3["department_id"]; ?>'"><?php echo $row3["university_name"] . " - " .  $row3["college_name"] . " - " .  $row3["department_name"]; ?></a></li>
-                    <?php } ?>
-                </ul>
-            </li>
-        </ul>
-        </li>
-
-        <form action="" class="search-from">
-            <input type="search" placeholder="عن ماذا تبحث؟" id="search-box">
-            <label for="search-box" class="fas fa-search"></label>
-        </form>
-
-
-        <div class="nav-item">
-            <i class="fa-solid fa-circle-info" title="ماذا عنا"></i>
-        </div>
-    </nav>
+    <?php include "assets/pg/Navbar_Index.php";?>
     <div class="control">
         <section>
             <div class="pagimation_">
@@ -173,7 +108,6 @@ require_once("assets/pg/admins/inc/conn.inc.php");
                                 <h4 class="title"><?php echo $row5["department_name"]; ?></h4>
                                 <button onclick="window.open('Show_Inf_department?id=<?php echo $row5['department_id']; ?>', '_self');">عرض القسم</button>
                             </div>
-
                         </div>
                     <?php
                     } ?>
@@ -181,56 +115,57 @@ require_once("assets/pg/admins/inc/conn.inc.php");
             </div>
         </section>
     </div>
-    <footer>
-        <div class="control">
-            <div class="about">
-                <h3>ماذا عنا</h3>
-                يهدف المشروع إلى توفير معلومات شاملة ومفصلة حول الجامعات والكليات والأقسام العلمية المختلفة. يتم توفير المعلومات حول البرامج الأكاديمية، والمتطلبات الدراسية، والخطط الدراسية، والفرص البحثية، والأنشطة الطلابية، والخدمات المقدمة، وما إلى ذلك، بهدف مساعدة الطلاب في اتخاذ قرارات مهمة بشأن تعليمهم العالي.
-            </div>
-            <div class="feedback">
-                <h3>اترك لنا رأيك</h3>
-                <form action="">
-                    <label for="">الايميل</label>
-                    <input type="Email" placeholder="الايميل">
-                    <label for="">الرساله</label>
-                    <textarea></textarea>
-                    <input type="submit">
-                </form>
-            </div>
-            <div class="contact_information">
-                <h3>معلومات الاتصال</h3>
-                <div class="grop">
-                    <div onclick="window.open('#', '_self');">
-                        <div class="fa-brands fa-instagram"></div>
-                        <div>انستغرام</div>
-                    </div>
-                    <div onclick="window.open('#', '_self');">
-                        <div class="fa-brands fa-facebook"></div>
-                        <div>فيسبوك</div>
-                    </div>
-                    <div onclick="window.open('https://t.me/M71_17', '_self');">
-                        <div class="fa-brands fa-telegram"></div>
-                        <div>تلجرام</div>
-                    </div>
-                    <div onclick="window.open('#', '_self');">
-                        <div class="fa-brands fa-twitter"></div>
-                        <div>تويتر</div>
-                    </div>
+    <?php include "assets/pg/Footer_Index.php";?>
+    <script src="jquery-3.6.0.min"></script>
+    <script>
+        $(document).ready(function() {
+            $("#search-box").on("input", function() {
+                var searchValue = $(this).val().trim(); 
+                if (searchValue === "") {
+                    $("#search-results").empty();
+                    $(".search-results").hide(); 
+                    return;
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "assets/pg/SearchHome.php",
+                    data: {
+                        search: searchValue
+                    },
+                    success: function(data) {
+                        if (data.trim() !== "") {
+                            $(".search-results").html(data);
+                            $(".search-results").show();
+                        } else {
+                            $(".search-results").html("<div>لا توجد نتائج.</div>");
+                            $(".search-results").show();
+                        }
+                    }
+                });
+            });
 
-                    <div onclick="window.open('tel:+9647839985872', '_self');">
-                        <div class="fa-solid fa-phone"></div>
-                        <div> رقم الهاتف</div>
+            $(document).on("click", ".search-results div", function() {
+                var resultText = $(this).text();
+                $("#search-box").val(resultText);
+                $(".search-results").hide();
+            });
 
-                    </div>
-                </div>
-            </div>
-        </div>
+            $(document).on("click", function(event) {
+                if (!$(event.target).closest('.search-from').length) {
+                    $(".search-results").hide();
+                }
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("search-results").style.display = "none";
+        });
 
-        <div class="copy">
-            <p>جميع الحقوق محفوظة &copy; 2024 Murtadha Haider Al-Mansouri</p>
-
-        </div>
-    </footer>
+        function showResults() {
+            document.getElementById("search-results").style.display = "block";
+        }
+    </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const xMark = document.querySelector(".fa-xmark");
