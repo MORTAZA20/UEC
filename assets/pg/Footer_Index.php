@@ -8,7 +8,7 @@
                 <h3>اترك لنا رأيك</h3>
                 <form action="">
                     <p>الايميل</p>
-                    <input type="Email" name="Email" placeholder="example@gmail.com">
+                    <input type="Email" name="Email" placeholder="example@gmail.com" autocomplete="on">
                     <p>الرساله</p>
                     <textarea name="msg"></textarea>
                     <input type="submit" name="submit">

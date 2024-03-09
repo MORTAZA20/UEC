@@ -2,12 +2,13 @@
 require_once("../inc/conn.inc.php");
 session_start();
 if (isset($_SESSION["admin_user"])) {
-    if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin"
-    ) {    
+    if (
+        $_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin"
+    ) {
         header("Location: login");
         exit();
-}
-}else{
+    }
+} else {
     header("Location: login");
     exit();
 }
@@ -89,7 +90,6 @@ if (isset($_SESSION["admin_user"])) {
                         echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>يرجى تحديد ملف صورة صحيح (PNG أو JPEG)</div>";
                     }
                 }
-
             }
             $conn->close();
             ?>
@@ -122,7 +122,7 @@ if (isset($_SESSION["admin_user"])) {
 
                     <div class="custom-column" style="margin-bottom: 10px;">
                         <input type="text" name="department_name" id="" placeholder="اسم القسم" required>
-                        <input type="text" name="evening_GPA" placeholder="معدل القبول المسائي" required  pattern="^(?:[5-9]\d|\d{2})(?:\.\d+)?$" title="الرجاء إدخال قيمة صحيحة بين 50 و 100">
+                        <input type="text" name="evening_GPA" placeholder="معدل القبول المسائي" required pattern="^(?:[5-9]\d|\d{2})(?:\.\d+)?$" title="الرجاء إدخال قيمة صحيحة بين 50 و 100">
                         <input type="text" name="parallel_GPA" placeholder="معدل القبول الموازي" required pattern="^(?:[5-9]\d|\d{2})(?:\.\d+)?$" title="الرجاء إدخال قيمة صحيحة بين 50 و 100">
                     </div>
 
@@ -136,9 +136,9 @@ if (isset($_SESSION["admin_user"])) {
                     <p>الوصف</p>
                     <textarea name="department_description" id="editor1" placeholder="النبذه عن القسم"></textarea>
                     <p>رسالة القسم</p>
-                    <textarea name="scientific_department_message" id="editor2" placeholder="رسالة القسم"></textarea>
+                    <textarea name="scientific_department_message" id="editor3" placeholder="رسالة القسم"></textarea>
                     <div class="container-img">
-                         <img id="uploaded-image" src="#" style="max-width: 100px;
+                        <img id="uploaded-image" src="#" style="max-width: 100px;
                                 max-height: 100px;
                                 width: auto;
                                 height: auto;
@@ -146,10 +146,8 @@ if (isset($_SESSION["admin_user"])) {
                     </div>
                     <div class="space"></div>
                     <div class="btn-row">
-                    <input type="file" name="departments_images" class="file-btn" id="upload-input" accept="image/*"
-                            onchange="displayImage()">
-                        <input type="button" class="file-btn" value="اختيار شعار القسم"
-                            onclick="document.getElementById('upload-input').click();">
+                        <input type="file" name="departments_images" class="file-btn" id="upload-input" accept="image/*" onchange="displayImage()">
+                        <input type="button" class="file-btn" value="اختيار شعار القسم" onclick="document.getElementById('upload-input').click();">
                         <p>
                             <input type="submit" name="sub_form" value="حـفـظ الـبـيـانـات" />
                         </p>
@@ -161,21 +159,22 @@ if (isset($_SESSION["admin_user"])) {
     <script src="displayImage"></script>
 
     <script>
-        setTimeout(function () {
+        setTimeout(function() {
             document.getElementById('success-message').style.display = 'none';
         }, 4000);
     </script>
     <script src="../../../../../university-education-compass/assets/pg/admins/ckeditor/ckeditor.js"></script>
+    
     <script>
-        CKEDITOR.replace('editor1');
-        CKEDITOR.editorConfig = function (config) {
-            config.language = 'ar';
-            config.uiColor = '#f7b42c';
-            config.height = 300;
-            config.toolbarCanCollapse = true;
-            config.contentsCss = 'margin-bottom: 15px;';
-        };
+        CKEDITOR.replace('editor1', {
+            language: 'ar',
+            uiColor: '#f7b42c',
+            height: 300,
+            toolbarCanCollapse: true,
+            contentsCss: 'margin-bottom: 15px;'
+        });
     </script>
+
 </body>
 
 </html>

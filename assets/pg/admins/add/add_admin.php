@@ -67,7 +67,7 @@ if (isset($_SESSION["admin_user"])) {
                 }
 
                 $stmt = $conn->prepare($sql);
-                if ($type == "Admin" && $type == "SubAdmin") { 
+                if ($type == "Admin" || $type == "SubAdmin") { 
                     $stmt->bind_param("ssss", $AdminUserName, $AdminPassword_hash, $type,$Gmail);
                 } else if($type == "department")  {
                     $stmt->bind_param("ssss", $department_id, $AdminUserName, $AdminPassword_hash, $type);

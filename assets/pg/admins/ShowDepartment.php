@@ -8,42 +8,31 @@ if (isset($_SESSION["admin_user"])) {
         && $_SESSION["admin_user"] != "SubAdmin"
         && $_SESSION["admin_user"] != "department"
         && $_SESSION["admin_user"] != "college"
-    ) {
+    ){
         header("Location: login");
         exit();
     }
-} else {
+}else {
     header("Location: login");
     exit();
 }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>بوصلة التعليم الجامعي | لوحة التحكم</title>
-
     <link rel="stylesheet" href="style">
 </head>
-
 <body>
-
     <?php include 'inc/navbar.php'; ?>
-
     <div class="content">
         <?php include 'inc/sidebar.php'; ?>
-
         <div class="content-bar">
             <div style='position:relative; margin-top: 15px; '>
-
                 <?php
                 if ($_SESSION["admin_user"] == "department") {
-
                 ?>
 
                     <button class="btn-style" onclick="window.open('edit_inf_departments' , '_self');">
@@ -77,8 +66,12 @@ if (isset($_SESSION["admin_user"])) {
                         }
                     }
 
-                    $sql = "SELECT departments.*, colleges.college_name FROM departments
-                            LEFT JOIN colleges ON departments.college_id = colleges.college_id WHERE department_id = $Show_id";
+                    $sql = "SELECT departments.*, colleges.college_name, universities.university_name 
+                            FROM departments
+                            LEFT JOIN colleges ON departments.college_id = colleges.college_id 
+                            LEFT JOIN universities ON colleges.university_id = universities.university_id 
+                            WHERE department_id = $Show_id";
+
 
                     $result = $conn->query($sql);
                     $row = $result->fetch_assoc();
@@ -88,8 +81,9 @@ if (isset($_SESSION["admin_user"])) {
                 </div>
                 <div class="prodation">
                     <div class="sh-name">
+                        <h1> الجامعة : <?php echo $row['university_name']; ?></h1>
                         <h2> الكلية : <?php echo $row['college_name']; ?></h2>
-                        <h2> القسم : <?php echo $row['department_name']; ?></h2>
+                        <h3> القسم : <?php echo $row['department_name']; ?></h3>
                         <h4> معدل القبول الصباحي : <?php echo $row['required_GPA']; ?></h4>
                         <h4> معدل القبول المسائي : <?php echo $row['evening_GPA']; ?></h4>
                         <h4> قسط القبول المسائي : <?php echo $row['evening_study_fees']; ?></h4>
@@ -108,9 +102,7 @@ if (isset($_SESSION["admin_user"])) {
                 <p><?php echo $row['department_description']; ?></p>
             </div>
             <div class="cont-desc">
-
                 <h3>رسالة القسم</h3>
-
             </div>
             <div class="message">
                 <p><?php echo $row['scientific_department_message']; ?></p>

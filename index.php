@@ -19,7 +19,7 @@ require_once("assets/pg/admins/inc/conn.inc.php");
         <i class="fa-solid fa-xmark"></i>
         <p>07839985872</p>
     </div>
-    <?php include "assets/pg/Navbar_Index.php";?>
+    <?php include "assets/pg/Navbar_Index.php"; ?>
     <div class="control">
         <section>
             <div class="pagimation_">
@@ -115,15 +115,15 @@ require_once("assets/pg/admins/inc/conn.inc.php");
             </div>
         </section>
     </div>
-    <?php include "assets/pg/Footer_Index.php";?>
+    <?php include "assets/pg/Footer_Index.php"; ?>
     <script src="jquery-3.6.0.min"></script>
     <script>
         $(document).ready(function() {
             $("#search-box").on("input", function() {
-                var searchValue = $(this).val().trim(); 
+                var searchValue = $(this).val().trim();
                 if (searchValue === "") {
                     $("#search-results").empty();
-                    $(".search-results").hide(); 
+                    $(".search-results").hide();
                     return;
                 }
                 $.ajax({
@@ -177,32 +177,72 @@ require_once("assets/pg/admins/inc/conn.inc.php");
         });
     </script>
     <script>
-        new Swiper('.swiper-universities', {
-            speed: 400,
-            spaceBetween: 10,
-            slidesPerView: '5',
-            navigation: {
-                nextEl: '.swiper-btn-next-universities',
-                prevEl: '.swiper-btn-prev-universities',
-            },
-        });
-        new Swiper('.swiper-colleges', {
-            speed: 400,
-            spaceBetween: 10,
-            slidesPerView: '5',
-            navigation: {
-                nextEl: '.swiper-btn-next-colleges',
-                prevEl: '.swiper-btn-prev-colleges',
-            },
-        });
-        new Swiper('.swiper-departments', {
-            speed: 400,
-            spaceBetween: 10,
-            slidesPerView: '5',
-            navigation: {
-                nextEl: '.swiper-btn-next-departments',
-                prevEl: '.swiper-btn-prev-departments',
-            },
+        window.onload = function() {
+            function initSwipers(slidesPerView) {
+                new Swiper('.swiper-universities', {
+                    loop: false,
+                    speed: 400,
+                    spaceBetween: 10,
+                    slidesPerView: slidesPerView,
+                    navigation: {
+                        nextEl: '.swiper-btn-next-universities',
+                        prevEl: '.swiper-btn-prev-universities',
+                    },
+                });
+                new Swiper('.swiper-colleges', {
+                    loop: false,
+                    speed: 400,
+                    spaceBetween: 10,
+                    slidesPerView: slidesPerView,
+                    navigation: {
+                        nextEl: '.swiper-btn-next-colleges',
+                        prevEl: '.swiper-btn-prev-colleges',
+                    },
+                });
+                new Swiper('.swiper-departments', {
+                    loop: false,
+                    speed: 400,
+                    spaceBetween: 10,
+                    slidesPerView: slidesPerView,
+                    navigation: {
+                        nextEl: '.swiper-btn-next-departments',
+                        prevEl: '.swiper-btn-prev-departments',
+                    },
+                });
+            }
+
+            function handleResize() {
+                var screenWidth = window.innerWidth;
+                var slidesPerView = (screenWidth <= 1024) ? '3' : '5';
+
+                if (typeof swiperUniversities !== 'undefined') {
+                    swiperUniversities.destroy();
+                    swiperColleges.destroy();
+                    swiperDepartments.destroy();
+                }
+
+                initSwipers(slidesPerView);
+            }
+
+            var slidesPerView = (window.innerWidth <= 1024) ? '3' : '5';
+            initSwipers(slidesPerView);
+
+            window.onresize = function() {
+                handleResize();
+            };
+        };
+    </script>
+    <script>
+        const searchIcon = document.querySelector('.search1');
+        const searchBox = document.querySelector('.search-from');
+
+        searchIcon.addEventListener('click', function() {
+            if (window.getComputedStyle(searchBox).display === 'none') {
+                searchBox.style.display = 'block';
+            } else {
+              
+                searchBox.style.display = 'none';
+            }
         });
     </script>
 </body>

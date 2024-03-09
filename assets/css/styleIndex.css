@@ -306,7 +306,9 @@ input {
   max-height: 200px;
   overflow-y: auto;
 }
-
+.navbar .search1{
+  display: none;
+}
 .navbar #search-results div {
   padding: 5px 10px;
   cursor: pointer;
@@ -594,12 +596,33 @@ footer .copy p {
   text-align: center;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 1000px) {
   footer .control {
     flex-direction: column;
   }
   footer .control > * {
     width: 100%;
     margin-bottom: 20px;
+  }
+
+  .navbar .search-from{
+    display: none;
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: calc(100% - 79%);; 
+    z-index: 1000; 
+    background-color: #ffffff; 
+    padding: 10px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  }
+
+  .navbar .search-from input {
+    width: calc(100% - 40px); 
+    margin-right: 10px; 
+  }
+  .navbar .search1{
+    display: block;
+    cursor: pointer;
   }
 }
