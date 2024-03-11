@@ -12,8 +12,7 @@ if (isset($_POST['search'])) {
                 $college_id = $_SESSION["college_id"];
                 $sql = "SELECT top_students.*, departments.department_name FROM top_students
                 LEFT JOIN departments ON top_students.department_id = departments.department_id WHERE (student_name LIKE '%$search%' OR  departments.department_name LIKE '$search') AND departments.college_id = '$college_id'";
-        } 
-        else {
+        } else {
                 $sql = "SELECT top_students.*, departments.department_name FROM top_students
                 LEFT JOIN departments ON top_students.department_id = departments.department_id WHERE student_name LIKE '%$search%' OR  departments.department_name LIKE '$search'";
         }
@@ -22,12 +21,11 @@ if (isset($_POST['search'])) {
                 $department_id = $_SESSION["department_id"];
                 $sql = "SELECT top_students.*, departments.department_name FROM top_students
                 LEFT JOIN departments ON top_students.department_id = departments.department_id WHERE top_students.department_id = '$department_id'";
-        }else if ($_SESSION["admin_user"] == "college") {
+        } else if ($_SESSION["admin_user"] == "college") {
                 $college_id = $_SESSION["college_id"];
                 $sql = "SELECT top_students.*, departments.department_name FROM top_students
                 LEFT JOIN departments ON top_students.department_id = departments.department_id WHERE departments.college_id = '$college_id'";
-        } 
-         else {
+        } else {
                 $sql = "SELECT top_students.*, departments.department_name FROM top_students
         LEFT JOIN departments ON top_students.department_id = departments.department_id";
         }
@@ -39,6 +37,19 @@ while ($row = $result->fetch_assoc()) {
                 <div class="truncated-text">
                         <td><?php echo $row["student_id"] ?></td>
                         <td><?php echo $row["department_name"] ?></td>
+                        <td>
+                                <?php
+                                if (!empty($row["top_students_img_path"])) {
+                                ?>
+                                        <img style="pointer-events: none;" src="./assets/pg/admins/<?php echo $row["top_students_img_path"]; ?>">
+                                <?php
+                                } else {
+                                ?>
+                                        <img style="pointer-events: none;" src="./assets/pg/admins/img/profile-avatar.png">
+                                <?php
+                                }
+                                ?>
+                        </td>
                         <td><?php echo $row["student_name"] ?></td>
                         <td><?php echo $row["Cumulative_Rating"] ?></td>
                         <td><?php echo $row["Graduation_Year"] ?></td>

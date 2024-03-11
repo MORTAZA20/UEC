@@ -173,7 +173,7 @@ a {
   --azure: hsl(219, 77%, 60%);
   --white: hsl(0, 0%, 100%);
   --platinum: hsl(0, 0%, 91%);
-  --gainsboro: hsl(0, 0%, 90%);
+  --gainsboro:  hsl(0, 9%, 86%);
   --red-salsa: hsl(0, 77%, 60%);
   --dim-gray: hsl(0, 0%, 39%);
   --davys-gray: hsl(0, 0%, 30%);
@@ -462,6 +462,7 @@ input {
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2); /* زيادة حجم الظل عند تحويل المؤشر */
   background-color: rgba(255, 255, 255, 0.95); /* تغيير لون الخلفية للكارت */
   transition: box-shadow 0.3s ease, background-color 0.3s ease; /* تحديد سرعة التحول */
+
 }
 
 .control .card img {
@@ -688,7 +689,7 @@ header {
   margin-bottom: 25px;
   text-align: right;
 }
-.control .Se-top-students button {
+.control .Se-top-students form button {
   padding: 15px 25px;
   margin-top: 30px;
   background-color: var(--sec);
@@ -696,7 +697,7 @@ header {
   border-radius: 5px;
   border: 1px solid var(--sec);
 }
-.control .Se-top-students button:hover {
+.control .Se-top-students form button:hover {
   background-color: #fff;
   color: var(--sec);
 }

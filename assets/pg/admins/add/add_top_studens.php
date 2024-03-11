@@ -2,12 +2,14 @@
 require_once("../inc/conn.inc.php");
 session_start();
 if (isset($_SESSION["admin_user"])) {
-    if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin"
-    && $_SESSION["admin_user"] != "department") {    
+    if (
+        $_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin"
+        && $_SESSION["admin_user"] != "department"
+    ) {
         header("Location: login");
         exit();
-}
-}else{
+    }
+} else {
     header("Location: login");
     exit();
 }
@@ -61,8 +63,23 @@ if (isset($_SESSION["admin_user"])) {
                 if ($resultTest->num_rows > 0) {
                     echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>عذرًا، معرف المادة الدراسية موجود مسبقًا</div>";
                 } else {
-                    $sql = "INSERT INTO top_students (student_id  , department_id , student_name, Graduation_Year, Cumulative_Rating) 
+
+                    if ($_FILES['top_students_images']['type'] == 'image/png' || $_FILES['top_students_images']['type'] == 'image/jpeg') {
+                        $top_students_folder = '../top_students_img';
+                        if (!file_exists($top_students_folder)) {
+                            mkdir($top_students_folder, 0777, true);
+                            chmod($top_students_folder, 0777);
+                        }
+                        $top_students_images = $_FILES["top_students_images"]["tmp_name"];
+                        $file_name = $_FILES["top_students_images"]["name"];
+                        move_uploaded_file($top_students_images, $top_students_folder . '/' . $file_name);
+                        $image_path = 'top_students_img' . '/' . $file_name;
+                        $sql = "INSERT INTO top_students (student_id  , department_id , student_name, Graduation_Year, Cumulative_Rating,top_students_img_path) 
+                                                        VALUES ('$student_id ', '$department_id', '$student_name', '$Graduation_Year', '$Cumulative_Rating','$image_path')";
+                    } else {
+                        $sql = "INSERT INTO top_students (student_id  , department_id , student_name, Graduation_Year, Cumulative_Rating) 
                                     VALUES ('$student_id ', '$department_id', '$student_name', '$Graduation_Year', '$Cumulative_Rating')";
+                    }
 
                     $result3 = $conn->query($sql);
                     if ($result3) {
@@ -99,11 +116,11 @@ if (isset($_SESSION["admin_user"])) {
                                 </select>
 
                                 <select id="department_id" class="fruit" name="department_id" required>
-                                   <?php 
-                                   if($_SESSION["admin_user"] == "department"){
-                                        echo "<option value='" . $_SESSION["department_id"] . "'></option>"; 
-                                    }?>                                
-  
+                                    <?php
+                                    if ($_SESSION["admin_user"] == "department") {
+                                        echo "<option value='" . $_SESSION["department_id"] . "'></option>";
+                                    } ?>
+
                                 </select>
 
                             </div>
@@ -118,9 +135,18 @@ if (isset($_SESSION["admin_user"])) {
                         <input type="text" name="Cumulative_Rating" placeholder="المعدل التراكمي" required pattern="^(?:[5-9]\d|\d{2})(?:\.\d+)?$" title="الرجاء إدخال قيمة صحيحة بين 50 و 100">
                         <input type="date" name="Graduation_Year" placeholder="سنة التخرج" required>
                     </div>
+                    <div class="container-img">
 
+                        <img id="uploaded-image" src="#" style="max-width: 100px;
+                            max-height: 100px;
+                            width: auto;
+                            height: auto;
+                            padding-left:20px;">
+                    </div>
                     <div class="space"></div>
                     <div class="btn-row">
+                        <input type="file" name="top_students_images" class="file-btn" id="upload-input" accept="image/*" onchange="displayImage()">
+                        <input type="button" class="file-btn" value="اختيار صورة للطالب " onclick="document.getElementById('upload-input').click();">
                         <p>
                             <input type="submit" name="sub_form" value="حـفـظ الـبـيـانـات" />
                         </p>
@@ -129,17 +155,20 @@ if (isset($_SESSION["admin_user"])) {
             </div>
         </div>
     </div>
-    <?php if($_SESSION["admin_user"] == "department"){?>
+        <script src="displayImage"></script>
+    <?php if ($_SESSION["admin_user"] == "department") { ?>
         <style>
-            #university_id,#college_id,#department_id{
-               display : none;
+            #university_id,
+            #college_id,
+            #department_id {
+                display: none;
             }
         </style>
     <?php } ?>
 
-   
+
     <script>
-        setTimeout(function () {
+        setTimeout(function() {
             document.getElementById('success-message').style.display = 'none';
         }, 4000);
     </script>

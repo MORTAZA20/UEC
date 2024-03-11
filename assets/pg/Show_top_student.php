@@ -43,7 +43,17 @@ require_once("admins/inc/conn.inc.php");
             while ($row_top_students = $result_top_students->fetch_assoc()) {
             ?>
                 <div class="card Sh-card">
-                    <img width="100%" class="object-fit-contain" src=".\assets\pg\admins\img\profile-avatar.png">
+                    <?php
+                    if (!empty($row_top_students["top_students_img_path"])) {
+                    ?>
+                        <img width="100%" class="object-fit-contain" src=".\assets\pg\admins\<?php echo $row_top_students["top_students_img_path"]; ?>">
+                    <?php
+                    } else {
+                    ?>
+                        <img width="100%" class="object-fit-contain" src=".\assets\pg\admins\img\profile-avatar.png">
+                    <?php
+                    }
+                    ?>
                     <div class="text-card" style="min-height: 0;">
                         <h4 class="title"><?php echo $row_top_students["student_name"]; ?></h4>
                         <p><?php echo $row_top_students["Cumulative_Rating"]; ?></p>

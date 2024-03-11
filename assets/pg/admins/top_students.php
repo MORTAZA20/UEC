@@ -36,15 +36,15 @@ if (isset($_SESSION["admin_user"])) {
             <div style='position:relative; margin-top: 15px;'>
                 <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>الطلبة الاوائل</h2>
             </div>
-<?php
+            <?php
 
-    if ($_SESSION["admin_user"] != "college") {
-?>
-            <button class="btn-style" onclick="window.open('add_top_studens' , '_self');">
-                <div class="Imgitem" style="background-image: url('A1');"></div>
-                أضافة طالب جديد
-            </button>
-<?php } ?>
+            if ($_SESSION["admin_user"] != "college") {
+            ?>
+                <button class="btn-style" onclick="window.open('add_top_studens' , '_self');">
+                    <div class="Imgitem" style="background-image: url('A1');"></div>
+                    أضافة طالب جديد
+                </button>
+            <?php } ?>
 
 
 
@@ -72,6 +72,7 @@ if (isset($_SESSION["admin_user"])) {
                     <tr>
                         <th width="10%">معرف الطالب</th>
                         <th class="text-right" width="10%">القسم</th>
+                        <th class="text-right" width="10%">صورة الطالب</th>
                         <th class="text-right" width="10%">اسم الطالب</th>
                         <th class="text-right" width="10%">المعدل التراكمي</th>
                         <th class="text-right" width="20%">سنة التخرج</th>

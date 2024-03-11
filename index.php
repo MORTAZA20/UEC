@@ -101,7 +101,7 @@ require_once("assets/pg/admins/inc/conn.inc.php");
                     $sql5 = "SELECT d.*, c.college_name, u.university_name
                     FROM departments d
                     LEFT JOIN colleges c ON d.college_id = c.college_id
-                    LEFT JOIN universities u ON c.university_id = u.university_id ";
+                    LEFT JOIN universities u ON c.university_id = u.university_id ORDER BY RAND() LIMIT 20";
                     $result5 = $conn->query($sql5);
                     while ($row5 = $result5->fetch_assoc()) {
                     ?>
@@ -110,8 +110,8 @@ require_once("assets/pg/admins/inc/conn.inc.php");
                             <div class="text-card">
                                 <p><?php echo $row5["university_name"] . " - " .  $row5["college_name"] ?></p>
                                 <h4 class="title"><?php echo $row5["department_name"]; ?></h4>
-                                <form action="department_id">
-                                    <button name="id" value="<?php echo $row['Show_Inf_department']; ?>">عرض القسم</button>
+                                <form action="Show_Inf_department">
+                                    <button name="id" value="<?php echo $row5['department_id']; ?>">عرض القسم</button>
                                 </form>
                             </div>
                         </div>
