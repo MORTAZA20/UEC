@@ -457,7 +457,6 @@ input {
   border-radius: 5px;
   width: 300px;
   position: relative;
- 
 }
 .control .card:hover {
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2); /* زيادة حجم الظل عند تحويل المؤشر */
@@ -476,6 +475,7 @@ input {
   flex-direction: column;
   gap: 5px;
   min-height: 150px;
+  justify-content: space-between;
 }
 
 .control .card .text-card .title {
@@ -492,7 +492,7 @@ input {
   margin-bottom: 8px;
 }
 
-.control .card .text-card button {
+.control .card .text-card form button {
   width: 100%;
   text-align: center;
   background-color: var(--sec);
@@ -503,7 +503,7 @@ input {
   margin-top: auto;
 }
 
-.control .card .text-card button:hover {
+.control .card .text-card form button:hover {
   background-color: var(--white);
   color: var(--sec);
 }
@@ -608,8 +608,9 @@ footer .copy p {
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
-  align-items: stretch;
+  align-items: center;
   justify-content: space-around;
+  margin-bottom: 25px;
 }
 .control .Show-SE .Img-logo {
   width: 20em;
@@ -625,10 +626,11 @@ footer .copy p {
   display: grid;
   gap: 8px;
   align-content: center;
-  height: 20em;
+  height: auto;
+  padding: 20px 0;
 }
 .control .Show-SE .info h1 {
-  font-size: 3em;
+  font-size: 2.5em;
   margin-bottom: 10px;
 }
 .control .Show-SE .info p,
@@ -638,6 +640,100 @@ footer .copy p {
 }
 .control .Show-SE .info a:hover {
   color: #23a0a9;
+}
+.control .Show-SE .info .p-dep {
+  font-size: 1.3em;
+  margin-top: 10px;
+  border-top: 1px solid var(--gainsboro);
+  padding: 18px 0;
+  line-height: 1.2;
+}
+.control .Sh-des {
+  border-top: 1px solid var(--gainsboro);
+  margin: 25px 0;
+}
+.control .Sh-des h2 {
+  margin: 25px 0 10px 0;
+}
+.control .Sh-des p {
+  text-align: justify;
+  line-height: 1.2;
+}
+/* خصائص الطلبة الاوائل */
+
+header {
+  display: grid;
+  align-content: center;
+  gap: 10px;
+  padding: 20px;
+  text-align: center;
+  justify-content: center;
+  height: 250px;
+  width: 100%;
+  background-color: var(--gainsboro);
+}
+.control .top-students {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.control .Se-top-students {
+  border-top: 1px solid var(--gainsboro);
+  padding-top: 25px;
+  margin: 25px 0;
+  text-align: center;
+}
+.control .Se-top-students h2 {
+  margin-bottom: 25px;
+  text-align: right;
+}
+.control .Se-top-students button {
+  padding: 15px 25px;
+  margin-top: 30px;
+  background-color: var(--sec);
+  color: #fff;
+  border-radius: 5px;
+  border: 1px solid var(--sec);
+}
+.control .Se-top-students button:hover {
+  background-color: #fff;
+  color: var(--sec);
+}
+.control .Sh-course .Sh-course-Div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+}
+.control .Sh-course {
+  border-top: 1px solid var(--gainsboro);
+  margin-top: 25px;
+  padding-top: 25px;
+}
+.control .Sh-course h3 {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 20px 35px 25px 0;
+}
+.control .Sh-course hr {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--primary);
+}
+.control .Sh-course .Sh-ul {
+  margin: 0 60px;
+  border-right: 1px solid var(--gainsboro);
+  padding: 0 10px;
+}
+.control .Sh-course .Sh-ul li {
+  margin: 15px 0;
+}
+.control .Sh-course .Sh-ul li:hover {
+  color: var(--sec);
+  cursor: pointer;
 }
 .control section .cards {
   display: flex;

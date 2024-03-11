@@ -7,10 +7,10 @@ require_once("assets/pg/admins/inc/conn.inc.php");
 <head>
     <meta charset="UTF-8">
     <title>بوصلة التعليم الجامعي | الرئيسية</title>
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/0b13675ea3.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css">
+    <link href="./assets/fontawesome-free-6.5.1-web/css/fontawesome.css" rel="stylesheet" />
+    <link href="./assets/fontawesome-free-6.5.1-web/css/brands.css" rel="stylesheet" />
+    <link href="./assets/fontawesome-free-6.5.1-web/css/solid.css" rel="stylesheet" />
     <link rel="stylesheet" href="assets/css/styleIndex.css">
 </head>
 
@@ -38,11 +38,13 @@ require_once("assets/pg/admins/inc/conn.inc.php");
                     while ($row = $result->fetch_assoc()) {
                     ?>
                         <div class="card swiper-slide">
-                            <img width="100%" class="object-fit-contain" src="assets/pg/admins/<?php echo $row['universities_img_path']; ?>">
+                            <img width="100%" class="object-fit-contain" src="./assets/pg/admins/<?php echo $row['universities_img_path']; ?>">
                             <div class="text-card">
                                 <h4 class="title"><?php echo $row["university_name"]; ?></h4>
                                 <p><?php echo $row["university_location"]; ?></p>
-                                <button onclick="window.open('Show_Inf_university?id=<?php echo $row['university_id']; ?>', '_self');">عرض الجامعة</button>
+                                <form action="Show_Inf_university">
+                                    <button name="id" value="<?php echo $row['university_id']; ?>">عرض الجامعة</button>
+                                </form>
                             </div>
                         </div>
                     <?php
@@ -69,11 +71,13 @@ require_once("assets/pg/admins/inc/conn.inc.php");
                     while ($row4 = $result4->fetch_assoc()) {
                     ?>
                         <div class="card swiper-slide">
-                            <img width="100%" class="object-fit-contain" src="assets/pg/admins/<?php echo $row4['colleges_img_path']; ?>">
+                            <img width="100%" class="object-fit-contain" src="./assets/pg/admins/<?php echo $row4['colleges_img_path']; ?>">
                             <div class="text-card">
                                 <p><?php echo $row4["university_name"]; ?></p>
                                 <h4 class="title"><?php echo $row4["college_name"]; ?></h4>
-                                <button onclick="window.open('Show_Inf_college?id=<?php echo $row4['college_id']; ?>', '_self');">عرض الكلية</button>
+                                <form action="Show_Inf_college">
+                                    <button name="id" value="<?php echo $row4['college_id']; ?>">عرض الكلية</button>
+                                </form>
                             </div>
 
                         </div>
@@ -106,7 +110,9 @@ require_once("assets/pg/admins/inc/conn.inc.php");
                             <div class="text-card">
                                 <p><?php echo $row5["university_name"] . " - " .  $row5["college_name"] ?></p>
                                 <h4 class="title"><?php echo $row5["department_name"]; ?></h4>
-                                <button onclick="window.open('Show_Inf_department?id=<?php echo $row5['department_id']; ?>', '_self');">عرض القسم</button>
+                                <form action="department_id">
+                                    <button name="id" value="<?php echo $row['Show_Inf_department']; ?>">عرض القسم</button>
+                                </form>
                             </div>
                         </div>
                     <?php
@@ -119,7 +125,7 @@ require_once("assets/pg/admins/inc/conn.inc.php");
     <script src="jquery-3.6.0.min"></script>
 
     <script src="assets/js/Script.js"></script>
-    
+
     <script>
         window.onload = function() {
             function initSwipers(slidesPerView) {
@@ -176,7 +182,7 @@ require_once("assets/pg/admins/inc/conn.inc.php");
             };
         };
     </script>
-    
+    <script src="./assets/js/swiper-bundle.min.js"></script>
 </body>
 
 </html>
