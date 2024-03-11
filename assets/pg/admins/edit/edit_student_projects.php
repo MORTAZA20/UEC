@@ -64,6 +64,7 @@ if ($_SESSION["admin_user"] != "Admin"
                 $project_name = mysqli_real_escape_string($conn, $_POST["project_name"]);
                 $project_supervisor = mysqli_real_escape_string($conn, $_POST["project_supervisor"]);
                 $project_description = mysqli_real_escape_string($conn, $_POST["project_description"]);
+                $project_description  = str_replace(array("\r\n", "\\r\\n"), '', $project_description);
 
 
                 $sql = "SELECT * FROM student_projects WHERE project_id =?";
@@ -95,7 +96,7 @@ if ($_SESSION["admin_user"] != "Admin"
                     $image_path = $row['student_projects_img_path'];
                 }
                    $sqlUP = "UPDATE student_projects SET department_id = ?,student_name = ?,project_name=?,
-                   project_supervisor= ? , student_projects_img_path= ? ,project_description=''
+                   project_supervisor= ? , student_projects_img_path= ? ,project_description=?
                    WHERE project_id = ?";
 
                    $stmt = $conn->prepare($sqlUP);

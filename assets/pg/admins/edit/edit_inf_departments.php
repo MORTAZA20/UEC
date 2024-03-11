@@ -70,7 +70,9 @@ if (isset($_SESSION["admin_user"])) {
                 $department_id = mysqli_real_escape_string($conn, $_POST["Edit_department_id"]);
                 $department_name = mysqli_real_escape_string($conn, $_POST["department_name"]);
                 $department_description = mysqli_real_escape_string($conn, $_POST["department_description"]);
+                $department_description  = str_replace(array("\r\n", "\\r\\n"), '', $department_description);
                 $scientific_department_message = mysqli_real_escape_string($conn, $_POST["scientific_department_message"]);
+                $scientific_department_message  = str_replace(array("\r\n", "\\r\\n"), '', $scientific_department_message);
                 $required_GPA = mysqli_real_escape_string($conn, $_POST["required_GPA"]);
                 $evening_GPA = mysqli_real_escape_string($conn, $_POST["evening_GPA"]);
                 $evening_study_fees = mysqli_real_escape_string($conn, $_POST["evening_study_fees"]);
@@ -158,12 +160,12 @@ if (isset($_SESSION["admin_user"])) {
                                                 } else {
                                                     echo $rec['university_id'];
                                                 } ?>" <?php
-                                                                if (isset($_POST['edit_id'])) {
-                                                                    if ($rec['university_id'] == $row['university_id']) {
-                                                                        echo  "selected";
-                                                                    }
-                                                                }
-                                                                ?>>
+                                                        if (isset($_POST['edit_id'])) {
+                                                            if ($rec['university_id'] == $row['university_id']) {
+                                                                echo  "selected";
+                                                            }
+                                                        }
+                                                        ?>>
                                     <?php if (!isset($_POST['edit_id'])) {
                                         echo "";
                                     } else {

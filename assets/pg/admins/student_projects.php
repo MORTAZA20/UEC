@@ -72,7 +72,6 @@ if (isset($_SESSION["admin_user"])) {
             <table class="table teble-bordered" id="table-data" role="table">
                 <thead>
                     <tr>
-                        <th class="text-right" width="10%">معرف المشروع</th>
                         <th class="text-right" width="10%">القسم</th>
                         <th class="text-right" width="10%">اسم المشروع</th>
                         <th class="text-right" width="10%">صاحب المشروع</th>
@@ -106,8 +105,6 @@ if (isset($_SESSION["admin_user"])) {
             });
         });
     </script>
-
-
     <script>
         function submitForm(delId) {
             document.getElementById('del_id_input').value = delId;

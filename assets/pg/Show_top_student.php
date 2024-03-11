@@ -22,7 +22,7 @@ require_once("admins/inc/conn.inc.php");
             الطلبة الاوائل
         </h1>
         <p>
-            مجموعة من الطلبة المتفوقبن
+            مجموعة من الطلبة المتفوقين
         </p>
 
     </header>
@@ -54,7 +54,7 @@ require_once("admins/inc/conn.inc.php");
                     <?php
                     }
                     ?>
-                    <div class="text-card" style="min-height: 0;">
+                    <div class="text-card" style="min-height: 0;text-align: center; ">
                         <h4 class="title"><?php echo $row_top_students["student_name"]; ?></h4>
                         <p><?php echo $row_top_students["Cumulative_Rating"]; ?></p>
                         <p><?php echo $row_top_students["Graduation_Year"]; ?></p>

@@ -97,7 +97,6 @@ require_once("assets/pg/admins/inc/conn.inc.php");
             <div class="swiper-departments swiper-best-sellers">
                 <div class="swiper-wrapper">
                     <?php
-
                     $sql5 = "SELECT d.*, c.college_name, u.university_name
                     FROM departments d
                     LEFT JOIN colleges c ON d.college_id = c.college_id
@@ -128,58 +127,37 @@ require_once("assets/pg/admins/inc/conn.inc.php");
 
     <script>
         window.onload = function() {
-            function initSwipers(slidesPerView) {
+           
                 new Swiper('.swiper-universities', {
-                    loop: false,
+
                     speed: 400,
                     spaceBetween: 10,
-                    slidesPerView: slidesPerView,
+                    slidesPerView:'auto',
                     navigation: {
                         nextEl: '.swiper-btn-next-universities',
                         prevEl: '.swiper-btn-prev-universities',
                     },
                 });
                 new Swiper('.swiper-colleges', {
-                    loop: false,
                     speed: 400,
                     spaceBetween: 10,
-                    slidesPerView: slidesPerView,
+                    slidesPerView: 'auto',
                     navigation: {
                         nextEl: '.swiper-btn-next-colleges',
                         prevEl: '.swiper-btn-prev-colleges',
                     },
                 });
                 new Swiper('.swiper-departments', {
-                    loop: false,
+ 
                     speed: 400,
                     spaceBetween: 10,
-                    slidesPerView: slidesPerView,
+                    slidesPerView:'auto',
                     navigation: {
                         nextEl: '.swiper-btn-next-departments',
                         prevEl: '.swiper-btn-prev-departments',
                     },
                 });
-            }
-
-            function handleResize() {
-                var screenWidth = window.innerWidth;
-                var slidesPerView = (screenWidth <= 1024) ? '3' : '5';
-
-                if (typeof swiperUniversities !== 'undefined') {
-                    swiperUniversities.destroy();
-                    swiperColleges.destroy();
-                    swiperDepartments.destroy();
-                }
-
-                initSwipers(slidesPerView);
-            }
-
-            var slidesPerView = (window.innerWidth <= 1024) ? '3' : '5';
-            initSwipers(slidesPerView);
-
-            window.onresize = function() {
-                handleResize();
-            };
+          
         };
     </script>
     <script src="./assets/js/swiper-bundle.min.js"></script>

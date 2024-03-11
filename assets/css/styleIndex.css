@@ -318,7 +318,7 @@ input {
 }
 .navbar #search-results div p {
   margin-top: 5px;
-  font-size: 15px;
+  font-size: 12px;
   color: var(--spanish-gray);
 }
 
@@ -455,7 +455,7 @@ input {
 .control .card {
   border: 1px solid var(--gainsboro);
   border-radius: 5px;
-  width: 300px;
+  width: 250px;
   position: relative;
 }
 .control .card:hover {
@@ -467,6 +467,8 @@ input {
 
 .control .card img {
   padding: 10px;
+  height: 250px;
+  object-fit:contain;
 }
 
 .control .card .text-card {
@@ -653,11 +655,11 @@ footer .copy p {
   border-top: 1px solid var(--gainsboro);
   margin: 25px 0;
 }
-.control .Sh-des h2 {
+.control .Sh-des h2,.control .Sh-des h3,.control .Sh-des h4 {
   margin: 25px 0 10px 0;
 }
 .control .Sh-des p {
-  text-align: justify;
+  text-align: justify; 
   line-height: 1.2;
 }
 /* خصائص الطلبة الاوائل */
@@ -736,9 +738,16 @@ header {
   color: var(--sec);
   cursor: pointer;
 }
+.control .Sh-student-projects{
+  border-top: 1px solid var(--gainsboro);
+  margin-top: 25px;
+  padding-top: 25px;
+}
 .control section .cards {
   display: flex;
   flex-wrap: wrap;
+  flex: 1 0 250p;
+  justify-content: right;
   gap: 35px 10px;
 }
 .control section .cards .Sh-card {

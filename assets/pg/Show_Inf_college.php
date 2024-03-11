@@ -15,7 +15,7 @@ $row_colleges = $result_colleges->fetch_assoc();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوصلة التعليم الجامعي | عرض الجامعات</title>
+    <title>بوصلة التعليم الجامعي | عرض الكلية</title>
     <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css">
     <link href="./assets/fontawesome-free-6.5.1-web/css/fontawesome.css" rel="stylesheet" />
     <link href="./assets/fontawesome-free-6.5.1-web/css/brands.css" rel="stylesheet" />
@@ -34,7 +34,7 @@ $row_colleges = $result_colleges->fetch_assoc();
             <div class="info">
                 <h1><?php echo $row_colleges["university_name"]; ?></h1>
                 <h2><?php echo $row_colleges["college_name"]; ?></h2>
-                <p><?php echo $row_colleges["required_GPA"]; ?></p>
+                <p>معدل القبول : <?php echo $row_colleges["required_GPA"]; ?></p>
 
             </div>
         </section>
@@ -50,27 +50,31 @@ $row_colleges = $result_colleges->fetch_assoc();
 
             <div class="cards"> <?php
 
-                                $sql5 = "SELECT d.*, c.college_name, u.university_name
-                             FROM departments d
-                             LEFT JOIN colleges c ON d.college_id = c.college_id
-                             LEFT JOIN universities u ON c.university_id = u.university_id 
-                             WHERE c.college_id = '$id'";
+                $sql5 = "SELECT d.*, c.college_name, u.university_name
+                FROM departments d
+                LEFT JOIN colleges c ON d.college_id = c.college_id
+                LEFT JOIN universities u ON c.university_id = u.university_id 
+                WHERE c.college_id = '$id'";
 
-                                $result5 = $conn->query($sql5);
-                                while ($row5 = $result5->fetch_assoc()) {
-                                ?>
-                    <div class="card Sh-card">
-                        <img width="100%" class="object-fit-contain" src="assets/pg/admins/<?php echo $row5['departments_img_path']; ?>">
-                        <div class="text-card">
-                            <p><?php echo $row5["university_name"] . " - " .  $row5["college_name"] ?></p>
-                            <h4 class="title"><?php echo $row5["department_name"]; ?></h4>
-                            <form action="Show_Inf_department">
-                                <button name="id" value="<?php echo $row5['department_id']; ?>">عرض القسم</button>
-                            </form>
-                        </div>
+                $result5 = $conn->query($sql5);
+                if ($result5->num_rows > 0) {
+                    while ($row5 = $result5->fetch_assoc()) {
+                ?>
+                <div class="card">
+                    <img width="100%" class="object-fit-contain" src="assets/pg/admins/<?php echo $row5['departments_img_path']; ?>">
+                    <div class="text-card">
+                        <p><?php echo $row5["university_name"] . " - " .  $row5["college_name"] ?></p>
+                        <h4 class="title"><?php echo $row5["department_name"]; ?></h4>
+                        <form action="Show_Inf_department">
+                            <button name="id" value="<?php echo $row5['department_id']; ?>">عرض القسم</button>
+                        </form>
                     </div>
+                </div>
                 <?php
-                                } ?>
+                    }
+                } else {
+                    echo "لا توجد اقسام للكلية المحددة";
+                }  ?>
             </div>
         </section>
     </div>

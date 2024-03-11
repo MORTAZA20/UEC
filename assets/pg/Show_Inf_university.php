@@ -14,7 +14,7 @@ $row_university = $result_university->fetch_assoc();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوصلة التعليم الجامعي | عرض الجامعات</title>
+    <title>بوصلة التعليم الجامعي | عرض الجامعة</title>
     <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css">
     <link href="./assets/fontawesome-free-6.5.1-web/css/fontawesome.css" rel="stylesheet" />
     <link href="./assets/fontawesome-free-6.5.1-web/css/brands.css" rel="stylesheet" />
@@ -50,7 +50,7 @@ $row_university = $result_university->fetch_assoc();
                 if ($result4->num_rows > 0) {
                     while ($row4 = $result4->fetch_assoc()) {
                 ?>
-                        <div class="card Sh-card">
+                        <div class="card">
                             <img width="100%" class="object-fit-contain" src="./assets/pg/admins/<?php echo $row4['colleges_img_path']; ?>">
                             <div class="text-card">
                                 <p><?php echo $row4["university_name"]; ?></p>

@@ -2,12 +2,14 @@
 require_once("../inc/conn.inc.php");
 session_start();
 if (isset($_SESSION["admin_user"])) {
-    if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin"
-    && $_SESSION["admin_user"] != "department") {    
+    if (
+        $_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin"
+        && $_SESSION["admin_user"] != "department"
+    ) {
         header("Location: login");
         exit();
-}
-}else{
+    }
+} else {
     header("Location: login");
     exit();
 }
@@ -53,6 +55,9 @@ if (isset($_SESSION["admin_user"])) {
                 $project_name = mysqli_real_escape_string($conn, $_POST["project_name"]);
                 $project_supervisor = mysqli_real_escape_string($conn, $_POST["project_supervisor"]);
                 $project_description = mysqli_real_escape_string($conn, $_POST["project_description"]);
+                $project_description  = str_replace(array("\r\n", "\\r\\n"), '', $project_description);
+
+
 
 
 
@@ -95,8 +100,7 @@ if (isset($_SESSION["admin_user"])) {
                     <div class="container" style="margin-bottom: 10px;">
                         <div class="row align-items-start">
                             <div class="col custom-column">
-                                <select id="university_id" class="fruit" name="university_id" onchange="getColleges()"
-                                    >
+                                <select id="university_id" class="fruit" name="university_id" onchange="getColleges()">
                                     <?php
                                     include '../inc/conn.inc.php';
                                     $sql = "SELECT university_id, university_name FROM universities";
@@ -107,16 +111,15 @@ if (isset($_SESSION["admin_user"])) {
                                     $conn->close();
                                     ?>
                                 </select>
-                                <select id="college_id" class="fruit" name="college_id" onchange="getInf_departments()"
-                                    >
+                                <select id="college_id" class="fruit" name="college_id" onchange="getInf_departments()">
 
                                 </select>
 
                                 <select id="department_id" class="fruit" name="department_id" required>
-                                <?php 
-                                   if($_SESSION["admin_user"] == "department"){
-                                        echo "<option value='" . $_SESSION["department_id"] . "'></option>"; 
-                                    }?>
+                                    <?php
+                                    if ($_SESSION["admin_user"] == "department") {
+                                        echo "<option value='" . $_SESSION["department_id"] . "'></option>";
+                                    } ?>
                                 </select>
                             </div>
                         </div>
@@ -126,8 +129,7 @@ if (isset($_SESSION["admin_user"])) {
 
                     <div class="custom-column" style="margin-bottom: 10px;">
                         <input type="text" name="project_id" placeholder="معرف المشروع" required>
-                        <input type="text" style="margin: 0px 10px;" name="project_name" placeholder="اسم المشروع"
-                            required>
+                        <input type="text" style="margin: 0px 10px;" name="project_name" placeholder="اسم المشروع" required>
                     </div>
 
                     <div class="custom-column" style="margin-bottom: 10px;">
@@ -138,19 +140,17 @@ if (isset($_SESSION["admin_user"])) {
                     <textarea name="project_description" id="editor1" placeholder="الوصف"></textarea>
 
                     <div class="container-img">
-                            
-                            <img id="uploaded-image" src="#"
-                            style="max-width: 100px;
+
+                        <img id="uploaded-image" src="#" style="max-width: 100px;
                             max-height: 100px;
                             width: auto;
                             height: auto;
-                            padding-left:20px;" >
+                            padding-left:20px;">
                     </div>
                     <div class="space"></div>
                     <div class="btn-row">
-                    <input type="file"  name="student_projects_images" class="file-btn" id="upload-input" accept="image/*" onchange="displayImage()" >
-                    <input type="button" class="file-btn" value="اختيار صورة للمشروع "
-                            onclick="document.getElementById('upload-input').click();"> 
+                        <input type="file" name="student_projects_images" class="file-btn" id="upload-input" accept="image/*" onchange="displayImage()">
+                        <input type="button" class="file-btn" value="اختيار صورة للمشروع " onclick="document.getElementById('upload-input').click();">
                         <p>
                             <input type="submit" name="sub_form" value="حـفـظ الـبـيـانـات" />
                         </p>
@@ -159,10 +159,12 @@ if (isset($_SESSION["admin_user"])) {
             </div>
         </div>
     </div>
-    <?php if($_SESSION["admin_user"] == "department"){?>
+    <?php if ($_SESSION["admin_user"] == "department") { ?>
         <style>
-            #university_id,#college_id,#department_id{
-               display : none;
+            #university_id,
+            #college_id,
+            #department_id {
+                display: none;
             }
         </style>
     <?php } ?>
@@ -170,17 +172,16 @@ if (isset($_SESSION["admin_user"])) {
     <script src="../../../../../university-education-compass/assets/pg/admins/ckeditor/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('editor1');
-        CKEDITOR.editorConfig = function (config) {
+        CKEDITOR.editorConfig = function(config) {
             config.language = 'ar';
             config.uiColor = '#f7b42c';
             config.height = 300;
             config.toolbarCanCollapse = true;
             config.contentsCss = 'margin-bottom: 15px;';
         };
-
     </script>
     <script>
-        setTimeout(function () {
+        setTimeout(function() {
             document.getElementById('success-message').style.display = 'none';
         }, 4000);
     </script>

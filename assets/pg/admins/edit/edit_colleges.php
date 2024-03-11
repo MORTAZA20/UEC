@@ -63,6 +63,7 @@ if ($_SESSION["admin_user"] != "Admin"
                 $college_name = mysqli_real_escape_string($conn, $_POST["college_name"]);
                 $required_GPA = mysqli_real_escape_string($conn, $_POST["required_GPA"]);
                 $college_description = mysqli_real_escape_string($conn, $_POST["college_description"]);
+                $college_description  = str_replace(array("\r\n", "\\r\\n"), '', $college_description);
 
                 $sql = "SELECT * FROM colleges WHERE college_id =?";
                 $stmt = $conn->prepare($sql);

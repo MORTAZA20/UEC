@@ -66,7 +66,8 @@ if ($_SESSION["admin_user"] != "Admin"
                 $course_name = mysqli_real_escape_string($conn, $_POST["course_name"]);
                 $course_stage = mysqli_real_escape_string($conn, $_POST["course_stage"]);
                 $course_description = mysqli_real_escape_string($conn, $_POST["course_description"]);
-                
+                $course_description  = str_replace(array("\r\n", "\\r\\n"), '', $course_description);
+
                
                     
                     $sql = "SELECT * FROM courses WHERE course_id =?";

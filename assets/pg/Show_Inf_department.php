@@ -18,7 +18,7 @@ $row_department = $result_department->fetch_assoc();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوصلة التعليم الجامعي | عرض الجامعات</title>
+    <title>بوصلة التعليم الجامعي | عرض القسم</title>
     <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css">
     <link href="./assets/fontawesome-free-6.5.1-web/css/fontawesome.css" rel="stylesheet" />
     <link href="./assets/fontawesome-free-6.5.1-web/css/brands.css" rel="stylesheet" />
@@ -116,7 +116,7 @@ $row_department = $result_department->fetch_assoc();
                             while ($row_courses = $result_courses->fetch_assoc()) {
                                 if ($row_courses["course_stage"] == $i) {
                             ?>
-                                    <li><?= $row_courses["course_name"]; ?></li>
+                                    <li onclick="window.open('Show_course?id=<?= $row_courses['course_id']; ?>', '_self');"><?= $row_courses['course_name']; ?></li>
                             <?php
                                 }
                             }
@@ -131,38 +131,67 @@ $row_department = $result_department->fetch_assoc();
 
         </section>
         <br>
-        <section>
+        <section class="Sh-student-projects">
             <div class="pagimation_">
                 <h3>مشاريع الطلبة</h3>
+                <div class="btn-grup">
+                    <div class="swiper-btn-prev-student-projects"><i class="fas fa-chevron-right"></i></div>
+                    <div class="swiper-btn-next-student-projects"><i class="fas fa-chevron-left"></i></div>
+                </div>
             </div>
 
-            <div class="cards"> <?php
-
-                                $sql5 = "SELECT d.*, c.college_name, u.university_name
-                             FROM departments d
-                             LEFT JOIN colleges c ON d.college_id = c.college_id
-                             LEFT JOIN universities u ON c.university_id = u.university_id 
-                             WHERE c.college_id = '$id'";
-
-                                $result5 = $conn->query($sql5);
-                                while ($row5 = $result5->fetch_assoc()) {
-                                ?>
-                    <div class="card Sh-card">
-                        <img width="100%" class="object-fit-contain" src="assets/pg/admins/<?php echo $row5['departments_img_path']; ?>">
-                        <div class="text-card">
-                            <p><?php echo $row5["university_name"] . " - " .  $row5["college_name"] ?></p>
-                            <h4 class="title"><?php echo $row5["department_name"]; ?></h4>
-                            <form action="Show_Inf_department">
-                                <button name="id" value="<?php echo $row5['department_id']; ?>">عرض القسم</button>
-                            </form>
+            <div class="swiper-student-projects swiper-best-sellers">
+                <div class="swiper-wrapper">
+                    <?php
+                    $sql_student_projects = "SELECT student_projects.*, departments.department_name 
+                 FROM student_projects
+                 LEFT JOIN departments ON student_projects.department_id = departments.department_id WHERE student_projects.department_id='$id'";
+                    $result_student_projects = $conn->query($sql_student_projects);
+                    while ($row_student_projects = $result_student_projects->fetch_assoc()) {
+                    ?>
+                        <div class="card swiper-slide">
+                            <img width="100%" class="object-fit-contain" src="assets/pg/admins/<?php echo $row_student_projects['student_projects_img_path']; ?>">
+                            <div class="text-card">
+                                <p><?php echo $row_student_projects["student_name"]; ?></p>
+                                <h4 class="title"><?php echo $row_student_projects["project_name"]; ?></h4>
+                                <form action="Show_student_projects">
+                                    <button name="id" value="<?php echo $row_student_projects['project_id']; ?>">عرض المشروع</button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                <?php
-                                } ?>
+                    <?php
+                    } ?>
+                </div>
             </div>
+        </section>
+        <section class="Sh-des">
+            <h2>فرص العمل المستقبلية</h2>
+            <?php
+            $sql_career_opportunities = "SELECT * FROM career_opportunities WHERE department_id ='$id'";
+            $result_career_opportunities = $conn->query($sql_career_opportunities);
+            while ($row_career_opportunities = $result_career_opportunities->fetch_assoc()) {
+            ?>
+                <h3>العنوان الوظيفي: <?php echo $row_career_opportunities["job_title"]; ?></h3>
+                <h4> مقدار الراتب: <?php echo $row_career_opportunities["salary_range"]; ?> دينار عراقي</h4>
+                <p><?php echo $row_career_opportunities["job_description"]; ?></p>
+            <?php } ?>
+
         </section>
     </div>
 
+    <script>
+        window.onload = function() {
+            new Swiper('.swiper-student-projects', {
+                speed: 400,
+                spaceBetween: 10,
+                slidesPerView: 'auto',
+                navigation: {
+                    nextEl: '.swiper-btn-next-student-projects',
+                    prevEl: '.swiper-btn-prev-student-projects',
+                },
+            });
+        }
+    </script>
     <?php include "Footer_Index.php"; ?>
     <script src="jquery-3.6.0.min"></script>
     <script src="./assets/js/Script.js"></script>

@@ -52,6 +52,7 @@ if (isset($_SESSION["admin_user"])) {
                 $job_title = mysqli_real_escape_string($conn, $_POST["job_title"]);
                 $salary_range = mysqli_real_escape_string($conn, $_POST["salary_range"]);
                 $job_description = mysqli_real_escape_string($conn, $_POST["job_description"]);
+                $job_description  = str_replace(array("\r\n", "\\r\\n"), '', $job_description);
 
 
 
