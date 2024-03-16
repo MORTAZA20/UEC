@@ -21,9 +21,9 @@ while ($row = $result->fetch_assoc()) {
         <div class="truncated-text">
                 <td><?php echo $row["university_name"]?></td>
                 <td><?php echo $row["university_location"]?></td>
-                <td><?php echo $row["university_website"]?></td>
+                <td style="text-align: center;"><a href="<?php echo $row["university_website"]?>" target="_blank" class="visit-btn">زيارة الموقع</a></td>
         </div>
-                <td data-title="التحكم" class="text-center">
+                <td data-title="التحكم" class="text-center" style="text-align: center;">
                         <div class="control-buttons">
                                 <form id="EditForm" action="edit_universitys" method="post">
                                         <input type="hidden" name="edit_id" value="<?php echo $row['university_id'];?>">

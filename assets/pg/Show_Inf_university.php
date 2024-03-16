@@ -33,7 +33,7 @@ $row_university = $result_university->fetch_assoc();
             <div class="info">
                 <h1><?php echo $row_university["university_name"]; ?></h1>
                 <p><?php echo $row_university["university_location"]; ?></p>
-                <a href="<?php echo $row_university["university_website"]; ?>">الموقع الالكتروني</a>
+                <a href="<?php echo $row_university["university_website"]; ?> target="_blank"">الموقع الالكتروني</a>
             </div>
         </section>
         <section>

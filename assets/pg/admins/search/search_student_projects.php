@@ -42,7 +42,7 @@ $result = $conn->query($sql);
 while ($row = $result->fetch_assoc()) {
 ?>
     <tr>
-        <div class="truncated-text">
+
             <td><?php echo $row["department_name"] ?></td>
             <td><?php echo $row["project_name"] ?></td>
             <td><?php echo $row["student_name"] ?></td>
@@ -51,7 +51,7 @@ while ($row = $result->fetch_assoc()) {
             <td class="truncated-text"><?php
                 echo $row["project_description"];
                 ?></td>
-        </div>
+
         <td data-title="التحكم" class="text-center">
             <?php if (isset($_SESSION["admin_user"])) {
                 if ($_SESSION["admin_user"] != "college") {

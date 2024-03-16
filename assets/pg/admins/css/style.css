@@ -270,6 +270,27 @@ tbody tr td {
     border: 1px solid #ccc;
 }
 
+tbody tr td .visit-btn {
+
+    display: inline-block;
+   justify-items: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 5px;
+    border:1px solid #007bff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+tbody tr td .visit-btn:hover {
+    background-color: #fff;
+    color: #007bff;
+}
+
 tbody tr td img {
     display: block;
     margin: auto;

@@ -34,7 +34,6 @@ $result = $conn->query($sql);
 while ($row = $result->fetch_assoc()) {
 ?>
         <tr>
-                <div class="truncated-text">
                         <td><?php echo $row["student_id"] ?></td>
                         <td><?php echo $row["department_name"] ?></td>
                         <td>
@@ -53,7 +52,6 @@ while ($row = $result->fetch_assoc()) {
                         <td><?php echo $row["student_name"] ?></td>
                         <td><?php echo $row["Cumulative_Rating"] ?></td>
                         <td><?php echo $row["Graduation_Year"] ?></td>
-                </div>
                 <td data-title="التحكم" class="text-center">
                         <?php if (isset($_SESSION["admin_user"])) {
                                 if ($_SESSION["admin_user"] != "college") {

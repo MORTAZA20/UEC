@@ -27,11 +27,9 @@ $result = $conn->query($sql);
 while ($row = $result->fetch_assoc()) {
 ?>
     <tr>
-        <div class="truncated-text">
             <td><?php echo $row["department_id"] ?></td>
             <td><?php echo $row["college_name"] ?></td>
             <td><?php echo $row["department_name"] ?></td>
-        </div>
         <td><img style="pointer-events: none;" src="./assets/pg/admins/<?php echo $row["departments_img_path"]; ?>">
         </td>
 

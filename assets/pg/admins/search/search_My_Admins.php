@@ -18,14 +18,12 @@ $result = $conn->query($sql);
 while ($row = $result->fetch_assoc()) {
 ?>
     <tr>
-        <div class="truncated-text">
             <td><?php echo $row["college_name"] ?></td>
             <td><?php echo $row["department_name"] ?></td>
             <td><?php echo $row["AdminUserName"] ?></td>
             <td><?php echo $row["RegistrationData"] ?></td>
             <td><?php echo $row["RegistrationTime"] ?></td>
             <td><?php echo $row["type"] ?></td>
-        </div>
         <td data-title="التحكم" class="text-center">
 
             <div class="control-buttons">
