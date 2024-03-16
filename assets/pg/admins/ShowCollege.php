@@ -48,7 +48,7 @@ if ($_SESSION["admin_user"] != "Admin"
         تعديل معلومات الكلية</button>
 
         <?php } ?>
-        <h2 style='text-align: center;font-size: 32px; font-weight: lighter;'>معلومات القسم</h2>
+        <h2 style='text-align: center;font-size: 32px; font-weight: 550;'>معلومات القسم</h2>
             
         
                 <div style='margin-top :50px;' class="path-bar">
@@ -84,7 +84,7 @@ if ($_SESSION["admin_user"] != "Admin"
                     $row = $result->fetch_assoc();
 
                     ?>
-                    <img style="width: 150px; pointer-events: none;"  src=./assets/pg/admins/<?php echo $row['colleges_img_path']; ?>>
+                    <img style="width: 150px; pointer-events: none;"  src="./assets/pg/admins/<?php echo $row['colleges_img_path']; ?>">
                 </div>
                 <div class="prodation">
                     <div class="sh-name">

@@ -24,7 +24,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
 
         <div class="content-bar">
             <div style='position:relative; margin-top: 15px;'>
-                <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>تعديل بيانات الادمن</h2>
+                <h2 style='margin-right:20px; font-size: 32px; font-weight: 550;'>تعديل بيانات الادمن</h2>
             </div>
             <div class="path-bar">
                 <div class="url-path active-path">لوحة التحكم</div>
@@ -98,10 +98,10 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                 <form action="" method="post">
                 <select class="fruit" name="type" style=" margin-bottom: 10px ;" required
                     onchange="toggle()">
-                    <option value="Admin" <?php if($row['type'] == "Admin") echo "selected"; ?>>مشرف عام</option>
-                    <option value="SubAdmin" <?php if($row['type'] == "SubAdmin") echo "selected"; ?>>مشرف ثانوي</option>
-                    <option value="department" <?php if($row['type'] == "department") echo "selected"; ?>>قسم</option>
-                    <option value="college" <?php if($row['type'] == "college") echo "selected"; ?>>كلية</option>
+                    <option value="Admin" <?php if(isset($_POST['btn_edit'])){if($row['type'] == "Admin"){echo "selected";}}  ?>>مشرف عام</option>
+                    <option value="SubAdmin" <?php if(isset($_POST['btn_edit'])){if($row['type'] == "SubAdmin") {echo "selected";}}  ?>>مشرف ثانوي</option>
+                    <option value="department" <?php if(isset($_POST['btn_edit'])){if($row['type'] == "department") {echo "selected";}}  ?>>قسم</option>
+                    <option value="college" <?php if(isset($_POST['btn_edit'])){if($row['type'] == "college") {echo "selected";}}  ?>>كلية</option>
                     </select>
                     <select class="fruit" name="department_id" style=" margin-bottom: 10px ;" 
                     id="department_select">

@@ -25,7 +25,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
 
         <div class="content-bar">
             <div style='position:relative; margin-top: 15px;'>
-                <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>تعديل الجامعات</h2>
+                <h2 style='margin-right:20px; font-size: 32px; font-weight: 550;'>تعديل الجامعات</h2>
             </div>
             <div class="path-bar">
                 <div class="url-path active-path">لوحة التحكم</div>

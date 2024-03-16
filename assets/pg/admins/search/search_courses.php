@@ -38,13 +38,13 @@ if (isset($_POST['search'])) {
 $result = $conn->query($sql);
 while ($row = $result->fetch_assoc()) {
 ?>
-    <tr>
+    <tr style="height: 100px;">
         <div class="truncated-text">
             <td><?php echo $row["course_id"] ?></td>
             <td><?php echo $row["department_name"] ?></td>
             <td><?php echo $row["course_name"] ?></td>
             <td><?php echo $row["course_stage"] ?></td>
-            <td><?php echo $row["course_description"] ?></td>
+            <td class="truncated-text"><?php echo $row["course_description"] ?></td>
         </div>
         <td data-title="التحكم" class="text-center">
             <?php if (isset($_SESSION["admin_user"])) {

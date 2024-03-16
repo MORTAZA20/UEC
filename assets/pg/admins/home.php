@@ -36,7 +36,7 @@ if (isset($_SESSION["admin_user"])) {
         <div class="content-bar">
             <div style='position:relative; margin-top: 15px; '>
 
-                <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>الصفحة الرئيسية</h2>
+                <h2 style='margin-right:20px; font-size: 32px; font-weight: 550;'>الصفحة الرئيسية</h2>
             </div>
 
             <div class="path-bar">
@@ -46,14 +46,20 @@ if (isset($_SESSION["admin_user"])) {
             </div>
 
             <div class="panel-bar">
+                <div>عدد الزوار <div>
+                        <script type="text/javascript" src="online_t"></script>
+                        <script type="text/javascript">
+                            sc_online_t(1684310, "", "23a0a9");
+                        </script>
+                    </div>
+                </div>
                 <div>عدد الجامعات <div>
                         <?php
                         include 'inc/conn.inc.php';
 
                         $sql = "SELECT * FROM universities";
                         $result = $conn->query($sql);
-                        echo $result->num_rows;
-                      
+                        echo $result->num_rows
                         ?>
                     </div>
                 </div>
@@ -76,36 +82,42 @@ if (isset($_SESSION["admin_user"])) {
                         echo $result->num_rows;
                         ?></div>
                 </div>
-                <div>عدد الادمنية<div>
-                        <?php
-                        include 'inc/conn.inc.php';
+                <?php if ($_SESSION["admin_user"] == "Admin") {
+                ?>
+                    <div>عدد الادمنية<div>
+                            <?php
+                            include 'inc/conn.inc.php';
 
-                        $sql = "SELECT * FROM inf_login";
-                        $result = $conn->query($sql);
-                        echo $result->num_rows;
-                        ?></div>
-                </div>
-            </div>
+                            $sql = "SELECT * FROM inf_login";
+                            $result = $conn->query($sql);
+                            echo $result->num_rows;
+                            ?></div>
+                    </div>
+            
+        <?php } ?>
+        </div>
+        <div class="Latest-orders">احدث الاضافات</div>
 
-            <div class="Latest-orders">احدث الاضافات</div>
-
-            <table class="table teble-bordered" role="table">
-                <thead>
-                    <tr>
-                        <th width="10%">معرف القسم</th>
-                        <th class="text-right" width="10%">الكلية</th>
-                        <th class="text-right" width="10%">القسم</th>
-                        <th class="text-right" width="10%">شعار القسم</th>
-                        <th class="text-right" width="30%">التحكم</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $sql = "SELECT departments.*, colleges.college_name FROM departments
+        <table class="table teble-bordered" role="table">
+            <thead>
+                <tr>
+                    <th width="10%">معرف القسم</th>
+                    <th class="text-right" width="10%">الكلية</th>
+                    <th class="text-right" width="10%">القسم</th>
+                    <th class="text-right" width="10%">شعار القسم</th>
+                    <th class="text-right" width="30%">التحكم</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $sql = "SELECT departments.*, colleges.college_name FROM departments
                     LEFT JOIN colleges ON departments.college_id = colleges.college_id ORDER BY departments.TheCounter DESC";
-                    $result = $conn->query($sql);
+                $result = $conn->query($sql);
+
+
+                if ($result->num_rows > 0) {
                     $row = $result->fetch_assoc();
-                    ?>
+                ?>
                     <tr>
                         <div class="truncated-text">
                             <td><?php echo $row["department_id"] ?></td>
@@ -149,12 +161,12 @@ if (isset($_SESSION["admin_user"])) {
                         </td>
                     </tr>
 
-                    <?php
-
-                    $conn->close();
-                    ?>
-                </tbody>
-            </table>
+                <?php
+                }
+                $conn->close();
+                ?>
+            </tbody>
+        </table>
         </div>
     </div>
 </body>

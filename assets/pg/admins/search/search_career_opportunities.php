@@ -47,7 +47,7 @@ $result = $conn->query($sql);
 
 while ($row = $result->fetch_assoc()) {
 ?>
-        <tr>
+        <tr style="height: 100px;">
                 <div class="truncated-text">
                         <td><?php echo $row["opportunity_id"] ?></td>
                         <td><?php echo $row["department_name"] ?></td>

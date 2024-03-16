@@ -33,7 +33,7 @@ if (isset($_SESSION["admin_user"])) {
 
         <div class="content-bar">
             <div style='position:relative; margin-top: 15px;'>
-                <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>أضافة مشاريع الطلبة</h2>
+                <h2 style='margin-right:20px; font-size: 32px; font-weight: 550;'>أضافة مشاريع الطلبة</h2>
             </div>
             <div class="path-bar">
                 <div class="url-path active-path">لوحة التحكم</div>
@@ -49,7 +49,6 @@ if (isset($_SESSION["admin_user"])) {
             if (isset($_POST["sub_form"])) {
 
                 //mysqli_real_escape_string للحماية من الهجمات
-                $project_id = mysqli_real_escape_string($conn, $_POST["project_id"]);
                 $department_id = mysqli_real_escape_string($conn, $_POST["department_id"]);
                 $student_name = mysqli_real_escape_string($conn, $_POST["student_name"]);
                 $project_name = mysqli_real_escape_string($conn, $_POST["project_name"]);
@@ -61,12 +60,6 @@ if (isset($_SESSION["admin_user"])) {
 
 
 
-                $sqlTest = "SELECT project_id  FROM student_projects WHERE project_id  = '$project_id'";
-                $resultTest = $conn->query($sqlTest);
-
-                if ($resultTest->num_rows > 0) {
-                    echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>عذرًا، معرف  المشروع موجود مسبقًا</div>";
-                } else {
                     if ($_FILES['student_projects_images']['type'] == 'image/png' || $_FILES['student_projects_images']['type'] == 'image/jpeg') {
 
 
@@ -90,7 +83,7 @@ if (isset($_SESSION["admin_user"])) {
                         }
                     }
                 }
-            }
+            
             ?>
             <script src="jquery-3.6.0.min"></script>
             <script src="Get_ScriptFunction.js"></script>
@@ -128,17 +121,25 @@ if (isset($_SESSION["admin_user"])) {
 
 
                     <div class="custom-column" style="margin-bottom: 10px;">
-                        <input type="text" name="project_id" placeholder="معرف المشروع" required>
                         <input type="text" style="margin: 0px 10px;" name="project_name" placeholder="اسم المشروع" required>
-                    </div>
-
-                    <div class="custom-column" style="margin-bottom: 10px;">
                         <input type="text" name="student_name" placeholder="صاحب المشروع" required>
                         <input type="text" name="project_supervisor" placeholder="المشرف على المشروع" required>
-                    </div>
-                    <p>نبذه عن المشروع</p>
-                    <textarea name="project_description" id="editor1" placeholder="الوصف"></textarea>
+                   </div>
 
+                       
+                    <p>نبذه عن المشروع</p>
+                    <textarea name="project_description" id="editor" placeholder="نبذه عن المشروع"></textarea>
+                    <script src=".\assets\pg\admins\ckeditor\js\index.js"></script>
+                    <script>
+                        ClassicEditor
+                            .create(document.querySelector('#editor'), {
+                                language: 'ar',
+                                uiLanguage: 'ar'
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            });
+                    </script>
                     <div class="container-img">
 
                         <img id="uploaded-image" src="#" style="max-width: 100px;
@@ -169,17 +170,6 @@ if (isset($_SESSION["admin_user"])) {
         </style>
     <?php } ?>
     <script src="displayImage"></script>
-    <script src="../../../../../university-education-compass/assets/pg/admins/ckeditor/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('editor1');
-        CKEDITOR.editorConfig = function(config) {
-            config.language = 'ar';
-            config.uiColor = '#f7b42c';
-            config.height = 300;
-            config.toolbarCanCollapse = true;
-            config.contentsCss = 'margin-bottom: 15px;';
-        };
-    </script>
     <script>
         setTimeout(function() {
             document.getElementById('success-message').style.display = 'none';

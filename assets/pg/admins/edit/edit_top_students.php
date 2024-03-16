@@ -30,7 +30,7 @@ if (isset($_SESSION["admin_user"])) {
 
         <div class="content-bar">
             <div style='position:relative; margin-top: 15px;'>
-                <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>تعديل معلومات الطلبة الاوائل</h2>
+                <h2 style='margin-right:20px; font-size: 32px; font-weight: 550;'>تعديل معلومات الطلبة الاوائل</h2>
             </div>
             <div class="path-bar">
                 <div class="url-path active-path">لوحة التحكم</div>
@@ -243,7 +243,6 @@ if (isset($_SESSION["admin_user"])) {
             window.location.href = 'top_students';
         }, 4000);
     </script>
-
 </body>
 
 </html>

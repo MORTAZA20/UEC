@@ -17,7 +17,7 @@ require_once("admins/inc/conn.inc.php");
 <body>
 
     <?php include "Navbar_Index.php"; ?>
-    <header>
+ <header>
         <h1>
             الطلبة الاوائل
         </h1>
@@ -36,7 +36,7 @@ require_once("admins/inc/conn.inc.php");
                                             LEFT JOIN departments ON top_students.department_id = departments.department_id WHERE top_students.department_id = '$id'";
             } else {
                 $sql_top_students = "SELECT top_students.*, departments.department_name FROM top_students
-                                            LEFT JOIN departments ON top_students.department_id = departments.department_id";
+                                        LEFT JOIN departments ON top_students.department_id = departments.department_id";
             }
 
             $result_top_students = $conn->query($sql_top_students);

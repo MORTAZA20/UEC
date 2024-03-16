@@ -35,7 +35,7 @@ if (isset($_SESSION["admin_user"])) {
         <?php include 'inc/sidebar.php'; ?>
         <div class="content-bar">
             <div style='position:relative; margin-top: 15px; '>
-                <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>
+                <h2 style='margin-right:20px; font-size: 32px; font-weight: 550;'>
                     مشاريع الطلاب
                 </h2>
             </div>

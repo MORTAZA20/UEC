@@ -1,5 +1,9 @@
 RewriteEngine on
 
+RewriteRule ^online_t ./assets/pg/admins/js/online_t.js [NC,L]
+
+
+
 RewriteRule ^style ./assets/pg/admins/css/style.css [NC,L]
 RewriteRule ^stylelogin ./assets/pg/admins/css/stylelogin.css [NC,L]
 

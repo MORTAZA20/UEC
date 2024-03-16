@@ -27,7 +27,7 @@ if ($_SESSION["admin_user"] != "Admin"
 
         <div class="content-bar">
             <div style='position:relative; margin-top: 15px;'>
-                <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>تعديل معلومات الكلية</h2>
+                <h2 style='margin-right:20px; font-size: 32px; font-weight: 550;'>تعديل معلومات الكلية</h2>
             </div>
             <div class="path-bar">
                 <div class="url-path active-path">لوحة التحكم</div>
@@ -147,6 +147,13 @@ if ($_SESSION["admin_user"] != "Admin"
                                  if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){echo "";}else{echo $row['required_GPA'];}?>" required pattern="^(?:[5-9]\d|\d{2})(?:\.\d+)?$" title="الرجاء إدخال قيمة صحيحة بين 50 و 100">
                     </div>
 
+                    <br> 
+                    <p>نبذة عن الكلية</p>
+                    <textarea name="college_description" id="editor" placeholder="نبذه عن الكلية">
+                        <?php 
+                            if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){echo "";}else{echo  $row['college_description'];}
+                        ?>
+                    </textarea>
                     <div class="container-img">   
                             <img id="uploaded-image" src="assets/pg/admins/<?php echo $row["colleges_img_path"]; ?>" 
                             style="max-width: 80px;
@@ -155,12 +162,17 @@ if ($_SESSION["admin_user"] != "Admin"
                             height: auto;
                             padding-left:20px;">
                     </div>
-                    <p>الوصف</p>
-                    <textarea name="college_description" id="editor1">
-                        <?php 
-                            if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])){echo "";}else{echo  $row['college_description'];}
-                        ?>
-                    </textarea>
+                    <script src=".\assets\pg\admins\ckeditor\js\index.js"></script>
+                    <script>
+                        ClassicEditor
+                            .create(document.querySelector('#editor'), {
+                                language: 'ar',
+                                uiLanguage: 'ar'
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            });
+                    </script>
                     <div class="space"></div>
                     <div class="btn-row">
                     <input type="file" name="colleges_images" class="file-btn" id="upload-input" accept="image/*"
@@ -188,17 +200,6 @@ if ($_SESSION["admin_user"] != "Admin"
                 window.location.href = 'colleges';
             <?php }  ?>
         }, 4000);
-    </script>
-    <script src="../../../../../university-education-compass/assets/pg/admins/ckeditor/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('editor1');
-        CKEDITOR.editorConfig = function (config) {
-            config.language = 'ar';
-            config.uiColor = '#f7b42c';
-            config.height = 300;
-            config.toolbarCanCollapse = true;
-            config.contentsCss = 'margin-bottom: 15px;';
-        };
     </script>
 </body>
 

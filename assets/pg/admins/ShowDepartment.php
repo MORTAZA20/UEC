@@ -41,7 +41,7 @@ if (isset($_SESSION["admin_user"])) {
                     </button>
 
                 <?php } ?>
-                <h2 style='text-align: center;font-size: 32px; font-weight: lighter;'>معلومات القسم</h2>
+                <h2 style='text-align: center;font-size: 32px; font-weight: 550;'>معلومات القسم</h2>
 
 
                 <div style='margin-top :50px;' class="path-bar">
@@ -77,7 +77,7 @@ if (isset($_SESSION["admin_user"])) {
                     $row = $result->fetch_assoc();
 
                     ?>
-                    <img style="width: 150px; pointer-events: none;" src=./assets/pg/admins/<?php echo $row['departments_img_path']; ?>>
+                    <img style="width: 150px; pointer-events: none;" src="./assets/pg/admins/<?php echo $row['departments_img_path']; ?>">
                 </div>
                 <div class="prodation">
                     <div class="sh-name">
@@ -85,13 +85,12 @@ if (isset($_SESSION["admin_user"])) {
                         <h2> الكلية : <?php echo $row['college_name']; ?></h2>
                         <h3> القسم : <?php echo $row['department_name']; ?></h3>
                         <h4> معدل القبول الصباحي : <?php echo $row['required_GPA']; ?></h4>
-                        <h4> معدل القبول المسائي : <?php echo $row['evening_GPA']; ?></h4>
-                        <h4> قسط القبول المسائي : <?php echo $row['evening_study_fees']; ?></h4>
-                        <h4> معدل القبول الموازي : <?php echo $row['parallel_GPA']; ?></h4>
-                        <h4> قسط القبول الموازي : <?php echo $row['parallel_study_fees']; ?></h4>
+                        <h4> معدل القبول المسائي : <?php if($row["evening_GPA"]==50){echo "لا يوجد";}else{ echo $row['evening_GPA'];} ?></h4>
+                        <h4> قسط القبول المسائي : <?php if($row["evening_study_fees"]==0){echo "لا يوجد";}else{ echo number_format($row['evening_study_fees']) . " دينار عراقي";} ?></h4>
+                        <h4> معدل القبول الموازي : <?php if($row["parallel_GPA"]==50){echo "لا يوجد";}else{ echo $row['parallel_GPA'];} ?></h4>
+                        <h4> قسط القبول الموازي : <?php if($row["parallel_study_fees"]==0){echo "لا يوجد";}else{ echo number_format($row['parallel_study_fees']). " دينار عراقي";} ?></h4>
                     </div>
                 </div>
-
             </div>
             <div class="cont-desc">
 

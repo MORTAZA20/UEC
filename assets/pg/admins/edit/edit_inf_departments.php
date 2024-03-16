@@ -31,7 +31,7 @@ if (isset($_SESSION["admin_user"])) {
 
         <div class="content-bar">
             <div style='position:relative; margin-top: 15px;'>
-                <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>تعديل معلومات القسم</h2>
+                <h2 style='margin-right:20px; font-size: 32px; font-weight: 550;'>تعديل معلومات القسم</h2>
             </div>
             <div class="path-bar">
                 <div class="url-path active-path">لوحة التحكم</div>
@@ -240,20 +240,41 @@ if (isset($_SESSION["admin_user"])) {
                                                                                                                     } ?>" required>
                     </div>
 
-                    <p>الوصف</p>
-                    <textarea name="department_description" id="editor1" placeholder="النبذه عن القسم">
+                    <br>
+                    <p>نبذة القسم</p>
+                    <textarea name="department_description" id="editor" placeholder="نبذه عن القسم">
                         <?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])) {
                             echo "";
                         } else {
                             echo $row['department_description'];
                         } ?></textarea>
+
                     <p>رسالة القسم</p>
-                    <textarea name="scientific_department_message" id="editor2" placeholder="رسالة القسم">
+                    <textarea name="scientific_department_message" id="editor1" placeholder="رسالة القسم">
                         <?php if (!isset($_POST['edit_id']) && !isset($_SESSION["admin_user"])) {
                             echo "";
                         } else {
                             echo $row['scientific_department_message'];
                         } ?></textarea>
+                    <script src=".\assets\pg\admins\ckeditor\js\index.js"></script>
+                    <script>
+                        ClassicEditor
+                            .create(document.querySelector('#editor'), {
+                                language: 'ar',
+                                uiLanguage: 'ar'
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            });
+                            ClassicEditor
+                            .create(document.querySelector('#editor1'), {
+                                language: 'ar',
+                                uiLanguage: 'ar'
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            });
+                    </script>
                     <div class="container-img">
                         <img id="uploaded-image" src="assets/pg/admins/<?php echo $row["departments_img_path"]; ?>" style="max-width: 80px;
                             max-height: 80px;
@@ -295,17 +316,6 @@ if (isset($_SESSION["admin_user"])) {
             }
             ?>
         }, 4000);
-    </script>
-    <script src="../../../../../university-education-compass/assets/pg/admins/ckeditor/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('editor1');
-        CKEDITOR.editorConfig = function(config) {
-            config.language = 'ar';
-            config.uiColor = '#f7b42c';
-            config.height = 300;
-            config.toolbarCanCollapse = true;
-            config.contentsCss = 'margin-bottom: 15px;';
-        };
     </script>
 </body>
 

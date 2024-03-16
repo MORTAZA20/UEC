@@ -2,12 +2,13 @@
 require_once("../inc/conn.inc.php");
 session_start();
 if (isset($_SESSION["admin_user"])) {
-    if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin"
-    ) {    
+    if (
+        $_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin"
+    ) {
         header("Location: login");
         exit();
-}
-}else{
+    }
+} else {
     header("Location: login");
     exit();
 }
@@ -32,7 +33,7 @@ if (isset($_SESSION["admin_user"])) {
 
         <div class="content-bar">
             <div style='position:relative; margin-top: 15px;'>
-                <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>أضافة كلية جديد</h2>
+                <h2 style='margin-right:20px; font-size: 32px; font-weight: 550;'>أضافة كلية جديد</h2>
             </div>
             <div class="path-bar">
                 <div class="url-path active-path">لوحة التحكم</div>
@@ -83,7 +84,6 @@ if (isset($_SESSION["admin_user"])) {
                     } else {
                         echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>يرجى تحديد ملف صورة صحيح (PNG أو JPEG)</div>";
                     }
-
                 }
             }
             $conn->close();
@@ -119,22 +119,32 @@ if (isset($_SESSION["admin_user"])) {
                     </div>
 
 
-                    <p>الوصف</p>
-                    <textarea name="editor1" id="editor1"></textarea>
-                     <div class="container-img">
-                         <img id="uploaded-image" src="#" style="max-width: 100px;
+                    <br> 
+                    <p>نبذة عن الكلية</p>
+                    <textarea name="editor1" id="editor" placeholder="نبذة عن الكلية"></textarea>
+                    <script src=".\assets\pg\admins\ckeditor\js\index.js"></script>
+                    <script>
+                        ClassicEditor
+                            .create(document.querySelector('#editor'), {
+                                language: 'ar',
+                                uiLanguage: 'ar'
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            });
+                    </script>
+                    <div class="container-img">
+                        <img id="uploaded-image" src="#" style="max-width: 100px;
                                 max-height: 100px;
                                 width: auto;
                                 height: auto;
                                 padding-left:20px;">
-                        </div>
+                    </div>
                     <div class="space"></div>
                     <div class="btn-row">
-                       
-                        <input type="file" name="colleges_images" class="file-btn" id="upload-input" accept="image/*"
-                            onchange="displayImage()">
-                        <input type="button" class="file-btn" value="اختيار شعار الكلية"
-                            onclick="document.getElementById('upload-input').click();">
+
+                        <input type="file" name="colleges_images" class="file-btn" id="upload-input" accept="image/*" onchange="displayImage()">
+                        <input type="button" class="file-btn" value="اختيار شعار الكلية" onclick="document.getElementById('upload-input').click();">
                         <p>
                             <input type="submit" name="sub_form" value="حـفـظ الـبـيـانـات" />
                         </p>
@@ -147,22 +157,12 @@ if (isset($_SESSION["admin_user"])) {
     </div>
 
     <script>
-        setTimeout(function () {
+        setTimeout(function() {
             document.getElementById('success-message').style.display = 'none';
         }, 4000);
     </script>
     <script src="displayImage"></script>
-    <script src="../../../../../university-education-compass/assets/pg/admins/ckeditor/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('editor1');
-        CKEDITOR.editorConfig = function (config) {
-            config.language = 'ar';
-            config.uiColor = '#f7b42c';
-            config.height = 300;
-            config.toolbarCanCollapse = true;
-            config.contentsCss = 'margin-bottom: 15px;';
-        };
-    </script>
+
 </body>
 
 </html>

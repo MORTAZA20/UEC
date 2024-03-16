@@ -31,7 +31,7 @@ if (isset($_SESSION["admin_user"])) {
 
         <div class="content-bar">
             <div style='position:relative; margin-top: 15px;'>
-                <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>أضافة قسم جديد</h2>
+                <h2 style='margin-right:20px; font-size: 32px; font-weight: 550;'>أضافة قسم جديد</h2>
             </div>
             <div class="path-bar">
                 <div class="url-path active-path">لوحة التحكم</div>
@@ -134,11 +134,33 @@ if (isset($_SESSION["admin_user"])) {
                         <input type="number" name="evening_study_fees" placeholder="القسط السنوي(المسائي)" required>
                         <input type="number" name="parallel_study_fees" placeholder="القسط السنوي(الموازي)" required>
                     </div>
+                    <br>
+                    <p>نبذة القسم</p>
 
-                    <p>الوصف</p>
-                    <textarea name="department_description" id="editor1" placeholder="النبذه عن القسم"></textarea>
+                    <textarea name="department_description" id="editor1" placeholder="نبذه عن القسم"></textarea>
                     <p>رسالة القسم</p>
-                    <textarea name="scientific_department_message" id="editor3" placeholder="رسالة القسم"></textarea>
+
+                    <textarea name="scientific_department_message" id="editor" placeholder="رسالة القسم"></textarea>
+                    
+                    <script src=".\assets\pg\admins\ckeditor\js\index.js"></script>
+                    <script>
+                        ClassicEditor
+                            .create(document.querySelector('#editor'), {
+                                language: 'ar',
+                                uiLanguage: 'ar'
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            });
+                            ClassicEditor
+                            .create(document.querySelector('#editor1'), {
+                                language: 'ar',
+                                uiLanguage: 'ar'
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            });
+                    </script>
                     <div class="container-img">
                         <img id="uploaded-image" src="#" style="max-width: 100px;
                                 max-height: 100px;
@@ -164,17 +186,6 @@ if (isset($_SESSION["admin_user"])) {
         setTimeout(function() {
             document.getElementById('success-message').style.display = 'none';
         }, 4000);
-    </script>
-    <script src="../../../../../university-education-compass/assets/pg/admins/ckeditor/ckeditor.js"></script>
-
-    <script>
-        CKEDITOR.replace('editor1', {
-            language: 'ar',
-            uiColor: '#f7b42c',
-            height: 300,
-            toolbarCanCollapse: true,
-            contentsCss: 'margin-bottom: 15px;'
-        });
     </script>
 
 </body>

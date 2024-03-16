@@ -11,6 +11,11 @@ if (isset($_POST['search'])) {
         WHERE d.required_GPA LIKE '%$search%' 
         OR d.evening_GPA LIKE '%$search%' 
         OR d.parallel_GPA LIKE '%$search%'";
+    } elseif (strpos($search, "كلية") !== false || strpos($search, "الكلية") !== false|| strpos($search, "معهد") !== false || strpos($search, "المعهد") !== false) {
+        $sql_search = "SELECT colleges.*, universities.university_name FROM colleges
+        LEFT JOIN universities 
+        ON colleges.university_id = universities.university_id
+        WHERE colleges.college_name LIKE '%$search%'";
     } else {
         $sql_search = "SELECT * FROM universities WHERE university_name LIKE '%$search%'";
     }
@@ -26,6 +31,12 @@ if (isset($_POST['search'])) {
                         موازي: <?php echo $row_search['parallel_GPA']; ?></p>
                 </div>
 
+            <?php
+            } elseif (strpos($search, "كلية") !== false || strpos($search, "معهد") !== false || strpos($search, "المعهد") !== false)  {
+            ?>
+                <div onclick="window.open('Show_Inf_college?id=<?php echo $row_search['college_id']; ?>', '_self');">
+                    <?php echo $row_search['university_name'] . " - " . $row_search['college_name']; ?>
+                </div>
             <?php
             } else {
             ?>

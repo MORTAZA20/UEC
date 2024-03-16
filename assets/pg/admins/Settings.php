@@ -29,7 +29,7 @@ if (isset($_SESSION["admin_user"])) {
 
         <div class="content-bar">
             <div style='position:relative; margin-top: 15px;'>
-                <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>اعدادات الموقع</h2>
+                <h2 style='margin-right:20px; font-size: 32px; font-weight: 550;'>اعدادات الموقع</h2>
             </div>
             <div class="path-bar">
                 <div class="url-path active-path">لوحة التحكم</div>

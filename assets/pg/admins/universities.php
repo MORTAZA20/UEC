@@ -30,7 +30,7 @@ include 'inc/navbar.php';
         <?php include 'inc/sidebar.php'; ?>
         <div class="content-bar">
             <div style='position:relative; margin-top: 15px; '>
-                <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>الجامعات</h2>
+                <h2 style='margin-right:20px; font-size: 32px; font-weight: 550;'>الجامعات</h2>
             </div>
             <button class="btn-style" onclick="window.open('add_universities' , '_self');"><div class="Imgitem" style="background-image: url('A1');"></div>
             إضافة جامعة جديدة</button>

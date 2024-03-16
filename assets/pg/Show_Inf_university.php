@@ -13,7 +13,6 @@ $row_university = $result_university->fetch_assoc();
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>بوصلة التعليم الجامعي | عرض الجامعة</title>
     <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css">
     <link href="./assets/fontawesome-free-6.5.1-web/css/fontawesome.css" rel="stylesheet" />
@@ -24,11 +23,12 @@ $row_university = $result_university->fetch_assoc();
 </head>
 
 <body>
+
     <?php include "Navbar_Index.php"; ?>
     <div class="control">
         <section class="Show-SE">
             <div class="Img-logo">
-                <img src="./assets\pg\admins\img\111.png" alt="rtttt">
+                <img src="./assets\pg\admins\<?php echo $row_university["universities_img_path"]; ?>" alt="rtttt">
             </div>
             <div class="info">
                 <h1><?php echo $row_university["university_name"]; ?></h1>

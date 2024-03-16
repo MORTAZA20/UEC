@@ -28,7 +28,7 @@ if ($_SESSION["admin_user"] != "Admin"
 
         <div class="content-bar">
             <div style='position:relative; margin-top: 15px;'>
-                <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>تعديل معلومات مشاريع الطلبة</h2>
+                <h2 style='margin-right:20px; font-size: 32px; font-weight: 550;'>تعديل معلومات مشاريع الطلبة</h2>
             </div>
             <div class="path-bar">
                 <div class="url-path active-path">لوحة التحكم</div>
@@ -204,9 +204,9 @@ if ($_SESSION["admin_user"] != "Admin"
                                 }
                         ?>" required>
                     </div>
-
+<br>
                     <p>نبذه عن المشروع</p>
-                    <textarea name="project_description" id="editor1" placeholder="الوصف">
+                    <textarea name="project_description" id="editor" placeholder="نبذه عن المشروع">
                     <?php
                     if (!isset($_POST['edit_id'])) {
                         echo "";
@@ -215,7 +215,17 @@ if ($_SESSION["admin_user"] != "Admin"
                     }
                     ?>
                     </textarea>
-
+                    <script src=".\assets\pg\admins\ckeditor\js\index.js"></script>
+                    <script>
+                        ClassicEditor
+                            .create(document.querySelector('#editor'), {
+                                language: 'ar',
+                                uiLanguage: 'ar'
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            });
+                    </script>
                     <div class="container-img">
                         <img id="uploaded-image" src="assets/pg/admins/<?php echo $row["student_projects_img_path"]; ?>"
                             style="max-width: 100px;
@@ -246,18 +256,6 @@ if ($_SESSION["admin_user"] != "Admin"
         </style>
     <?php } ?>
     <script src="displayImage"></script>
-    <script src="../../../../../university-education-compass/assets/pg/admins/ckeditor/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('editor1');
-        CKEDITOR.editorConfig = function (config) {
-            config.language = 'ar';
-            config.uiColor = '#f7b42c';
-            config.height = 300;
-            config.toolbarCanCollapse = true;
-            config.contentsCss = 'margin-bottom: 15px;';
-        };
-        
-    </script>
     <script>
         setTimeout(function () {
             document.getElementById('success-message').style.display = 'none';

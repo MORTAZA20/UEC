@@ -103,13 +103,13 @@
 <script>
     function sub_menu_open() {
         document.getElementById("req1").style.display = "none";
-        document.getElementById("req2").style.display = "block";
+        document.getElementById("req2").style.display = "flex";
         document.getElementById("sub-menu").style.height = "auto";
     }
 
     function sub_menu_close() {
         document.getElementById("req2").style.display = "none";
-        document.getElementById("req1").style.display = "block";
+        document.getElementById("req1").style.display = "flex";
         document.getElementById("sub-menu").style.height = "0px";
     }
 </script>

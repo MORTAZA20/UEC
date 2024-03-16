@@ -33,7 +33,7 @@ if (isset($_SESSION["admin_user"])) {
 
         <div class="content-bar">
             <div style='position:relative; margin-top: 15px;'>
-                <h2 style='margin-right:20px; font-size: 32px; font-weight: lighter;'>الدعم والمساعدة</h2>
+                <h2 style='margin-right:20px; font-size: 32px; font-weight: 550;'>الدعم والمساعدة</h2>
             </div>
             <div class="path-bar">
                 <div class="url-path active-path">لوحة التحكم</div>
@@ -53,7 +53,18 @@ if (isset($_SESSION["admin_user"])) {
                 $mail->setFrom("$email", "$Name");
                 $mail->addAddress('qqwwertyui488@gmail.com');
                 $mail->Subject = "$about";
-                $mail->Body = "$email" . "<br><br><br>" . "$msg";
+
+                $mailBody = "<html><body style='font-family: Arial, sans-serif; text-align: right;'>";
+                $mailBody .= "<h2 style='color: #333; text-align: center; border-bottom: 2px solid #333; padding-bottom: 10px;'>الدعم والمساعدة</h2>";
+                $mailBody .= "<p style='font-size: 22px; color: #333;'><strong>الاسم: </strong> <span style='color: #333;'>$Name</span></p>";
+                $mailBody .= "<p style='font-size: 22px; color: #333;'><strong><span style='font-size: 18px; color: #333;'>$email</span> : البريد الإلكتروني</strong> </p>";
+                $mailBody .= "<p style='font-size: 22px; color: #333;'><strong>عنوان الرسالة: </strong> <span style='color: #333;'>$about</span></p>";
+                $mailBody .= "<p style='font-size: 22px; color: #333;'><strong> : الرسالة</strong></p>";
+                $mailBody .= "<strong style='font-size: 22px; color: #333;'>$msg</strong>";
+                $mailBody .= "</body></html>";
+
+                $mail->Body = $mailBody;
+
 
                 if (!empty($_FILES["file"]["name"])) {
                     move_uploaded_file($_FILES["file"]["tmp_name"], $_FILES["file"]["name"]);
@@ -87,7 +98,18 @@ if (isset($_SESSION["admin_user"])) {
                         <input type="text" name="email" placeholder="حساب  Gmail" style=" margin-bottom: 10px ;" required>
                     </div>
                     <p>الرسالة</p>
-                    <textarea name="msg" id="editor1"></textarea>
+                    <textarea name="msg" id="editor"></textarea>
+                    <script src=".\assets\pg\admins\ckeditor\js\index.js"></script>
+                    <script>
+                        ClassicEditor
+                            .create(document.querySelector('#editor'), {
+                                language: 'ar',
+                                uiLanguage: 'ar'
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            });
+                    </script>
                     <div class="container-img">
                         <img id="uploaded-image" src="#" style="max-width: 100px;
                                 max-height: 100px;
@@ -114,17 +136,7 @@ if (isset($_SESSION["admin_user"])) {
             document.getElementById('success-message').style.display = 'none';
         }, 5000);
     </script>
-    <script src="../../../../../university-education-compass/assets/pg/admins/ckeditor/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('editor1');
-        CKEDITOR.editorConfig = function(config) {
-            config.language = 'ar';
-            config.uiColor = '#f7b42c';
-            config.height = 300;
-            config.toolbarCanCollapse = true;
-            config.contentsCss = 'margin-bottom: 15px;';
-        };
-    </script>
+
 </body>
 
 </html>

@@ -17,7 +17,6 @@ $row_department = $result_department->fetch_assoc();
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>بوصلة التعليم الجامعي | عرض القسم</title>
     <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css">
     <link href="./assets/fontawesome-free-6.5.1-web/css/fontawesome.css" rel="stylesheet" />
@@ -39,10 +38,10 @@ $row_department = $result_department->fetch_assoc();
                 <h2><?php echo $row_department["college_name"]; ?></h2>
                 <h2><?php echo $row_department["department_name"]; ?></h2>
                 <p class="p-dep"> معدل القبول الصباحي : <?php echo $row_department["required_GPA"]; ?><br>
-                    معدل القبول المسائي : <?php echo $row_department["evening_GPA"]; ?><br>
-                    قسط القبول المسائي : <?php echo $row_department["evening_study_fees"]; ?><br>
-                    معدل القبول الــمـوازي : <?php echo $row_department["evening_GPA"]; ?><br>
-                    قسط القبول الــمـوازي : <?php echo $row_department["evening_study_fees"]; ?></p>
+                    معدل القبول المسائي : <?php if($row_department["evening_GPA"]==50){echo "لا يوجد";}else{echo $row_department["evening_GPA"];}  ?><br>
+                    قسط القبول المسائي : <?php if($row_department["evening_study_fees"]==0){echo "لا يوجد";}else{ echo number_format($row_department["evening_study_fees"]) . " دينار عراقي";} ?>  <br>
+                    معدل القبول الــمـوازي : <?php if($row_department["parallel_GPA"]==50){echo "لا يوجد";}else{echo $row_department["parallel_GPA"]; }?><br>
+                    قسط القبول الــمـوازي : <?php if($row_department["parallel_study_fees"]==0){echo "لا يوجد";}else{echo number_format($row_department["parallel_study_fees"]). " دينار عراقي"; } ?></p>
 
 
             </div>
@@ -93,7 +92,7 @@ $row_department = $result_department->fetch_assoc();
                 <?php } ?>
             </div>
             <form action="Show_top_student">
-                <button name="id" value="<?php echo $row_top_students['Show_Inf_department']; ?>">عرض المزيد</button>
+                <button name="id" value="<?php echo $id  ?>">عرض المزيد</button>
             </form>
         </section>
         <section class="Sh-course">
@@ -108,7 +107,7 @@ $row_department = $result_department->fetch_assoc();
                 ?>
                     <div>
                         <h3>
-                            <hr>المرحلة ال<?= $i ?>
+                            <hr>المرحلة<?php if($i ==1){echo " الاولى";}elseif($i ==2){echo " الثانية";}elseif($i ==3){echo " الثالثة";}elseif($i ==4){echo " الرابعة";}elseif($i ==5){echo " الخامسة";}  ?>
                         </h3>
                         <ul class='Sh-ul'>
                             <?php
