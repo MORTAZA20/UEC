@@ -103,13 +103,16 @@ nav,
 section {
   display: block;
 }
+
 body {
   line-height: 1;
 }
+
 ol,
 ul {
   list-style: none;
 }
+
 blockquote,
 q {
   quotes: none;
@@ -122,6 +125,7 @@ q:after {
   content: "";
   content: none;
 }
+
 *,
 *::before,
 *::after {
@@ -129,36 +133,44 @@ q:after {
   padding: 0;
   box-sizing: border-box;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
 a {
   text-decoration: none;
   color: inherit;
 }
+
 button {
   border: none;
   background: none;
   font: inherit;
   cursor: pointer;
 }
+
 label,
 img {
   display: block;
 }
+
 input {
   font: inherit;
   width: 100%;
   border: none;
 }
+
 ion-icon,
 span {
   display: inline-block;
 }
+
 a {
   text-decoration: none;
 }
+
 :root {
   --primary: #111822;
   --sec: #23a0a9;
@@ -173,7 +185,7 @@ a {
   --azure: hsl(219, 77%, 60%);
   --white: hsl(0, 0%, 100%);
   --platinum: hsl(0, 0%, 91%);
-  --gainsboro:  hsl(0, 9%, 86%);
+  --gainsboro: hsl(0, 9%, 86%);
   --red-salsa: hsl(0, 77%, 60%);
   --dim-gray: hsl(0, 0%, 39%);
   --davys-gray: hsl(0, 0%, 30%);
@@ -222,9 +234,11 @@ body {
   direction: rtl;
   position: relative;
 }
+
 input {
   text-transform: none;
 }
+
 .header {
   display: flex;
   width: 100%;
@@ -238,17 +252,21 @@ input {
 .header.hide {
   display: none;
 }
+
 .header .fa-solid {
   position: absolute;
   right: 18px;
 }
+
 .header .fa-solid:hover {
   color: #a80909;
   cursor: pointer;
 }
+
 .header p {
   margin-bottom: 0;
 }
+
 .navbar {
   display: flex;
   gap: 1.5em;
@@ -262,6 +280,7 @@ input {
   top: 0;
   z-index: 990;
 }
+
 .navbar .search-from {
   width: auto;
   height: 40px;
@@ -274,12 +293,14 @@ input {
   padding: 0 10px;
   position: relative;
 }
+
 .navbar .search-from:hover {
   outline: none;
   border-color: var(--sec);
   background-color: #fff;
   box-shadow: 0 0 0 4px rgba(3, 217, 255, 0.1);
 }
+
 .navbar .search-from input {
   font-size: 1.1em;
   height: 100%;
@@ -288,6 +309,7 @@ input {
   text-transform: none;
   color: var(--primary);
 }
+
 .navbar .search-from i {
   margin-right: 10px;
 }
@@ -306,9 +328,11 @@ input {
   max-height: 200px;
   overflow-y: auto;
 }
+
 .navbar .search1 {
   display: none;
 }
+
 .navbar #search-results div {
   padding: 5px 10px;
   cursor: pointer;
@@ -316,6 +340,7 @@ input {
   border-bottom: 0.5px solid var(--primary);
   margin-bottom: 5px;
 }
+
 .navbar #search-results div p {
   margin-top: 5px;
   font-size: 12px;
@@ -337,6 +362,7 @@ input {
   align-items: center;
   margin: 0;
 }
+
 .navbar .nav-item {
   font-size: 1em;
   padding: 8px 15px;
@@ -344,10 +370,12 @@ input {
   font-weight: 700;
   cursor: pointer;
 }
+
 .navbar .nav-item:hover {
   color: var(--sec);
   border-bottom: 2px solid var(--sec);
 }
+
 .navbar .nav-menu ul[class^="menu-dep"] {
   border-radius: 5px;
   background-color: var(--primary);
@@ -360,32 +388,40 @@ input {
   transition: 0.3s all;
   z-index: 999;
 }
+
 .navbar .nav-menu ul[class^="menu-dep"] li {
   padding: 10px 15px;
   font-size: 0.8em;
   font-weight: 500;
 }
+
 .navbar .nav-menu ul[class^="menu-dep"] li:hover {
   background-color: var(--sec);
   padding: 10px 25px 10px 10px;
   cursor: pointer;
 }
+
 .active {
   position: relative;
 }
+
 .navbar .nav-menu .active:hover ul[class^="menu-dep"] {
   display: block;
 }
+
 .navbar img {
   width: 3em;
 }
+
 .control {
   padding: var(--px);
 }
+
 .control section {
   width: 100%;
   overflow: hidden;
 }
+
 .control section .pagimation_ {
   max-height: 70px;
   padding: 8px;
@@ -416,9 +452,11 @@ input {
   border-radius: 5px;
   border: 1px solid #94a3b8;
 }
+
 .control section .pagimation_ .btn-grup div[class^="swiper-btn"]:hover {
   cursor: pointer;
 }
+
 .control section .pagimation_ .btn-grup div i {
   font-size: 18px;
   color: #000;
@@ -447,11 +485,13 @@ input {
 .control section .swiper-slide {
   height: auto;
 }
+
 .control section div[class^="swiper"] .swiper-wrapper {
   display: flex;
   flex-wrap: nowrap;
   gap: 10px;
 }
+
 .control .card {
   border: 1px solid var(--gainsboro);
   border-radius: 5px;
@@ -461,7 +501,7 @@ input {
 }
 
 .control .card:hover {
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2); 
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
   background-color: rgba(255, 255, 255, 0.95);
   transform: translate(0px, -10px);
 }
@@ -469,7 +509,7 @@ input {
 .control .card img {
   padding: 10px;
   height: 250px;
-  object-fit:contain;
+  object-fit: contain;
 }
 
 .control .card .text-card {
@@ -511,43 +551,52 @@ input {
   background-color: var(--white);
   color: var(--sec);
 }
+
 footer {
   background-color: var(--primary);
   color: #fff;
 }
+
 footer .control {
   display: flex;
   gap: 1em;
   padding: 15px 20px;
   border-bottom: 1px solid var(--gainsboro);
 }
+
 footer .control .about {
   flex: 1;
   padding: 10px 15px;
   line-height: 1.5;
 }
+
 footer .control .about p {
   font-size: 20px;
 }
+
 footer .control .about h3 {
   margin-bottom: 15px;
   font-size: 1.5em;
   font-weight: 700;
   line-height: 1;
 }
+
 footer .control .feedback {
   flex: 1;
   padding: 10px 15px;
 }
+
 footer .control .feedback h3 {
   margin-bottom: 15px;
   font-size: 1.5em;
   font-weight: 700;
 }
+
 footer .control .feedback form {
   display: grid;
   gap: 10px;
 }
+
 footer .control .feedback form input {
   font-size: 18px;
   width: 100%;
@@ -557,6 +606,7 @@ footer .control .feedback form input {
   display: block;
   border-radius: 5px;
 }
+
 footer .control .feedback form input[type="submit"] {
   color: #fff;
   font-size: 18px;
@@ -567,10 +617,12 @@ footer .control .feedback form input[type="submit"] {
   padding: 10px 15px;
   cursor: pointer;
 }
+
 footer .control .feedback form input[type="submit"]:hover {
   color: #23a0a9;
   background-color: #fff;
 }
+
 footer .control .feedback form textarea {
   font-size: 18px;
   width: 100%;
@@ -581,31 +633,104 @@ footer .control .feedback form textarea {
   border-radius: 5px;
   height: 100px;
 }
+
 footer .control .contact_information {
   flex: 1;
   padding: 10px 15px;
 }
+
 footer .control .contact_information h3 {
   margin-bottom: 15px;
   font-size: 1.5em;
   font-weight: 700;
 }
+
 footer .control .contact_information .grop {
   display: grid;
   gap: 15px;
 }
+
 footer .control .contact_information .grop div {
   display: flex;
   gap: 8px;
 }
+
 footer .control .contact_information .grop div:hover {
   color: var(--sec);
   cursor: pointer;
 }
+
 footer .copy p {
   width: 100%;
   padding: 8px 20px;
   text-align: center;
+}
+
+/* ستايلات لنافذة الإشعار */
+footer .modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+footer .modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 70%;
+  border-radius: 5px;
+}
+#Modal{
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.add-to{
+  border: 1px solid #888;
+  border-radius: 5px;
+  padding: 20px;
+  background-color:#fff;
+  margin: 12% auto;
+  width: 50%;
+  box-shadow: var(--box-shadow);
+}
+footer .close ,.close-download{
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+footer .close:hover,.close-download:hover,
+footer .close:focus,.close-download:focus{
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.add-to p .add-to-btn{
+  margin: 18px 0 0;
+  padding: 8px;
+  border:1px solid #007bff;
+  color: #007bff;
+  background-color: #fff;
+  border-radius: 5px;
+}
+.add-to p .add-to-btn:hover{
+  border:1px solid #007bff;
+  color: #fff;
+  background-color: #007bff;
+  border-radius: 5px;
 }
 /* هذا الكود خاص بعرض المعلومات */
 
@@ -619,15 +744,18 @@ footer .copy p {
   justify-content: space-around;
   margin-bottom: 25px;
 }
+
 .control .Show-SE .Img-logo {
   width: 20em;
   height: 20em;
   overflow: hidden;
 }
+
 .control .Show-SE .Img-logo img {
   width: 100%;
   height: 100%;
 }
+
 .control .Show-SE .info {
   flex: 1;
   display: grid;
@@ -636,18 +764,26 @@ footer .copy p {
   height: auto;
   padding: 20px 0;
 }
+
 .control .Show-SE .info h1 {
   font-size: 2.5em;
   margin-bottom: 10px;
 }
+
 .control .Show-SE .info p,
 .control .Show-SE .info a {
   font-size: 1.5em;
   margin-bottom: 2px;
 }
+
+.control .Show-SE .info a {
+  color: #b11500;
+}
+
 .control .Show-SE .info a:hover {
   color: #23a0a9;
 }
+
 .control .Show-SE .info .p-dep {
   font-size: 1.3em;
   margin-top: 10px;
@@ -655,20 +791,25 @@ footer .copy p {
   padding: 18px 0;
   line-height: 1.2;
 }
+
 .control .Sh-des {
   border-top: 1px solid var(--gainsboro);
   margin: 25px 0;
 }
-.control .Sh-des h2,.control .Sh-des h3,.control .Sh-des h4 {
+
+.control .Sh-des h2,
+.control .Sh-des h3,
+.control .Sh-des h4 {
   margin: 25px 0 10px 0;
 }
+
 .control .Sh-des p {
-  text-align: justify; 
+  text-align: justify;
   font-size: 1.3em;
   line-height: 1.2;
 }
-/* خصائص الطلبة الاوائل */
 
+/* خصائص الطلبة الاوائل */
 header {
   display: grid;
   align-content: center;
@@ -680,74 +821,88 @@ header {
   width: 100%;
   background-color: var(--gainsboro);
 }
+
 .control .top-students {
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
   justify-content: center;
 }
+
 .control .Se-top-students {
   border-top: 1px solid var(--gainsboro);
   padding-top: 25px;
   margin: 25px 0;
   text-align: center;
 }
+
 .control .Se-top-students h2 {
   margin-bottom: 25px;
   text-align: right;
 }
+
 .control .Se-top-students form button {
   padding: 15px 25px;
   margin-top: 30px;
   background-color: var(--sec);
-  color: #fff;
+  color: #f8fafc;
   border-radius: 5px;
   border: 1px solid var(--sec);
 }
+
 .control .Se-top-students form button:hover {
-  background-color: #fff;
+  background-color: #f8fafc;
   color: var(--sec);
 }
+
 .control .Sh-course .Sh-course-Div {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 
 }
+
 .control .Sh-course {
   border-top: 1px solid var(--gainsboro);
   margin-top: 25px;
   padding-top: 25px;
 }
+
 .control .Sh-course h3 {
   display: flex;
   gap: 10px;
   align-items: center;
   margin: 20px 35px 25px 0;
 }
+
 .control .Sh-course hr {
   width: 10px;
   height: 10px;
   border-radius: 50%;
   background-color: var(--primary);
 }
+
 .control .Sh-course .Sh-ul {
   margin: 0 60px;
   border-right: 1px solid var(--gainsboro);
   padding: 0 10px;
 }
+
 .control .Sh-course .Sh-ul li {
   margin: 15px 0;
 }
+
 .control .Sh-course .Sh-ul li:hover {
   color: var(--sec);
   cursor: pointer;
 }
-.control .Sh-student-projects{
+
+.control .Sh-student-projects {
   border-top: 1px solid var(--gainsboro);
   margin-top: 25px;
   padding-top: 25px;
 }
+
 .control section .cards {
   display: flex;
   flex-wrap: wrap;
@@ -755,14 +910,17 @@ header {
   justify-content: right;
   gap: 35px 10px;
 }
+
 .control section .cards .Sh-card {
   flex: 1 0 250px;
 }
+
 @media only screen and (max-width: 1000px) {
   footer .control {
     flex-direction: column;
   }
-  footer .control > * {
+
+  footer .control>* {
     width: 100%;
     margin-bottom: 20px;
   }
@@ -783,8 +941,9 @@ header {
     width: calc(100% - 40px);
     margin-right: 10px;
   }
+
   .navbar .search1 {
     display: block;
     cursor: pointer;
-  } 
+  }
 }

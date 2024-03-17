@@ -1,9 +1,7 @@
 <nav class="navbar">
     <img src="LOGO" alt="شعار بوصلة التعليم الجامعي">
     <ul class="nav-menu">
-
         <li class="nav-item" onclick="window.open('../university-education-compass/', '_self');"><i class="fa-solid fa-house"></i> الرئيسية</li>
-
         <li class="nav-item active">الجامعات
             <i class="fa-solid fa-caret-down"></i>
             <ul class="menu-dep-universities">
@@ -32,7 +30,7 @@
                 <?php } ?>
             </ul>
         </li>
-
+        
         <li class="nav-item active">الاقسام العلمية
             <i class="fa-solid fa-caret-down"></i>
             <ul class="menu-dep-departments">

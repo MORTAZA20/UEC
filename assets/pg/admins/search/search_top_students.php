@@ -34,24 +34,24 @@ $result = $conn->query($sql);
 while ($row = $result->fetch_assoc()) {
 ?>
         <tr>
-                        <td><?php echo $row["student_id"] ?></td>
-                        <td><?php echo $row["department_name"] ?></td>
-                        <td>
-                                <?php
-                                if (!empty($row["top_students_img_path"])) {
-                                ?>
-                                        <img style="pointer-events: none;" src="./assets/pg/admins/<?php echo $row["top_students_img_path"]; ?>">
-                                <?php
-                                } else {
-                                ?>
-                                        <img style="pointer-events: none;" src="./assets/pg/admins/img/profile-avatar.png">
-                                <?php
-                                }
-                                ?>
-                        </td>
-                        <td><?php echo $row["student_name"] ?></td>
-                        <td><?php echo $row["Cumulative_Rating"] ?></td>
-                        <td><?php echo $row["Graduation_Year"] ?></td>
+                <td><?php echo $row["student_id"] ?></td>
+                <td><?php echo $row["department_name"] ?></td>
+                <td>
+                        <?php
+                        if (!empty($row["top_students_img_path"])) {
+                        ?>
+                                <img style="pointer-events: none;" src="./assets/pg/admins/<?php echo $row["top_students_img_path"]; ?>">
+                        <?php
+                        } else {
+                        ?>
+                                <img style="pointer-events: none;" src="./assets/pg/admins/img/profile-avatar.png">
+                        <?php
+                        }
+                        ?>
+                </td>
+                <td><?php echo $row["student_name"] ?></td>
+                <td><?php echo $row["Cumulative_Rating"] ?></td>
+                <td><?php echo $row["Graduation_Year"] ?></td>
                 <td data-title="التحكم" class="text-center">
                         <?php if (isset($_SESSION["admin_user"])) {
                                 if ($_SESSION["admin_user"] != "college") {

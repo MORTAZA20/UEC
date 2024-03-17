@@ -23,10 +23,10 @@ while ($row = $result->fetch_assoc()) {
                 <td><?php echo $row["university_location"]?></td>
                 <td style="text-align: center;"><a href="<?php echo $row["university_website"]?>" target="_blank" class="visit-btn">زيارة الموقع</a></td>
         </div>
-                <td data-title="التحكم" class="text-center" style="text-align: center;">
+                <td data-title="التحكم"  style="text-align: center;">
                         <div class="control-buttons">
                                 <form id="EditForm" action="edit_universitys" method="post">
-                                        <input type="hidden" name="edit_id" value="<?php echo $row['university_id'];?>">
+                                        <input type="hidden" name="edit_id" value="<?php echo $row['university_id'];?>" style="display: none;">
                                         <input type="submit" name="btn_edit" value="تعديل" class="edit-btn">
                                 </form>
                                 
@@ -34,7 +34,7 @@ while ($row = $result->fetch_assoc()) {
                                 if ($_SESSION["admin_user"] == "Admin") {
                                 ?>
                                 <form id="deleteForm" action="delete_universities" method="post" >
-                                        <input type="hidden" name="del_id" value="<?php echo $row['university_id'];?>">
+                                        <input type="hidden" name="del_id" value="<?php echo $row['university_id'];?>" style="display: none;">
                                         <input type="submit" name="btn_delete" value="حذف" class="delete-btn">
                                 </form>  
                                 <?php 

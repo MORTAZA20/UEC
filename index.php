@@ -11,6 +11,8 @@ require_once("assets/pg/admins/inc/conn.inc.php");
     <link href="./assets/fontawesome-free-6.5.1-web/css/fontawesome.css" rel="stylesheet" />
     <link href="./assets/fontawesome-free-6.5.1-web/css/brands.css" rel="stylesheet" />
     <link href="./assets/fontawesome-free-6.5.1-web/css/solid.css" rel="stylesheet" />
+    <link rel="icon" href="LOGO" type="image/png" sizes="16x16">
+    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="assets/css/styleIndex.css">
 </head>
 
@@ -20,6 +22,73 @@ require_once("assets/pg/admins/inc/conn.inc.php");
         <p>07839985872</p>
     </div>
     <?php include "assets/pg/Navbar_Index.php"; ?>
+
+    <div id="Modal">
+        <div class="add-to">
+            <span class="close-download">&times;</span>
+            <p style="text-align: center; font-size: 24px; font-weight: bold; color: #23a0a9;">
+                هل تريد تنزيل الموقع على شكل تطبيق؟
+            </p>
+            <p style="text-align: center; font-size: 18px; color: #333; margin-top: 10px;">
+                <button class="add-to-btn">نعم تنزيل</button>
+            </p>
+        </div>
+    </div>
+    <script>
+        var Modal = document.getElementById("Modal");
+        var Close = Modal.getElementsByClassName("close-download")[0];
+        Close.onclick = function() {
+            Modal.style.display = "none";
+        }
+    </script>
+
+    <script type="text/javascript">
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                    // Registration was successful
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function(err) {
+                    // registration failed :(
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+
+        let deferredPrompt;
+        var div = document.querySelector('.add-to');
+        var Modal = document.getElementById("Modal");
+        var button = document.querySelector('.add-to-btn');
+        div.style.display = 'none';
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent Chrome 67 and earlier from automatically showing the prompt
+            e.preventDefault();
+            // Stash the event so it can be triggered later.
+            deferredPrompt = e;
+            div.style.display = 'block';
+            button.addEventListener('click', (e) => {
+                // hide our user interface that shows our A2HS button
+                div.style.display = 'none';
+                Modal.style.display = 'none';
+
+                // Show the prompt
+                deferredPrompt.prompt();
+                // Wait for the user to respond to the prompt
+                deferredPrompt.userChoice
+                    .then((choiceResult) => {
+                        if (choiceResult.outcome === 'accepted') {
+                            console.log('User accepted the A2HS prompt');
+                        } else {
+                            console.log('User dismissed the A2HS prompt');
+                        }
+                        deferredPrompt = null;
+                    });
+            });
+        });
+    </script>
+
+
     <div class="control">
         <section>
             <div class="pagimation_">
@@ -127,37 +196,37 @@ require_once("assets/pg/admins/inc/conn.inc.php");
 
     <script>
         window.onload = function() {
-           
-                new Swiper('.swiper-universities', {
 
-                    speed: 400,
-                    spaceBetween: 10,
-                    slidesPerView:'auto',
-                    navigation: {
-                        nextEl: '.swiper-btn-next-universities',
-                        prevEl: '.swiper-btn-prev-universities',
-                    },
-                });
-                new Swiper('.swiper-colleges', {
-                    speed: 400,
-                    spaceBetween: 10,
-                    slidesPerView: 'auto',
-                    navigation: {
-                        nextEl: '.swiper-btn-next-colleges',
-                        prevEl: '.swiper-btn-prev-colleges',
-                    },
-                });
-                new Swiper('.swiper-departments', {
- 
-                    speed: 400,
-                    spaceBetween: 10,
-                    slidesPerView:'auto',
-                    navigation: {
-                        nextEl: '.swiper-btn-next-departments',
-                        prevEl: '.swiper-btn-prev-departments',
-                    },
-                });
-          
+            new Swiper('.swiper-universities', {
+
+                speed: 400,
+                spaceBetween: 10,
+                slidesPerView: 'auto',
+                navigation: {
+                    nextEl: '.swiper-btn-next-universities',
+                    prevEl: '.swiper-btn-prev-universities',
+                },
+            });
+            new Swiper('.swiper-colleges', {
+                speed: 400,
+                spaceBetween: 10,
+                slidesPerView: 'auto',
+                navigation: {
+                    nextEl: '.swiper-btn-next-colleges',
+                    prevEl: '.swiper-btn-prev-colleges',
+                },
+            });
+            new Swiper('.swiper-departments', {
+
+                speed: 400,
+                spaceBetween: 10,
+                slidesPerView: 'auto',
+                navigation: {
+                    nextEl: '.swiper-btn-next-departments',
+                    prevEl: '.swiper-btn-prev-departments',
+                },
+            });
+
         };
     </script>
     <script src="./assets/js/swiper-bundle.min.js"></script>

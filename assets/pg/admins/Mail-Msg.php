@@ -9,10 +9,11 @@ use PHPMailer\PHPMailer\Exception;
 require 'mailer/autoload.php';
 
 // Instantiation and passing `true` enables exceptions
-$mail = new PHPMailer();
-
-    //Server settings
- //   $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+$mail = new PHPMailer(true); // Create a new PHPMailer instance
+try{
+    
+  //Server settings
+ //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
     $mail->isSMTP();                                            // Send using SMTP
     $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
@@ -25,3 +26,7 @@ $mail = new PHPMailer();
 // Content
 $mail->isHTML(true);  
 $mail->CharSet = "UTF-8";
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
+?>

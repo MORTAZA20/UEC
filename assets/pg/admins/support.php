@@ -48,7 +48,7 @@ if (isset($_SESSION["admin_user"])) {
                 $msg   = $_POST["msg"];
                 $Name  = $_POST["Name"];
 
-                require_once "mail.php";
+                include 'Mail-Msg.php';
 
                 $mail->setFrom("$email", "$Name");
                 $mail->addAddress('qqwwertyui488@gmail.com');

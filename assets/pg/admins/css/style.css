@@ -271,15 +271,14 @@ tbody tr td {
 }
 
 tbody tr td .visit-btn {
-
     display: inline-block;
-   justify-items: center;
+    justify-items: center;
     padding: 10px 20px;
     font-size: 16px;
     text-align: center;
     text-decoration: none;
-    color: #fff;
-    background-color: #007bff;
+    color: #007bff;
+    background-color: #efefef;
     border-radius: 5px;
     border:1px solid #007bff;
     cursor: pointer;
@@ -287,8 +286,8 @@ tbody tr td .visit-btn {
 }
 
 tbody tr td .visit-btn:hover {
-    background-color: #fff;
-    color: #007bff;
+    background-color: #007bff;
+    color: #efefef;
 }
 
 tbody tr td img {
@@ -299,8 +298,6 @@ tbody tr td img {
     width: auto;
     height: auto;
 }
-
-
 
 .container-form {
     margin: 10px 20px;
@@ -408,9 +405,7 @@ a {
 input:hover,
 input:focus {
     outline: none;
-    border-color: #23a0a9;
     background-color: #23a0a9;
-    box-shadow: 0 0 0 1px #23a0a9;
 }
 
 
@@ -485,36 +480,41 @@ input:focus {
     transition: background-color 0.3s;
     font-family: 'Tajawal', sans-serif;
 }
-
+#EditForm ,#deleteForm ,#ShowForm{
+    margin-bottom: 0;
+}
 .edit-btn {
-    background-color: #23a0a9;
-    color: #fff;
+    background-color: #efefef;
+    color: #23a0a9;
+    border: 1px solid #23a0a9;
 }
 
 .edit-btn:hover {
-    background-color: #fff;
-    color: #23a0a9;
+    background-color: #23a0a9;
+    color: #efefef;
 }
 
 .Show-btn {
-    background-color: #2e5383;
-    color: #fff;
+    background-color: #efefef;
+    color: #2e5383;
+    border: 1px solid #2e5383;
 }
 
 .Show-btn:hover {
-    background-color: #fff;
-    color: #2e5383;
+    background-color: #2e5383;
+    color: #efefef;
 }
 
 .delete-btn {
-    background-color: rgb(175, 29, 21);
-    color: #fff;
+    color: rgb(175, 29, 21);
+    background-color: #efefef;
+    border: 1px solid rgb(175, 29, 21);
 }
 
 .delete-btn:hover {
-    color: rgb(175, 29, 21);
-    background-color: #fff;
 
+    background-color: rgb(175, 29, 21);
+    color: #efefef;
 }
 
 
@@ -522,14 +522,6 @@ input:focus {
 #college_select {
     display: none;
 }
-
-.truncated-text td {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-
 
 .content {
     display: flex;
@@ -644,3 +636,4 @@ input:focus {
 :checked+.toggleButton__body:after {
     left: calc(2.5em + 2px);
 }
+

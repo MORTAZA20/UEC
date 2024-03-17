@@ -2,7 +2,7 @@
 if (isset($_POST['search'])) {
     require_once("admins/inc/conn.inc.php");
     $search = mysqli_real_escape_string($conn, $_POST['search']);
-    if (is_numeric($search)) {
+    if (is_numeric($search) || strpos($search, "قسم") !== false) {
 
         $sql_search = "SELECT d.*, c.college_name, u.university_name
         FROM departments d

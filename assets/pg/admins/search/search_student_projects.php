@@ -48,7 +48,7 @@ while ($row = $result->fetch_assoc()) {
             <td><?php echo $row["student_name"] ?></td>
             <td><?php echo $row["project_supervisor"] ?></td>
             <td><img style="pointer-events: none;" src="./assets/pg/admins/<?php echo $row["student_projects_img_path"]; ?>">
-            <td class="truncated-text"><?php
+            <td><?php
                 echo $row["project_description"];
                 ?></td>
 

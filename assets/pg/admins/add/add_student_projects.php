@@ -73,8 +73,8 @@ if (isset($_SESSION["admin_user"])) {
                         $file_name = $_FILES["student_projects_images"]["name"];
                         move_uploaded_file($student_projects_images, $student_projects_folder . '/' . $file_name);
                         $image_path = 'student_projects_img' . '/' . $file_name;
-                        $sql = "INSERT INTO student_projects (project_id  , department_id , student_name, project_name, project_supervisor,project_description,student_projects_img_path) 
-                                    VALUES ('$project_id ', '$department_id', '$student_name', '$project_name', '$project_supervisor','$project_description','$image_path')";
+                        $sql = "INSERT INTO student_projects (department_id , student_name, project_name, project_supervisor,project_description,student_projects_img_path) 
+                                    VALUES ('$department_id', '$student_name', '$project_name', '$project_supervisor','$project_description','$image_path')";
                         $result3 = $conn->query($sql);
                         if ($result3) {
                             echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>تم إضافة المشروع بنجاح</div>";

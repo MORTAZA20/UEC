@@ -63,7 +63,7 @@ if (isset($_POST["sub_log"])) {
                   $random_code = generateRandomCode();
                   $Gmail = $row['Gmail'];
 
-                  require_once 'C:/xampp/htdocs/university-education-compass/assets/pg/admins/Mail-2FA.php';
+                  require_once ("Mail-Msg.php");
                   
                   $mail->setFrom("qqwwertyui488@gmail.com" ,"University Education Compass");
                   $mail->addAddress($Gmail);
