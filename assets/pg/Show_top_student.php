@@ -6,7 +6,8 @@ require_once("admins/inc/conn.inc.php");
 
 <head>
     <meta charset="UTF-8">
-    <title>بوصلة التعليم الجامعي | الرئيسية</title>
+    <title>بوصلة التعليم الجامعي | الطلبة الاوائل</title>
+    <link rel="icon" href="LOGO" type="image/png" sizes="16x16">
     <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css">
     <link href="./assets/fontawesome-free-6.5.1-web/css/fontawesome.css" rel="stylesheet" />
     <link href="./assets/fontawesome-free-6.5.1-web/css/brands.css" rel="stylesheet" />
@@ -31,7 +32,7 @@ require_once("admins/inc/conn.inc.php");
         <section class="top-students">
             <?php
             if (isset($_GET['id'])) {
-                $id = 1;
+                $id = $_GET['id'];
                 $sql_top_students = "SELECT top_students.*, departments.department_name FROM top_students
                                             LEFT JOIN departments ON top_students.department_id = departments.department_id WHERE top_students.department_id = '$id'";
             } else {

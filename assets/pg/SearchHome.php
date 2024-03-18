@@ -8,10 +8,11 @@ if (isset($_POST['search'])) {
         FROM departments d
         LEFT JOIN colleges c ON d.college_id = c.college_id
         LEFT JOIN universities u ON c.university_id = u.university_id
-        WHERE d.required_GPA LIKE '%$search%' 
+        WHERE d.department_name LIKE '%$search%' 
+        OR d.required_GPA LIKE '%$search%' 
         OR d.evening_GPA LIKE '%$search%' 
         OR d.parallel_GPA LIKE '%$search%'";
-    } elseif (strpos($search, "كلية") !== false || strpos($search, "الكلية") !== false|| strpos($search, "معهد") !== false || strpos($search, "المعهد") !== false) {
+    } elseif (strpos($search, "كلية") !== false || strpos($search, "الكلية") !== false || strpos($search, "معهد") !== false || strpos($search, "المعهد") !== false) {
         $sql_search = "SELECT colleges.*, universities.university_name FROM colleges
         LEFT JOIN universities 
         ON colleges.university_id = universities.university_id
@@ -22,7 +23,7 @@ if (isset($_POST['search'])) {
     $result_search = $conn->query($sql_search);
     if ($result_search->num_rows > 0) {
         while ($row_search = $result_search->fetch_assoc()) {
-            if (is_numeric($search)) {
+            if (is_numeric($search) || strpos($search, "قسم") !== false) {
 ?>
                 <div onclick="window.open('Show_Inf_department?id=<?php echo $row_search['department_id']; ?>', '_self');">
                     <?php echo $row_search['university_name'] . " - " . $row_search['college_name'] . " - " . $row_search['department_name']; ?>
@@ -32,7 +33,7 @@ if (isset($_POST['search'])) {
                 </div>
 
             <?php
-            } elseif (strpos($search, "كلية") !== false || strpos($search, "معهد") !== false || strpos($search, "المعهد") !== false)  {
+            } elseif (strpos($search, "كلية") !== false || strpos($search, "الكلية") || strpos($search, "معهد") !== false || strpos($search, "المعهد") !== false) {
             ?>
                 <div onclick="window.open('Show_Inf_college?id=<?php echo $row_search['college_id']; ?>', '_self');">
                     <?php echo $row_search['university_name'] . " - " . $row_search['college_name']; ?>

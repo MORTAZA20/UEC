@@ -46,7 +46,9 @@ input {
     padding: 8px 10px;
     border-radius: 5px;
     margin-left: 20px;
-    border-radius: 5px;
+    border-radius: 5px;  
+    border: 0.1rem solid #af3602;
+
 }
 
 .menu-item:hover {
@@ -54,7 +56,6 @@ input {
     background-color: #192330;
     cursor: pointer;
     color: #af3602;
-    border: 0.1rem solid #af3602;
 }
 
 .content {
@@ -280,7 +281,7 @@ tbody tr td .visit-btn {
     color: #007bff;
     background-color: #efefef;
     border-radius: 5px;
-    border:1px solid #007bff;
+    border: 1px solid #007bff;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -480,9 +481,13 @@ input:focus {
     transition: background-color 0.3s;
     font-family: 'Tajawal', sans-serif;
 }
-#EditForm ,#deleteForm ,#ShowForm{
+
+#EditForm,
+#deleteForm,
+#ShowForm {
     margin-bottom: 0;
 }
+
 .edit-btn {
     background-color: #efefef;
     color: #23a0a9;
@@ -636,4 +641,3 @@ input:focus {
 :checked+.toggleButton__body:after {
     left: calc(2.5em + 2px);
 }
-
