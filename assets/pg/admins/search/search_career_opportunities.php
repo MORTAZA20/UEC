@@ -53,26 +53,29 @@ while ($row = $result->fetch_assoc()) {
                         <td><?php echo $row["department_name"] ?></td>
                         <td><?php echo $row["job_title"] ?></td>
                         <td><?php echo $row["salary_range"] ?></td>
-                        <td><?php echo $row["job_description"] ?></td>
                 </div>
                 <td data-title="التحكم" class="text-center">
-                        <?php if (isset($_SESSION["admin_user"])) {
-                                if ($_SESSION["admin_user"] != "college") {
-                        ?>
                         <div class="control-buttons">
-                                <form id="EditForm" action="edit_career_opportunities" method="post">
-                                        <input type="hidden" name="edit_id" value="<?php echo $row['opportunity_id']; ?>">
-                                        <input type="submit" name="btn_edit" value="تعديل" class="edit-btn">
+                                <form id="ShowForm" action="ShowCareerPpportunities" method="post">
+                                        <input type="hidden" name="Show_id" value="<?php echo $row['opportunity_id']; ?>">
+                                        <input type="submit" name="btn_Show" value="عرض كل البيانات" class="Show-btn">
                                 </form>
-                                <form id="deleteForm" action="delete_career_opportunities" method="post">
-                                        <input type="hidden" name="del_id" value="<?php echo $row['opportunity_id']; ?>">
-                                        <input type="submit" name="btn_delete" value="حذف" class="delete-btn">
-                                </form>
+                                <?php if (isset($_SESSION["admin_user"])) {
+                                        if ($_SESSION["admin_user"] != "college") {
+                                ?>
+                                                <form id="EditForm" action="edit_career_opportunities" method="post">
+                                                        <input type="hidden" name="edit_id" value="<?php echo $row['opportunity_id']; ?>">
+                                                        <input type="submit" name="btn_edit" value="تعديل" class="edit-btn">
+                                                </form>
+                                                <form id="deleteForm" action="delete_career_opportunities" method="post">
+                                                        <input type="hidden" name="del_id" value="<?php echo $row['opportunity_id']; ?>">
+                                                        <input type="submit" name="btn_delete" value="حذف" class="delete-btn">
+                                                </form>
                         </div>
-                        <?php
+        <?php
+                                        }
                                 }
-                        }
-                        ?>
+        ?>
                 </td>
         </tr>
 <?php

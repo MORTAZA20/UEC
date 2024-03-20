@@ -39,10 +39,26 @@ $row_department = $result_department->fetch_assoc();
                 <h2><?php echo $row_department["college_name"]; ?></h2>
                 <h2><?php echo $row_department["department_name"]; ?></h2>
                 <p class="p-dep"> معدل القبول الصباحي : <?php echo $row_department["required_GPA"]; ?><br>
-                    معدل القبول المسائي : <?php if($row_department["evening_GPA"]==50){echo "لا يوجد";}else{echo $row_department["evening_GPA"];}  ?><br>
-                    قسط القبول المسائي : <?php if($row_department["evening_study_fees"]==0){echo "لا يوجد";}else{ echo number_format($row_department["evening_study_fees"]) . " دينار عراقي";} ?>  <br>
-                    معدل القبول الــمـوازي : <?php if($row_department["parallel_GPA"]==50){echo "لا يوجد";}else{echo $row_department["parallel_GPA"]; }?><br>
-                    قسط القبول الــمـوازي : <?php if($row_department["parallel_study_fees"]==0){echo "لا يوجد";}else{echo number_format($row_department["parallel_study_fees"]). " دينار عراقي"; } ?></p>
+                    معدل القبول المسائي : <?php if ($row_department["evening_GPA"] == 50) {
+                                                echo "لا يوجد";
+                                            } else {
+                                                echo $row_department["evening_GPA"];
+                                            }  ?><br>
+                    قسط القبول المسائي : <?php if ($row_department["evening_study_fees"] == 0) {
+                                                echo "لا يوجد";
+                                            } else {
+                                                echo number_format($row_department["evening_study_fees"]) . " دينار عراقي";
+                                            } ?> <br>
+                    معدل القبول الــمـوازي : <?php if ($row_department["parallel_GPA"] == 50) {
+                                                    echo "لا يوجد";
+                                                } else {
+                                                    echo $row_department["parallel_GPA"];
+                                                } ?><br>
+                    قسط القبول الــمـوازي : <?php if ($row_department["parallel_study_fees"] == 0) {
+                                                echo "لا يوجد";
+                                            } else {
+                                                echo number_format($row_department["parallel_study_fees"]) . " دينار عراقي";
+                                            } ?></p>
 
 
             </div>
@@ -104,31 +120,53 @@ $row_department = $result_department->fetch_assoc();
             <h2>المواد الدراسية</h2>
             <div class="Sh-course-Div">
                 <?php
-                for ($i = 1; $i <= 5; $i++) {
+                $available_stages = array();
+                while ($row_courses = $result_courses->fetch_assoc()) {
+                    $stage = $row_courses["course_stage"];
+                    if (!in_array($stage, $available_stages)) {
+                        $available_stages[] = $stage;
+                    }
+                }
+
+                for ($i = 1; $i <= 6; $i++) {
+                    if (in_array($i, $available_stages)) { 
                 ?>
-                    <div>
-                        <h3>
-                            <hr>المرحلة<?php if($i ==1){echo " الاولى";}elseif($i ==2){echo " الثانية";}elseif($i ==3){echo " الثالثة";}elseif($i ==4){echo " الرابعة";}elseif($i ==5){echo " الخامسة";}  ?>
-                        </h3>
-                        <ul class='Sh-ul'>
-                            <?php
-                            mysqli_data_seek($result_courses, 0);
-                            while ($row_courses = $result_courses->fetch_assoc()) {
-                                if ($row_courses["course_stage"] == $i) {
-                            ?>
-                                    <li onclick="window.open('Show_course?id=<?= $row_courses['course_id']; ?>', '_self');"><?= $row_courses['course_name']; ?></li>
-                            <?php
+                        <div>
+                            <h3>
+                                <hr>المرحلة <?php
+                                            if ($i == 1) {
+                                                echo "الاولى";
+                                            } elseif ($i == 2) {
+                                                echo "الثانية";
+                                            } elseif ($i == 3) {
+                                                echo "الثالثة";
+                                            } elseif ($i == 4) {
+                                                echo "الرابعة";
+                                            } elseif ($i == 5) {
+                                                echo "الخامسة";
+                                            } elseif ($i == 6) {
+                                                echo "السادسة";
+                                            }
+                                            ?>
+                            </h3>
+                            <ul class='Sh-ul'>
+                                <?php
+                                mysqli_data_seek($result_courses, 0);
+                                while ($row_courses = $result_courses->fetch_assoc()) {
+                                    if ($row_courses["course_stage"] == $i) {
+                                ?>
+                                        <li onclick="window.open('Show_course?id=<?= $row_courses['course_id']; ?>', '_self');"><?= $row_courses['course_name']; ?></li>
+                                <?php
+                                    }
                                 }
-                            }
-                            ?>
-                        </ul>
-                    </div>
+                                ?>
+                            </ul>
+                        </div>
                 <?php
+                    }
                 }
                 ?>
             </div>
-
-
         </section>
         <br>
         <section class="Sh-student-projects">

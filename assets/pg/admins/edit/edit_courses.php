@@ -120,12 +120,12 @@ if (isset($_SESSION["admin_user"])) {
                                                         } else {
                                                             echo $rec['university_id'];
                                                         } ?>" <?php
-                                                                                if (isset($_POST['edit_id'])) {
-                                                                                    if ($rec['university_id'] == $row['university_id']) {
-                                                                                        echo  "selected";
-                                                                                    }
-                                                                                }
-                                                                                ?>>
+                                                                if (isset($_POST['edit_id'])) {
+                                                                    if ($rec['university_id'] == $row['university_id']) {
+                                                                        echo  "selected";
+                                                                    }
+                                                                }
+                                                                ?>>
                                             <?php if (!isset($_POST['edit_id'])) {
                                                 echo "";
                                             } else {
@@ -185,12 +185,12 @@ if (isset($_SESSION["admin_user"])) {
                                                                                                     echo $row['course_name'];
                                                                                                 } ?>" required>
                         <select id="fruit" name="course_stage" class="fruit" required>
-                            <option value="1">المرحلة الاولى</option>
-                            <option value="2">المرحلة الثانية</option>
-                            <option value="3">المرحلة الثالثة</option>
-                            <option value="4">المرحلة الرابعة</option>
-                            <option value="5">المرحلة الخامسة</option>
-
+                            <option value="1" <?php if ($row['course_stage'] == 1) echo "selected"; ?>>المرحلة الاولى</option>
+                            <option value="2" <?php if ($row['course_stage'] == 2) echo "selected"; ?>>المرحلة الثانية</option>
+                            <option value="3" <?php if ($row['course_stage'] == 3) echo "selected"; ?>>المرحلة الثالثة</option>
+                            <option value="4" <?php if ($row['course_stage'] == 4) echo "selected"; ?>>المرحلة الرابعة</option>
+                            <option value="5" <?php if ($row['course_stage'] == 5) echo "selected"; ?>>المرحلة الخامسة</option>
+                            <option value="6" <?php if ($row['course_stage'] == 6) echo "selected"; ?>>المرحلة السادسة</option>
                         </select>
 
                     </div>

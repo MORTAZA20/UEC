@@ -72,7 +72,7 @@ if (isset($_POST["sub_log"])) {
                     <div style="background-color: #f4f4f4; padding: 20px;">
                         <div style="background-color: #fff; padding: 20px; border-radius: 5px;">
                             <h1 style="color: #333;text-align: center;">رسالة تأكيد تسجيل الدخول</h1>
-                            <h2 style="color: #333; text-align: center;"><span style="color: #23a0a9; display: inline-block;">' . $random_code . '</span> : رمز التحقق</h2>
+                            <h2 style="color: #333; text-align: center;"><span style="color: #23a0a9; display: inline-block; text-transform: none;">' . $random_code . '</span> : رمز التحقق</h2>
                             <h3 style="text-align: right;">.من فضلك، قم بإدخال هذا الرمز لتأكيد تسجيل الدخول</h3>
                             <h4 style="text-align: right;"> ،شكرًا لك
                             <br> 

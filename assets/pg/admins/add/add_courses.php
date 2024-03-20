@@ -108,6 +108,8 @@ if (isset($_SESSION["admin_user"])) {
                             <option value="2">المرحلة الثانية</option>
                             <option value="3">المرحلة الثالثة</option>
                             <option value="4">المرحلة الرابعة</option>
+                            <option value="5">المرحلة الخامسة</option>
+                            <option value="6">المرحلة السادسة</option>
                         </select>
 
                     </div>

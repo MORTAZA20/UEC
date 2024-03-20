@@ -39,18 +39,22 @@ $result = $conn->query($sql);
 while ($row = $result->fetch_assoc()) {
 ?>
     <tr style="height: 100px;">
-        
-            <td><?php echo $row["course_id"] ?></td>
-            <td><?php echo $row["department_name"] ?></td>
-            <td><?php echo $row["course_name"] ?></td>
-            <td><?php echo $row["course_stage"] ?></td>
-            <td><?php echo $row["course_description"] ?></td>
-       
+
+        <td><?php echo $row["course_id"] ?></td>
+        <td><?php echo $row["course_name"] ?></td>
+        <td><?php if($row['course_stage']==1){echo "الاولى";}elseif($row['course_stage']==2){echo "الثانية";}elseif($row['course_stage']==3){echo "الثالثة";}elseif($row['course_stage']==4){echo "الرابعة";}elseif($row['course_stage']==5){echo "الخامسة";}elseif($row['course_stage']==6){echo "السادسة";} ?></td>
+        <td><?php echo $row["department_name"] ?></td>
+
         <td data-title="التحكم" class="text-center">
-            <?php if (isset($_SESSION["admin_user"])) {
-                if ($_SESSION["admin_user"] != "college") {
-            ?>
-                    <div class="control-buttons">
+            <div class="control-buttons">
+                <form id="ShowForm" action="ShowCourses" method="post">
+                    <input type="hidden" name="Show_id" value="<?php echo $row['course_id']; ?>">
+                    <input type="submit" name="btn_Show" value="عرض كل البيانات" class="Show-btn">
+                </form>
+                <?php if (isset($_SESSION["admin_user"])) {
+                    if ($_SESSION["admin_user"] != "college") {
+                ?>
+
                         <form id="EditForm" action="edit_courses" method="post">
                             <input type="hidden" name="edit_id" value="<?php echo $row['course_id']; ?>">
                             <input type="submit" name="btn_edit" value="تعديل" class="edit-btn">
@@ -59,11 +63,11 @@ while ($row = $result->fetch_assoc()) {
                             <input type="hidden" name="del_id" value="<?php echo $row['course_id']; ?>">
                             <input type="submit" name="btn_delete" value="حذف" class="delete-btn">
                         </form>
-                    </div>
-            <?php
+            </div>
+    <?php
+                    }
                 }
-            }
-            ?>
+    ?>
         </td>
     </tr>
 <?php

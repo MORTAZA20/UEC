@@ -73,7 +73,6 @@ if (isset($_SESSION["admin_user"])) {
                         <th class="text-right" width="10%">القسم</th>
                         <th class="text-right" width="10%">العنوان الوظيفي</th>
                         <th class="text-right" width="10%">مقدار الراتب</th>
-                        <th class="text-right" width="15%">نبذه عن الوظيفة</th>
                         <th class="text-right" width="20%">التحكم</th>
                     </tr>
                 </thead>

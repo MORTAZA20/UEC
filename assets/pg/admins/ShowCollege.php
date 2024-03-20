@@ -5,7 +5,6 @@ require_once("inc/conn.inc.php");
 if (isset($_SESSION["admin_user"])) {
 if ($_SESSION["admin_user"] != "Admin" 
     && $_SESSION["admin_user"] != "SubAdmin"
-    && $_SESSION["admin_user"] != "department"
     && $_SESSION["admin_user"] != "college") {
     header("Location: login");
     exit();
@@ -24,7 +23,7 @@ if ($_SESSION["admin_user"] != "Admin"
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>بوصلة التعليم الجامعي | لوحة التحكم</title>
+    <title>بوصلة التعليم الجامعي | معلومات الكلية </title>
 
     <link rel="stylesheet" href="style">
 </head>
@@ -48,7 +47,7 @@ if ($_SESSION["admin_user"] != "Admin"
         تعديل معلومات الكلية</button>
 
         <?php } ?>
-        <h2 style='text-align: center;font-size: 32px; font-weight: 550;'>معلومات القسم</h2>
+        <h2 style='text-align: center;font-size: 32px; font-weight: 550;'>معلومات الكلية</h2>
             
         
                 <div style='margin-top :50px;' class="path-bar">

@@ -71,11 +71,10 @@ if (isset($_SESSION["admin_user"])) {
                 <thead>
                     <tr>
                         <th width="10%">معرف المادة</th>
-                        <th class="text-right" width="10%">القسم</th>
                         <th class="text-right" width="10%">اسم المادة</th>
                         <th class="text-right" width="10%">المرحلة</th>
-                        <th class="text-right" width="20%">نبذة عن المادة</th>
-                        <th class="text-right" width="20%">التحكم</th>
+                        <th class="text-right" width="10%">القسم</th>
+                        <th class="text-right" width="30%">التحكم</th>
                     </tr>
                 </thead>
                 <tbody>

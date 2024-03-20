@@ -22,7 +22,7 @@ if (isset($_SESSION["admin_user"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوصلة التعليم الجامعي | لوحة التحكم</title>
+    <title>بوصلة التعليم الجامعي |  معلومات القسم</title>
     <link rel="stylesheet" href="style">
 </head>
 <body>
