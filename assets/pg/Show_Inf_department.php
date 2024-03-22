@@ -17,6 +17,7 @@ $row_department = $result_department->fetch_assoc();
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>بوصلة التعليم الجامعي | القسم</title>
     <link rel="icon" href="LOGO" type="image/png" sizes="16x16">
     <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css">
@@ -129,7 +130,7 @@ $row_department = $result_department->fetch_assoc();
                 }
 
                 for ($i = 1; $i <= 6; $i++) {
-                    if (in_array($i, $available_stages)) { 
+                    if (in_array($i, $available_stages)) {
                 ?>
                         <div>
                             <h3>

@@ -5,7 +5,7 @@ require_once("assets/pg/admins/inc/conn.inc.php");
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+   
     <title>بوصلة التعليم الجامعي | الرئيسية</title>
     <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css">
     <link href="./assets/fontawesome-free-6.5.1-web/css/fontawesome.css" rel="stylesheet" />
@@ -13,63 +13,61 @@ require_once("assets/pg/admins/inc/conn.inc.php");
     <link href="./assets/fontawesome-free-6.5.1-web/css/solid.css" rel="stylesheet" />
     <link rel="icon" href="LOGO" type="image/png" sizes="16x16">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="assets/css/styleIndex.css">
+    <link rel="stylesheet" href="assets/css/styleIndex.css"> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <style>
- 
+        .sliders-ads {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    .sliders-ads {
-      text-align: center;
-      font-size: 18px;
-      background: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+        .sliders-ads img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-    .sliders-ads img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+        .autoplay-progress {
+            position: absolute;
+            right: 16px;
+            bottom: 16px;
+            z-index: 10;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--swiper-theme-color);
+        }
 
-    .autoplay-progress {
-      position: absolute;
-      right: 16px;
-      bottom: 16px;
-      z-index: 10;
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      color: var(--swiper-theme-color);
-    }
-
-    .autoplay-progress svg {
-      --progress: 0;
-      position: absolute;
-      left: 0;
-      top: 0px;
-      z-index: 10;
-      width: 100%;
-      height: 100%;
-      stroke-width: 4px;
-      stroke: var(--swiper-theme-color);
-      fill: none;
-      stroke-dashoffset: calc(125.6 * (1 - var(--progress)));
-      stroke-dasharray: 125.6;
-      transform: rotate(-90deg);
-    }
-  </style>
+        .autoplay-progress svg {
+            --progress: 0;
+            position: absolute;
+            left: 0;
+            top: 0px;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            stroke-width: 4px;
+            stroke: var(--swiper-theme-color);
+            fill: none;
+            stroke-dashoffset: calc(125.6 * (1 - var(--progress)));
+            stroke-dasharray: 125.6;
+            transform: rotate(-90deg);
+        }
+    </style>
 </head>
 
 <body>
-    <div class="header">
-        <i class="fa-solid fa-xmark"></i>
-        <p>07839985872</p>
-    </div>
+
     <?php include "assets/pg/Navbar_Index.php"; ?>
 
     <div class="container1">
@@ -84,13 +82,13 @@ require_once("assets/pg/admins/inc/conn.inc.php");
         <div class="swiper sliders-ads">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <img src='imgs/slider_ads1.jpg' />
+                    <img src="imgs\8.png"/>
                 </div>
                 <div class="swiper-slide">
-                    <img src='imgs/slider_ads2.jpg' />
+                    <img src='imgs/7.png' />
                 </div>
                 <div class="swiper-slide">
-                    <img src='imgs/slider_ads3.jpg' />
+                    <img src='imgs/m1.png' />
                 </div>
                 <div class="swiper-slide">
                     <img src='imgs/slider_ads1.jpg' />
@@ -114,7 +112,7 @@ require_once("assets/pg/admins/inc/conn.inc.php");
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const progressCircle = document.querySelector(".autoplay-progress svg");
-            const progressContent = document.querySelector( ".autoplay-progress span");
+            const progressContent = document.querySelector(".autoplay-progress span");
 
             const swiper = new Swiper(".sliders-ads", {
                 centeredSlides: true,
@@ -133,7 +131,8 @@ require_once("assets/pg/admins/inc/conn.inc.php");
                 on: {
                     autoplayTimeLeft(s, time, progress) {
                         progressCircle.style.setProperty("--progress", 1 - progress);
-                        progressContent.textContent = `${Math.ceil(time / 1000)}s`;                    },
+                        progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+                    },
                 },
             });
         });

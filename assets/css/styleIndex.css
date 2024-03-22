@@ -239,33 +239,7 @@ input {
   text-transform: none;
 }
 
-.header {
-  display: flex;
-  width: 100%;
-  height: 45px;
-  color: #f1efef;
-  background-color: var(--primary);
-  align-items: center;
-  justify-content: center;
-}
 
-.header.hide {
-  display: none;
-}
-
-.header .fa-solid {
-  position: absolute;
-  right: 18px;
-}
-
-.header .fa-solid:hover {
-  color: #a80909;
-  cursor: pointer;
-}
-
-.header p {
-  margin-bottom: 0;
-}
 
 .navbar {
   display: flex;
@@ -748,11 +722,11 @@ footer .close:focus {
 }
 
 .control .Show-SE .info a {
-  color: #b11500;
+  color: #23a0a9;
 }
 
 .control .Show-SE .info a:hover {
-  color: #23a0a9;
+  color: #aa0b8f;
 }
 
 .control .Show-SE .info .p-dep {
@@ -891,7 +865,8 @@ header {
   top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color:var(--primary);;
+  background-color: var(--primary);
+  ;
   color: white;
   padding: 20px;
   border-radius: 5px;
@@ -925,7 +900,8 @@ header {
 
 #noButton {
   color: #dc3545;
-  background-color: var(--primary);;
+  background-color: var(--primary);
+  ;
   border: 1px solid #dc3545;
 }
 
@@ -939,7 +915,55 @@ header {
   background-color: #dc3545;
 }
 
-@media only screen and (max-width: 1000px) {
+.side {
+  width: 220px;
+  background-color: var(--primary);
+  display: grid;
+  gap: 8px;
+  position: absolute;
+  left: 0;
+  height: 100vh;
+  z-index: 9999;
+  color: #fff;
+  padding: 15px 10px;
+
+}
+
+.side .side-menu {
+
+}
+
+.side .side-menu .side-menu-item {
+  padding: 12px 10px 12px 0;
+  border-bottom: 1px solid #2A3B52;
+ 
+}
+
+.side .side-menu .side-menu-item ul[class^="menu-dep"] {
+  height: auto;max-height: 200px;
+  width: 100%;
+  overflow: hidden;
+  padding: 5px 10px 5px 0;
+  background-color:  #344865;
+  margin: 12px 0 0 0;
+  overflow-y:scroll;
+ 
+}
+ ::-webkit-scrollbar {
+    width: 5px; /* عرض شريط التمرير */
+}
+::-webkit-scrollbar-thumb {
+  background-color: #2A3B52; /* لون المقبض */
+  border-radius: 10px; /* شكل الزوايا */
+}
+.side .side-menu .side-menu-item ul[class^="menu-dep"] li{
+  padding: 10px 5px;
+  border-bottom: 1px solid #2A3B52;
+}
+@media screen and (max-width:768px) {
+  .navbar{
+    display: none;
+  }
   footer .control {
     flex-direction: column;
   }
