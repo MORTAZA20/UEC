@@ -88,6 +88,7 @@ video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  user-select: none;
 }
 
 article,
@@ -239,8 +240,6 @@ input {
   text-transform: none;
 }
 
-
-
 .navbar {
   display: flex;
   gap: 1.5em;
@@ -253,6 +252,44 @@ input {
   position: sticky;
   top: 0;
   z-index: 990;
+}
+.hamburger {
+  cursor: pointer;
+}
+
+.hamburger input {
+  display: none;
+}
+
+.hamburger svg {
+  /* The size of the SVG defines the overall size */
+  height: 3em;
+  /* Define the transition for transforming the SVG */
+  transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line {
+  fill: none;
+  stroke: var(--primary);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+  /* Define the transition for transforming the Stroke */
+  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+              stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line-top-bottom {
+  stroke-dasharray: 12 63;
+}
+
+.hamburger input:checked + svg {
+  transform: rotate(-45deg);
+}
+
+.hamburger input:checked + svg .line-top-bottom {
+  stroke-dasharray: 20 300;
+  stroke-dashoffset: -32.42;
 }
 
 .navbar .search-from {
@@ -826,28 +863,23 @@ header {
   border-radius: 50%;
   background-color: var(--primary);
 }
-
 .control .Sh-course .Sh-ul {
   margin: 0 60px;
   border-right: 1px solid var(--gainsboro);
   padding: 0 10px;
 }
-
 .control .Sh-course .Sh-ul li {
   margin: 15px 0;
 }
-
 .control .Sh-course .Sh-ul li:hover {
   color: var(--sec);
   cursor: pointer;
 }
-
 .control .Sh-student-projects {
   border-top: 1px solid var(--gainsboro);
   margin-top: 25px;
   padding-top: 25px;
 }
-
 .control section .cards {
   display: flex;
   flex-wrap: wrap;
@@ -855,18 +887,15 @@ header {
   justify-content: right;
   gap: 35px 10px;
 }
-
 .control section .cards .Sh-card {
   flex: 1 0 250px;
 }
-
 .container1 .popup {
   position: fixed;
   top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--primary);
-  ;
   color: white;
   padding: 20px;
   border-radius: 5px;
@@ -874,12 +903,10 @@ header {
   z-index: 999;
   text-align: center;
 }
-
 .container1 .popup h1 {
   margin-bottom: 15px;
   line-height: 1.5;
 }
-
 .container1 .popup button {
   margin-top: 18px;
   background-color: #fff;
@@ -891,88 +918,93 @@ header {
   cursor: pointer;
   justify-content: center;
 }
-
 #yesButton {
   color: #007bff;
   background-color: var(--primary);
   border: 1px solid #007bff;
 }
-
 #noButton {
   color: #dc3545;
   background-color: var(--primary);
   ;
   border: 1px solid #dc3545;
 }
-
 #yesButton:hover {
   color: #fff;
   background-color: #007bff;
 }
-
 #noButton:hover {
   color: #fff;
   background-color: #dc3545;
 }
-
+.fa-caret-down {
+  transform: rotate(90deg);
+}
+.nav-item:hover .fa-caret-down,
+.side-menu-item:hover .fa-caret-down {
+  transform: rotate(0deg);
+}
 .side {
   width: 220px;
   background-color: var(--primary);
   display: grid;
   gap: 8px;
   position: absolute;
-  left: 0;
+  right: 0;
   height: 100vh;
   z-index: 9999;
   color: #fff;
   padding: 15px 10px;
 
 }
-
 .side .side-menu {
-
+  cursor: pointer;
 }
-
 .side .side-menu .side-menu-item {
   padding: 12px 10px 12px 0;
   border-bottom: 1px solid #2A3B52;
- 
+  cursor: pointer;
 }
-
-.side .side-menu .side-menu-item ul[class^="menu-dep"] {
-  height: auto;max-height: 200px;
+.side .side-menu .side-menu-item:hover{
+  background-color: #23a0a9;
+}
+.side .side-menu  ul[class^="menu-dep"] {
+  height: auto;
+  max-height: 200px;
   width: 100%;
   overflow: hidden;
   padding: 5px 10px 5px 0;
-  background-color:  #344865;
+  background-color: #344865;
   margin: 12px 0 0 0;
-  overflow-y:scroll;
- 
+  overflow-y: scroll;
+  cursor: pointer;
 }
- ::-webkit-scrollbar {
-    width: 5px; /* عرض شريط التمرير */
+.side .side-menu  ul[class^="menu-dep"] li:hover{
+  background-color: #23a0a9;
 }
-::-webkit-scrollbar-thumb {
-  background-color: #2A3B52; /* لون المقبض */
-  border-radius: 10px; /* شكل الزوايا */
-}
-.side .side-menu .side-menu-item ul[class^="menu-dep"] li{
+.side .side-menu ul[class^="menu-dep"] li {
   padding: 10px 5px;
   border-bottom: 1px solid #2A3B52;
 }
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #2A3B52;
+  border-radius: 10px;
+}
 @media screen and (max-width:768px) {
-  .navbar{
+  .navbar .nav-menu ,.nav-item{
     display: none;
   }
+
   footer .control {
     flex-direction: column;
   }
-
   footer .control>* {
     width: 100%;
     margin-bottom: 20px;
   }
-
   .navbar .search-from {
     display: none;
     position: fixed;

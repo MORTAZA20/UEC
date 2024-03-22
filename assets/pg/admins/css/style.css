@@ -9,6 +9,7 @@ body {
 * {
     box-sizing: border-box;
     border: none;
+    user-select: none;
 }
 
 input {
@@ -52,6 +53,8 @@ input {
     transition-duration: .3s;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
     background-color: var(--af-white);
+    transition-timing-function: ease-out;
+
 }
 
 .sign {
@@ -75,9 +78,8 @@ input {
     width: auto;
     transition-duration: .3s;
     margin: 0 8px;
-
+    transition-timing-function: ease-in;
 }
-
 /* button click effect*/
 .Btn:active {
     transform: translate(2px, 2px);
@@ -186,10 +188,6 @@ input {
     transition: 0.3s all;
     cursor: pointer;
 }
-
-
-
-
 .path-bar {
     margin: 20px;
     padding: 14px;
