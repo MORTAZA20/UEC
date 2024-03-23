@@ -15,7 +15,6 @@ $row_student_projects = $result_student_projects->fetch_assoc();
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
     <title>بوصلة التعليم الجامعي | المشروع</title>
     <link rel="icon" href="LOGO" type="image/png" sizes="16x16">
     <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css">
@@ -23,6 +22,9 @@ $row_student_projects = $result_student_projects->fetch_assoc();
     <link href="./assets/fontawesome-free-6.5.1-web/css/brands.css" rel="stylesheet" />
     <link href="./assets/fontawesome-free-6.5.1-web/css/solid.css" rel="stylesheet" />
     <link rel="stylesheet" href="./assets/css/styleIndex.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
 
 </head>
 

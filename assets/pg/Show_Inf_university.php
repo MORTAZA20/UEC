@@ -20,6 +20,8 @@ $row_university = $result_university->fetch_assoc();
     <link href="./assets/fontawesome-free-6.5.1-web/css/brands.css" rel="stylesheet" />
     <link href="./assets/fontawesome-free-6.5.1-web/css/solid.css" rel="stylesheet" />
     <link rel="stylesheet" href="./assets/css/styleIndex.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
 
