@@ -96,6 +96,9 @@ require_once("assets/pg/admins/inc/conn.inc.php");
                 <div class="swiper-slide">
                     <img src='imgs/slider_ads2.jpg' />
                 </div>
+                <div class="swiper-slide">
+                    <img src='imgs/121.png' />
+                </div>
             </div>
 
             <div class="swiper-button-next"></div>

@@ -56,7 +56,7 @@
     </ul>
 
     <div class="search-from">
-        <input type="search" placeholder="عن ماذا تبحث؟" id="search-box" oninput="showResults()">
+        <input type="text" placeholder="عن ماذا تبحث؟" id="search-box" oninput="showResults()">
         <i class="fas fa-search"></i>
     </div>
     <div id="search-results" class="search-results"></div>

@@ -22,9 +22,10 @@ if ($_SESSION["admin_user"] != "Admin"
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>بوصلة التعليم الجامعي | معلومات الكلية </title>
-
+    <link href="./assets/fontawesome-free-6.5.1-web/css/fontawesome.css" rel="stylesheet" />
+    <link href="./assets/fontawesome-free-6.5.1-web/css/brands.css" rel="stylesheet" />
+    <link href="./assets/fontawesome-free-6.5.1-web/css/solid.css" rel="stylesheet" />
     <link rel="stylesheet" href="style">
 </head>
 

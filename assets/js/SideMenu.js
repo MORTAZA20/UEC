@@ -14,12 +14,26 @@ const ShowSide = document.getElementById('ShowSide');
 
 SideMenu1.addEventListener('click', function () {
     ShowSideMenu1.classList.toggle('active');
+    if (ShowSideMenu1.classList.contains('active')) {
+        ShowSideMenu2.classList.remove('active');
+        ShowSideMenu3.classList.remove('active');
+    }
 });
+
 SideMenu2.addEventListener('click', function () {
     ShowSideMenu2.classList.toggle('active');
+    if (ShowSideMenu2.classList.contains('active')) {
+        ShowSideMenu1.classList.remove('active');
+        ShowSideMenu3.classList.remove('active');
+    }
 });
+
 SideMenu3.addEventListener('click', function () {
     ShowSideMenu3.classList.toggle('active');
+    if (ShowSideMenu3.classList.contains('active')) {
+        ShowSideMenu1.classList.remove('active');
+        ShowSideMenu2.classList.remove('active');
+    }
 });
  
 SideIcon.addEventListener('click', function () {

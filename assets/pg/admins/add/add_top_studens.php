@@ -21,6 +21,9 @@ if (isset($_SESSION["admin_user"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة التحكم | أضافة الطلبة الاوائل</title>
+    <link href="./assets/fontawesome-free-6.5.1-web/css/fontawesome.css" rel="stylesheet" />
+    <link href="./assets/fontawesome-free-6.5.1-web/css/brands.css" rel="stylesheet" />
+    <link href="./assets/fontawesome-free-6.5.1-web/css/solid.css" rel="stylesheet" />
     <link rel="stylesheet" href="style">
 </head>
 
@@ -49,7 +52,6 @@ if (isset($_SESSION["admin_user"])) {
             if (isset($_POST["sub_form"])) {
 
                 //mysqli_real_escape_string للحماية من الهجمات
-                $student_id = mysqli_real_escape_string($conn, $_POST["student_id"]);
                 $department_id = mysqli_real_escape_string($conn, $_POST["department_id"]);
                 $student_name = mysqli_real_escape_string($conn, $_POST["student_name"]);
                 $Graduation_Year = mysqli_real_escape_string($conn, $_POST["Graduation_Year"]);
@@ -57,12 +59,7 @@ if (isset($_SESSION["admin_user"])) {
 
 
 
-                $sqlTest = "SELECT student_id  FROM top_students WHERE student_id  = '$student_id'";
-                $resultTest = $conn->query($sqlTest);
 
-                if ($resultTest->num_rows > 0) {
-                    echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>عذرًا، معرف المادة الدراسية موجود مسبقًا</div>";
-                } else {
 
                     if ($_FILES['top_students_images']['type'] == 'image/png' || $_FILES['top_students_images']['type'] == 'image/jpeg') {
                         $top_students_folder = '../top_students_img';
@@ -74,11 +71,11 @@ if (isset($_SESSION["admin_user"])) {
                         $file_name = $_FILES["top_students_images"]["name"];
                         move_uploaded_file($top_students_images, $top_students_folder . '/' . $file_name);
                         $image_path = 'top_students_img' . '/' . $file_name;
-                        $sql = "INSERT INTO top_students (student_id  , department_id , student_name, Graduation_Year, Cumulative_Rating,top_students_img_path) 
-                                                        VALUES ('$student_id ', '$department_id', '$student_name', '$Graduation_Year', '$Cumulative_Rating','$image_path')";
+                        $sql = "INSERT INTO top_students (department_id , student_name, Graduation_Year, Cumulative_Rating,top_students_img_path) 
+                                                        VALUES ('$department_id', '$student_name', '$Graduation_Year', '$Cumulative_Rating','$image_path')";
                     } else {
-                        $sql = "INSERT INTO top_students (student_id  , department_id , student_name, Graduation_Year, Cumulative_Rating) 
-                                    VALUES ('$student_id ', '$department_id', '$student_name', '$Graduation_Year', '$Cumulative_Rating')";
+                        $sql = "INSERT INTO top_students ( department_id , student_name, Graduation_Year, Cumulative_Rating) 
+                                    VALUES ('$department_id', '$student_name', '$Graduation_Year', '$Cumulative_Rating')";
                     }
 
                     $result3 = $conn->query($sql);
@@ -88,7 +85,7 @@ if (isset($_SESSION["admin_user"])) {
                         echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>هنالك خطأ: " . $conn->error . "</div>";
                     }
                 }
-            }
+            
 
             ?>
             <script src="jquery-3.6.0.min"></script>
@@ -128,15 +125,12 @@ if (isset($_SESSION["admin_user"])) {
                     </div>
 
                     <div class="custom-column" style="margin-bottom: 10px;">
-                        <input type="text" name="student_id" placeholder="معرف الطالب" required>
                         <input type="text" name="student_name" placeholder="اسم الطالب" required>
-                    </div>
-                    <div class="custom-column" style="margin-bottom: 10px;">
                         <input type="text" name="Cumulative_Rating" placeholder="المعدل التراكمي" required pattern="^(?:[5-9]\d|\d{2})(?:\.\d+)?$" title="الرجاء إدخال قيمة صحيحة بين 50 و 100">
                         <input type="date" name="Graduation_Year" placeholder="سنة التخرج" required>
                     </div>
-                    <div class="container-img">
 
+                    <div class="container-img">
                         <img id="uploaded-image" src="#" style="max-width: 100px;
                             max-height: 100px;
                             width: auto;
@@ -155,7 +149,7 @@ if (isset($_SESSION["admin_user"])) {
             </div>
         </div>
     </div>
-        <script src="displayImage"></script>
+    <script src="displayImage"></script>
     <?php if ($_SESSION["admin_user"] == "department") { ?>
         <style>
             #university_id,
