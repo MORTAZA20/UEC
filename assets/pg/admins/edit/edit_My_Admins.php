@@ -1,10 +1,10 @@
 <?php
 session_start();
 if (isset($_SESSION["admin_user"])) {
-if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin") {
-    header("Location: login");
-    exit();
-}
+    if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin") {
+        header("Location: login");
+        exit();
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -19,6 +19,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
     <link href="./assets/fontawesome-free-6.5.1-web/css/solid.css" rel="stylesheet" />
     <link rel="stylesheet" href="style">
 </head>
+
 <body>
     <?php include '../inc/navbar.php'; ?>
 
@@ -38,7 +39,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
             </div>
             <?php
             include '../inc/conn.inc.php';
-            
+
             if (isset($_POST["sub_form"])) {
                 $Admin_id = mysqli_real_escape_string($conn, $_POST["Admin_id"]);
                 $department_id = mysqli_real_escape_string($conn, $_POST["department_id"]);
@@ -57,19 +58,19 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                     $end = microtime(true);
                 } while (($end - $start) < $timeTarget);
 
-                
 
-                
+
+
                 $sql = "UPDATE inf_login SET department_id = ?, college_id = ?, AdminUserName = ?, AdminPassword = ?, type = ?, Gmail = ? WHERE Admin_id = ?";
                 $stmt = $conn->prepare($sql);
 
                 if ($type == "Admin" || $type == "SubAdmin") {
-                    $department_id=NULL;
-                    $college_id=NULL;
-                }else if($type == "college"){
-                    $department_id=NULL;
-                }else if($type == "department"){
-                    $college_id=NULL;
+                    $department_id = NULL;
+                    $college_id = NULL;
+                } else if ($type == "college") {
+                    $department_id = NULL;
+                } else if ($type == "department") {
+                    $college_id = NULL;
                 }
 
                 $stmt->bind_param("ssssssi", $department_id, $college_id, $AdminUserName, $AdminPassword_hash, $type, $Gmail, $Admin_id);
@@ -92,22 +93,36 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
             $stmt->execute();
             $result = $stmt->get_result();
             $row = $result->fetch_assoc();
-            
-            
+
+
             $conn->close();
             ?>
 
             <div class="container-form">
                 <form action="" method="post">
-                <select class="fruit" name="type" style=" margin-bottom: 10px ;" required
-                    onchange="toggle()">
-                    <option value="Admin" <?php if(isset($_POST['btn_edit'])){if($row['type'] == "Admin"){echo "selected";}}  ?>>مشرف عام</option>
-                    <option value="SubAdmin" <?php if(isset($_POST['btn_edit'])){if($row['type'] == "SubAdmin") {echo "selected";}}  ?>>مشرف ثانوي</option>
-                    <option value="department" <?php if(isset($_POST['btn_edit'])){if($row['type'] == "department") {echo "selected";}}  ?>>قسم</option>
-                    <option value="college" <?php if(isset($_POST['btn_edit'])){if($row['type'] == "college") {echo "selected";}}  ?>>كلية</option>
+                    <select class="fruit" name="type" style=" margin-bottom: 10px ;" required onchange="toggle()">
+                        <option value="Admin" <?php if (isset($_POST['btn_edit'])) {
+                                                    if ($row['type'] == "Admin") {
+                                                        echo "selected";
+                                                    }
+                                                }  ?>>مشرف عام</option>
+                        <option value="SubAdmin" <?php if (isset($_POST['btn_edit'])) {
+                                                        if ($row['type'] == "SubAdmin") {
+                                                            echo "selected";
+                                                        }
+                                                    }  ?>>مشرف ثانوي</option>
+                        <option value="department" <?php if (isset($_POST['btn_edit'])) {
+                                                        if ($row['type'] == "department") {
+                                                            echo "selected";
+                                                        }
+                                                    }  ?>>قسم</option>
+                        <option value="college" <?php if (isset($_POST['btn_edit'])) {
+                                                    if ($row['type'] == "college") {
+                                                        echo "selected";
+                                                    }
+                                                }  ?>>كلية</option>
                     </select>
-                    <select class="fruit" name="department_id" style=" margin-bottom: 10px ;" 
-                    id="department_select">
+                    <select class="fruit" name="department_id" style=" margin-bottom: 10px ;" id="department_select">
                         <?php
                         include '../inc/conn.inc.php';
                         $sql1 = "SELECT d.*, c.college_name, u.university_name
@@ -115,18 +130,17 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                                 LEFT JOIN colleges c ON d.college_id = c.college_id
                                 LEFT JOIN universities u ON c.university_id = u.university_id";
                         $result = $conn->query($sql1);
-                        if($result->num_rows >0){
+                        if ($result->num_rows > 0) {
                             while ($row1 = $result->fetch_assoc()) {
-                            echo "<option value='" . $row1['department_id'] . "'>" . $row1['university_name'] ." - " . $row1['college_name'] ." - ". $row1['department_name'] . "</option>";
-                        }
-                        }else{
+                                echo "<option value='" . $row1['department_id'] . "'>" . $row1['university_name'] . " - " . $row1['college_name'] . " - " . $row1['department_name'] . "</option>";
+                            }
+                        } else {
                             echo "<option>لا توجد أقسام مضافه</option>";
                         }
-                        
+
                         ?>
                     </select>
-                    <select class="fruit" name="college_id" style=" margin-bottom: 10px ;" 
-                    id="college_select">
+                    <select class="fruit" name="college_id" style=" margin-bottom: 10px ;" id="college_select">
                         <?php
                         include '../inc/conn.inc.php';
                         $sql2 = "SELECT  c.*, u.university_name
@@ -134,45 +148,41 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                                 LEFT JOIN universities u ON c.university_id = u.university_id";
 
                         $result = $conn->query($sql2);
-                        if($result->num_rows >0){
+                        if ($result->num_rows > 0) {
                             while ($row2 = $result->fetch_assoc()) {
-                            echo "<option value='" . $row2['college_id'] . "'>" . $row2['university_name'] ." - " . $row2['college_name'] . "</option>";
-                        }
-                        }else{
+                                echo "<option value='" . $row2['college_id'] . "'>" . $row2['university_name'] . " - " . $row2['college_name'] . "</option>";
+                            }
+                        } else {
                             echo "<option>لا توجد كليات مضافه</option>";
                         }
-                        
+
                         ?>
                     </select>
-                    <input type="hidden" name="Admin_id" placeholder="أسم المستخدم" style=" margin-bottom: 10px ;" 
-                    value="<?php
-                        if (!isset($_POST['edit_id'])) {
-                            echo "";
-                        } else {
-                            echo $edit_id;
-                        }?>" required>
-                    <input type="text" name="AdminUserName" placeholder="أسم المستخدم" style=" margin-bottom: 10px ;"
-                    value="<?php
-                        if (!isset($_POST['edit_id'])) {
-                            echo "";
-                        } else {
-                            echo $row['AdminUserName'];
-                        }?>" required> 
+                    <input type="hidden" name="Admin_id" placeholder="أسم المستخدم" style=" margin-bottom: 10px ;" value="<?php
+                                                                                                                            if (!isset($_POST['edit_id'])) {
+                                                                                                                                echo "";
+                                                                                                                            } else {
+                                                                                                                                echo $edit_id;
+                                                                                                                            } ?>" required>
+                    <input type="text" name="AdminUserName" placeholder="أسم المستخدم" style=" margin-bottom: 10px ;" value="<?php
+                                                                                                                                if (!isset($_POST['edit_id'])) {
+                                                                                                                                    echo "";
+                                                                                                                                } else {
+                                                                                                                                    echo $row['AdminUserName'];
+                                                                                                                                } ?>" required>
 
-                    <input type="text" name="AdminPassword" placeholder="كلمة المرور" style=" margin-bottom: 10px ;" 
-                    value="<?php
-                        if (!isset($_POST['edit_id'])) {
-                            echo "";
-                        } else {
-                            echo $row['AdminPassword'];
-                        }?>" required>
-                        <input type="email" name="Gmail" id="gmailField" placeholder="حساب الـ Gmail" style=" margin-bottom: 10px ;"
-                        value="<?php
-                        if (!isset($_POST['edit_id'])) {
-                            echo "";
-                        } else {
-                            echo $row['Gmail'];
-                        }?>" >
+                    <input type="text" name="AdminPassword" placeholder="كلمة المرور" style=" margin-bottom: 10px ;" value="<?php
+                                                                                                                            if (!isset($_POST['edit_id'])) {
+                                                                                                                                echo "";
+                                                                                                                            } else {
+                                                                                                                                echo $row['AdminPassword'];
+                                                                                                                            } ?>" required>
+                    <input type="email" name="Gmail" id="gmailField" placeholder="حساب الـ Gmail" style=" margin-bottom: 10px ;" value="<?php
+                                                                                                                                        if (!isset($_POST['edit_id'])) {
+                                                                                                                                            echo "";
+                                                                                                                                        } else {
+                                                                                                                                            echo $row['Gmail'];
+                                                                                                                                        } ?>">
 
                     <p>
                         <input class="seve" type="submit" name="sub_form" value=" حـفـظ البـيـانـات" />
@@ -182,32 +192,37 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
         </div>
     </div>
     <script>
-    function toggle() {
-        var type = document.querySelector('select[name="type"]').value;
-        var departmentSelect = document.getElementById('department_select');
-        var collegeSelect = document.getElementById('college_select');
-        var gmailField = document.getElementById('gmailField');
+        function toggle() {
+            var type = document.querySelector('select[name="type"]').value;
+            var departmentSelect = document.getElementById('department_select');
+            var collegeSelect = document.getElementById('college_select');
+            var gmailField = document.getElementById('gmailField');
 
-        if (type == "department") {
-            departmentSelect.style.display = "block";
-            collegeSelect.style.display = "none";
-            gmailField.style.display = "none";
-            departmentSelect.setAttribute("required", "required");
-            collegeSelect.removeAttribute("required"); 
-        } else if (type == "college") {
-            departmentSelect.style.display = "none";
-            collegeSelect.style.display = "block";
-            gmailField.style.display = "none";
-            departmentSelect.removeAttribute("required"); 
-            collegeSelect.setAttribute("required", "required"); 
-        } else {
-            departmentSelect.style.display = "none";
-            collegeSelect.style.display = "none";
-            gmailField.style.display = "block";
-            departmentSelect.removeAttribute("required");  
-            collegeSelect.removeAttribute("required"); 
+            if (type == "department") {
+                departmentSelect.style.display = "block";
+                collegeSelect.style.display = "none";
+                gmailField.style.display = "none";
+                departmentSelect.setAttribute("required", "required");
+                collegeSelect.removeAttribute("required");
+            } else if (type == "college") {
+                departmentSelect.style.display = "none";
+                collegeSelect.style.display = "block";
+                gmailField.style.display = "none";
+                departmentSelect.removeAttribute("required");
+                collegeSelect.setAttribute("required", "required");
+            } else {
+                departmentSelect.style.display = "none";
+                collegeSelect.style.display = "none";
+                gmailField.style.display = "block";
+                departmentSelect.removeAttribute("required");
+                collegeSelect.removeAttribute("required");
+            }
         }
-    }
+        // تنفيذ toggle() عند تحميل الصفحة
+        window.onload = toggle;
+
+        // تنفيذ toggle() عند تغيير القيمة في القائمة المنسدلة
+        document.querySelector('select[name="type"]').onchange = toggle;
         setTimeout(function() {
             document.getElementById('success-message').style.display = 'none';
             window.location.href = 'My_Admins';
@@ -216,4 +231,3 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
 </body>
 
 </html>
-    

@@ -1,5 +1,12 @@
 <?php
 require_once("admins/inc/conn.inc.php");
+$sql_settings = "SELECT * FROM settings WHERE id = 1";
+$result_sql_settings = $conn->query($sql_settings);
+
+$row_sql_settings = $result_sql_settings->fetch_assoc();
+if ($row_sql_settings['Off_And_On'] == 0) {
+    header("Location: message");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,11 +21,9 @@ require_once("admins/inc/conn.inc.php");
     <link rel="stylesheet" href="./assets/css/styleIndex.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
 </head>
 
 <body>
-
     <?php include "Navbar_Index.php"; ?>
  <header>
         <h1>
@@ -27,7 +32,6 @@ require_once("admins/inc/conn.inc.php");
         <p>
             مجموعة من الطلبة المتفوقين
         </p>
-
     </header>
     <div class="control">
 
@@ -73,63 +77,6 @@ require_once("admins/inc/conn.inc.php");
     <script src="jquery-3.6.0.min"></script>
 
     <script src="assets/js/Script.js"></script>
-
-    <script>
-        window.onload = function() {
-            function initSwipers(slidesPerView) {
-                new Swiper('.swiper-universities', {
-                    loop: false,
-                    speed: 400,
-                    spaceBetween: 10,
-                    slidesPerView: slidesPerView,
-                    navigation: {
-                        nextEl: '.swiper-btn-next-universities',
-                        prevEl: '.swiper-btn-prev-universities',
-                    },
-                });
-                new Swiper('.swiper-colleges', {
-                    loop: false,
-                    speed: 400,
-                    spaceBetween: 10,
-                    slidesPerView: slidesPerView,
-                    navigation: {
-                        nextEl: '.swiper-btn-next-colleges',
-                        prevEl: '.swiper-btn-prev-colleges',
-                    },
-                });
-                new Swiper('.swiper-departments', {
-                    loop: false,
-                    speed: 400,
-                    spaceBetween: 10,
-                    slidesPerView: slidesPerView,
-                    navigation: {
-                        nextEl: '.swiper-btn-next-departments',
-                        prevEl: '.swiper-btn-prev-departments',
-                    },
-                });
-            }
-
-            function handleResize() {
-                var screenWidth = window.innerWidth;
-                var slidesPerView = (screenWidth <= 1024) ? '3' : '5';
-
-                if (typeof swiperUniversities !== 'undefined') {
-                    swiperUniversities.destroy();
-                    swiperColleges.destroy();
-                    swiperDepartments.destroy();
-                }
-
-                initSwipers(slidesPerView);
-            }
-
-            var slidesPerView = (window.innerWidth <= 1024) ? '3' : '5';
-            initSwipers(slidesPerView);
-
-            window.onresize = function() {
-                handleResize();
-            };
-        };
-    </script>
     <script src="./assets/js/swiper-bundle.min.js"></script>
 </body>
 

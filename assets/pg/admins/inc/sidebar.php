@@ -5,7 +5,6 @@
         if ($type == "Admin" || $type == "SubAdmin") {
     ?>
 
-
             <div class="item-bar" onclick="window.open('home' , '_self');">
                 <div class="Imgitem" style="background-image: url('home-page');"></div>
                 الصفحة الرئيسية
@@ -14,7 +13,7 @@
 
 
             <div class="item-bar" onclick="window.open('universities' , '_self');">
-                <div class="Imgitem" style="background-image: url('university');"></div>
+                <div class="Imgitem" style="background-image: url('universityImg');"></div>
                 الجامعات
             </div>
             <div class="item-bar" onclick="window.open('colleges' , '_self')">

@@ -253,6 +253,7 @@ input {
   position: sticky;
   top: 0;
   z-index: 990;
+  user-select: none;
 }
 
 .hamburger {
@@ -392,6 +393,8 @@ input {
   color: #fff;
   padding: 5px 0;
   width: max-content;
+  max-height: 300px;
+  overflow-y: scroll;
   display: none;
   position: absolute;
   top: 30px;
@@ -895,60 +898,6 @@ header {
   flex: 1 0 250px;
 }
 
-.container1 .popup {
-  position: fixed;
-  top: 35%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: var(--primary);
-  color: white;
-  padding: 20px;
-  border-radius: 5px;
-  display: none;
-  z-index: 999;
-  text-align: center;
-}
-
-.container1 .popup h1 {
-  margin-bottom: 15px;
-  line-height: 1.5;
-}
-
-.container1 .popup button {
-  margin-top: 18px;
-  background-color: #fff;
-  color: var(--primary);
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  margin-right: 10px;
-  cursor: pointer;
-  justify-content: center;
-}
-
-#yesButton {
-  color: #007bff;
-  background-color: var(--primary);
-  border: 1px solid #007bff;
-}
-
-#noButton {
-  color: #dc3545;
-  background-color: var(--primary);
-  ;
-  border: 1px solid #dc3545;
-}
-
-#yesButton:hover {
-  color: #fff;
-  background-color: #007bff;
-}
-
-#noButton:hover {
-  color: #fff;
-  background-color: #dc3545;
-}
-
 .fa-caret-down {
   transform: rotate(90deg);
 }
@@ -969,7 +918,7 @@ header {
   z-index: 9999;
   color: #fff;
   padding: 15px 10px;
-  transition: transform 0.3s ease;
+  transition: right 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .side.active {
@@ -997,7 +946,8 @@ header {
   background-color: #344865;
   overflow-y: scroll;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: height 0.5s ease;
+
 }
 
 .side .side-menu ul[class^="menu-dep"].active {

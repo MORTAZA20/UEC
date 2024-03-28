@@ -1,6 +1,12 @@
 <?php
 require_once("admins/inc/conn.inc.php");
+$sql_settings = "SELECT * FROM settings WHERE id = 1";
+$result_sql_settings = $conn->query($sql_settings);
 
+$row_sql_settings = $result_sql_settings->fetch_assoc();
+if ($row_sql_settings['Off_And_On'] == 0) {
+    header("Location: message");
+}
 $id = $_GET['id'];
 $sql_colleges = "SELECT colleges.*, universities.university_name FROM colleges
                  LEFT JOIN universities ON colleges.university_id = universities.university_id WHERE colleges.college_id = '$id'";

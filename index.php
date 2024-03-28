@@ -1,11 +1,18 @@
 <?php
 require_once("assets/pg/admins/inc/conn.inc.php");
+$sql_settings = "SELECT * FROM settings WHERE id = 1";
+$result_sql_settings = $conn->query($sql_settings);
+
+$row_sql_settings = $result_sql_settings->fetch_assoc();
+if ($row_sql_settings['Off_And_On'] == 0) {
+    header("Location: message");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-   
+
     <title>بوصلة التعليم الجامعي | الرئيسية</title>
     <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css">
     <link href="./assets/fontawesome-free-6.5.1-web/css/fontawesome.css" rel="stylesheet" />
@@ -13,7 +20,7 @@ require_once("assets/pg/admins/inc/conn.inc.php");
     <link href="./assets/fontawesome-free-6.5.1-web/css/solid.css" rel="stylesheet" />
     <link rel="icon" href="LOGO" type="image/png" sizes="16x16">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="assets/css/styleIndex.css"> 
+    <link rel="stylesheet" href="assets/css/styleIndex.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -62,6 +69,7 @@ require_once("assets/pg/admins/inc/conn.inc.php");
             stroke-dashoffset: calc(125.6 * (1 - var(--progress)));
             stroke-dasharray: 125.6;
             transform: rotate(-90deg);
+            visibility: hidden;
         }
     </style>
 </head>
@@ -70,19 +78,12 @@ require_once("assets/pg/admins/inc/conn.inc.php");
 
     <?php include "assets/pg/Navbar_Index.php"; ?>
 
-    <div class="container1">
-        <div class="popup" id="installPopup">
-            <h1>هل تريد تثبيت تطبيق بوصلة التعليم الجامعي؟</h1>
-            <button id="yesButton">تثبيت</button>
-            <button id="noButton">الغاء</button>
-        </div>
-    </div>
 
     <div class="cont-sliders-ads">
         <div class="swiper sliders-ads">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <img src="imgs\8.png"/>
+                    <img src="imgs\8.png" />
                 </div>
                 <div class="swiper-slide">
                     <img src='imgs/7.png' />
@@ -90,15 +91,7 @@ require_once("assets/pg/admins/inc/conn.inc.php");
                 <div class="swiper-slide">
                     <img src='imgs/m1.png' />
                 </div>
-                <div class="swiper-slide">
-                    <img src='imgs/slider_ads1.jpg' />
-                </div>
-                <div class="swiper-slide">
-                    <img src='imgs/slider_ads2.jpg' />
-                </div>
-                <div class="swiper-slide">
-                    <img src='imgs/121.png' />
-                </div>
+
             </div>
 
             <div class="swiper-button-next"></div>
@@ -120,7 +113,7 @@ require_once("assets/pg/admins/inc/conn.inc.php");
             const swiper = new Swiper(".sliders-ads", {
                 centeredSlides: true,
                 autoplay: {
-                    delay: 5000,
+                    delay: 4000,
                     disableOnInteraction: false,
                 },
                 pagination: {
@@ -153,7 +146,9 @@ require_once("assets/pg/admins/inc/conn.inc.php");
                 <div class="swiper-wrapper">
                     <?php
 
-                    $sql = "SELECT * FROM universities ORDER BY RAND() LIMIT 20";
+                    $sql = "(SELECT * FROM universities WHERE university_name = 'جامعة البصرة')
+                                UNION ALL
+                                (SELECT * FROM universities WHERE university_name != 'جامعة البصرة' ORDER BY RAND() LIMIT 19)";
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) {
                     ?>
@@ -184,9 +179,15 @@ require_once("assets/pg/admins/inc/conn.inc.php");
                 <div class="swiper-wrapper">
                     <?php
 
-                    $sql4 = "SELECT  c.*, u.university_name
-                    FROM colleges c
-                    LEFT JOIN universities u ON c.university_id = u.university_id ORDER BY RAND() LIMIT 20";
+                    $sql4 = "(SELECT c.*, u.university_name
+                                FROM colleges c
+                                LEFT JOIN universities u ON c.university_id = u.university_id 
+                                WHERE c.college_name = 'كلية التربية للعلوم الصرفة')
+                                UNION ALL
+                                (SELECT c.*, u.university_name
+                                FROM colleges c
+                                LEFT JOIN universities u ON c.university_id = u.university_id 
+                                WHERE c.college_name != 'كلية التربية للعلوم الصرفة' ORDER BY RAND() LIMIT 19)";
                     $result4 = $conn->query($sql4);
                     while ($row4 = $result4->fetch_assoc()) {
                     ?>
@@ -293,53 +294,13 @@ require_once("assets/pg/admins/inc/conn.inc.php");
             });
         }
 
-        let deferredPrompt;
-        var div = document.querySelector('.popup');
-
-        // Check for dismissal flag in local storage on page load
-        const isPopupDismissed = localStorage.getItem("popupDismissed");
-        if (isPopupDismissed) {
-            div.style.display = 'none'; // Hide popup if dismissed previously
-        } else {
-            div.style.display = 'block'; // Show popup initially
-        }
-
-        // معالج الحدث للزر "نعم"
-        document.getElementById('yesButton').addEventListener('click', function() {
-            if (deferredPrompt) {
-                // hide our user interface that shows our A2HS button
-                div.style.display = 'none';
-                // Show the prompt
-                deferredPrompt.prompt();
-                // Wait for the user to respond to the prompt
-                deferredPrompt.userChoice
-                    .then((choiceResult) => {
-                        if (choiceResult.outcome === 'accepted') {
-                            div.style.display = 'none';
-                            localStorage.setItem("popupDismissed", true);
-                            console.log('User accepted the A2HS prompt');
-                        } else {
-                            console.log('User dismissed the A2HS prompt');
-                        }
-                        deferredPrompt = null;
-                    });
-            }
-        });
-
-        // معالج الحدث للزر "لا"
-        document.getElementById('noButton').addEventListener('click', function() {
-            // Hide the popup and store dismissal flag in local storage
-            div.style.display = 'none';
-            localStorage.setItem("popupDismissed", true);
-        });
-
         window.addEventListener('beforeinstallprompt', (e) => {
             // Prevent Chrome 67 and earlier from automatically showing the prompt
             e.preventDefault();
-            // Stash the event so it can be triggered later.
-            deferredPrompt = e;
+            // Prompt can be shown programmatically later if needed.
         });
     </script>
+
     <script src="./assets/js/swiper-bundle.min.js"></script>
 </body>
 

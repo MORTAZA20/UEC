@@ -43,24 +43,6 @@ width: 40%;
     color: #111827;
     margin-bottom: 0;
 }
-a {
-  text-decoration: none; 
-  font-size: 20px;
-}
-
-.login-resert {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-}
-
-.login-resert p a{
-    color: #0d6efd;
-}
-
-.login-resert p a:hover {
-    text-decoration: underline;
-}
 
 </style>
 
@@ -73,9 +55,6 @@ a {
     <div class="off-div">
         <h4>نأسف لأزعاجكم، الموقع حاليًا متوقف لأغراض الصيانة</h4>
         <p>سيتم استئناف الخدمة قريبًا</p>
-    </div>
-    <div class="login-resert">
-       <p><a href="login">الرجوع الى صفحة تسجيل الدخول</a></p>
     </div>
 </div>
 </body>

@@ -65,25 +65,19 @@ if (isset($_SESSION["admin_user"])) {
                     } while (($end - $start) < $timeTarget);
 
                     if ($type == "Admin" || $type == "SubAdmin") {
-                        $sql = "INSERT INTO inf_login (Admin_id,AdminUserName, AdminPassword,type,Gmail) VALUES (?, ?, ?, ?, ?)";
+                        $sql = "INSERT INTO inf_login (Admin_id,AdminUserName, AdminPassword,type,Gmail) 
+                        VALUES ('$Admin_id','$AdminUserName','$AdminPassword_hash','$type','$Gmail')";
                     } else if ($type == "department") {
                         $department_id = mysqli_real_escape_string($conn, $_POST["department_id"]);
-                        $sql = "INSERT INTO inf_login (Admin_id,department_id, AdminUserName, AdminPassword,type) VALUES (?, ?, ?, ?, ?)";
+                        $sql = "INSERT INTO inf_login (Admin_id,department_id, AdminUserName, AdminPassword,type) 
+                        VALUES ('$Admin_id','$department_id','$AdminUserName','$AdminPassword_hash','$type')";
                     } else {
                         $college_id = mysqli_real_escape_string($conn, $_POST["college_id"]);
-                        $sql = "INSERT INTO inf_login (Admin_id, college_id, AdminUserName, AdminPassword,type) VALUES (?, ?, ?, ?)";
+                        $sql = "INSERT INTO inf_login (Admin_id, college_id, AdminUserName, AdminPassword,type) 
+                        VALUES ('$Admin_id','$college_id','$AdminUserName', '$AdminPassword_hash','$type')";
                     }
 
-                    $stmt = $conn->prepare($sql);
-                    if ($type == "Admin" || $type == "SubAdmin") {
-                        $stmt->bind_param("sssss", $Admin_id, $AdminUserName, $AdminPassword_hash, $type, $Gmail);
-                    } else if ($type == "department") {
-                        $stmt->bind_param("sssss", $Admin_id, $department_id, $AdminUserName, $AdminPassword_hash, $type);
-                    } else {
-                        $stmt->bind_param("sssss", $Admin_id, $college_id, $AdminUserName, $AdminPassword_hash, $type);
-                    }
-
-                    $result = $stmt->execute();
+                    $result = $conn->query($sql);
 
                     if ($result) {
                         echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>تم إضافة المشرف بنجاح</div>";
@@ -91,7 +85,6 @@ if (isset($_SESSION["admin_user"])) {
                         echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>هناك خطأ: " . $conn->error . "</div>";
                     }
 
-                    $stmt->close();
                 }
                 $conn->close();
             }

@@ -11,7 +11,7 @@ RewriteRule ^bg1 ./assets/pg/admins/img/bg1.png [L]
 RewriteRule ^LOGO ./assets/pg/admins/img/LOGO233.png [L]
 
 RewriteRule ^home-page ./assets/pg/admins/img/home-page.png [L]
-RewriteRule ^university ./assets/pg/admins/img/university.png [L]
+RewriteRule ^universityImg ./assets/pg/admins/img/universityImg.png [L]
 RewriteRule ^C1 ./assets/pg/admins/img/C1.png [L]
 RewriteRule ^department ./assets/pg/admins/img/department.png [L]
 RewriteRule ^information-department ./assets/pg/admins/img/information-department.png [L]
