@@ -1,3 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap");
+
+:root {
+    --primary: #111822;
+    --sec: #23a0a9;
+    --neutral: #f1efef;
+    --light-color: #e1e5ea;
+    --light-color2: #cdd0cb;
+    --bord: rgb(226 232 240);
+    --border: solid rgb(226 232 240);
+    --heart: #d80032;
+  
+    --onyx: hsl(0, 0%, 25%);
+    --azure: hsl(219, 77%, 60%);
+    --white: hsl(0, 0%, 100%);
+    --platinum: hsl(0, 0%, 91%);
+    --gainsboro: hsl(0, 9%, 86%);
+    --red-salsa: hsl(0, 77%, 60%);
+    --dim-gray: hsl(0, 0%, 39%);
+    --davys-gray: hsl(0, 0%, 30%);
+    --spanish-gray: hsl(0, 0%, 62%);
+    --quick-silver: hsl(0, 0, 64%);
+  
+    --fs-28: 28px;
+    --fs-24: 24px;
+    --fs-18: 18px;
+    --fs-15: 15px;
+    --fs-14: 14px;
+    --fs-12: 12px;
+    --fw-5: 500;
+    --fw-6: 600;
+    --fw-7: 700;
+  
+    --px: 50px;
+    --px-30-15: 30px;
+    --radius: 5px;
+  
+    --box-shadow: 0 8px 10px -6px rgb(0 0 0 / 0.2);
+    --main-font: "Tajawal", sans-serif;
+  }
+  
 body {
     margin: 0;
     padding: 0;
@@ -197,7 +238,6 @@ input {
     border-radius: 5px;
     display: flex;
     position: relative;
-
 }
 
 .url-path {
@@ -218,12 +258,9 @@ input {
     cursor: pointer;
     transform: 0.3s all;
 }
-
-
 .path-bar>button :hover {
     background-color: #23a0a9;
 }
-
 .Latest-orders {
     margin: 20px;
     color: #fff;
@@ -232,11 +269,9 @@ input {
     border-radius: 5px;
     background-color: #192330;
 }
-
 .active-path {
     color: #23a0a9 !important;
 }
-
 .panel-bar {
     margin: 40px 20px;
     display: flex;

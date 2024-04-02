@@ -17,7 +17,7 @@ if ($_SESSION["admin_user"] != "Admin"
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">

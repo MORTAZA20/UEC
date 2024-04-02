@@ -122,7 +122,7 @@ if (isset($_POST["sub_log"])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 

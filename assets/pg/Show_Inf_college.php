@@ -16,7 +16,7 @@ $row_colleges = $result_colleges->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <title>بوصلة التعليم الجامعي | الكلية</title>

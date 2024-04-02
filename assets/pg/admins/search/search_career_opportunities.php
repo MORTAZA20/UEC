@@ -1,10 +1,8 @@
 <?php
 if (isset($_POST['search'])) {
         session_start();
-
         include '../inc/conn.inc.php';
         $search = mysqli_real_escape_string($conn, $_POST['search']);
-
         if ($_SESSION["admin_user"] == "department") {
                 $department_id = $_SESSION["department_id"];
                 $sql = "SELECT career_opportunities.*, departments.department_name 
@@ -42,9 +40,7 @@ if (isset($_POST['search'])) {
                     LEFT JOIN departments ON career_opportunities.department_id = departments.department_id";
         }
 }
-
 $result = $conn->query($sql);
-
 while ($row = $result->fetch_assoc()) {
 ?>
         <tr style="height: 100px;">

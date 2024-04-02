@@ -15,8 +15,7 @@ $row_university = $result_university->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
     <meta charset="UTF-8">
     <title>بوصلة التعليم الجامعي | الجامعة</title>
@@ -30,7 +29,6 @@ $row_university = $result_university->fetch_assoc();
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
-
 <body>
 
     <?php include "Navbar_Index.php"; ?>

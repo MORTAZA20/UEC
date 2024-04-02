@@ -59,21 +59,19 @@ if (isset($_SESSION["admin_user"])) {
                 } while (($end - $start) < $timeTarget);
 
 
-
-
-                $sql = "UPDATE inf_login SET department_id = ?, college_id = ?, AdminUserName = ?, AdminPassword = ?, type = ?, Gmail = ? WHERE Admin_id = ?";
-                $stmt = $conn->prepare($sql);
-
                 if ($type == "Admin" || $type == "SubAdmin") {
-                    $department_id = NULL;
-                    $college_id = NULL;
+                    $sql = "UPDATE inf_login SET AdminUserName = ?, AdminPassword = ?, type = ?, Gmail = ? WHERE Admin_id = ?";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("ssssi", $AdminUserName, $AdminPassword_hash, $type, $Gmail, $Admin_id);
                 } else if ($type == "college") {
-                    $department_id = NULL;
+                    $sql = "UPDATE inf_login SET college_id = ?, AdminUserName = ?, AdminPassword = ?, type = ? WHERE Admin_id = ?";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("ssssi", $college_id, $AdminUserName, $AdminPassword_hash, $type, $Admin_id);
                 } else if ($type == "department") {
-                    $college_id = NULL;
+                    $sql = "UPDATE inf_login SET department_id = ?, AdminUserName = ?, AdminPassword = ?, type = ? WHERE Admin_id = ?";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("ssssi", $department_id, $AdminUserName, $AdminPassword_hash, $type, $Admin_id);
                 }
-
-                $stmt->bind_param("ssssssi", $department_id, $college_id, $AdminUserName, $AdminPassword_hash, $type, $Gmail, $Admin_id);
                 $result = $stmt->execute();
 
                 if ($result) {
@@ -87,12 +85,12 @@ if (isset($_SESSION["admin_user"])) {
             if (isset($_POST['btn_edit'])) {
                 $edit_id = $_POST['edit_id'];
             }
-            $sql = "SELECT * FROM inf_login WHERE Admin_id =?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("i", $edit_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $row = $result->fetch_assoc();
+            $sql_SELECT = "SELECT * FROM inf_login WHERE Admin_id =?";
+            $stmt_SELECT = $conn->prepare($sql_SELECT);
+            $stmt_SELECT->bind_param("i", $edit_id);
+            $stmt_SELECT->execute();
+            $result_SELECT = $stmt_SELECT->get_result();
+            $row = $result_SELECT->fetch_assoc();
 
 
             $conn->close();
@@ -218,10 +216,8 @@ if (isset($_SESSION["admin_user"])) {
                 collegeSelect.removeAttribute("required");
             }
         }
-        // تنفيذ toggle() عند تحميل الصفحة
         window.onload = toggle;
 
-        // تنفيذ toggle() عند تغيير القيمة في القائمة المنسدلة
         document.querySelector('select[name="type"]').onchange = toggle;
         setTimeout(function() {
             document.getElementById('success-message').style.display = 'none';

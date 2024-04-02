@@ -9,7 +9,7 @@ if ($row_sql_settings['Off_And_On'] == 0) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <title>بوصلة التعليم الجامعي | الطلبة الاوائل</title>

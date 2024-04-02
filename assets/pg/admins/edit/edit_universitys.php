@@ -96,9 +96,20 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                 
 
                 if ($stmt->affected_rows > 0) {
-                    echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#e6fff5; border-radius: 5px;'>تم تحديث بيانات الجامعة بنجاح</div>";
+                    echo "<div id='success-message' 
+                    style='margin:20px; padding:10px 15px; 
+                    font-size: 18px; 
+                    background-color:#e6fff5; 
+                    border-radius: 5px;'>
+                    تم تحديث بيانات الجامعة بنجاح</div>";
                 } else {
-                    echo "<div id='success-message' style='margin:20px; padding:10px 15px; font-size: 18px; background-color:#ffe6e6; border-radius: 5px;'>حدث خطأ أثناء تحديث بيانات الجامعة: " . $stmt->error . "</div>";
+                    echo "<div id='success-message' 
+                    style='margin:20px; 
+                    padding:10px 15px; 
+                    font-size: 18px; 
+                    background-color:#ffe6e6; 
+                    border-radius: 5px;'>
+                    حدث خطأ أثناء تحديث بيانات الجامعة: " . $stmt->error . "</div>";
                 }
             }}
             ?>

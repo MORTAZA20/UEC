@@ -48,9 +48,8 @@ include 'inc/navbar.php';
                     </g>
                 </svg>
 
-                <input name="search" id="search" placeholder="ادخل اسم الجامعة" type="search" class="input-placeholder"
-                    onkeyup="search()">
-
+                <input name="search" id="search" placeholder="ادخل اسم الجامعة" type="search" class="input-placeholder">
+                    
             </div>
 
 
@@ -88,14 +87,12 @@ include 'inc/navbar.php';
                     url: "../university-education-compass/assets/pg/admins/search/search_universities.php",
                     data: { search: searchValue },
                     success: function (data) {
-                        $("#table-data tbody").html(data);
+                        $("tbody").html(data);
                     }
                 });
             });
         });
     </script>
-
-
     <script>
 
         function submitForm(delId) {

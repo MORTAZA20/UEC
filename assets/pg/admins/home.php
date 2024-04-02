@@ -15,7 +15,7 @@ if (isset($_SESSION["admin_user"])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -52,7 +52,7 @@ if (isset($_SESSION["admin_user"])) {
                 <div>عدد الزوار <div>
                         <script type="text/javascript" src="online_t"></script>
                         <script type="text/javascript">
-                            sc_online_t(1684310, "", "23a0a9");
+                            sc_online_t(1684310,"عرض", "23a0a9");
                         </script>
                     </div>
                 </div>

@@ -46,7 +46,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                         </g>
                     </svg>
                     <input id="search" name="search" placeholder="ادخل اسم الكلية او الجامعة" type="search"
-                        class="input-placeholder" onkeyup="search()">
+                        class="input-placeholder">
                 </div>
  
             <div class="path-bar">
@@ -82,7 +82,7 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
                     url: "../university-education-compass/assets/pg/admins/search/search_colleges.php",
                     data: { search: searchValue },
                     success: function (data) {
-                        $("#table-data tbody").html(data);
+                        $("tbody").html(data);
                     }
                 });
             });

@@ -58,7 +58,7 @@ if (isset($_SESSION["admin_user"])) {
                     </g>
                 </svg>
 
-                <input id="search" name="search" placeholder="ادخل اسم المادة او القسم" type="search" onkeyup="search()" class="input-placeholder">
+                <input id="search" name="search" placeholder="ادخل اسم المادة او القسم" type="search" class="input-placeholder">
             </div>
 
 
@@ -98,7 +98,7 @@ if (isset($_SESSION["admin_user"])) {
                         search: searchValue
                     },
                     success: function(data) {
-                        $("#table-data tbody").html(data);
+                        $("tbody").html(data);
                     }
                 });
             });

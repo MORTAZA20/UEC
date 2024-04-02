@@ -19,7 +19,7 @@ $row_department = $result_department->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
   

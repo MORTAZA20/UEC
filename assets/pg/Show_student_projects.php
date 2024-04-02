@@ -18,7 +18,7 @@ $row_student_projects = $result_student_projects->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <title>بوصلة التعليم الجامعي | المشروع</title>

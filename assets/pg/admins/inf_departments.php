@@ -18,7 +18,7 @@ if (isset($_SESSION["admin_user"])) {
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -59,7 +59,7 @@ if (isset($_SESSION["admin_user"])) {
                     </g>
                 </svg>
 
-                <input id="search" name="search" placeholder="ادخل اسم القسم او الكلية" type="search" onkeyup="search()" class="input-placeholder">
+                <input id="search" name="search" placeholder="ادخل اسم القسم او الكلية" type="search" class="input-placeholder">
             </div>
 
             <div class="path-bar">
@@ -98,7 +98,7 @@ if (isset($_SESSION["admin_user"])) {
                         search: searchValue
                     },
                     success: function(data) {
-                        $("#table-data tbody").html(data);
+                        $("tbody").html(data);
                     }
                 });
             });

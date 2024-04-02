@@ -9,10 +9,8 @@ if ($row_sql_settings['Off_And_On'] == 0) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-
     <title>بوصلة التعليم الجامعي | الرئيسية</title>
     <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css">
     <link href="./assets/fontawesome-free-6.5.1-web/css/fontawesome.css" rel="stylesheet" />
@@ -89,7 +87,7 @@ if ($row_sql_settings['Off_And_On'] == 0) {
                     <img src='imgs/7.png' />
                 </div>
                 <div class="swiper-slide">
-                    <img src='imgs/m1.png' />
+                    <img src='imgs/121.png' />
                 </div>
 
             </div>
@@ -136,7 +134,7 @@ if ($row_sql_settings['Off_And_On'] == 0) {
     <div class="control">
         <section>
             <div class="pagimation_">
-                <h3>الجامعات المتقرحة</h3>
+                <h3>الجامعات المقترحة</h3>
                 <div class="btn-grup">
                     <div class="swiper-btn-prev-universities"><i class="fas fa-chevron-right"></i></div>
                     <div class="swiper-btn-next-universities"><i class="fas fa-chevron-left"></i></div>

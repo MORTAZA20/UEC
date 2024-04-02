@@ -19,7 +19,7 @@ $row_courses = $result_courses->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <title>بوصلة التعليم الجامعي | المواد الدراسية</title>
