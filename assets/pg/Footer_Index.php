@@ -13,7 +13,7 @@
                 <input type="Email" name="Email" placeholder="example@gmail.com" required autocomplete="on">
                 <p>الرساله</p>
                 <textarea required name="msg"></textarea>
-                <input type="submit" name="sub_form">
+                <input type="submit" value="أرسال" name="sub_form">
             </form>
         </div>
         <div class="contact_information">

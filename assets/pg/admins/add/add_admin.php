@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 if (isset($_SESSION["admin_user"])) {
     if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin") {
@@ -180,8 +179,6 @@ if (isset($_SESSION["admin_user"])) {
             document.getElementById('success-message').style.display = 'none';
         }, 4000);
     </script>
-
-
 </body>
 
 </html>

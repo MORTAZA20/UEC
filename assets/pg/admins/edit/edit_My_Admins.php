@@ -130,7 +130,12 @@ if (isset($_SESSION["admin_user"])) {
                         $result = $conn->query($sql1);
                         if ($result->num_rows > 0) {
                             while ($row1 = $result->fetch_assoc()) {
-                                echo "<option value='" . $row1['department_id'] . "'>" . $row1['university_name'] . " - " . $row1['college_name'] . " - " . $row1['department_name'] . "</option>";
+                        ?>
+                                <option value="<?= $row1['department_id']; ?>" <?php if ($row1['department_id'] == $row['department_id']) {
+                                                                                    echo "selected";
+                                                                                }
+                                                                                ?>><?= $row1['university_name'] . " - " . $row1['college_name'] . " - " . $row1['department_name']; ?></option>
+                        <?php
                             }
                         } else {
                             echo "<option>لا توجد أقسام مضافه</option>";
@@ -148,7 +153,12 @@ if (isset($_SESSION["admin_user"])) {
                         $result = $conn->query($sql2);
                         if ($result->num_rows > 0) {
                             while ($row2 = $result->fetch_assoc()) {
-                                echo "<option value='" . $row2['college_id'] . "'>" . $row2['university_name'] . " - " . $row2['college_name'] . "</option>";
+                                ?>
+                                <option value="<?= $row2['college_id'];?>" <?php if ($row2['college_id'] == $row['college_id']) {
+                                                                                    echo "selected";
+                                                                                }
+                                                                                ?>><?= $row2['university_name'] . " - " . $row2['college_name'];?></option>
+                            <?php
                             }
                         } else {
                             echo "<option>لا توجد كليات مضافه</option>";

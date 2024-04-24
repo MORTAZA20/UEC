@@ -163,6 +163,4 @@ if ($_SESSION["admin_user"] != "Admin" && $_SESSION["admin_user"] != "SubAdmin")
     </script>
 
 </body>
-
-
 </html>
