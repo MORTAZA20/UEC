@@ -10,6 +10,7 @@ if ($row_sql_settings['Off_And_On'] == 0) {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>بوصلة التعليم الجامعي | الرئيسية</title>
     <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css">
@@ -21,12 +22,14 @@ if ($row_sql_settings['Off_And_On'] == 0) {
     <link rel="stylesheet" href="assets/css/styleIndex.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="tailwind"></script>
 
     <style>
         .sliders-ads {
             text-align: center;
             font-size: 18px;
-            background: #fff;
+            height: 450px;
+            background: #111822;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -34,7 +37,6 @@ if ($row_sql_settings['Off_And_On'] == 0) {
 
         .sliders-ads img {
             display: block;
-            width: 100%;
             height: 100%;
             object-fit: cover;
         }
@@ -51,6 +53,7 @@ if ($row_sql_settings['Off_And_On'] == 0) {
             justify-content: center;
             font-weight: bold;
             color: var(--swiper-theme-color);
+            visibility: hidden;
         }
 
         .autoplay-progress svg {
@@ -69,6 +72,12 @@ if ($row_sql_settings['Off_And_On'] == 0) {
             transform: rotate(-90deg);
             visibility: hidden;
         }
+
+        .sliders-ads div[class^="swiper-button"] {
+            color: #23a0a9;
+            width: 40px;
+            height: 40px;
+        }
     </style>
 </head>
 
@@ -76,24 +85,69 @@ if ($row_sql_settings['Off_And_On'] == 0) {
 
     <?php include "assets/pg/Navbar_Index.php"; ?>
 
-
     <div class="cont-sliders-ads">
         <div class="swiper sliders-ads">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <img src="imgs\8.png" />
-                </div>
-                <div class="swiper-slide">
-                    <img src='imgs/7.png' />
-                </div>
-                <div class="swiper-slide">
-                    <img src='imgs/121.png' />
-                </div>
+                    <div class="flex w-screen h-full relative">
+                        <img class="h-full left-0 absolute bottom-0" src="imgs/1.png" />
 
+                        <div class="h-full w-screen py-4 px-16 text-right absolute bottom-0 right-0 bg-gradient-to-t from-black to-transparent sm:bg-gradient-to-r sm:from-transparent sm:to-black" style="direction: rtl;">
+                            <h1 class="text-3xl mt-6 text-white font-bold drop-shadow-md">التنميه المستدامه (التعليم المستدام)</h1>
+                            <p class="my-4 text-white drop-shadow-md sm:max-w-[450px] max-h-48 text-wrap">
+                                يمثل مفهومًا حيويا يهدف إلى تطوير الوعي والمعرفة والمهارات
+                                والقيم والسلوكيات لدى الأفراد، بما يمكنهم من المشاركة الفعالة
+                                في حل المشكلات البيئية المعاصرة والتحديات الاجتماعية
+                                والاقتصادية. بطريقة تضمن الحفاظ على موارد الأرض للأجيال
+                                القادمة.
+                            </p>
+                            <button onclick="window.open('sustainability', '_self');" class="border-solid text-teal-500 text-3xl hover:text-white border border-teal-500 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-4">معرفة المزيد</button>
+                            <!-- <div class="absolute bottom-0 right-0 z-10 bg-gradient-to-t from-black to-transparent"></div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="flex w-screen h-full relative">
+                        <img class="h-full left-0 absolute bottom-0" src="imgs/3.jpeg" />
+
+                        <div class="h-full w-screen py-4 px-16 text-right absolute bottom-0 right-0 bg-gradient-to-t from-black to-transparent" style="direction: rtl;">
+                            <h1 class="text-3xl mt-6 text-white font-bold drop-shadow-md">التعليم المستدام</h1>
+                            <p class="my-4 text-white drop-shadow-md" style="max-width: 350px;">
+                                يمثل مفهومًا حيويا يهدف إلى تطوير الوعي والمعرفة والمهارات
+                                والقيم والسلوكيات لدى الأفراد، بما يمكنهم من المشاركة الفعالة
+                                في حل المشكلات البيئية المعاصرة والتحديات الاجتماعية
+                                والاقتصادية. بطريقة تضمن الحفاظ على موارد الأرض للأجيال
+                                القادمة.
+                            </p>
+                            <button class="border-solid text-teal-500 text-3xl hover:text-white border border-teal-500 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-4">معرفة المزيد</button>
+                            <!-- <div class="absolute bottom-0 right-0 z-10 bg-gradient-to-t from-black to-transparent"></div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="flex w-screen h-full">
+                        <img class="h-full left-0 absolute bottom-0" src="imgs/2.jpeg" />
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="flex w-screen h-full">
+                        <img class="h-full left-0 absolute bottom-0" src="imgs/3.jpeg" />
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="flex w-screen h-full">
+                        <img class="h-full left-0 absolute bottom-0" src="imgs/4.jpg" />
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="flex w-screen h-full">
+                        <img class="h-full left-0 absolute bottom-0" src="imgs/8.png" />
+                    </div>
+                </div>
             </div>
 
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next h-14 w-14"></div>
+            <div class="swiper-button-prev h-14 w-14"></div>
             <div class="swiper-pagination"></div>
             <div class="autoplay-progress">
                 <svg viewBox="0 0 48 48">
@@ -111,7 +165,7 @@ if ($row_sql_settings['Off_And_On'] == 0) {
             const swiper = new Swiper(".sliders-ads", {
                 centeredSlides: true,
                 autoplay: {
-                    delay: 4000,
+                    delay: 7000,
                     disableOnInteraction: false,
                 },
                 pagination: {

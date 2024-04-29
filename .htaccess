@@ -90,3 +90,7 @@ RewriteRule ^Show_Inf_college ./assets/pg/Show_Inf_college.php [NC,L]
 RewriteRule ^Show_Inf_department ./assets/pg/Show_Inf_department.php [NC,L]
 RewriteRule ^Show_student_projects ./assets/pg/Show_student_projects.php [NC,L]
 RewriteRule ^Show_course ./assets/pg/Show_course.php [NC,L]
+RewriteRule ^sustainability ./assets/pg/sustainability.php [NC,L]
+
+
+RewriteRule ^tailwind ./assets/js/tailwind.js [NC,L]

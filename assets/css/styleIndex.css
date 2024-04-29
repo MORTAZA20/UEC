@@ -972,7 +972,24 @@ header {
   background-color: #2A3B52;
   border-radius: 10px;
 }
-
+.overlay-button {
+  position: absolute;
+  top: 93%;
+  left: 85%;
+  transform: translate(-50%, -50%);
+  background-color: #23a0a9;
+  color: #fff;
+  padding: 10px 20px;
+  border: 1px solid #23a0a9;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+.overlay-button:hover{
+  background-color: #fff;
+  color: #23a0a9; 
+}
 @media screen and (max-width:768px) {
 
   :root {
